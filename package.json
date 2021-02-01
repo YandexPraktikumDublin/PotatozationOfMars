@@ -1,0 +1,20 @@
+{
+  "name": "potatozation-of-mars",
+  "version": "1.0.0",
+  "description": "Проектная работа второй когорты курса Яндекс.Практикум \"Мидл Фронт-Энд разработчик\" команды \"Дублин\" Веб-Приложение \"Игра\" - \"Potatozation of Mars\".",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YandexPraktikumDublin/PotatozationOfMars.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YandexPraktikumDublin/PotatozationOfMars/issues"
+  },
+  "homepage": "https://github.com/YandexPraktikumDublin/PotatozationOfMars#readme"
+}
