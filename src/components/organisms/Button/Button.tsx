@@ -6,7 +6,6 @@ export type TButtonProps = {
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
 export const Button: FC<TButtonProps> = ({
-  children,
   isFullWidth = true,
   className = '',
   ...props
@@ -22,9 +21,7 @@ export const Button: FC<TButtonProps> = ({
       { 'w-full': isFullWidth }
     )}
     {...props}
-  >
-    {children}
-  </button>
+  />
 )
 
 Button.displayName = 'Button'
