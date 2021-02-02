@@ -1,0 +1,18 @@
+{
+  "rootDir": "../src",
+  "setupFiles": ["../.jest/register-context.js"],
+  "moduleNameMapper": {
+    "@components/([^\\.]*)$": ["<rootDir>/components/$1"],
+    "@components/atoms": ["<rootDir>/components/atoms/index.ts"],
+    "@components/molecules": ["<rootDir>/components/molecules/index.ts"],
+    "@components/organisms": ["<rootDir>/components/organisms/index.ts"],
+    "@components/templates": ["<rootDir>/components/templates/index.ts"],
+    "@pages": ["<rootDir>/pages/index.ts"]
+  },
+  "setupFilesAfterEnv": ["../.jest/setupTests.js"],
+  "transform": {
+    "^.+\\.(j|t)sx?$": "babel-jest",
+    "^.+\\.svg$": "jest-svg-transformer"
+  },
+  "transformIgnorePatterns": ["/node_modules/(?!register-service-worker).+\\.js$"]
+}

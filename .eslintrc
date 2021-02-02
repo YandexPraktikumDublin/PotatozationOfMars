@@ -15,5 +15,15 @@
     "import/resolver": {
       "typescript": {}
     }
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/test.tsx"
+      ],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
 }

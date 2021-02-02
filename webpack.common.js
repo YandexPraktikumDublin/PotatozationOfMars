@@ -1,6 +1,7 @@
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
 module.exports = {
   entry: './src/index.tsx',
@@ -9,7 +10,12 @@ module.exports = {
     filename: 'bundle-[hash].js'
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: ['.tsx', '.ts', '.js', '.json'],
+    plugins: [
+      new TsconfigPathsPlugin({
+        configFile: './tsconfig.json'
+      })
+    ]
   },
   module: {
     rules: [
