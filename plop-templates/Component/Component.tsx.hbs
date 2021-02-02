@@ -1,8 +1,8 @@
-import React, { FC } from 'react'
+import React, { FC, memo } from 'react'
 
 export type T{{pascalCase name}}Props = {}
 
-export const {{pascalCase name}}: FC<T{{pascalCase name}}Props> = ({}: T{{pascalCase name}}Props) => <></>
+export const {{pascalCase name}}: FC<T{{pascalCase name}}Props> = memo(({}: T{{pascalCase name}}Props) => <></>)
 
 {{pascalCase name}}.displayName = '{{pascalCase name}}'
 
