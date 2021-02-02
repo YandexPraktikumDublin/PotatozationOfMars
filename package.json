@@ -10,6 +10,12 @@
     "test": "jest --runInBand --config .jest/config.json",
     "generate": "plop"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm-run-all lint test",
+      "pre-push": "npm-run-all lint test"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/YandexPraktikumDublin/PotatozationOfMars.git"
@@ -52,6 +58,7 @@
     "eslint-plugin-react": "7.22.0",
     "eslint-plugin-react-hooks": "4.2.0",
     "html-webpack-plugin": "4.5.1",
+    "husky": "4.3.8",
     "jest": "26.6.3",
     "jest-svg-transformer": "1.0.0",
     "plop": "2.7.4",
@@ -65,7 +72,8 @@
     "webpack": "5.19.0",
     "webpack-cli": "4.4.0",
     "webpack-dev-server": "3.11.2",
-    "webpack-merge": "5.7.3"
+    "webpack-merge": "5.7.3",
+    "yarn-run-all": "3.1.1"
   },
   "dependencies": {
     "classnames": "2.2.6",
