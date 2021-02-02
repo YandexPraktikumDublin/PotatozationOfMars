@@ -10,6 +10,9 @@ module.exports = {
   darkMode: 'class',
   theme: {
     fontFamily: {
+      sans: ['Roboto', 'sans-serif'],
+      serif: ['serif'],
+      display: ['Roboto', 'serif'],
       body: ['Roboto', 'sans-serif']
     },
     colors: {
