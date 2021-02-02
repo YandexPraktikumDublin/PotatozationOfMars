@@ -4,6 +4,7 @@
   "description": "Проектная работа второй когорты курса Яндекс.Практикум \"Мидл Фронт-Энд разработчик\" команды \"Дублин\" Веб-Приложение \"Игра\" - \"Potatozation of Mars\".",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint \"src/**/*.@(tsx|ts|jsx|js)\" --fix; prettier --check \"src/**/*.@(tsx|ts|jsx|js)\" --write",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,14 +21,20 @@
   "devDependencies": {
     "@types/react": "17.0.0",
     "@types/react-dom": "17.0.0",
+    "@typescript-eslint/eslint-plugin": "4.14.2",
+    "@typescript-eslint/parser": "4.14.2",
     "eslint": "7.19.0",
+    "eslint-config-prettier": "7.2.0",
     "eslint-config-standard": "16.0.2",
     "eslint-config-standard-jsx": "10.0.0",
+    "eslint-import-resolver-typescript": "2.3.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-prettier": "3.3.1",
     "eslint-plugin-promise": "4.2.1",
     "eslint-plugin-react": "7.22.0",
     "eslint-plugin-react-hooks": "4.2.0",
+    "prettier": "2.2.1",
     "ts-loader": "8.0.14",
     "typescript": "4.1.3",
     "webpack": "5.19.0",
