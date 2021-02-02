@@ -93,6 +93,26 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.22.tgz#0d29f382472c4ccf3bd96ff0ce47daf5b7b84b18"
   integrity sha512-g+f/qj/cNcqKkc3tFqlXOYjrmZA+jNBiDzbP3kH+B+otKFqAdPgVTGP1IeKRdMml/aE69as5S4FqtxAbl+LaMw==
 
+"@types/prop-types@*":
+  version "15.7.3"
+  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
+  integrity sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
+
+"@types/react-dom@^17.0.0":
+  version "17.0.0"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.0.tgz#b3b691eb956c4b3401777ee67b900cb28415d95a"
+  integrity sha512-lUqY7OlkF/RbNtD5nIq7ot8NquXrdFrjSOR6+w9a9RFQevGi1oZO1dcJbXMeONAPKtZ2UrZOEJ5UOCVsxbLk/g==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react@*", "@types/react@^17.0.0":
+  version "17.0.0"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.0.tgz#5af3eb7fad2807092f0046a1302b7823e27919b8"
+  integrity sha512-aj/L7RIMsRlWML3YB6KZiXB3fV2t41+5RBGYF8z+tAKU43Px8C3cYUZsDvf1/+Bm4FK21QWBrDutu8ZJ/70qOw==
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^3.0.2"
+
 "@webassemblyjs/ast@1.11.0":
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.11.0.tgz#a5aa679efdc9e51707a4207139da57920555961f"
@@ -835,6 +855,11 @@ cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
+csstype@^3.0.2:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.6.tgz#865d0b5833d7d8d40f4e5b8a6d76aea3de4725ef"
+  integrity sha512-+ZAmfyWMT7TiIlzdqJgjMb7S4f1beorDbWbsocyK4RaiqA5RTX3K14bnBWmmA9QEM0gRdsjyyrEmcyga8Zsxmw==
+
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.9:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
@@ -1119,7 +1144,7 @@ escape-string-regexp@^1.0.5:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
 
-eslint-config-standard-jsx@^10.0.0:
+eslint-config-standard-jsx@10.0.0:
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/eslint-config-standard-jsx/-/eslint-config-standard-jsx-10.0.0.tgz#dc24992661325a2e480e2c3091d669f19034e18d"
   integrity sha512-hLeA2f5e06W1xyr/93/QJulN/rLbUVUmqTlexv9PRKHFwEC9ffJcH2LvJhMoEqYQBEYafedgGZXH2W8NUpt5lA==
