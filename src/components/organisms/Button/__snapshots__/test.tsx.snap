@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Button /> should be full width by default 1`] = `
+<button
+  className="inline-block font-medium text-center uppercase border rounded py-2 px-4 text-primary border-primary hover:text-white hover:border-white hover:bg-primary dark:text-white dark:border-white dark:hover:text-primary dark:hover:border-primary dark:hover:bg-white w-full"
+>
+  test
+</button>
+`;
+
+exports[`<Button /> should not be full width when isFullWidth prop is false 1`] = `
+<button
+  className="inline-block font-medium text-center uppercase border rounded py-2 px-4 text-primary border-primary hover:text-white hover:border-white hover:bg-primary dark:text-white dark:border-white dark:hover:text-primary dark:hover:border-primary dark:hover:bg-white"
+>
+  test
+</button>
+`;
+
+exports[`<Button /> should renders correct <Button /> 1`] = `
+<button
+  className="inline-block font-medium text-center uppercase border rounded py-2 px-4 text-primary border-primary hover:text-white hover:border-white hover:bg-primary dark:text-white dark:border-white dark:hover:text-primary dark:hover:border-primary dark:hover:bg-white w-full"
+>
+  test
+</button>
+`;
