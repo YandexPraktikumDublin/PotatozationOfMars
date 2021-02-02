@@ -18,3 +18,4 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 - `npm run start` - запустить сервер по адресу `localhost:3000`
 - `npm run lint` - валидация файлов
 - `npm run test` - запуск тестов
+- `npm run generate` - генерация компонентов
