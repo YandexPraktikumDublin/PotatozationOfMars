@@ -5,18 +5,17 @@ import './styles/globals.css'
 
 const App: React.FC = () => (
   <BrowserRouter>
-    <main>
       <Switch>
-        <Route exact path="/" />
-        <Route path="/signup" />
+        <Route exact path="/"/>
+        <Route path="/auth" />
+        <Route path="/signup"/>
         <Route path="/game" />
         <Route path="/profile" />
         <Route path="/liderboard" />
-        <Route path="/400" />
+        <Route path="/404" />
         <Route path="/500" />
         <Route path="/forum" />
       </Switch>
-    </main>
   </BrowserRouter>
 )
 
