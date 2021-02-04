@@ -1,9 +1,9 @@
 import React from 'react'
-import { withPage } from '../HOCs/withPage'
-import { GameTemplate } from '../components/templates/GameTemplate'
+import { withHeaderAndFooter } from '@hocs'
+import { GameTemplate } from '@components/templates'
 
 const Game = () => {
-  return <GameTemplate testContent="test" />
+  return <GameTemplate />
 }
 
-export default withPage(Game)
+export default withHeaderAndFooter(Game)

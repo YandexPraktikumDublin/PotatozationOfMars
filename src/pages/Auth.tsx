@@ -1,9 +1,9 @@
 import React from 'react'
-import { withPage } from '../HOCs/withPage'
-import { AuthTemplate } from '../components/templates/AuthTemplate'
+import { withHeaderAndFooter } from '@hocs'
+import { AuthTemplate } from '@components/templates'
 
 const Auth: React.FC = () => {
-  return <AuthTemplate testContent="test" />
+  return <AuthTemplate />
 }
 
-export default withPage(Auth)
+export default withHeaderAndFooter(Auth)

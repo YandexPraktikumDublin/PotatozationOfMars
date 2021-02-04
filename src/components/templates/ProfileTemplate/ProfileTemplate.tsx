@@ -1,12 +1,8 @@
 import React, { FC, memo } from 'react'
 
-export type TProfileTemplateProps = {
-  testContent: string
-}
+type TProfileTemplateProps = {}
 
-export const ProfileTemplate: FC<TProfileTemplateProps> = memo(
-  ({ testContent }: TProfileTemplateProps) => <></>
-)
+const ProfileTemplate: FC<TProfileTemplateProps> = memo(() => <></>)
 
 ProfileTemplate.displayName = 'ProfileTemplate'
 

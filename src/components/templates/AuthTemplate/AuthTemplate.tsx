@@ -1,11 +1,9 @@
 import React, { FC, memo } from 'react'
 
-export type TAuthTemplateProps = {
-  testContent: string
-}
+type TAuthTemplateProps = {}
 
-export const AuthTemplate: FC<TAuthTemplateProps> = memo(
-  ({ testContent }: TAuthTemplateProps) => <></>
-)
+const AuthTemplate: FC<TAuthTemplateProps> = memo(() => <></>)
 
 AuthTemplate.displayName = 'AuthTemplate'
+
+export default AuthTemplate

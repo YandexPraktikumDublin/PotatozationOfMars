@@ -1,2 +1,1 @@
-export { default } from './SignUpTemplate'
-export * from './SignUpTemplate'
+export { default as SignUpTemplate } from './SignUpTemplate'

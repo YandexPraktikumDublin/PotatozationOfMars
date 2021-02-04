@@ -25,7 +25,9 @@
       "@components/molecules": ["./src/components/molecules/index.ts"],
       "@components/organisms": ["./src/components/organisms/index.ts"],
       "@components/templates": ["./src/components/templates/index.ts"],
-      "@pages": ["./src/pages/index.ts"]
+      "@pages": ["./src/pages/index.ts"],
+      "@config": ["./src/config.ts"],
+      "@hocs": ["./src/HOCs/index.ts"]
     },
     "typeRoots": [
       "node_modules/@types"

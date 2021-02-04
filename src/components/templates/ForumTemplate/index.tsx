@@ -1,2 +1,1 @@
-export { default } from './ForumTemplate'
-export * from './ForumTemplate'
+export { default as ForumTemplate } from './ForumTemplate'

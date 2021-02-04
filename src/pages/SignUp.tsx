@@ -1,9 +1,9 @@
 import React from 'react'
-import { withPage } from '../HOCs/withPage'
-import { SignUpTemplate } from '../components/templates/SignUpTemplate'
+import { withHeaderAndFooter } from '@hocs'
+import { SignUpTemplate } from '@components/templates'
 
 const SignUp = () => {
-  return <SignUpTemplate testContent="test" />
+  return <SignUpTemplate />
 }
 
-export default withPage(SignUp)
+export default withHeaderAndFooter(SignUp)

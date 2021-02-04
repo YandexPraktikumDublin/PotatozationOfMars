@@ -1,12 +1,8 @@
 import React, { FC, memo } from 'react'
 
-export type TSignUpTemplateProps = {
-  testContent: string
-}
+type TSignUpTemplateProps = {}
 
-export const SignUpTemplate: FC<TSignUpTemplateProps> = memo(
-  ({ testContent }: TSignUpTemplateProps) => <></>
-)
+const SignUpTemplate: FC<TSignUpTemplateProps> = memo(() => <></>)
 
 SignUpTemplate.displayName = 'SignUpTemplate'
 

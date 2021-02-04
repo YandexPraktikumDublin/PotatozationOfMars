@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function withPage<T>(Page: React.FC<T>) {
+export default function withHeaderAndFooter<T>(Page: React.FC<T>) {
   return (props: T) => (
     <>
       <header />

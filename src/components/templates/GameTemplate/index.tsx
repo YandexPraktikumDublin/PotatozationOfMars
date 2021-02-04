@@ -1,2 +1,1 @@
-export { default } from './GameTemplate'
-export * from './GameTemplate'
+export { default as GameTemplate } from './GameTemplate'

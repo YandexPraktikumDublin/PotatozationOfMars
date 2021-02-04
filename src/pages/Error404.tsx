@@ -1,9 +1,9 @@
 import React from 'react'
-import { withPage } from '../HOCs/withPage'
-import { Error404Template } from '../components/templates/Error404Template'
+import { withHeaderAndFooter } from '@hocs'
+import { ErrorTemplate } from '@components/templates'
 
 const Error404 = () => {
-  return <Error404Template testContent="" />
+  return <ErrorTemplate />
 }
 
-export default withPage(Error404)
+export default withHeaderAndFooter(Error404)

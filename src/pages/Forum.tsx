@@ -1,9 +1,9 @@
 import React from 'react'
-import { withPage } from '../HOCs/withPage'
+import { withHeaderAndFooter } from '@hocs'
 import { ForumTemplate } from '../components/templates/ForumTemplate'
 
 const Forum = () => {
-  return <ForumTemplate testContent="test" />
+  return <ForumTemplate />
 }
 
-export default withPage(Forum)
+export default withHeaderAndFooter(Forum)

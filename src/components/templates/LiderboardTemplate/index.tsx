@@ -1,2 +1,1 @@
-export { default } from './LiderboardTemplate'
-export * from './LiderboardTemplate'
+export { default as LiderboardTemplate } from './LiderboardTemplate'

@@ -1,9 +1,9 @@
 import React from 'react'
-import { withPage } from '../HOCs/withPage'
-import { ProfileTemplate } from '../components/templates/ProfileTemplate'
+import { withHeaderAndFooter } from '@hocs'
+import { ProfileTemplate } from '@components/templates'
 
 const Profile = () => {
-  return <ProfileTemplate testContent="test" />
+  return <ProfileTemplate />
 }
 
-export default withPage(Profile)
+export default withHeaderAndFooter(Profile)
