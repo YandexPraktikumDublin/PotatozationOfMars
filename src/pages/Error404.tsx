@@ -6,4 +6,4 @@ const Error404 = () => {
   return <Error404Template testContent="" />
 }
 
-export default withPage(Error404, {})
+export default withPage(Error404)

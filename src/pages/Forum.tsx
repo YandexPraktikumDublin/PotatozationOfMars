@@ -6,4 +6,4 @@ const Forum = () => {
   return <ForumTemplate testContent="test" />
 }
 
-export default withPage(Forum, {})
+export default withPage(Forum)

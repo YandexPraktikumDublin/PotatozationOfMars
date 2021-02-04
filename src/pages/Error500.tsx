@@ -6,4 +6,4 @@ const Error500 = () => {
   return <Error500Template testContent="test" />
 }
 
-export default withPage(Error500, {})
+export default withPage(Error500)

@@ -6,4 +6,4 @@ const SignUp = () => {
   return <SignUpTemplate testContent="test" />
 }
 
-export default withPage(SignUp, {})
+export default withPage(SignUp)

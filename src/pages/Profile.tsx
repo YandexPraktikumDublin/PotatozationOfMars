@@ -6,4 +6,4 @@ const Profile = () => {
   return <ProfileTemplate testContent="test" />
 }
 
-export default withPage(Profile, {})
+export default withPage(Profile)

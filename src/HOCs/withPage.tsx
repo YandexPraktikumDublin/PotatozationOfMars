@@ -1,7 +1,7 @@
 import React from 'react'
 
-export const withPage: React.FC<any> = (Page: React.FC, props: object) => {
-  return (
+export function withPage<T>(Page: React.FC<T>) {
+  return (props: T) => (
     <>
       <header />
       <main>

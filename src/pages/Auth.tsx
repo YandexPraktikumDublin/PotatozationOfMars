@@ -6,4 +6,4 @@ const Auth: React.FC = () => {
   return <AuthTemplate testContent="test" />
 }
 
-export default withPage(Auth, {})
+export default withPage(Auth)

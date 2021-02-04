@@ -6,4 +6,4 @@ const Liderboard = () => {
   return <LiderboardTemplate testContent="test" />
 }
 
-export default withPage(Liderboard, {})
+export default withPage(Liderboard)

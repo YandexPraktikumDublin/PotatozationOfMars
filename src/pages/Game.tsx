@@ -6,4 +6,4 @@ const Game = () => {
   return <GameTemplate testContent="test" />
 }
 
-export default withPage(Game, {})
+export default withPage(Game)
