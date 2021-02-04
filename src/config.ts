@@ -5,7 +5,7 @@ export const PATHS = {
   GAME: '/game/',
   PROFILE: '/profile/',
   LIDERBOARD: '/liderboard/',
-  ERROR400: '/404/',
+  ERROR404: '/404/',
   ERROR500: '/500/',
   FORUM: '/forum/'
 }

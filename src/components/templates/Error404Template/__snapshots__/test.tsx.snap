@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Error404Template /> should renders correct <Error404Template /> 1`] = `<Fragment />`;

@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Error500Template /> should renders correct <Error500Template /> 1`] = `<Fragment />`;

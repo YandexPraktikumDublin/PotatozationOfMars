@@ -1,10 +1,12 @@
 import React, { FC, memo } from 'react'
 
 export type TError500TemplateProps = {
-  testContent: string;
+  testContent: string
 }
 
-export const Error500Template: FC<TError500TemplateProps> = memo(({testContent}: TError500TemplateProps) => <></>)
+export const Error500Template: FC<TError500TemplateProps> = memo(
+  ({ testContent }: TError500TemplateProps) => <></>
+)
 
 Error500Template.displayName = 'Error500Template'
 

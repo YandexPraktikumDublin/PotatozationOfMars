@@ -1,11 +1,9 @@
-import React from 'react';
-import { withPage } from '../HOCs/withPage';
-import { LiderboardTemplate } from '../components/templates/LiderboardTemplate';
+import React from 'react'
+import { withPage } from '../HOCs/withPage'
+import { LiderboardTemplate } from '../components/templates/LiderboardTemplate'
 
 const Liderboard = () => {
-  return (
-    <LiderboardTemplate testContent='test'/>
-  )
+  return <LiderboardTemplate testContent="test" />
 }
 
-export default withPage(Liderboard, {});
+export default withPage(Liderboard, {})

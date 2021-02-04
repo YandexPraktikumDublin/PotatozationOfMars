@@ -1,10 +1,12 @@
 import React, { FC, memo } from 'react'
 
 export type TGameTemplateProps = {
-  testContent: string;
+  testContent: string
 }
 
-export const GameTemplate: FC<TGameTemplateProps> = memo(({testContent}: TGameTemplateProps) => <></>)
+export const GameTemplate: FC<TGameTemplateProps> = memo(
+  ({ testContent }: TGameTemplateProps) => <></>
+)
 
 GameTemplate.displayName = 'GameTemplate'
 

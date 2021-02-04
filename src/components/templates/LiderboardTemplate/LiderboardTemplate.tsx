@@ -1,10 +1,12 @@
 import React, { FC, memo } from 'react'
 
 export type TLiderboardTemplateProps = {
-  testContent: string;
+  testContent: string
 }
 
-export const LiderboardTemplate: FC<TLiderboardTemplateProps> = memo(({testContent}: TLiderboardTemplateProps) => <></>)
+export const LiderboardTemplate: FC<TLiderboardTemplateProps> = memo(
+  ({ testContent }: TLiderboardTemplateProps) => <></>
+)
 
 LiderboardTemplate.displayName = 'LiderboardTemplate'
 
