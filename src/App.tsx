@@ -6,7 +6,7 @@ import {
   Error404,
   Forum,
   Game,
-  Liderboard,
+  Leaderboard,
   Profile,
   SignUp
 } from '@pages'
@@ -21,7 +21,7 @@ const App: React.FC = () => (
       <Route path={PATHS.SIGNUP} component={SignUp} />
       <Route path={PATHS.FORUM} component={Forum} />
       <Route path={PATHS.GAME} component={Game} />
-      <Route path={PATHS.LIDERBOARD} component={Liderboard} />
+      <Route path={PATHS.LEADERBOARD} component={Leaderboard} />
       <Route path={PATHS.PROFILE} component={Profile} />
       <Route path="*" component={Error404} />
     </Switch>

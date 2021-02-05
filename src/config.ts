@@ -4,6 +4,6 @@ export const PATHS = {
   SIGNUP: '/signup/',
   GAME: '/game/',
   PROFILE: '/profile/',
-  LIDERBOARD: '/liderboard/',
+  LEADERBOARD: '/leaderboard/',
   FORUM: '/forum/'
 }
