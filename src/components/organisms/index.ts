@@ -1,1 +1,5 @@
 export * from './Button'
+export * from './Header'
+export * from './TumblerTheme'
+export * from './Pause'
+export * from './Footer'

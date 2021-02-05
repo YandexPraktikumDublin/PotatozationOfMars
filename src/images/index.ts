@@ -1,0 +1,7 @@
+export { default as profile } from './profile.svg'
+export { default as forum } from './forum.svg'
+export { default as leaderboard } from './leaderboard.svg'
+export { default as tumbler } from './tumbler.svg'
+export { default as background } from './background.jpg'
+export { default as home } from './home.svg'
+export { default as feedback } from './feedback.svg'
