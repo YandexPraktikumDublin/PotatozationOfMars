@@ -4,7 +4,7 @@ import { feedback } from '@images'
 type TFooterProps = {}
 
 const Footer: FC<TFooterProps> = memo(() => (
-  <footer className="p-2 items-center flex mt-auto">
+  <footer className="p-2 items-center flex">
     <button className="ml-auto mr-4">
       <img src={feedback} alt="" />
     </button>
