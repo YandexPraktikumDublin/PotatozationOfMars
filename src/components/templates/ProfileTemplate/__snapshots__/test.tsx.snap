@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProfileTemplate /> should renders correct <ProfileTemplate /> 1`] = `<Fragment />`;

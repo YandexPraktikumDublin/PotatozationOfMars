@@ -1,11 +1,11 @@
 import React, { FC, ButtonHTMLAttributes, memo } from 'react'
 import classNames from 'classnames'
 
-export type TButtonProps = {
+type TButtonProps = {
   isFullWidth?: boolean
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
-export const Button: FC<TButtonProps> = memo(
+const Button: FC<TButtonProps> = memo(
   ({ isFullWidth = true, className = '', ...props }: TButtonProps) => (
     <button
       className={classNames(
