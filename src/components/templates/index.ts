@@ -1,0 +1,7 @@
+export * from './AuthTemplate'
+export * from './ForumTemplate'
+export * from './GameTemplate'
+export * from './LeaderboardTemplate'
+export * from './ProfileTemplate'
+export * from './SignUpTemplate'
+export * from './ErrorTemplate'
