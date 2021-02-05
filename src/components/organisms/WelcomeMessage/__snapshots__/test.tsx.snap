@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<WelcomeMessage /> should renders correct <WelcomeMessage /> 1`] = `
+<div
+  className="flex"
+>
+  <img
+    alt="Hi"
+    className=""
+    src={[Function]}
+  />
+  <img
+    alt="Elon Musk"
+    className=""
+    src={[Function]}
+  />
+</div>
+`;

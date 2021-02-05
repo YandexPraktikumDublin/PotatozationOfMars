@@ -3,9 +3,7 @@ import { WelcomeMessage } from '@components/organisms'
 
 type TStartTemplateProps = {}
 
-const StartTemplate: FC<TStartTemplateProps> = memo(() => (
-  <WelcomeMessage />
-))
+const StartTemplate: FC<TStartTemplateProps> = memo(() => <WelcomeMessage />)
 
 StartTemplate.displayName = 'StartTemplate'
 

@@ -11,7 +11,7 @@ export default function withHeaderAndFooter<T>(Page: React.FC<T>) {
       }}
     >
       <Header />
-      <main className='min-h-screen'>
+      <main className="min-h-screen">
         <Page {...props} />
       </main>
       <Footer />

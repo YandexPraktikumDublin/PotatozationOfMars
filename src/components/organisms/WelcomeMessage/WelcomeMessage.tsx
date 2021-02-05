@@ -4,9 +4,9 @@ import { musk, text } from '@images'
 type TWelcomeMessageProps = {}
 
 const WelcomeMessage: FC<TWelcomeMessageProps> = memo(() => (
-  <div className='flex'>
-    <img className='' src={ text } alt="Hi" />
-    <img className='' src={ musk } alt="Elon Musk" />
+  <div className="flex">
+    <img className="" src={text} alt="Hi" />
+    <img className="" src={musk} alt="Elon Musk" />
   </div>
 ))
 
