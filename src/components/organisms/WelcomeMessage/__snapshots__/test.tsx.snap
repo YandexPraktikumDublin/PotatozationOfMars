@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<WelcomeMessage /> should renders correct <WelcomeMessage /> 1`] = `
+<p
+  className="m-auto w-72 text-center text-3xl portrait:text-2xl sm:text-xs md:text-sm lg:text-2xl md:w-36 sm:w-36"
+/>
+`;
