@@ -3,7 +3,7 @@ import { withHeaderAndFooter } from '@hocs'
 import { SignUpTemplate } from '@components/templates'
 
 const SignUp = () => {
-  return <SignUpTemplate />
+  return <SignUpTemplate title="Sign up" />
 }
 
 export default withHeaderAndFooter(SignUp)

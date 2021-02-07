@@ -23,7 +23,11 @@ const WelcomeMessage: FC<TWelcomeMessageProps> = memo(() => {
   useEffect(() => {
     window.addEventListener('resize', resizeHandler)
     resizeHandler()
-  })
+
+    return () => {
+      window.removeEventListener('resize', resizeHandler)
+    }
+  }, [])
 
   return (
     <p className="m-auto w-72 text-center text-3xl portrait:text-2xl sm:text-xs md:text-sm lg:text-2xl md:w-36 sm:w-36">

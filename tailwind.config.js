@@ -19,7 +19,8 @@ module.exports = {
       primary: '#353535',
       black: colors.black,
       white: colors.white,
-      danger: '#d54356'
+      danger: '#d54356',
+      gray: 'rgba(0, 0, 0, var(--tw-bg-opacity))'
     },
     screens: {
       'portrait': {'max': '567px'},
@@ -29,7 +30,19 @@ module.exports = {
       'xl': {'min': '1280px', 'max': '1535px'},
       '2xl': {'min': '1536px'},
     },
-    extend: {}
+    minWidth: {
+      '0': '0',
+      '320': '320px'
+    },
+    minHeight: {
+      '296': '296px',
+      '45': '45px'
+    },
+    extend: {
+      spacing: {
+        '400': '400px'
+      }
+     }
   },
   variants: {
     extend: {}
