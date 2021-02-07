@@ -2,15 +2,14 @@
 
 exports[`<Footer /> should renders correct <Footer /> 1`] = `
 <footer
-  className="p-2 items-center flex"
+  className="mt-auto mb-0 p-4"
 >
-  <button
-    className="ml-auto mr-4"
-  >
-    <img
-      alt=""
-      src={[Function]}
+  <Navigation>
+    <NavigationButton
+      imageSrc={[Function]}
+      onClick={[Function]}
+      title="Feedback"
     />
-  </button>
+  </Navigation>
 </footer>
 `;

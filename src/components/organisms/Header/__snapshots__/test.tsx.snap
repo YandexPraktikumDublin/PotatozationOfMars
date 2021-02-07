@@ -2,18 +2,41 @@
 
 exports[`<Header /> should renders correct <Header /> 1`] = `
 <header
-  className="p-2 items-center w-full flex"
+  className="flex items-center justify-between p-4"
 >
-  <div
-    className="my-auto"
-  >
-    <Pause />
-  </div>
-  <div
-    className="flex ml-auto mr-0"
-  >
-    <Navigation />
-    <TumblerTheme />
-  </div>
+  <Navigation>
+    <NavigationLink
+      href="/"
+      imageSrc={[Function]}
+      title="Home"
+    />
+    <NavigationButton
+      imageSrc={[Function]}
+      onClick={[Function]}
+      title="Restart game"
+    />
+    <NavigationButton
+      imageSrc={[Function]}
+      onClick={[Function]}
+      title="Pause"
+    />
+  </Navigation>
+  <Navigation>
+    <NavigationLink
+      href="/profile/"
+      imageSrc={[Function]}
+      title="Profile"
+    />
+    <NavigationLink
+      href="/forum/"
+      imageSrc={[Function]}
+      title="Forum"
+    />
+    <NavigationLink
+      href="/leaderboard/"
+      imageSrc={[Function]}
+      title="Leader Board"
+    />
+  </Navigation>
 </header>
 `;
