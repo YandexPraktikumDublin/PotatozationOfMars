@@ -9,7 +9,7 @@ const Footer: FC<TFooterProps> = memo(() => {
   const feedbackButtonClick = () => {}
 
   return (
-    <footer className="mt-auto mb-0 p-4">
+    <footer className="relative mt-auto mb-0 p-4">
       <Navigation>
         <NavigationButton
           title="Feedback"

@@ -20,11 +20,13 @@ module.exports = {
       black: colors.black,
       white: colors.white,
       transparent: colors.transparent,
-      danger: '#d54356',
+      danger: '#d54356'
     }
   },
   variants: {
-    extend: {}
+    extend: {
+      display: ['dark']
+    }
   },
   plugins: []
 }

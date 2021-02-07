@@ -2,7 +2,7 @@
 
 exports[`<Header /> should renders correct <Header /> 1`] = `
 <header
-  className="flex items-center justify-between p-4"
+  className="relative flex items-center justify-between p-4"
 >
   <Navigation>
     <NavigationLink
