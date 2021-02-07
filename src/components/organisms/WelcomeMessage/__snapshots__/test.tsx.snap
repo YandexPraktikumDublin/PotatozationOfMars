@@ -4,6 +4,7 @@ exports[`<WelcomeMessage /> should renders correct <WelcomeMessage /> 1`] = `
 <WelcomeMessage>
   <div
     className="fixed bottom-0 max-w-full"
+    onTouchStart={[Function]}
     style={
       Object {
         "height": "30.625rem",

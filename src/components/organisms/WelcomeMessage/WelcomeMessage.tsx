@@ -25,11 +25,9 @@ const WelcomeMessage: FC<TWelcomeMessageProps> = memo(() => {
 
   useEffect(() => {
     document.addEventListener('keypress', startGame)
-    document.addEventListener('touchstart', startGame)
 
     return () => {
       document.removeEventListener('keypress', startGame)
-      document.removeEventListener('touchstart', startGame)
     }
   }, [])
 
@@ -42,6 +40,7 @@ const WelcomeMessage: FC<TWelcomeMessageProps> = memo(() => {
         maxHeight: 'calc(100vh - 4.5rem)',
         right: '3.5625rem'
       }}
+      onTouchStart={startGame}
     >
       <div
         className="bg-contain bg-no-repeat text-center absolute top-0 z-10 flex px-14"
