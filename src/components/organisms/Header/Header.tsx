@@ -1,5 +1,5 @@
 import React, { FC, memo } from 'react'
-import { Navigation } from '@components/organisms'
+import { Navigation, TumblerTheme } from '@components/organisms'
 import { NavigationButton, NavigationLink } from '@components/molecules'
 import { PATHS } from '@config'
 import { home, restart, pause, profile, forum, leaderboard } from '@images'
@@ -39,6 +39,7 @@ const Header: FC<THeaderProps> = memo(() => {
           href={PATHS.LEADERBOARD}
           imageSrc={leaderboard}
         />
+        <TumblerTheme />
       </Navigation>
     </header>
   )
