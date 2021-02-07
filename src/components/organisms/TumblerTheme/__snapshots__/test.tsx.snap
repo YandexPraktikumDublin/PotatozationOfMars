@@ -2,11 +2,54 @@
 
 exports[`<TumblerTheme /> should renders correct <TumblerTheme /> 1`] = `
 <button
-  className="my-auto mr-4"
+  className="relative bg-primary border-2 border-white rounded-2xl h-5 outline-none"
+  onClick={[Function]}
+  style={
+    Object {
+      "width": "3.125rem",
+    }
+  }
 >
   <img
-    alt=""
+    alt="Toggle theme"
+    className="absolute transition ease-in-out"
+    height="25"
     src={[Function]}
+    style={
+      Object {
+        "top": "calc(50% - 12.5px)",
+        "transform": "translateX(-2px)",
+      }
+    }
+    width="25"
   />
 </button>
+`;
+
+exports[`<TumblerTheme /> should toggle theme 1`] = `
+<TumblerTheme>
+  <button
+    className="relative bg-primary border-2 border-white rounded-2xl h-5 outline-none"
+    onClick={[Function]}
+    style={
+      Object {
+        "width": "3.125rem",
+      }
+    }
+  >
+    <img
+      alt="Toggle theme"
+      className="absolute transition ease-in-out"
+      height="25"
+      src={[Function]}
+      style={
+        Object {
+          "top": "calc(50% - 12.5px)",
+          "transform": "translateX(-2px)",
+        }
+      }
+      width="25"
+    />
+  </button>
+</TumblerTheme>
 `;
