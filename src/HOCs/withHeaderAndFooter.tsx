@@ -13,7 +13,7 @@ export default function withHeaderAndFooter<T>(Page: React.FC<T>) {
       <div className="hidden absolute inset-0 bg-black opacity-50 dark:block" />
 
       <Header />
-      <main className="relative flex flex-grow">
+      <main className="relative flex flex-grow justify-center items-center">
         <Page {...props} />
       </main>
       <Footer />

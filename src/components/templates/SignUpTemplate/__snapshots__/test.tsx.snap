@@ -2,7 +2,7 @@
 
 exports[`<SignUpTemplate /> should renders correct <SignUpTemplate /> 1`] = `
 <div
-  className="flex-grow max-w-xs"
+  className="w-full max-w-xs"
 >
   <Window>
     <Title>

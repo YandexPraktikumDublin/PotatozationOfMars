@@ -10,7 +10,7 @@ type TSignUpTemplateProps = {
 const SignUpTemplate: FC<TSignUpTemplateProps> = memo(
   ({ title }: TSignUpTemplateProps) => {
     return (
-      <div className="flex-grow max-w-xs">
+      <div className="w-full max-w-xs">
         <Window>
           <Title>{title}</Title>
           <SignUpForm />
