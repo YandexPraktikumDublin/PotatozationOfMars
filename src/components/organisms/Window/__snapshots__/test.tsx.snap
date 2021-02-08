@@ -2,6 +2,6 @@
 
 exports[`<Window /> should renders correct <Window /> 1`] = `
 <div
-  className="text-center border border-primary rounded-3xl p-6 bg-white bg-opacity-40 dark:text-white dark:border-white dark:bg-primary"
+  className="text-center border border-primary rounded-3xl p-6 bg-white bg-opacity-40 dark:text-white dark:border-white dark:bg-primary dark:bg-opacity-40"
 />
 `;

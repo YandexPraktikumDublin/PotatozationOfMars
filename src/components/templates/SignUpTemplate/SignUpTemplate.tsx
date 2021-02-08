@@ -14,7 +14,9 @@ const SignUpTemplate: FC<TSignUpTemplateProps> = memo(
         <Window>
           <Title>{title}</Title>
           <SignUpForm />
-          <FormLink text="Already have an account?" path={PATHS.AUTH} />
+          <FormLink path={PATHS.AUTH} className="inline-block mt-4">
+            Already have an account?
+          </FormLink>
         </Window>
       </div>
     )

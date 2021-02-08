@@ -25,7 +25,8 @@ module.exports = {
   },
   variants: {
     extend: {
-      display: ['dark']
+      display: ['dark'],
+      backgroundOpacity: ['dark']
     }
   },
   plugins: []
