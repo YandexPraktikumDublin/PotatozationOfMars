@@ -6,23 +6,23 @@ type TTumblerThemeProps = {}
 const darkThemeClass = 'dark'
 
 const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
-  const [isDarkTheme, setIsDarkTheme] = useState(
-    window.localStorage.isDarkTheme === 'true'
+  const [isLightTheme, setIsLightTheme] = useState(
+    window.localStorage.isLightTheme === 'true'
   )
 
   const toggleTheme = useCallback(() => {
-    setIsDarkTheme((value) => !value)
-  }, [setIsDarkTheme])
+    setIsLightTheme((value) => !value)
+  }, [setIsLightTheme])
 
   useEffect(() => {
-    if (isDarkTheme) {
-      document.documentElement.classList.add(darkThemeClass)
-      window.localStorage.isDarkTheme = 'true'
-    } else {
+    if (isLightTheme) {
       document.documentElement.classList.remove(darkThemeClass)
-      window.localStorage.isDarkTheme = 'false'
+      window.localStorage.isLightTheme = 'true'
+    } else {
+      document.documentElement.classList.add(darkThemeClass)
+      window.localStorage.isLightTheme = 'false'
     }
-  }, [isDarkTheme])
+  }, [isLightTheme])
 
   return (
     <button
@@ -36,7 +36,7 @@ const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
         className="absolute transition ease-in-out w-6 h-6"
         style={{
           top: 'calc(50% - 0.75rem)',
-          transform: isDarkTheme ? 'translateX(-2px)' : 'translateX(100%)'
+          transform: isLightTheme ? 'translateX(100%)' : 'translateX(-2px)'
         }}
         alt="Toggle theme"
       />
