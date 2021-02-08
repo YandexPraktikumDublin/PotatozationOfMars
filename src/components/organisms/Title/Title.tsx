@@ -7,9 +7,7 @@ type TTitleProps = {
 
 const Title: FC<TTitleProps> = memo(({ title }: TTitleProps) => {
   return (
-    <h1 className={classNames('text-5xl text-center mb-8', 'dark:text-white')}>
-      {title}
-    </h1>
+    <h1 className={classNames('text-4xl mb-4', 'dark:text-white')}>{title}</h1>
   )
 })
 

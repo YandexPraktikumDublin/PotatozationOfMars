@@ -3,7 +3,7 @@ import { Formik, FormikHelpers, Form } from 'formik'
 import * as Yup from 'yup'
 import { Button } from '@components/organisms'
 
-interface Values {
+interface IValues {
   email: string
   login: string
   firstName: string
@@ -46,16 +46,16 @@ const BaseForm: FC<TBaseFormProps> = memo((props) => (
       password: ''
     }}
     validationSchema={SignupSchema}
-    onSubmit={(values: Values, { setSubmitting }: FormikHelpers<Values>) => {
+    onSubmit={(values: IValues, { setSubmitting }: FormikHelpers<IValues>) => {
       console.log(JSON.stringify(values, null, 2))
       setSubmitting(false)
     }}
   >
     {({ isSubmitting }) => (
-      <Form className="flex flex-col" noValidate>
+      <Form noValidate>
         {props.children}
-        <Button type="submit" disabled={isSubmitting}>
-          Submit
+        <Button className="mb-4" type="submit" disabled={isSubmitting}>
+          Sing up
         </Button>
       </Form>
     )}

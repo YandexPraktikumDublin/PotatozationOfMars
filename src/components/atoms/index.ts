@@ -1,2 +1,2 @@
 export * from './Popup'
-export * from './BaseInput'
+export * from './FormLink'

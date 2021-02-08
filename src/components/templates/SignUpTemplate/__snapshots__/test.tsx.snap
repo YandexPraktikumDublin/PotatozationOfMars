@@ -1,41 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SignUpTemplate /> should renders correct <SignUpTemplate /> 1`] = `
-<Popup>
-  <Title
-    title="test"
-  />
-  <BaseForm>
-    <BaseInput
-      name="email"
-      placeholder="Email"
-      type="email"
+<div
+  className="flex-grow max-w-xs"
+>
+  <Popup>
+    <Title
+      title="test"
     />
-    <BaseInput
-      name="login"
-      placeholder="Login"
-      type="text"
+    <BaseForm>
+      <BaseInput
+        name="email"
+        placeholder="Email"
+        type="email"
+      />
+      <BaseInput
+        name="login"
+        placeholder="Login"
+        type="text"
+      />
+      <BaseInput
+        name="firstName"
+        placeholder="First name"
+        type="text"
+      />
+      <BaseInput
+        name="lastName"
+        placeholder="Last name"
+        type="text"
+      />
+      <BaseInput
+        name="phone"
+        placeholder="Phone"
+        type="phone"
+      />
+      <BaseInput
+        name="password"
+        placeholder="Password"
+        type="password"
+      />
+    </BaseForm>
+    <FormLink
+      path="text"
+      text="test"
     />
-    <BaseInput
-      name="firstName"
-      placeholder="First name"
-      type="text"
-    />
-    <BaseInput
-      name="lastName"
-      placeholder="Last name"
-      type="text"
-    />
-    <BaseInput
-      name="phone"
-      placeholder="Phone"
-      type="phone"
-    />
-    <BaseInput
-      name="password"
-      placeholder="Password"
-      type="password"
-    />
-  </BaseForm>
-</Popup>
+  </Popup>
+</div>
 `;

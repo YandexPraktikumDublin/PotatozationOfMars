@@ -2,6 +2,9 @@
 
 exports[`<WelcomeMessage /> should renders correct <WelcomeMessage /> 1`] = `
 <p
-  className="m-auto w-72 text-center text-3xl portrait:text-2xl sm:text-xs md:text-sm lg:text-2xl md:w-36 sm:w-36"
-/>
+  className="m-auto w-64 text-center text-3xl sm:w-30 sm:text-xxs portrait:text-base"
+>
+  Hi! Welcome to the Potatization 
+    of Mars. Oh, wait, you can't see me! Turn the screen :)
+</p>
 `;

@@ -8,13 +8,13 @@ export default function withHeaderAndFooter<T>(Page: React.FC<T>) {
       props.location.pathname === '/' ? `url(${start})` : `url(${background})`
     return (
       <div
-        className="h-screen bg-cover bg-center flex flex-col"
+        className="min-h-screen bg-cover bg-center flex flex-col"
         style={{
           backgroundImage: backgroundImage
         }}
       >
         <Header />
-        <main className="flex flex-grow h-auto">
+        <main className="flex flex-grow h-auto justify-center items-center px-3">
           <Page {...props} />
         </main>
         <Footer />
