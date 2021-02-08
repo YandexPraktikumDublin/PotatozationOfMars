@@ -3,10 +3,12 @@ import { moon } from '@images'
 
 type TTumblerThemeProps = {}
 
-const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
-  const darkThemeClass = 'dark'
+const darkThemeClass = 'dark'
 
-  const [isDarkTheme, setIsDarkTheme] = useState(true)
+const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
+  const [isDarkTheme, setIsDarkTheme] = useState(
+    window.localStorage.isDarkTheme === 'true'
+  )
 
   const toggleTheme = useCallback(() => {
     setIsDarkTheme((value) => !value)
@@ -15,24 +17,25 @@ const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
   useEffect(() => {
     if (isDarkTheme) {
       document.documentElement.classList.add(darkThemeClass)
+      window.localStorage.isDarkTheme = 'true'
     } else {
       document.documentElement.classList.remove(darkThemeClass)
+      window.localStorage.isDarkTheme = 'false'
     }
   }, [isDarkTheme])
 
   return (
     <button
-      className="relative bg-primary border-2 border-white rounded-2xl h-5 outline-none"
-      style={{ width: '3.125rem' }}
+      className="relative bg-primary border-2 border-white rounded-2xl w-12	h-5 outline-none"
       onClick={toggleTheme}
     >
       <img
-        width="25"
-        height="25"
+        width="24"
+        height="24"
         src={moon}
-        className="absolute transition ease-in-out"
+        className="absolute transition ease-in-out w-6 h-6"
         style={{
-          top: 'calc(50% - 12.5px)',
+          top: 'calc(50% - 0.75rem)',
           transform: isDarkTheme ? 'translateX(-2px)' : 'translateX(100%)'
         }}
         alt="Toggle theme"

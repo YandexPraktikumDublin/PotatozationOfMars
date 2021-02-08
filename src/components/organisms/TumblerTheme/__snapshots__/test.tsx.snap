@@ -2,26 +2,21 @@
 
 exports[`<TumblerTheme /> should renders correct <TumblerTheme /> 1`] = `
 <button
-  className="relative bg-primary border-2 border-white rounded-2xl h-5 outline-none"
+  className="relative bg-primary border-2 border-white rounded-2xl w-12	h-5 outline-none"
   onClick={[Function]}
-  style={
-    Object {
-      "width": "3.125rem",
-    }
-  }
 >
   <img
     alt="Toggle theme"
-    className="absolute transition ease-in-out"
-    height="25"
+    className="absolute transition ease-in-out w-6 h-6"
+    height="24"
     src={[Function]}
     style={
       Object {
-        "top": "calc(50% - 12.5px)",
-        "transform": "translateX(-2px)",
+        "top": "calc(50% - 0.75rem)",
+        "transform": "translateX(100%)",
       }
     }
-    width="25"
+    width="24"
   />
 </button>
 `;
@@ -29,26 +24,21 @@ exports[`<TumblerTheme /> should renders correct <TumblerTheme /> 1`] = `
 exports[`<TumblerTheme /> should toggle theme 1`] = `
 <TumblerTheme>
   <button
-    className="relative bg-primary border-2 border-white rounded-2xl h-5 outline-none"
+    className="relative bg-primary border-2 border-white rounded-2xl w-12	h-5 outline-none"
     onClick={[Function]}
-    style={
-      Object {
-        "width": "3.125rem",
-      }
-    }
   >
     <img
       alt="Toggle theme"
-      className="absolute transition ease-in-out"
-      height="25"
+      className="absolute transition ease-in-out w-6 h-6"
+      height="24"
       src={[Function]}
       style={
         Object {
-          "top": "calc(50% - 12.5px)",
-          "transform": "translateX(-2px)",
+          "top": "calc(50% - 0.75rem)",
+          "transform": "translateX(100%)",
         }
       }
-      width="25"
+      width="24"
     />
   </button>
 </TumblerTheme>

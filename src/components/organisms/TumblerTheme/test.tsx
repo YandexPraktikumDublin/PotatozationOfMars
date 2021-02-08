@@ -17,18 +17,7 @@ describe('<TumblerTheme />', () => {
     const wrapper = mount(<TumblerTheme />)
 
     expect(wrapper.find('img').prop('style')).toEqual({
-      top: 'calc(50% - 12.5px)',
-      transform: 'translateX(-2px)'
-    })
-
-    expect(
-      document.documentElement.classList.contains(darkThemeClass)
-    ).toBeTruthy()
-
-    wrapper.simulate('click')
-
-    expect(wrapper.find('img').prop('style')).toEqual({
-      top: 'calc(50% - 12.5px)',
+      top: 'calc(50% - 0.75rem)',
       transform: 'translateX(100%)'
     })
 
@@ -39,13 +28,24 @@ describe('<TumblerTheme />', () => {
     wrapper.simulate('click')
 
     expect(wrapper.find('img').prop('style')).toEqual({
-      top: 'calc(50% - 12.5px)',
+      top: 'calc(50% - 0.75rem)',
       transform: 'translateX(-2px)'
     })
 
     expect(
       document.documentElement.classList.contains(darkThemeClass)
     ).toBeTruthy()
+
+    wrapper.simulate('click')
+
+    expect(wrapper.find('img').prop('style')).toEqual({
+      top: 'calc(50% - 0.75rem)',
+      transform: 'translateX(100%)'
+    })
+
+    expect(
+      document.documentElement.classList.contains(darkThemeClass)
+    ).toBeFalsy()
 
     expect(toJSON(wrapper)).toMatchSnapshot()
   })
