@@ -2,7 +2,7 @@
 
 exports[`<FormLink /> should renders correct <FormLink /> 1`] = `
 <Link
-  className="mt-4 underline"
+  className="underline"
   to="test"
 >
   test
