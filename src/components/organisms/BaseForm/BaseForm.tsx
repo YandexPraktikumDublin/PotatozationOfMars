@@ -34,7 +34,7 @@ const BaseForm: FC<TBaseFormProps> = memo(
         {({ isSubmitting }) => (
           <Form noValidate>
             {children}
-            <Button className="mb-4" type="submit" disabled={isSubmitting}>
+            <Button type="submit" disabled={isSubmitting}>
               {textButton}
             </Button>
           </Form>
