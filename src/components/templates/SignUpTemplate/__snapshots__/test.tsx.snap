@@ -1,3 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<SignUpTemplate /> should renders correct <SignUpTemplate /> 1`] = `<Fragment />`;
+exports[`<SignUpTemplate /> should renders correct <SignUpTemplate /> 1`] = `
+<div
+  className="flex-grow max-w-xs"
+>
+  <Window>
+    <Title>
+      test
+    </Title>
+    <SignUpForm />
+    <FormLink
+      path="/auth/"
+      text="Already have an account?"
+    />
+  </Window>
+</div>
+`;

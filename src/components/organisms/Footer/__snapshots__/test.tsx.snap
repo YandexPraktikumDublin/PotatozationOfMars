@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Footer /> should renders correct <Footer /> 1`] = `
+<footer
+  className="p-2 items-center flex"
+>
+  <button
+    className="ml-auto mr-4"
+  >
+    <img
+      alt=""
+      src={[Function]}
+    />
+  </button>
+</footer>
+`;

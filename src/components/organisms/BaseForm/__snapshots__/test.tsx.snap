@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BaseForm /> should renders correct <BaseForm /> 1`] = `
+<Formik
+  initialValues={
+    Object {
+      "email": "",
+      "firstName": "",
+      "lastName": "",
+      "login": "",
+      "password": "",
+      "phone": "",
+    }
+  }
+  onSubmit={[Function]}
+  validationSchema={
+    Object {
+      "email": "",
+      "firstName": "",
+      "lastName": "",
+      "login": "",
+      "password": "",
+      "phone": "",
+    }
+  }
+>
+  <Component />
+</Formik>
+`;

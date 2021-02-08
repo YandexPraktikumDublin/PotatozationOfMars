@@ -1,3 +1,4 @@
+export { default as Start } from './Start'
 export { default as Auth } from './Auth'
 export { default as Error404 } from './Error404'
 export { default as Forum } from './Forum'

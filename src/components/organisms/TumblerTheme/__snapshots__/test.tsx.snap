@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TumblerTheme /> should renders correct <TumblerTheme /> 1`] = `
+<button
+  className="my-auto mr-4"
+>
+  <img
+    alt=""
+    src={[Function]}
+  />
+</button>
+`;

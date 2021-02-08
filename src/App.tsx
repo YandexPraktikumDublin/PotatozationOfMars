@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { PATHS } from '@config'
 import {
+  Start,
   Auth,
   Error404,
   Forum,
@@ -16,7 +17,7 @@ import './styles/globals.css'
 const App: React.FC = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path={PATHS.BASE} />
+      <Route exact path={PATHS.BASE} component={Start} />
       <Route path={PATHS.AUTH} component={Auth} />
       <Route path={PATHS.SIGNUP} component={SignUp} />
       <Route path={PATHS.FORUM} component={Forum} />

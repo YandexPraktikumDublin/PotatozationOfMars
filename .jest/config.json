@@ -7,12 +7,16 @@
     "@components/molecules": ["<rootDir>/components/molecules/index.ts"],
     "@components/organisms": ["<rootDir>/components/organisms/index.ts"],
     "@components/templates": ["<rootDir>/components/templates/index.ts"],
-    "@pages": ["<rootDir>/pages/index.ts"]
+    "@pages": ["<rootDir>/pages/index.ts"],
+    "@config": ["<rootDir>/config.ts"],
+    "@hocs": ["<rootDir>/HOCs/index.ts"],
+    "@images": ["<rootDir>/images/index.ts"]
   },
   "setupFilesAfterEnv": ["../.jest/setupTests.js"],
   "transform": {
     "^.+\\.(j|t)sx?$": "babel-jest",
-    "^.+\\.svg$": "jest-svg-transformer"
+    "^.+\\.svg$": "jest-svg-transformer",
+    ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
   },
   "transformIgnorePatterns": ["/node_modules/(?!register-service-worker).+\\.js$"]
 }
