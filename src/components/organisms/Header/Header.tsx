@@ -2,24 +2,17 @@ import React, { FC, memo } from 'react'
 import { Navigation, TumblerTheme } from '@components/organisms'
 import { NavigationButton, NavigationLink } from '@components/molecules'
 import { PATHS } from '@config'
-import { home, restart, pause, profile, forum, leaderboard } from '@images'
+import { home, pause, profile, forum, leaderboard } from '@images'
 
 type THeaderProps = {}
 
 const Header: FC<THeaderProps> = memo(() => {
-  const restartButtonClick = () => {}
-
   const pauseButtonClick = () => {}
 
   return (
     <header className="relative flex items-center justify-between p-4">
       <Navigation>
         <NavigationLink title="Home" href={PATHS.BASE} imageSrc={home} />
-        <NavigationButton
-          title="Restart game"
-          onClick={restartButtonClick}
-          imageSrc={restart}
-        />
         <NavigationButton
           title="Pause"
           onClick={pauseButtonClick}

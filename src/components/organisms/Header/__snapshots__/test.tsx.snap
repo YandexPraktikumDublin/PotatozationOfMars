@@ -13,11 +13,6 @@ exports[`<Header /> should renders correct <Header /> 1`] = `
     <NavigationButton
       imageSrc={[Function]}
       onClick={[Function]}
-      title="Restart game"
-    />
-    <NavigationButton
-      imageSrc={[Function]}
-      onClick={[Function]}
       title="Pause"
     />
   </Navigation>
