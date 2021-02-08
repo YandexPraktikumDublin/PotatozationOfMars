@@ -8,7 +8,7 @@ type TFormLinkProps = {
 
 const FormLink: FC<TFormLinkProps> = memo(({ text, path }: TFormLinkProps) => {
   return (
-    <Link className="mt-4 underline" to={path}>
+    <Link className="underline" to={path}>
       {text}
     </Link>
   )
