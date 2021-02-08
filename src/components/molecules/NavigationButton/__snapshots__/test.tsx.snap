@@ -19,9 +19,10 @@ exports[`<NavigationButton /> should renders correct <NavigationButton /> 1`] = 
 >
   <img
     alt="Test title"
-    height="25"
+    className="w-6 h-6"
+    height="24"
     src="image.jpg"
-    width="25"
+    width="24"
   />
 </button>
 `;
