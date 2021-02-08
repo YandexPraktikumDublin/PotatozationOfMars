@@ -17,7 +17,7 @@ import './styles/globals.css'
 
 const App: React.FC = () => (
   <div
-    className="relative h-screen bg-cover bg-center bg-no-repeat flex flex-col"
+    className="relative bg-cover bg-center bg-no-repeat"
     style={{
       backgroundImage: `url(${background})`
     }}
