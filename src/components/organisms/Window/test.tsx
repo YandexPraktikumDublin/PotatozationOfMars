@@ -2,11 +2,11 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import toJSON from 'enzyme-to-json'
 
-import { Popup } from '.'
+import { Window } from '.'
 
-describe('<Popup />', () => {
-  it('should renders correct <Popup />', () => {
-    const wrapper = shallow(<Popup />)
+describe('<Window />', () => {
+  it('should renders correct <Window />', () => {
+    const wrapper = shallow(<Window />)
 
     expect(toJSON(wrapper)).toMatchSnapshot()
   })

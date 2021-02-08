@@ -4,7 +4,7 @@ exports[`<SignUpTemplate /> should renders correct <SignUpTemplate /> 1`] = `
 <div
   className="flex-grow max-w-xs"
 >
-  <Popup>
+  <Window>
     <Title
       title="test"
     />
@@ -44,6 +44,6 @@ exports[`<SignUpTemplate /> should renders correct <SignUpTemplate /> 1`] = `
       path="text"
       text="test"
     />
-  </Popup>
+  </Window>
 </div>
 `;

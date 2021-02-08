@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react'
-import { Popup, FormLink } from '@components/atoms'
-import { BaseForm, BaseInput, Title } from '@components/organisms'
+import { FormLink } from '@components/atoms'
+import { Window, BaseForm, BaseInput, Title } from '@components/organisms'
 
 type TSignUpTemplateProps = {
   title: string
@@ -12,7 +12,7 @@ const SignUpTemplate: FC<TSignUpTemplateProps> = memo(
   ({ title, text, path }: TSignUpTemplateProps) => {
     return (
       <div className="flex-grow max-w-xs">
-        <Popup>
+        <Window>
           <Title title={title} />
           <BaseForm>
             <BaseInput type="email" name="email" placeholder="Email" />
@@ -23,7 +23,7 @@ const SignUpTemplate: FC<TSignUpTemplateProps> = memo(
             <BaseInput type="password" name="password" placeholder="Password" />
           </BaseForm>
           <FormLink text={text} path={path} />
-        </Popup>
+        </Window>
       </div>
     )
   }

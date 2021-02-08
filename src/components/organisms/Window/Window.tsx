@@ -1,9 +1,9 @@
 import React, { FC, memo } from 'react'
 import classNames from 'classnames'
 
-type TPopupProps = {}
+type TWindowProps = {}
 
-const Popup: FC<TPopupProps> = memo((props) => {
+const Window: FC<TWindowProps> = memo((props) => {
   return (
     <div
       className={classNames(
@@ -16,6 +16,6 @@ const Popup: FC<TPopupProps> = memo((props) => {
   )
 })
 
-Popup.displayName = 'Popup'
+Window.displayName = 'Window'
 
-export default Popup
+export default Window
