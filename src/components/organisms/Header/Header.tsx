@@ -3,21 +3,26 @@ import { Navigation, TumblerTheme } from '@components/organisms'
 import { NavigationButton, NavigationLink } from '@components/molecules'
 import { PATHS } from '@config'
 import { home, pause, profile, forum, leaderboard } from '@images'
+import { useLocation } from 'react-router-dom'
 
 type THeaderProps = {}
 
 const Header: FC<THeaderProps> = memo(() => {
+  const location = useLocation()
+
   const pauseButtonClick = () => {}
 
   return (
     <header className="relative flex items-center justify-between p-4">
       <Navigation>
         <NavigationLink title="Home" href={PATHS.BASE} imageSrc={home} />
-        <NavigationButton
-          title="Pause"
-          onClick={pauseButtonClick}
-          imageSrc={pause}
-        />
+        {location.pathname === PATHS.GAME && (
+          <NavigationButton
+            title="Pause"
+            onClick={pauseButtonClick}
+            imageSrc={pause}
+          />
+        )}
       </Navigation>
 
       <Navigation>

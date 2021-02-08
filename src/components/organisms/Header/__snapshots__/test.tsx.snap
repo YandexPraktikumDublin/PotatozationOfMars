@@ -1,38 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Header /> should renders correct <Header /> 1`] = `
-<header
-  className="relative flex items-center justify-between p-4"
+<Router
+  history={
+    Object {
+      "action": "POP",
+      "block": [Function],
+      "createHref": [Function],
+      "go": [Function],
+      "goBack": [Function],
+      "goForward": [Function],
+      "length": 1,
+      "listen": [Function],
+      "location": Object {
+        "hash": "",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+      "push": [Function],
+      "replace": [Function],
+    }
+  }
 >
-  <Navigation>
-    <NavigationLink
-      href="/"
-      imageSrc={[Function]}
-      title="Home"
-    />
-    <NavigationButton
-      imageSrc={[Function]}
-      onClick={[Function]}
-      title="Pause"
-    />
-  </Navigation>
-  <Navigation>
-    <NavigationLink
-      href="/profile/"
-      imageSrc={[Function]}
-      title="Profile"
-    />
-    <NavigationLink
-      href="/forum/"
-      imageSrc={[Function]}
-      title="Forum"
-    />
-    <NavigationLink
-      href="/leaderboard/"
-      imageSrc={[Function]}
-      title="Leader Board"
-    />
-    <TumblerTheme />
-  </Navigation>
-</header>
+  <Header />
+</Router>
 `;
