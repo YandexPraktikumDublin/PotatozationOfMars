@@ -11,22 +11,32 @@ import {
   Profile,
   SignUp
 } from '@pages'
+import { background } from '@images'
 
 import './styles/globals.css'
 
 const App: React.FC = () => (
-  <BrowserRouter>
-    <Switch>
-      <Route exact path={PATHS.BASE} component={Start} />
-      <Route path={PATHS.AUTH} component={Auth} />
-      <Route path={PATHS.SIGNUP} component={SignUp} />
-      <Route path={PATHS.FORUM} component={Forum} />
-      <Route path={PATHS.GAME} component={Game} />
-      <Route path={PATHS.LEADERBOARD} component={Leaderboard} />
-      <Route path={PATHS.PROFILE} component={Profile} />
-      <Route path="*" component={Error404} />
-    </Switch>
-  </BrowserRouter>
+  <div
+    className="relative h-screen bg-cover bg-center bg-no-repeat flex flex-col"
+    style={{
+      backgroundImage: `url(${background})`
+    }}
+  >
+    <div className="hidden absolute inset-0 bg-black opacity-50 dark:block" />
+
+    <BrowserRouter>
+      <Switch>
+        <Route exact path={PATHS.BASE} component={Start} />
+        <Route path={PATHS.AUTH} component={Auth} />
+        <Route path={PATHS.SIGNUP} component={SignUp} />
+        <Route path={PATHS.FORUM} component={Forum} />
+        <Route path={PATHS.GAME} component={Game} />
+        <Route path={PATHS.LEADERBOARD} component={Leaderboard} />
+        <Route path={PATHS.PROFILE} component={Profile} />
+        <Route path="*" component={Error404} />
+      </Switch>
+    </BrowserRouter>
+  </div>
 )
 
 export default App
