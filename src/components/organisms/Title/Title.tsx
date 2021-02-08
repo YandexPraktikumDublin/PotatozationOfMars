@@ -1,13 +1,13 @@
 import React, { FC, memo } from 'react'
 import classNames from 'classnames'
 
-type TTitleProps = {
-  title: string
-}
+type TTitleProps = {}
 
-const Title: FC<TTitleProps> = memo(({ title }: TTitleProps) => {
+const Title: FC<TTitleProps> = memo((props) => {
   return (
-    <h1 className={classNames('text-4xl mb-4', 'dark:text-white')}>{title}</h1>
+    <h1 className={classNames('text-4xl mb-6 font-medium', 'dark:text-white')}>
+      {props.children}
+    </h1>
   )
 })
 

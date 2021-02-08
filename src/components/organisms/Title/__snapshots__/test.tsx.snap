@@ -2,8 +2,6 @@
 
 exports[`<Title /> should renders correct <Title /> 1`] = `
 <h1
-  className="text-4xl mb-4 dark:text-white"
->
-  test
-</h1>
+  className="text-4xl mb-6 font-medium dark:text-white"
+/>
 `;
