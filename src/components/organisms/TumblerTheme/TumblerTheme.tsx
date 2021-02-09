@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback, useEffect, useState } from 'react'
+import React, { FC, memo, useEffect, useState } from 'react'
 import { moon } from '@images'
 
 type TTumblerThemeProps = {}
@@ -10,9 +10,9 @@ const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
     window.localStorage.isLightTheme === 'true'
   )
 
-  const toggleTheme = useCallback(() => {
+  const toggleTheme = () => {
     setIsLightTheme((value) => !value)
-  }, [setIsLightTheme])
+  }
 
   useEffect(() => {
     if (isLightTheme) {
