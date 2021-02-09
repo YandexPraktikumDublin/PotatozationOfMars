@@ -1,6 +1,7 @@
 import React, { FC, memo } from 'react'
 import { BaseForm, BaseInput } from '@components/organisms'
 import * as Yup from 'yup'
+import { onSubmitAuth } from './AuthController'
 
 type TAuthFormProps = {}
 
@@ -22,6 +23,7 @@ const AuthForm: FC<TAuthFormProps> = memo(() => {
     <BaseForm
       schema={AuthSchema}
       initialValues={initialValues}
+      onSubmit={onSubmitAuth}
       textButton="Log in"
     >
       <BaseInput type="text" name="login" placeholder="Login" />

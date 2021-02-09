@@ -11,7 +11,8 @@
     "@config": ["<rootDir>/config.ts"],
     "@hocs": ["<rootDir>/HOCs/index.ts"],
     "@images": ["<rootDir>/images/index.ts"],
-    "@hooks": ["<rootDir>/hooks/index.ts"]
+    "@hooks": ["<rootDir>/hooks/index.ts"],
+    "@api": ["<rootDir>/api/index.ts"]
   },
   "setupFilesAfterEnv": ["../.jest/setupTests.js"],
   "transform": {

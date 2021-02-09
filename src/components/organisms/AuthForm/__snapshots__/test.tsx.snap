@@ -8,6 +8,7 @@ exports[`<AuthForm /> should renders correct <AuthForm /> 1`] = `
       "password": "",
     }
   }
+  onSubmit={[Function]}
   schema={
     ObjectSchema {
       "_blacklist": ReferenceSet {

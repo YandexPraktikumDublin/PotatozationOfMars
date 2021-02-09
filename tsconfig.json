@@ -30,6 +30,7 @@
       "@hocs": ["./src/HOCs/index.ts"],
       "@images": ["./src/images/index.ts"],
       "@hooks": ["./src/hooks/index.ts"],
+      "@api": ["./src/api/index.ts"]
     },
     "typeRoots": [
       "node_modules/@types"

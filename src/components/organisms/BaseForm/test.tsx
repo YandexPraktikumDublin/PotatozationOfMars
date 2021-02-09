@@ -15,7 +15,12 @@ describe('<BaseForm />', () => {
       password: ''
     }
     const wrapper = shallow(
-      <BaseForm schema={test} initialValues={test} textButton="test" />
+      <BaseForm
+        schema={test}
+        initialValues={test}
+        onSubmit={() => console.log()}
+        textButton="test"
+      />
     )
 
     expect(toJSON(wrapper)).toMatchSnapshot()

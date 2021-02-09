@@ -9,11 +9,12 @@ interface IValues {
 type TBaseFormProps = {
   schema: object
   initialValues: IValues
+  onSubmit: (values: object) => any
   textButton: string
 }
 
 const BaseForm: FC<TBaseFormProps> = memo(
-  ({ initialValues, schema, children, textButton }) => {
+  ({ initialValues, schema, onSubmit, children, textButton }) => {
     return (
       <Formik
         initialValues={initialValues}
@@ -22,7 +23,7 @@ const BaseForm: FC<TBaseFormProps> = memo(
           values: IValues,
           { setSubmitting }: FormikHelpers<IValues>
         ) => {
-          console.log(JSON.stringify(values, null, 2))
+          onSubmit(values)
           setSubmitting(false)
         }}
       >

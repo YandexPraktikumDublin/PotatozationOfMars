@@ -1,6 +1,7 @@
 import React, { FC, memo } from 'react'
 import { BaseForm, BaseInput } from '@components/organisms'
 import * as Yup from 'yup'
+import { onSubmitSignUp } from './SignUpController'
 
 type TSignUpFormProps = {}
 
@@ -10,11 +11,11 @@ const SignupSchema = Yup.object().shape({
     .min(2, 'Too Short!')
     .max(20, 'Too Long!')
     .required('Required'),
-  firstName: Yup.string()
+  first_name: Yup.string()
     .min(2, 'Too Short!')
     .max(20, 'Too Long!')
     .required('Required'),
-  lastName: Yup.string()
+  second_name: Yup.string()
     .min(2, 'Too Short!')
     .max(20, 'Too Long!')
     .required('Required'),
@@ -28,8 +29,8 @@ const SignupSchema = Yup.object().shape({
 const initialValues = {
   email: '',
   login: '',
-  firstName: '',
-  lastName: '',
+  first_name: '',
+  second_name: '',
   phone: '',
   password: ''
 }
@@ -39,12 +40,13 @@ const SignUpForm: FC<TSignUpFormProps> = memo(() => {
     <BaseForm
       schema={SignupSchema}
       initialValues={initialValues}
+      onSubmit={onSubmitSignUp}
       textButton="Sign up"
     >
       <BaseInput type="email" name="email" placeholder="Email" />
       <BaseInput type="text" name="login" placeholder="Login" />
-      <BaseInput type="text" name="firstName" placeholder="First name" />
-      <BaseInput type="text" name="lastName" placeholder="Last name" />
+      <BaseInput type="text" name="first_name" placeholder="First name" />
+      <BaseInput type="text" name="second_name" placeholder="Last name" />
       <BaseInput type="phone" name="phone" placeholder="Phone" />
       <BaseInput type="password" name="password" placeholder="Password" />
     </BaseForm>
