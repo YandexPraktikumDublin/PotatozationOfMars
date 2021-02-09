@@ -6,7 +6,7 @@ import { AuthTemplate } from '.'
 
 describe('<AuthTemplate />', () => {
   it('should renders correct <AuthTemplate />', () => {
-    const wrapper = shallow(<AuthTemplate />)
+    const wrapper = shallow(<AuthTemplate title="test" />)
 
     expect(toJSON(wrapper)).toMatchSnapshot()
   })

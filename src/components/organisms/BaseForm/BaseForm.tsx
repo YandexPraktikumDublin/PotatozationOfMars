@@ -3,26 +3,21 @@ import { Formik, FormikHelpers, Form } from 'formik'
 import { Button } from '@components/organisms'
 
 interface IValues {
-  email: string
-  login: string
-  firstName: string
-  lastName: string
-  phone: string
-  password: string
+  [key: string]: string
 }
 
 type TBaseFormProps = {
-  validate: object
+  schema: object
   initialValues: IValues
   textButton: string
 }
 
 const BaseForm: FC<TBaseFormProps> = memo(
-  ({ initialValues, validate, children, textButton }) => {
+  ({ initialValues, schema, children, textButton }) => {
     return (
       <Formik
         initialValues={initialValues}
-        validationSchema={validate}
+        validationSchema={schema}
         onSubmit={(
           values: IValues,
           { setSubmitting }: FormikHelpers<IValues>
