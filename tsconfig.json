@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "es2017"
-    ],
+    "lib": ["dom", "es2017"],
     "module": "esnext",
     "moduleResolution": "node",
     "target": "es5",
@@ -28,18 +25,13 @@
       "@pages": ["./src/pages/index.ts"],
       "@config": ["./src/config.ts"],
       "@hocs": ["./src/HOCs/index.ts"],
-      "@images": ["./src/images/index.ts"]
+      "@images": ["./src/images/index.ts"],
+      "@game/@types": ["./src/game/@types/index.ts"],
+      "@game/entities": ["./src/game/entities/index.ts"],
+      "@game/controllers": ["./src/game/controllers/index.ts"]
     },
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "typeRoots": ["node_modules/@types"]
   },
-  "include": [
-    "src",
-    "src/custom.d.ts",
-    "./node_modules/@types"
-  ],
-  "exclude": [
-    "**/*.js"
-  ]
+  "include": ["src", "src/custom.d.ts", "./node_modules/@types"],
+  "exclude": ["**/*.js"]
 }
