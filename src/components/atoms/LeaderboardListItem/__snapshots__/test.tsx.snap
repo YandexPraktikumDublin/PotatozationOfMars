@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LeaderboardListItem /> should renders correct <LeaderboardListItem /> 1`] = `
+<div
+  className="flex justify-between border-b border-primary mb-4 dark:border-white"
+>
+  <span>
+    1
+    . 
+    IvanIvanov
+  </span>
+  <span>
+    1023
+  </span>
+</div>
+`;

@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NavigationButton /> should renders correct <NavigationButton /> 1`] = `
+<button
+  onClick={
+    [MockFunction] {
+      "calls": Array [
+        Array [],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  title="Test title"
+>
+  <img
+    alt="Test title"
+    className="w-6 h-6"
+    height="24"
+    src="image.jpg"
+    width="24"
+  />
+</button>
+`;

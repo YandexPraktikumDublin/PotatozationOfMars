@@ -28,7 +28,8 @@
       "@pages": ["./src/pages/index.ts"],
       "@config": ["./src/config.ts"],
       "@hocs": ["./src/HOCs/index.ts"],
-      "@images": ["./src/images/index.ts"]
+      "@images": ["./src/images/index.ts"],
+      "@hooks": ["./src/hooks/index.ts"],
     },
     "typeRoots": [
       "node_modules/@types"

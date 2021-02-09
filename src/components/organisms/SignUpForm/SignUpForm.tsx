@@ -37,7 +37,7 @@ const initialValues = {
 const SignUpForm: FC<TSignUpFormProps> = memo(() => {
   return (
     <BaseForm
-      validate={SignupSchema}
+      schema={SignupSchema}
       initialValues={initialValues}
       textButton="Sign up"
     >

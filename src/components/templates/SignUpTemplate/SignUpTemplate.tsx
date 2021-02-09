@@ -8,17 +8,17 @@ type TSignUpTemplateProps = {
 }
 
 const SignUpTemplate: FC<TSignUpTemplateProps> = memo(
-  ({ title }: TSignUpTemplateProps) => {
-    return (
-      <div className="flex-grow max-w-xs">
-        <Window>
-          <Title>{title}</Title>
-          <SignUpForm />
-          <FormLink text="Already have an account?" path={PATHS.AUTH} />
-        </Window>
-      </div>
-    )
-  }
+  ({ title }: TSignUpTemplateProps) => (
+    <div className="w-full max-w-xs">
+      <Window>
+        <Title>{title}</Title>
+        <SignUpForm />
+        <FormLink path={PATHS.AUTH} className="inline-block mt-4">
+          Already have an account?
+        </FormLink>
+      </Window>
+    </div>
+  )
 )
 
 SignUpTemplate.displayName = 'SignUpTemplate'
