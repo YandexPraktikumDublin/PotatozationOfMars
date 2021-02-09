@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Leaderboard /> should renders correct <Leaderboard /> 1`] = `
+<div
+  className="text-primary dark:text-white"
+>
+  <LeaderboardList>
+    <LeaderboardListItem
+      key="IvanIvanov"
+      login="IvanIvanov"
+      position={1}
+      scores={1023}
+    />
+    <LeaderboardListItem
+      key="PetrPetrov"
+      login="PetrPetrov"
+      position={2}
+      scores={1010}
+    />
+  </LeaderboardList>
+</div>
+`;

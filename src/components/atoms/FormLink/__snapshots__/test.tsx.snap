@@ -3,8 +3,8 @@
 exports[`<FormLink /> should renders correct <FormLink /> 1`] = `
 <Link
   className="underline"
-  to="test"
+  to="/test"
 >
-  test
+  Test children
 </Link>
 `;

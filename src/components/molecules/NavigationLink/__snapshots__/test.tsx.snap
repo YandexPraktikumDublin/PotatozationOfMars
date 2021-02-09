@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NavigationLink /> should renders correct <NavigationLink /> 1`] = `
+<Link
+  title="Test title"
+  to="/test"
+>
+  <img
+    alt="Test title"
+    className="w-6 h-6"
+    height="24"
+    src="image.jpg"
+    width="24"
+  />
+</Link>
+`;

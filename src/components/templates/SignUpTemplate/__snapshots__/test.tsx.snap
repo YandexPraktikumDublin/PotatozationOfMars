@@ -2,7 +2,7 @@
 
 exports[`<SignUpTemplate /> should renders correct <SignUpTemplate /> 1`] = `
 <div
-  className="flex-grow max-w-xs"
+  className="w-full max-w-xs"
 >
   <Window>
     <Title>
@@ -10,9 +10,11 @@ exports[`<SignUpTemplate /> should renders correct <SignUpTemplate /> 1`] = `
     </Title>
     <SignUpForm />
     <FormLink
+      className="inline-block mt-4"
       path="/auth/"
-      text="Already have an account?"
-    />
+    >
+      Already have an account?
+    </FormLink>
   </Window>
 </div>
 `;

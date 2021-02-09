@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LeaderboardList /> should renders correct <LeaderboardList /> 1`] = `
+<ol>
+  Test children
+</ol>
+`;

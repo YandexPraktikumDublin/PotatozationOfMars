@@ -1,12 +1,14 @@
-import React, { FC, memo } from 'react'
+import React, { FC, memo, ReactNode } from 'react'
 import classNames from 'classnames'
 
-type TTitleProps = {}
+type TTitleProps = {
+  children: ReactNode
+}
 
-const Title: FC<TTitleProps> = memo((props) => {
+const Title: FC<TTitleProps> = memo(({ children }: TTitleProps) => {
   return (
     <h1 className={classNames('text-4xl mb-6 font-medium', 'dark:text-white')}>
-      {props.children}
+      {children}
     </h1>
   )
 })
