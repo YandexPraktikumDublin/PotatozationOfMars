@@ -33,7 +33,7 @@ const Header: FC<THeaderProps> = memo(() => {
         />
         <NavigationLink title="Forum" href={PATHS.FORUM} imageSrc={forum} />
         <NavigationLink
-          title="Leader Board"
+          title="Leaderboard"
           href={PATHS.LEADERBOARD}
           imageSrc={leaderboard}
         />
