@@ -32,5 +32,11 @@ exports[`<ProfileBoard /> should renders correct <ProfileBoard /> 1`] = `
       value="••••••"
     />
   </List>
+  <List>
+    <ActionsListItem
+      name="Log out"
+      onClick={[Function]}
+    />
+  </List>
 </div>
 `;
