@@ -10,6 +10,14 @@ class Vector {
     this.y = 0
   }
 
+  correct = () => {
+    const magnitude = Math.sqrt(this.x ** 2 + this.y ** 2)
+    if (magnitude === 0) return
+    const k = this.magnitude / magnitude
+    this.x *= k
+    this.y *= k
+  }
+
   defineByAngle = (a: number) => {
     this.x = this.magnitude * Math.cos(a * Math.PI)
     this.y = this.magnitude * Math.sin(a * Math.PI)
@@ -22,6 +30,7 @@ class Vector {
     const [ex, ey] = [entityPosition.x, entityPosition.y]
     const [x, y] = [position.x, position.y]
     const [dx, dy] = [x - ex, y - ey]
+    if (x === -1 && y === -1) return
     const magnitude = Math.sqrt(dx ** 2 + dy ** 2)
     if (magnitude <= this.magnitude) {
       this.x = dx

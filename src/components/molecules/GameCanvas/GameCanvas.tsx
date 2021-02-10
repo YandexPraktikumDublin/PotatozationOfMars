@@ -1,10 +1,10 @@
 import React, { FC, memo } from 'react'
-import { renderCanvas } from '@game/controllers'
+import { useRenderCanvas } from '@game/controllers'
 
 type TGameCanvasProps = {}
 
 const GameCanvas: FC<TGameCanvasProps> = memo(() => {
-  const canvasRef = renderCanvas()
+  const canvasRef = useRenderCanvas()
   return (
     <canvas
       className="border-2 border-white rounded-2xl h-screen"
