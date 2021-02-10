@@ -1,5 +1,6 @@
-import React, { FC, memo } from 'react'
+import React, { FC, memo, useState } from 'react'
 import classNames from 'classnames'
+import { ChangeAvatarModal } from '@components/organisms'
 import { profile } from '@images'
 
 type TProfileBoardHeaderProps = {
@@ -8,7 +9,14 @@ type TProfileBoardHeaderProps = {
 
 const ProfileBoardHeader: FC<TProfileBoardHeaderProps> = memo(
   ({ className }: TProfileBoardHeaderProps) => {
-    const handleChangeAvatarButtonClick = () => {}
+    const [
+      isShownAvatarChangeModal,
+      setIsShownAvatarChangeModal
+    ] = useState<boolean>(false)
+
+    const toggleModal = () => {
+      setIsShownAvatarChangeModal((value) => !value)
+    }
 
     return (
       <header className={classNames('text-center', className)}>
@@ -17,12 +25,16 @@ const ProfileBoardHeader: FC<TProfileBoardHeaderProps> = memo(
 
           <div
             className="hidden group-hover:flex justify-center items-center absolute inset-0 bg-primary bg-opacity-50 text-white"
-            onClick={handleChangeAvatarButtonClick}
+            onClick={() => setIsShownAvatarChangeModal(true)}
           >
             change
           </div>
         </button>
         <h1 className="font-medium">Ivan Ivanov</h1>
+
+        {isShownAvatarChangeModal && (
+          <ChangeAvatarModal toggleModal={toggleModal} />
+        )}
       </header>
     )
   }
