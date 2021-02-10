@@ -1,7 +1,8 @@
-import React, { FC, memo } from 'react'
+import React, { FC, memo, useState } from 'react'
 import { BaseForm, BaseInput } from '@components/organisms'
 import * as Yup from 'yup'
 import { FormikValues } from 'formik'
+import { DEFAULT_ERROR_MESSAGE } from '@config'
 
 type TSignUpFormProps = {}
 
@@ -36,8 +37,15 @@ const initialValues = {
 }
 
 const SignUpForm: FC<TSignUpFormProps> = memo(() => {
+  const [formError, setFormError] = useState<string>('')
+
   const handleSubmit = (values: FormikValues) => {
-    console.log(values)
+    try {
+      setFormError('')
+      console.log(values)
+    } catch (error) {
+      setFormError(error?.message ?? DEFAULT_ERROR_MESSAGE)
+    }
   }
 
   return (
@@ -45,7 +53,8 @@ const SignUpForm: FC<TSignUpFormProps> = memo(() => {
       initialValues={initialValues}
       validationSchema={signupValidationSchema}
       onSubmit={handleSubmit}
-      textButton="Sign up"
+      buttonText="Sign up"
+      formError={formError}
     >
       <BaseInput type="email" name="email" placeholder="Email" />
       <BaseInput type="text" name="login" placeholder="Login" />

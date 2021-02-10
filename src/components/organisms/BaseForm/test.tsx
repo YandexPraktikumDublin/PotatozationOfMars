@@ -9,7 +9,7 @@ describe('<BaseForm />', () => {
     const children = 'Test children'
     const validationSchema = {}
     const initialValues = { login: '', password: '' }
-    const textButton = 'Test text'
+    const buttonText = 'Test text'
     const onSubmit = jest.fn()
 
     const wrapper = shallow(
@@ -17,7 +17,7 @@ describe('<BaseForm />', () => {
         initialValues={validationSchema}
         validationSchema={initialValues}
         onSubmit={onSubmit}
-        textButton={textButton}
+        buttonText={buttonText}
       >
         {children}
       </BaseForm>

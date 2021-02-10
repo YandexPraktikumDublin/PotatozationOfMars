@@ -2,6 +2,8 @@
 
 exports[`<SignUpForm /> should renders correct <SignUpForm /> 1`] = `
 <BaseForm
+  buttonText="Sign up"
+  formError=""
   initialValues={
     Object {
       "email": "",
@@ -13,7 +15,6 @@ exports[`<SignUpForm /> should renders correct <SignUpForm /> 1`] = `
     }
   }
   onSubmit={[Function]}
-  textButton="Sign up"
   validationSchema={
     ObjectSchema {
       "_blacklist": ReferenceSet {
