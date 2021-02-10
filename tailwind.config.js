@@ -33,7 +33,8 @@ module.exports = {
       display: ['dark', 'group-hover'],
       backgroundOpacity: ['dark'],
       margin: ['last'],
-      fill: ['dark']
+      fill: ['dark'],
+      placeholderOpacity: ['dark']
     }
   },
   plugins: []
