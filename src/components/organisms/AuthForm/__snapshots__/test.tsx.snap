@@ -8,7 +8,9 @@ exports[`<AuthForm /> should renders correct <AuthForm /> 1`] = `
       "password": "",
     }
   }
-  schema={
+  onSubmit={[Function]}
+  textButton="Log in"
+  validationSchema={
     ObjectSchema {
       "_blacklist": ReferenceSet {
         "list": Set {},
@@ -127,7 +129,6 @@ exports[`<AuthForm /> should renders correct <AuthForm /> 1`] = `
       "type": "object",
     }
   }
-  textButton="Log in"
 >
   <BaseInput
     name="login"

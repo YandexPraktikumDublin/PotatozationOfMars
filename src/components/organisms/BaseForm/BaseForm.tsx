@@ -1,28 +1,29 @@
-import React, { FC, memo } from 'react'
-import { Formik, FormikHelpers, Form } from 'formik'
+import React, { FC, memo, ReactNode } from 'react'
+import { Formik, Form, FormikValues } from 'formik'
 import { Button } from '@components/organisms'
 
-interface IValues {
-  [key: string]: string
-}
-
 type TBaseFormProps = {
-  schema: object
-  initialValues: IValues
+  initialValues: FormikValues
+  validationSchema: Record<string, any>
+  onSubmit: (values: Record<string, any>) => void | Promise<any>
   textButton: string
+  children: ReactNode
 }
 
 const BaseForm: FC<TBaseFormProps> = memo(
-  ({ initialValues, schema, children, textButton }) => {
+  ({
+    initialValues,
+    validationSchema,
+    onSubmit,
+    textButton,
+    children
+  }: TBaseFormProps) => {
     return (
       <Formik
         initialValues={initialValues}
-        validationSchema={schema}
-        onSubmit={(
-          values: IValues,
-          { setSubmitting }: FormikHelpers<IValues>
-        ) => {
-          console.log(JSON.stringify(values, null, 2))
+        validationSchema={validationSchema}
+        onSubmit={(values, { setSubmitting }) => {
+          onSubmit(values)
           setSubmitting(false)
         }}
       >

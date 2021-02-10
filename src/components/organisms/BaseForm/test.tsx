@@ -6,16 +6,21 @@ import { BaseForm } from '.'
 
 describe('<BaseForm />', () => {
   it('should renders correct <BaseForm />', () => {
-    const test = {
-      email: '',
-      login: '',
-      firstName: '',
-      lastName: '',
-      phone: '',
-      password: ''
-    }
+    const children = 'Test children'
+    const validationSchema = {}
+    const initialValues = { login: '', password: '' }
+    const textButton = 'Test text'
+    const onSubmit = jest.fn()
+
     const wrapper = shallow(
-      <BaseForm schema={test} initialValues={test} textButton="test" />
+      <BaseForm
+        initialValues={validationSchema}
+        validationSchema={initialValues}
+        onSubmit={onSubmit}
+        textButton={textButton}
+      >
+        {children}
+      </BaseForm>
     )
 
     expect(toJSON(wrapper)).toMatchSnapshot()

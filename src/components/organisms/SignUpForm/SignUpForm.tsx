@@ -1,10 +1,11 @@
 import React, { FC, memo } from 'react'
 import { BaseForm, BaseInput } from '@components/organisms'
 import * as Yup from 'yup'
+import { FormikValues } from 'formik'
 
 type TSignUpFormProps = {}
 
-const SignupSchema = Yup.object().shape({
+const signupValidationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
   login: Yup.string()
     .min(2, 'Too Short!')
@@ -35,10 +36,15 @@ const initialValues = {
 }
 
 const SignUpForm: FC<TSignUpFormProps> = memo(() => {
+  const handleSubmit = (values: FormikValues) => {
+    console.log(values)
+  }
+
   return (
     <BaseForm
-      schema={SignupSchema}
       initialValues={initialValues}
+      validationSchema={signupValidationSchema}
+      onSubmit={handleSubmit}
       textButton="Sign up"
     >
       <BaseInput type="email" name="email" placeholder="Email" />

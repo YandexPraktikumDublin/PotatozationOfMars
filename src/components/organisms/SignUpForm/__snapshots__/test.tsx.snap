@@ -12,7 +12,9 @@ exports[`<SignUpForm /> should renders correct <SignUpForm /> 1`] = `
       "phone": "",
     }
   }
-  schema={
+  onSubmit={[Function]}
+  textButton="Sign up"
+  validationSchema={
     ObjectSchema {
       "_blacklist": ReferenceSet {
         "list": Set {},
@@ -293,7 +295,6 @@ exports[`<SignUpForm /> should renders correct <SignUpForm /> 1`] = `
       "type": "object",
     }
   }
-  textButton="Sign up"
 >
   <BaseInput
     name="email"

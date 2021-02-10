@@ -1,10 +1,11 @@
 import React, { FC, memo } from 'react'
-import { BaseForm, BaseInput } from '@components/organisms'
 import * as Yup from 'yup'
+import { FormikValues } from 'formik'
+import { BaseForm, BaseInput } from '@components/organisms'
 
 type TAuthFormProps = {}
 
-const AuthSchema = Yup.object().shape({
+const authValidationSchema = Yup.object().shape({
   login: Yup.string()
     .min(2, 'Too Short!')
     .max(20, 'Too Long!')
@@ -18,10 +19,15 @@ const initialValues = {
 }
 
 const AuthForm: FC<TAuthFormProps> = memo(() => {
+  const handleSubmit = (values: FormikValues) => {
+    console.log(values)
+  }
+
   return (
     <BaseForm
-      schema={AuthSchema}
       initialValues={initialValues}
+      validationSchema={authValidationSchema}
+      onSubmit={handleSubmit}
       textButton="Log in"
     >
       <BaseInput type="text" name="login" placeholder="Login" />
