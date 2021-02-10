@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import {
   ActionsListItem,
   NameValueListItem,
+  ProfileBoardBackButton,
   ProfileBoardEditButton
 } from '@components/atoms'
 import { List, ProfileBoardHeader } from '@components/molecules'
@@ -19,6 +20,10 @@ const ProfileBoard: FC<TProfileBoardProps> = memo(() => {
     <div className={classNames('relative text-primary', 'dark:text-white')}>
       {!isShowForm && (
         <ProfileBoardEditButton onClick={() => setIsShowForm(true)} />
+      )}
+
+      {isShowForm && (
+        <ProfileBoardBackButton onClick={() => setIsShowForm(false)} />
       )}
 
       <ProfileBoardHeader className="mb-6" />
