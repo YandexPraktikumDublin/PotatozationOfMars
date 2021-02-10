@@ -14,4 +14,16 @@ describe('<NameValueList />', () => {
 
     expect(toJSON(wrapper)).toMatchSnapshot()
   })
+
+  it('should has className from className prop', () => {
+    const className = 'test-class-name'
+
+    const wrapper = shallow(
+      <NameValueList className={className}>{children}</NameValueList>
+    )
+
+    expect(wrapper.prop('className')).toMatch(className)
+
+    expect(toJSON(wrapper)).toMatchSnapshot()
+  })
 })

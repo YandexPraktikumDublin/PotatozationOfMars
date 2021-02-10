@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<NameValueList /> should has className from className prop 1`] = `
+<ul
+  className="test-class-name"
+>
+  Test children
+</ul>
+`;
+
 exports[`<NameValueList /> should renders correct <NameValueList /> 1`] = `
 <ul>
   Test children
