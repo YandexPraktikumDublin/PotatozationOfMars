@@ -1,4 +1,4 @@
-import React, { FC, memo, ReactNode, useState, useEffect } from 'react'
+import React, { FC, memo, ReactNode, useEffect, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 
 type TModalBackdropProps = {
@@ -7,10 +7,10 @@ type TModalBackdropProps = {
 
 const ModalBackdrop: FC<TModalBackdropProps> = memo(
   ({ children }: TModalBackdropProps) => {
-    const [container] = useState(document.createElement('div'))
-    container.classList.add('fixed', 'z-40', 'inset-0', 'overflow-y-auto')
+    const container = useMemo(() => document.createElement('div'), [])
 
     useEffect(() => {
+      container.classList.add('fixed', 'z-40', 'inset-0', 'overflow-y-auto')
       document.body.appendChild(container)
 
       return () => {
