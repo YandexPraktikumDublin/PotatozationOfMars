@@ -6,7 +6,7 @@ import * as Yup from 'yup'
 
 type TProfilePasswordFormProps = {}
 
-const profilePasswordValidationSchema = Yup.object().shape({
+const validationSchema = Yup.object().shape({
   oldPassword: Yup.string().min(8, 'Too Short!').required('Required'),
   newPassword: Yup.string().min(8, 'Too Short!').required('Required')
 })
@@ -31,7 +31,7 @@ const ProfilePasswordForm: FC<TProfilePasswordFormProps> = memo(() => {
   return (
     <BaseForm
       initialValues={initialValues}
-      validationSchema={profilePasswordValidationSchema}
+      validationSchema={validationSchema}
       onSubmit={handleSubmit}
       buttonText="Change password"
       formError={formError}

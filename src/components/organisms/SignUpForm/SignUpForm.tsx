@@ -6,7 +6,7 @@ import { DEFAULT_ERROR_MESSAGE } from '@config'
 
 type TSignUpFormProps = {}
 
-const signupValidationSchema = Yup.object().shape({
+const validationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
   login: Yup.string()
     .min(2, 'Too Short!')
@@ -51,7 +51,7 @@ const SignUpForm: FC<TSignUpFormProps> = memo(() => {
   return (
     <BaseForm
       initialValues={initialValues}
-      validationSchema={signupValidationSchema}
+      validationSchema={validationSchema}
       onSubmit={handleSubmit}
       buttonText="Sign up"
       formError={formError}

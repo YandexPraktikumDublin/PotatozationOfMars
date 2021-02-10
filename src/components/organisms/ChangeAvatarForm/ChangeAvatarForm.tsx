@@ -6,7 +6,7 @@ import * as Yup from 'yup'
 
 type TChangeAvatarFormProps = {}
 
-const profilePasswordValidationSchema = Yup.object().shape({
+const validationSchema = Yup.object().shape({
   avatar: Yup.mixed().required('Required')
 })
 
@@ -29,7 +29,7 @@ const ChangeAvatarForm: FC<TChangeAvatarFormProps> = memo(() => {
   return (
     <BaseForm
       initialValues={initialValues}
-      validationSchema={profilePasswordValidationSchema}
+      validationSchema={validationSchema}
       onSubmit={handleSubmit}
       buttonText="Change avatar"
       formError={formError}

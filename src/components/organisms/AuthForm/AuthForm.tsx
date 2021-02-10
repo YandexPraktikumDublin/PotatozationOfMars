@@ -6,7 +6,7 @@ import { DEFAULT_ERROR_MESSAGE } from '@config'
 
 type TAuthFormProps = {}
 
-const authValidationSchema = Yup.object().shape({
+const validationSchema = Yup.object().shape({
   login: Yup.string()
     .min(2, 'Too Short!')
     .max(20, 'Too Long!')
@@ -34,7 +34,7 @@ const AuthForm: FC<TAuthFormProps> = memo(() => {
   return (
     <BaseForm
       initialValues={initialValues}
-      validationSchema={authValidationSchema}
+      validationSchema={validationSchema}
       onSubmit={handleSubmit}
       buttonText="Log in"
       formError={formError}
