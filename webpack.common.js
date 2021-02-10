@@ -6,6 +6,7 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 module.exports = {
   entry: './src/index.tsx',
   output: {
+    publicPath: '/',
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle-[hash].js'
   },
@@ -40,10 +41,10 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg)$/i,
         use: [
           {
-            loader: 'file-loader',
-          },
-        ],
-      },
+            loader: 'file-loader'
+          }
+        ]
+      }
     ]
   },
   plugins: [

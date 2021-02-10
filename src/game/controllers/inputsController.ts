@@ -1,6 +1,6 @@
 import { TPosition } from '@game/@types'
 
-type TCallback = (mousePosition: TPosition, ...args: Array<unknown>) => void
+type TCallback = (mousePosition: TPosition, ...rest: Array<unknown>) => void
 
 class InputsController {
   private static __instance: InputsController
@@ -15,7 +15,7 @@ class InputsController {
   onMouseDrag = (
     context: HTMLElement,
     callback: TCallback,
-    ...args: Array<unknown>
+    ...rest: Array<unknown>
   ) => {
     let tracking = false
 
@@ -25,7 +25,7 @@ class InputsController {
         x: evt.clientX - rect.left,
         y: evt.clientY - rect.top
       }
-      callback(mousePos, ...args)
+      callback(mousePos, ...rest)
     }
 
     const mouseTracking = (evt: MouseEvent) => {

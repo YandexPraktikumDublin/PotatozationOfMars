@@ -15,7 +15,7 @@ const renderCanvas = () => {
     const clock = new GameClock(context)
     const player = new Player(clock)
     player.render()
-    const playerControlHandler = player.controlWithMouse(canvas)
+    const playerControlHandler = player.controlWithMouse(canvas,context)
 
     let animationFrameId: number
 

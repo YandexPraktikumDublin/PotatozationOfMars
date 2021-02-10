@@ -1,4 +1,4 @@
-import { tumbler } from '@images'
+import { moon } from '@images'
 import {
   ContextController,
   GameClock,
@@ -21,12 +21,17 @@ class Player {
     this.velocity = new Vector(10)
   }
 
-  moveTo = (destination: TPosition) => {
-    this.destination = destination
+  moveTo = (destination: TPosition, controller: unknown) => {
+    const { x, y } = destination
+    const { cx, cy } = (<ContextController>controller).coefficient
+    this.destination = { x: x * cx, y: y * cy }
   }
 
-  controlWithMouse = (context: HTMLCanvasElement) => {
-    return InputsController.onMouseDrag(context, this.moveTo)
+  controlWithMouse = (
+    context: HTMLCanvasElement,
+    controller: ContextController
+  ) => {
+    return InputsController.onMouseDrag(context, this.moveTo, controller)
   }
 
   move = (context: ContextController) => {
@@ -37,7 +42,7 @@ class Player {
 
   render = () => {
     this.image.onload = () => this.clock.startEvent(this.move)
-    this.image.src = tumbler
+    this.image.src = moon
   }
 }
 
