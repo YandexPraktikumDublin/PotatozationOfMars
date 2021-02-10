@@ -1,6 +1,7 @@
 import React, { FC, memo, ReactNode } from 'react'
 import { CloseButton } from '@components/atoms'
 import { ModalBackdrop } from '@components/organisms'
+import classNames from 'classnames'
 
 type TModalProps = {
   children: ReactNode
@@ -10,8 +11,16 @@ type TModalProps = {
 const Modal: FC<TModalProps> = memo(
   ({ children, toggleModal }: TModalProps) => (
     <ModalBackdrop>
-      <div className="relative bg-white rounded-lg shadow-2xl w-full m-auto overflow-hidden animate-flip-in-x">
-        <CloseButton onClick={toggleModal} className="absolute top-6 right-6" />
+      <div
+        className={classNames(
+          'relative text-center border border-primary rounded-3xl p-6 bg-white',
+          'dark:text-white dark:border-white dark:bg-primary'
+        )}
+      >
+        <CloseButton
+          onClick={toggleModal}
+          className="absolute top-4 right-4 z-10"
+        />
         {children}
       </div>
     </ModalBackdrop>
