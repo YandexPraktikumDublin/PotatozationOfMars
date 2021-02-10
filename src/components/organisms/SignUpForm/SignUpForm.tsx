@@ -60,7 +60,7 @@ const SignUpForm: FC<TSignUpFormProps> = memo(() => {
       <BaseInput type="text" name="login" placeholder="Login" />
       <BaseInput type="text" name="firstName" placeholder="First name" />
       <BaseInput type="text" name="lastName" placeholder="Last name" />
-      <BaseInput type="phone" name="phone" placeholder="Phone" />
+      <BaseInput type="tel" name="phone" placeholder="Phone" />
       <BaseInput type="password" name="password" placeholder="Password" />
     </BaseForm>
   )
