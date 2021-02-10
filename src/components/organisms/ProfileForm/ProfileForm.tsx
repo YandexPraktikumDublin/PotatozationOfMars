@@ -6,7 +6,7 @@ import { BaseForm, BaseInput } from '@components/organisms'
 
 type TProfileFormProps = {}
 
-const signupValidationSchema = Yup.object().shape({
+const profileValidationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
   login: Yup.string()
     .min(2, 'Too Short!')
@@ -49,7 +49,7 @@ const ProfileForm: FC<TProfileFormProps> = memo(() => {
   return (
     <BaseForm
       initialValues={initialValues}
-      validationSchema={signupValidationSchema}
+      validationSchema={profileValidationSchema}
       onSubmit={handleSubmit}
       buttonText="Save"
       formError={formError}
