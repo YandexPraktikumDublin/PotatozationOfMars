@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Modal /> should renders correct <Modal /> 1`] = `
+<ModalBackdrop>
+  <div
+    className="relative bg-white rounded-lg shadow-2xl w-full m-auto overflow-hidden animate-flip-in-x"
+  >
+    <CloseButton
+      className="absolute top-6 right-6"
+      onClick={[MockFunction]}
+    />
+    Test children
+  </div>
+</ModalBackdrop>
+`;
