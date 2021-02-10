@@ -21,13 +21,19 @@ module.exports = {
       white: colors.white,
       transparent: colors.transparent,
       danger: '#d54356'
-    }
+    },
+    fill: (theme) => ({
+      primary: theme('colors.primary'),
+      black: theme('colors.black'),
+      white: theme('colors.white')
+    })
   },
   variants: {
     extend: {
-      display: ['dark'],
+      display: ['dark', 'group-hover'],
       backgroundOpacity: ['dark'],
-      margin: ['last']
+      margin: ['last'],
+      fill: ['dark']
     }
   },
   plugins: []
