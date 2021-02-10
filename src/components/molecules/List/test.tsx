@@ -2,13 +2,13 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import toJSON from 'enzyme-to-json'
 
-import { NameValueList } from '.'
+import { List } from '.'
 
-describe('<NameValueList />', () => {
+describe('<List />', () => {
   const children = 'Test children'
 
-  it('should renders correct <NameValueList />', () => {
-    const wrapper = shallow(<NameValueList>{children}</NameValueList>)
+  it('should renders correct <List />', () => {
+    const wrapper = shallow(<List>{children}</List>)
 
     expect(wrapper.contains(children)).toBeTruthy()
 
@@ -18,9 +18,7 @@ describe('<NameValueList />', () => {
   it('should has className from className prop', () => {
     const className = 'test-class-name'
 
-    const wrapper = shallow(
-      <NameValueList className={className}>{children}</NameValueList>
-    )
+    const wrapper = shallow(<List className={className}>{children}</List>)
 
     expect(wrapper.prop('className')).toMatch(className)
 

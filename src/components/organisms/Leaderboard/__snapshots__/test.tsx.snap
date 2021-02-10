@@ -4,7 +4,7 @@ exports[`<Leaderboard /> should renders correct <Leaderboard /> 1`] = `
 <div
   className="text-primary dark:text-white"
 >
-  <NameValueList>
+  <List>
     <NameValueListItem
       key="IvanIvanov"
       name="1 IvanIvanov"
@@ -15,6 +15,6 @@ exports[`<Leaderboard /> should renders correct <Leaderboard /> 1`] = `
       name="2 PetrPetrov"
       value={1010}
     />
-  </NameValueList>
+  </List>
 </div>
 `;

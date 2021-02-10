@@ -4,7 +4,7 @@ exports[`<ProfileBoard /> should renders correct <ProfileBoard /> 1`] = `
 <div
   className="text-primary dark:text-white"
 >
-  <NameValueList
+  <List
     className="mb-12"
   >
     <NameValueListItem
@@ -31,6 +31,6 @@ exports[`<ProfileBoard /> should renders correct <ProfileBoard /> 1`] = `
       name="Password"
       value="••••••"
     />
-  </NameValueList>
+  </List>
 </div>
 `;

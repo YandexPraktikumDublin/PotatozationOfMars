@@ -1,7 +1,7 @@
 import React, { FC, memo } from 'react'
 import classNames from 'classnames'
 import { NameValueListItem } from '@components/atoms'
-import { NameValueList } from '@components/molecules'
+import { List } from '@components/molecules'
 
 type TLeaderboardProps = {}
 
@@ -20,7 +20,7 @@ const leaders = [
 
 const Leaderboard: FC<TLeaderboardProps> = memo(() => (
   <div className={classNames('text-primary', 'dark:text-white')}>
-    <NameValueList>
+    <List>
       {leaders.map((leader) => (
         <NameValueListItem
           key={leader.login}
@@ -28,7 +28,7 @@ const Leaderboard: FC<TLeaderboardProps> = memo(() => (
           value={leader.scores}
         />
       ))}
-    </NameValueList>
+    </List>
   </div>
 ))
 
