@@ -20,8 +20,10 @@ const ModalBackdrop: FC<TModalBackdropProps> = memo(
 
     return createPortal(
       <>
-        <div className="relative z-50 w-full h-full flex">{children}</div>
-        <div className="bg-black fixed inset-0 z-auto opacity-50" />
+        <div className="relative z-50 w-full h-full flex justify-center items-center px-3">
+          {children}
+        </div>
+        <div className="fixed inset-0 bg-black opacity-80" />
       </>,
       container
     )

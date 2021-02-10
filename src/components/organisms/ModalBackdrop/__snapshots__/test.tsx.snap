@@ -9,12 +9,12 @@ exports[`<ModalBackdrop /> should renders correct <ModalBackdrop /> 1`] = `
   }
 >
   <div
-    className="relative z-50 w-full h-full flex"
+    className="relative z-50 w-full h-full flex justify-center items-center px-3"
   >
     Test children
   </div>
   <div
-    className="bg-black fixed inset-0 z-auto opacity-50"
+    className="fixed inset-0 bg-black opacity-80"
   />
 </Portal>
 `;
