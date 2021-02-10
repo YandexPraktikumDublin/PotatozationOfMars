@@ -40,6 +40,10 @@ exports[`<ProfileBoard /> should renders correct <ProfileBoard /> 1`] = `
   </List>
   <List>
     <ActionsListItem
+      name="Change password"
+      onClick={[Function]}
+    />
+    <ActionsListItem
       name="Log out"
       onClick={[Function]}
     />

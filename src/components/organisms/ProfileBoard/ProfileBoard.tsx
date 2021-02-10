@@ -7,28 +7,39 @@ import {
   ProfileBoardEditButton
 } from '@components/atoms'
 import { List, ProfileBoardHeader } from '@components/molecules'
-import { ProfileForm } from '@components/organisms'
+import { ProfileForm, ProfilePasswordForm } from '@components/organisms'
 
 type TProfileBoardProps = {}
 
 const ProfileBoard: FC<TProfileBoardProps> = memo(() => {
-  const [isShowForm, setIsShowForm] = useState<boolean>(false)
+  const [isShowProfileForm, setIsShowProfileForm] = useState<boolean>(false)
+  const [
+    isShowProfilePasswordForm,
+    setIsShowProfilePasswordForm
+  ] = useState<boolean>(false)
+
+  const isShownForms = isShowProfileForm || isShowProfilePasswordForm
+
+  const handleBackButtonClick = () => {
+    setIsShowProfileForm(false)
+    setIsShowProfilePasswordForm(false)
+  }
 
   const handleLogoutButtonClick = () => {}
 
   return (
     <div className={classNames('relative text-primary', 'dark:text-white')}>
-      {!isShowForm && (
-        <ProfileBoardEditButton onClick={() => setIsShowForm(true)} />
+      {!isShownForms && (
+        <ProfileBoardEditButton onClick={() => setIsShowProfileForm(true)} />
       )}
 
-      {isShowForm && (
-        <ProfileBoardBackButton onClick={() => setIsShowForm(false)} />
+      {isShownForms && (
+        <ProfileBoardBackButton onClick={handleBackButtonClick} />
       )}
 
       <ProfileBoardHeader className="mb-6" />
 
-      {!isShowForm && (
+      {!isShownForms && (
         <>
           <List className="mb-12">
             <NameValueListItem name="Email" value="ivan@yandex.ru" />
@@ -40,12 +51,18 @@ const ProfileBoard: FC<TProfileBoardProps> = memo(() => {
           </List>
 
           <List>
+            <ActionsListItem
+              name="Change password"
+              onClick={() => setIsShowProfilePasswordForm(true)}
+            />
             <ActionsListItem name="Log out" onClick={handleLogoutButtonClick} />
           </List>
         </>
       )}
 
-      {isShowForm && <ProfileForm />}
+      {isShowProfileForm && <ProfileForm />}
+
+      {isShowProfilePasswordForm && <ProfilePasswordForm />}
     </div>
   )
 })
