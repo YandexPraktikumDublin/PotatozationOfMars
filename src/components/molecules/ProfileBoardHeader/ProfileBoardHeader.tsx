@@ -1,7 +1,6 @@
 import React, { FC, memo } from 'react'
 import classNames from 'classnames'
 import { profile } from '@images'
-import { ProfileBoardHeaderEditButton } from '@components/atoms'
 
 type TProfileBoardHeaderProps = {
   className?: string
@@ -9,13 +8,10 @@ type TProfileBoardHeaderProps = {
 
 const ProfileBoardHeader: FC<TProfileBoardHeaderProps> = memo(
   ({ className }: TProfileBoardHeaderProps) => {
-    const handleEditButtonClick = () => {}
-
     const handleChangeAvatarButtonClick = () => {}
 
     return (
-      <header className={classNames('relative text-center', className)}>
-        <ProfileBoardHeaderEditButton onClick={handleEditButtonClick} />
+      <header className={classNames('text-center', className)}>
         <button className="group relative rounded-full border border-white outline-none overflow-hidden mx-auto mb-6">
           <img width="80" height="80" src={profile} alt="" />
 

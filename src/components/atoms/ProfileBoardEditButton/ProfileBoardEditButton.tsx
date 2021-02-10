@@ -1,12 +1,12 @@
 import React, { FC, memo } from 'react'
 import classNames from 'classnames'
 
-type TProfileBoardHeaderEditButtonProps = {
+type TProfileBoardEditButtonProps = {
   onClick: () => void
 }
 
-const ProfileBoardHeaderEditButton: FC<TProfileBoardHeaderEditButtonProps> = memo(
-  ({ onClick }: TProfileBoardHeaderEditButtonProps) => (
+const ProfileBoardEditButton: FC<TProfileBoardEditButtonProps> = memo(
+  ({ onClick }: TProfileBoardEditButtonProps) => (
     <button className="absolute top-0 right-0" onClick={onClick}>
       <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
         <g className={classNames('fill-primary', 'dark:fill-white')}>
@@ -17,6 +17,6 @@ const ProfileBoardHeaderEditButton: FC<TProfileBoardHeaderEditButtonProps> = mem
   )
 )
 
-ProfileBoardHeaderEditButton.displayName = 'ProfileBoardHeaderEditButton'
+ProfileBoardEditButton.displayName = 'ProfileBoardEditButton'
 
-export default ProfileBoardHeaderEditButton
+export default ProfileBoardEditButton

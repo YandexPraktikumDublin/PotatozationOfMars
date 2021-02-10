@@ -2,8 +2,11 @@
 
 exports[`<ProfileBoard /> should renders correct <ProfileBoard /> 1`] = `
 <div
-  className="text-primary dark:text-white"
+  className="relative text-primary dark:text-white"
 >
+  <ProfileBoardEditButton
+    onClick={[Function]}
+  />
   <ProfileBoardHeader
     className="mb-6"
   />

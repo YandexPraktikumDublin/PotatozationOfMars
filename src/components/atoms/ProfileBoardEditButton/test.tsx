@@ -2,13 +2,13 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import toJSON from 'enzyme-to-json'
 
-import { ProfileBoardHeaderEditButton } from '.'
+import { ProfileBoardEditButton } from '.'
 
-describe('<ProfileBoardHeaderEditButton />', () => {
-  it('should renders correct <ProfileBoardHeaderEditButton />', () => {
+describe('<ProfileBoardEditButton />', () => {
+  it('should renders correct <ProfileBoardEditButton />', () => {
     const onClick = jest.fn()
 
-    const wrapper = shallow(<ProfileBoardHeaderEditButton onClick={onClick} />)
+    const wrapper = shallow(<ProfileBoardEditButton onClick={onClick} />)
 
     wrapper.simulate('click')
 

@@ -2,11 +2,8 @@
 
 exports[`<ProfileBoardHeader /> should has className from className prop 1`] = `
 <header
-  className="relative text-center test-class-name"
+  className="text-center test-class-name"
 >
-  <ProfileBoardHeaderEditButton
-    onClick={[Function]}
-  />
   <button
     className="group relative rounded-full border border-white outline-none overflow-hidden mx-auto mb-6"
   >
@@ -33,11 +30,8 @@ exports[`<ProfileBoardHeader /> should has className from className prop 1`] = `
 
 exports[`<ProfileBoardHeader /> should renders correct <ProfileBoardHeader /> 1`] = `
 <header
-  className="relative text-center"
+  className="text-center"
 >
-  <ProfileBoardHeaderEditButton
-    onClick={[Function]}
-  />
   <button
     className="group relative rounded-full border border-white outline-none overflow-hidden mx-auto mb-6"
   >

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProfileBoardHeaderEditButton /> should renders correct <ProfileBoardHeaderEditButton /> 1`] = `
+exports[`<ProfileBoardEditButton /> should renders correct <ProfileBoardEditButton /> 1`] = `
 <button
   className="absolute top-0 right-0"
   onClick={
