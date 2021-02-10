@@ -4,19 +4,17 @@ exports[`<Leaderboard /> should renders correct <Leaderboard /> 1`] = `
 <div
   className="text-primary dark:text-white"
 >
-  <LeaderboardList>
-    <LeaderboardListItem
+  <NameValueList>
+    <NameValueListItem
       key="IvanIvanov"
-      login="IvanIvanov"
-      position={1}
-      scores={1023}
+      name="1 IvanIvanov"
+      value={1023}
     />
-    <LeaderboardListItem
+    <NameValueListItem
       key="PetrPetrov"
-      login="PetrPetrov"
-      position={2}
-      scores={1010}
+      name="2 PetrPetrov"
+      value={1010}
     />
-  </LeaderboardList>
+  </NameValueList>
 </div>
 `;
