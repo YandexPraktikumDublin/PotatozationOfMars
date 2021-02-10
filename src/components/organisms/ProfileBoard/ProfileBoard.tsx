@@ -1,7 +1,7 @@
 import React, { FC, memo } from 'react'
 import classNames from 'classnames'
 import { ActionsListItem, NameValueListItem } from '@components/atoms'
-import { List } from '@components/molecules'
+import { List, ProfileBoardHeader } from '@components/molecules'
 
 type TProfileBoardProps = {}
 
@@ -10,6 +10,7 @@ const ProfileBoard: FC<TProfileBoardProps> = memo(() => {
 
   return (
     <div className={classNames('text-primary', 'dark:text-white')}>
+      <ProfileBoardHeader className="mb-6" />
       <List className="mb-12">
         <NameValueListItem name="Email" value="ivan@yandex.ru" />
         <NameValueListItem name="Login" value="IvanIvanov" />

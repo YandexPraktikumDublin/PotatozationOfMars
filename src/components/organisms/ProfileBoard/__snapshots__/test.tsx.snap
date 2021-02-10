@@ -4,6 +4,9 @@ exports[`<ProfileBoard /> should renders correct <ProfileBoard /> 1`] = `
 <div
   className="text-primary dark:text-white"
 >
+  <ProfileBoardHeader
+    className="mb-6"
+  />
   <List
     className="mb-12"
   >
