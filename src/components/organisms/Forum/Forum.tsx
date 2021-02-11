@@ -1,7 +1,7 @@
-import React, { FC, memo } from 'react'
+import React, { FC, memo, useState } from 'react'
 import { ActionsListItem, AddButton } from '@components/atoms'
 import { List } from '@components/molecules'
-import { Title } from '@components/organisms'
+import { CreateTopicModal, Title } from '@components/organisms'
 import { useHistory } from 'react-router-dom'
 import { PATHS } from '@config'
 
@@ -23,16 +23,20 @@ const forumTopics = [
 const Forum: FC<TForumProps> = memo(() => {
   const history = useHistory()
 
-  const handleAddTopicButtonClick = () => {}
+  const [
+    isShownCreateTopicModal,
+    setIsShownCreateTopicModal
+  ] = useState<boolean>(false)
+
+  const toggleModal = () => {
+    setIsShownCreateTopicModal((value) => !value)
+  }
 
   return (
     <div className="relative">
       <Title>Forum</Title>
 
-      <AddButton
-        onClick={handleAddTopicButtonClick}
-        className="absolute top-0 right-0"
-      />
+      <AddButton onClick={toggleModal} className="absolute top-0 right-0" />
 
       <List className="mb-12">
         {forumTopics.map((topic) => (
@@ -44,6 +48,10 @@ const Forum: FC<TForumProps> = memo(() => {
           />
         ))}
       </List>
+
+      {isShownCreateTopicModal && (
+        <CreateTopicModal toggleModal={toggleModal} />
+      )}
     </div>
   )
 })
