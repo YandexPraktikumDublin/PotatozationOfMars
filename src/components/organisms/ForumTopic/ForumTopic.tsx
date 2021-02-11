@@ -1,5 +1,5 @@
 import React, { FC, memo } from 'react'
-import { Title } from '@components/organisms'
+import { Title, TopicMessageForm } from '@components/organisms'
 import { BackButton } from '@components/atoms'
 import { useHistory } from 'react-router-dom'
 import { PATHS } from '@config'
@@ -21,6 +21,8 @@ const ForumTopic: FC<TForumTopicProps> = memo(() => {
         onClick={handleBackButtonClick}
         className="absolute top-0 left-0"
       />
+
+      <TopicMessageForm />
     </div>
   )
 })

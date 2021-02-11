@@ -32,6 +32,242 @@ exports[`<ForumTopic /> should renders correct <ForumTopic /> 1`] = `
         </svg>
       </button>
     </BackButton>
+    <TopicMessageForm>
+      <BaseForm
+        buttonText="Send"
+        formError=""
+        initialValues={
+          Object {
+            "message": "",
+          }
+        }
+        onSubmit={[Function]}
+        validationSchema={
+          ObjectSchema {
+            "_blacklist": ReferenceSet {
+              "list": Set {},
+              "refs": Map {},
+            },
+            "_blacklistError": undefined,
+            "_excludedEdges": Array [],
+            "_nodes": Array [
+              "message",
+            ],
+            "_sortErrors": [Function],
+            "_typeError": [Function],
+            "_whitelist": ReferenceSet {
+              "list": Set {},
+              "refs": Map {},
+            },
+            "_whitelistError": undefined,
+            "conditions": Array [],
+            "deps": Array [],
+            "exclusiveTests": Object {},
+            "fields": Object {
+              "message": StringSchema {
+                "_blacklist": ReferenceSet {
+                  "list": Set {},
+                  "refs": Map {},
+                },
+                "_blacklistError": undefined,
+                "_mutate": undefined,
+                "_typeError": [Function],
+                "_whitelist": ReferenceSet {
+                  "list": Set {},
+                  "refs": Map {},
+                },
+                "_whitelistError": undefined,
+                "conditions": Array [],
+                "deps": Array [],
+                "exclusiveTests": Object {
+                  "min": true,
+                  "required": true,
+                },
+                "spec": Object {
+                  "abortEarly": true,
+                  "label": undefined,
+                  "meta": undefined,
+                  "nullable": false,
+                  "presence": "required",
+                  "recursive": true,
+                  "strict": false,
+                  "strip": false,
+                },
+                "tests": Array [
+                  [Function],
+                  [Function],
+                ],
+                "transforms": Array [
+                  [Function],
+                ],
+                "type": "string",
+              },
+            },
+            "spec": Object {
+              "abortEarly": true,
+              "label": undefined,
+              "meta": undefined,
+              "nullable": false,
+              "presence": "optional",
+              "recursive": true,
+              "strict": false,
+              "strip": false,
+            },
+            "tests": Array [],
+            "transforms": Array [
+              [Function],
+            ],
+            "type": "object",
+          }
+        }
+      >
+        <Formik
+          initialValues={
+            Object {
+              "message": "",
+            }
+          }
+          onSubmit={[Function]}
+          validationSchema={
+            ObjectSchema {
+              "_blacklist": ReferenceSet {
+                "list": Set {},
+                "refs": Map {},
+              },
+              "_blacklistError": undefined,
+              "_excludedEdges": Array [],
+              "_nodes": Array [
+                "message",
+              ],
+              "_sortErrors": [Function],
+              "_typeError": [Function],
+              "_whitelist": ReferenceSet {
+                "list": Set {},
+                "refs": Map {},
+              },
+              "_whitelistError": undefined,
+              "conditions": Array [],
+              "deps": Array [],
+              "exclusiveTests": Object {},
+              "fields": Object {
+                "message": StringSchema {
+                  "_blacklist": ReferenceSet {
+                    "list": Set {},
+                    "refs": Map {},
+                  },
+                  "_blacklistError": undefined,
+                  "_mutate": undefined,
+                  "_typeError": [Function],
+                  "_whitelist": ReferenceSet {
+                    "list": Set {},
+                    "refs": Map {},
+                  },
+                  "_whitelistError": undefined,
+                  "conditions": Array [],
+                  "deps": Array [],
+                  "exclusiveTests": Object {
+                    "min": true,
+                    "required": true,
+                  },
+                  "spec": Object {
+                    "abortEarly": true,
+                    "label": undefined,
+                    "meta": undefined,
+                    "nullable": false,
+                    "presence": "required",
+                    "recursive": true,
+                    "strict": false,
+                    "strip": false,
+                  },
+                  "tests": Array [
+                    [Function],
+                    [Function],
+                  ],
+                  "transforms": Array [
+                    [Function],
+                  ],
+                  "type": "string",
+                },
+              },
+              "spec": Object {
+                "abortEarly": true,
+                "label": undefined,
+                "meta": undefined,
+                "nullable": false,
+                "presence": "optional",
+                "recursive": true,
+                "strict": false,
+                "strip": false,
+              },
+              "tests": Array [],
+              "transforms": Array [
+                [Function],
+              ],
+              "type": "object",
+            }
+          }
+        >
+          <Form
+            noValidate={true}
+          >
+            <form
+              action="#"
+              noValidate={true}
+              onReset={[Function]}
+              onSubmit={[Function]}
+            >
+              <BaseTextarea
+                name="message"
+                placeholder="Message"
+              >
+                <div
+                  className="mb-4"
+                >
+                  <textarea
+                    className="w-full py-2 px-4 border rounded-md bg-transparent placeholder-primary placeholder-opacity-60 dark:text-white dark:border-white dark:placeholder-white dark:placeholder-opacity-60"
+                    name="message"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    placeholder="Message"
+                    value=""
+                  />
+                </div>
+              </BaseTextarea>
+              <BaseInput
+                name="topicId"
+                placeholder="Topic id"
+                type="hidden"
+              >
+                <div
+                  className="mb-4"
+                >
+                  <input
+                    className="w-full py-2 px-4 border rounded-md bg-transparent placeholder-primary placeholder-opacity-60 dark:text-white dark:border-white dark:placeholder-white dark:placeholder-opacity-60"
+                    name="topicId"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    placeholder="Topic id"
+                    type="hidden"
+                  />
+                </div>
+              </BaseInput>
+              <Button
+                disabled={false}
+                type="submit"
+              >
+                <button
+                  className="inline-block font-medium text-center uppercase border rounded py-2 px-4 text-primary border-primary hover:text-white hover:border-white hover:bg-primary dark:text-white dark:border-white dark:hover:text-primary dark:hover:border-primary dark:hover:bg-white w-full"
+                  disabled={false}
+                  type="submit"
+                >
+                  Send
+                </button>
+              </Button>
+            </form>
+          </Form>
+        </Formik>
+      </BaseForm>
+    </TopicMessageForm>
   </div>
 </ForumTopic>
 `;
