@@ -3,7 +3,7 @@ import {
   ActionsListItem,
   NameValueListItem,
   ProfileBoardBackButton,
-  ProfileBoardEditButton
+  EditButton
 } from '@components/atoms'
 import { List, ProfileBoardHeader } from '@components/molecules'
 import { ProfileForm, ProfilePasswordForm } from '@components/organisms'
@@ -29,7 +29,10 @@ const Profile: FC<TProfileProps> = memo(() => {
   return (
     <div className="relative">
       {!isShownForms && (
-        <ProfileBoardEditButton onClick={() => setIsShowProfileForm(true)} />
+        <EditButton
+          onClick={() => setIsShowProfileForm(true)}
+          className="absolute top-0 right-0"
+        />
       )}
 
       {isShownForms && (
