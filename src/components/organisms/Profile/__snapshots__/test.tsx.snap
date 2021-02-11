@@ -8,7 +8,7 @@ exports[`<Profile /> should renders correct <Profile /> 1`] = `
     className="absolute top-0 right-0"
     onClick={[Function]}
   />
-  <ProfileBoardHeader
+  <ProfileHeader
     className="mb-6"
   />
   <List

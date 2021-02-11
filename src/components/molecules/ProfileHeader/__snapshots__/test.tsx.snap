@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProfileBoardHeader /> should has className from className prop 1`] = `
+exports[`<ProfileHeader /> should has className from className prop 1`] = `
 <header
   className="text-center test-class-name"
 >
@@ -28,7 +28,7 @@ exports[`<ProfileBoardHeader /> should has className from className prop 1`] = `
 </header>
 `;
 
-exports[`<ProfileBoardHeader /> should renders correct <ProfileBoardHeader /> 1`] = `
+exports[`<ProfileHeader /> should renders correct <ProfileHeader /> 1`] = `
 <header
   className="text-center"
 >

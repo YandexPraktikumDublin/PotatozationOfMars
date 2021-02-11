@@ -2,11 +2,11 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import toJSON from 'enzyme-to-json'
 
-import { ProfileBoardHeader } from '.'
+import { ProfileHeader } from '.'
 
-describe('<ProfileBoardHeader />', () => {
-  it('should renders correct <ProfileBoardHeader />', () => {
-    const wrapper = shallow(<ProfileBoardHeader />)
+describe('<ProfileHeader />', () => {
+  it('should renders correct <ProfileHeader />', () => {
+    const wrapper = shallow(<ProfileHeader />)
 
     expect(toJSON(wrapper)).toMatchSnapshot()
   })
@@ -14,7 +14,7 @@ describe('<ProfileBoardHeader />', () => {
   it('should has className from className prop', () => {
     const className = 'test-class-name'
 
-    const wrapper = shallow(<ProfileBoardHeader className={className} />)
+    const wrapper = shallow(<ProfileHeader className={className} />)
 
     expect(wrapper.prop('className')).toMatch(className)
 

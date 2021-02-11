@@ -3,12 +3,12 @@ import classNames from 'classnames'
 import { ChangeAvatarModal } from '@components/organisms'
 import { profile } from '@images'
 
-type TProfileBoardHeaderProps = {
+type TProfileHeaderProps = {
   className?: string
 }
 
-const ProfileBoardHeader: FC<TProfileBoardHeaderProps> = memo(
-  ({ className }: TProfileBoardHeaderProps) => {
+const ProfileHeader: FC<TProfileHeaderProps> = memo(
+  ({ className }: TProfileHeaderProps) => {
     const [
       isShownAvatarChangeModal,
       setIsShownAvatarChangeModal
@@ -40,6 +40,6 @@ const ProfileBoardHeader: FC<TProfileBoardHeaderProps> = memo(
   }
 )
 
-ProfileBoardHeader.displayName = 'ProfileBoardHeader'
+ProfileHeader.displayName = 'ProfileHeader'
 
-export default ProfileBoardHeader
+export default ProfileHeader

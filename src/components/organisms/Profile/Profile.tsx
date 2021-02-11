@@ -5,7 +5,7 @@ import {
   BackButton,
   EditButton
 } from '@components/atoms'
-import { List, ProfileBoardHeader } from '@components/molecules'
+import { List, ProfileHeader } from '@components/molecules'
 import { ProfileForm, ProfilePasswordForm } from '@components/organisms'
 
 type TProfileProps = {}
@@ -42,7 +42,7 @@ const Profile: FC<TProfileProps> = memo(() => {
         />
       )}
 
-      <ProfileBoardHeader className="mb-6" />
+      <ProfileHeader className="mb-6" />
 
       {!isShownForms && (
         <>
