@@ -6,6 +6,7 @@ import {
   Auth,
   Error404,
   Forum,
+  ForumTopic,
   Game,
   Leaderboard,
   Profile,
@@ -29,6 +30,7 @@ const App: React.FC = () => (
         <Route exact path={PATHS.BASE} component={Start} />
         <Route path={PATHS.AUTH} component={Auth} />
         <Route path={PATHS.SIGNUP} component={SignUp} />
+        <Route path={PATHS.FORUM_TOPIC} component={ForumTopic} />
         <Route path={PATHS.FORUM} component={Forum} />
         <Route path={PATHS.GAME} component={Game} />
         <Route path={PATHS.LEADERBOARD} component={Leaderboard} />
