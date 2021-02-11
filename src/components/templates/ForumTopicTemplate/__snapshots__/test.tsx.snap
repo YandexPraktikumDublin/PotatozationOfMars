@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ForumTopicTemplate /> should renders correct <ForumTopicTemplate /> 1`] = `
+<div
+  className="w-full max-w-2xl"
+>
+  <Window>
+    <ForumTopic />
+  </Window>
+</div>
+`;
