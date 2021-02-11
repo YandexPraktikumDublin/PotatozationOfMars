@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProfileBoard /> should renders correct <ProfileBoard /> 1`] = `
+exports[`<Profile /> should renders correct <Profile /> 1`] = `
 <div
-  className="relative text-primary dark:text-white"
+  className="relative"
 >
   <ProfileBoardEditButton
     onClick={[Function]}

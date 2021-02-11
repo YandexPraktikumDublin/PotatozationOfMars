@@ -1,5 +1,4 @@
 import React, { FC, memo, useState } from 'react'
-import classNames from 'classnames'
 import {
   ActionsListItem,
   NameValueListItem,
@@ -9,9 +8,9 @@ import {
 import { List, ProfileBoardHeader } from '@components/molecules'
 import { ProfileForm, ProfilePasswordForm } from '@components/organisms'
 
-type TProfileBoardProps = {}
+type TProfileProps = {}
 
-const ProfileBoard: FC<TProfileBoardProps> = memo(() => {
+const Profile: FC<TProfileProps> = memo(() => {
   const [isShowProfileForm, setIsShowProfileForm] = useState<boolean>(false)
   const [
     isShowProfilePasswordForm,
@@ -28,7 +27,7 @@ const ProfileBoard: FC<TProfileBoardProps> = memo(() => {
   const handleLogoutButtonClick = () => {}
 
   return (
-    <div className={classNames('relative text-primary', 'dark:text-white')}>
+    <div className="relative">
       {!isShownForms && (
         <ProfileBoardEditButton onClick={() => setIsShowProfileForm(true)} />
       )}
@@ -67,6 +66,6 @@ const ProfileBoard: FC<TProfileBoardProps> = memo(() => {
   )
 })
 
-ProfileBoard.displayName = 'ProfileBoard'
+Profile.displayName = 'Profile'
 
-export default ProfileBoard
+export default Profile
