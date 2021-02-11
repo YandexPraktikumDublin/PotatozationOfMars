@@ -32,6 +32,41 @@ exports[`<ForumTopic /> should renders correct <ForumTopic /> 1`] = `
         </svg>
       </button>
     </BackButton>
+    <List
+      className="mb-4"
+    >
+      <ul
+        className="mb-4"
+      >
+        <FormTopicMessage
+          body="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+           dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+           ea commodo consequat."
+          date="01.12.20"
+          key="1"
+          userName="Ivan Ivanov"
+        >
+          <div
+            className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
+          >
+            <div
+              className="mb-4"
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+           dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+           ea commodo consequat.
+            </div>
+            <div
+              className="text-xs"
+            >
+              Ivan Ivanov
+               
+              01.12.20
+            </div>
+          </div>
+        </FormTopicMessage>
+      </ul>
+    </List>
     <TopicMessageForm>
       <BaseForm
         buttonText="Send"
