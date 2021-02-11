@@ -2,7 +2,7 @@ import React, { FC, memo, useState } from 'react'
 import {
   ActionsListItem,
   NameValueListItem,
-  ProfileBoardBackButton,
+  BackButton,
   EditButton
 } from '@components/atoms'
 import { List, ProfileBoardHeader } from '@components/molecules'
@@ -36,7 +36,10 @@ const Profile: FC<TProfileProps> = memo(() => {
       )}
 
       {isShownForms && (
-        <ProfileBoardBackButton onClick={handleBackButtonClick} />
+        <BackButton
+          onClick={handleBackButtonClick}
+          className="absolute top-0 left-0"
+        />
       )}
 
       <ProfileBoardHeader className="mb-6" />

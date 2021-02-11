@@ -4,7 +4,8 @@ exports[`<Profile /> should renders correct <Profile /> 1`] = `
 <div
   className="relative"
 >
-  <ProfileBoardEditButton
+  <EditButton
+    className="absolute top-0 right-0"
     onClick={[Function]}
   />
   <ProfileBoardHeader
