@@ -20,6 +20,7 @@ exports[`<CloseButton /> should has className from className prop 1`] = `
 
 exports[`<CloseButton /> should renders correct <CloseButton /> 1`] = `
 <button
+  className=""
   onClick={
     [MockFunction] {
       "calls": Array [

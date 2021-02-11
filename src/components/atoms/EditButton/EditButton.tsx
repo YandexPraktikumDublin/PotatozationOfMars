@@ -7,7 +7,7 @@ type TEditButtonProps = {
 }
 
 const EditButton: FC<TEditButtonProps> = memo(
-  ({ onClick, className }: TEditButtonProps) => (
+  ({ onClick, className = '' }: TEditButtonProps) => (
     <button className={className} onClick={onClick}>
       <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
         <g className={classNames('fill-primary', 'dark:fill-white')}>

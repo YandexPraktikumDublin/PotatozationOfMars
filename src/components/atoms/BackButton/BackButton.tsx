@@ -1,13 +1,14 @@
 import React, { FC, memo } from 'react'
 import classNames from 'classnames'
 
-type TProfileBoardBackButtonProps = {
+type TBackButtonProps = {
   onClick: () => void
+  className?: string
 }
 
-const ProfileBoardBackButton: FC<TProfileBoardBackButtonProps> = memo(
-  ({ onClick }: TProfileBoardBackButtonProps) => (
-    <button className="absolute top-0 left-0" onClick={onClick}>
+const BackButton: FC<TBackButtonProps> = memo(
+  ({ onClick, className = '' }: TBackButtonProps) => (
+    <button className={className} onClick={onClick}>
       <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
         <path
           className={classNames('fill-primary', 'dark:fill-white')}
@@ -18,6 +19,6 @@ const ProfileBoardBackButton: FC<TProfileBoardBackButtonProps> = memo(
   )
 )
 
-ProfileBoardBackButton.displayName = 'ProfileBoardBackButton'
+BackButton.displayName = 'BackButton'
 
-export default ProfileBoardBackButton
+export default BackButton
