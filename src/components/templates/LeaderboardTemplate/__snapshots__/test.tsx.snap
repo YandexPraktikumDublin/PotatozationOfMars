@@ -6,7 +6,7 @@ exports[`<LeaderboardTemplate /> should renders correct <LeaderboardTemplate /> 
 >
   <Window>
     <Title>
-      Test title
+      Leaderboard
     </Title>
     <Leaderboard />
   </Window>

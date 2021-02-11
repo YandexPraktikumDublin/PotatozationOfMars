@@ -6,7 +6,7 @@ exports[`<SignUpTemplate /> should renders correct <SignUpTemplate /> 1`] = `
 >
   <Window>
     <Title>
-      test
+      Sign up
     </Title>
     <SignUpForm />
     <FormLink
