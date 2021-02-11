@@ -1,28 +1,32 @@
-import React, { FC, memo } from 'react'
-import { Formik, FormikHelpers, Form } from 'formik'
+import React, { FC, memo, ReactNode } from 'react'
+import { Formik, Form, FormikValues } from 'formik'
 import { Button } from '@components/organisms'
-
-interface IValues {
-  [key: string]: string
-}
+import { BaseFormError } from '@components/atoms'
 
 type TBaseFormProps = {
-  schema: object
-  initialValues: IValues
-  textButton: string
+  children: ReactNode
+  initialValues: FormikValues
+  validationSchema: Record<string, any>
+  onSubmit: (values: Record<string, any>) => void | Promise<any>
+  buttonText: string
+  formError?: string
 }
 
 const BaseForm: FC<TBaseFormProps> = memo(
-  ({ initialValues, schema, children, textButton }) => {
+  ({
+    children,
+    initialValues,
+    validationSchema,
+    onSubmit,
+    buttonText,
+    formError = ''
+  }: TBaseFormProps) => {
     return (
       <Formik
         initialValues={initialValues}
-        validationSchema={schema}
-        onSubmit={(
-          values: IValues,
-          { setSubmitting }: FormikHelpers<IValues>
-        ) => {
-          console.log(JSON.stringify(values, null, 2))
+        validationSchema={validationSchema}
+        onSubmit={(values, { setSubmitting }) => {
+          onSubmit(values)
           setSubmitting(false)
         }}
       >
@@ -30,8 +34,9 @@ const BaseForm: FC<TBaseFormProps> = memo(
           <Form noValidate>
             {children}
             <Button type="submit" disabled={isSubmitting}>
-              {textButton}
+              {buttonText}
             </Button>
+            {formError.length > 0 && <BaseFormError>{formError}</BaseFormError>}
           </Form>
         )}
       </Formik>

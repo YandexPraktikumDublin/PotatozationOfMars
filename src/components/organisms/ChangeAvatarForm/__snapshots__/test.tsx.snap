@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ChangeAvatarForm /> should renders correct <ChangeAvatarForm /> 1`] = `
+<BaseForm
+  buttonText="Change avatar"
+  formError=""
+  initialValues={
+    Object {
+      "avatar": "",
+    }
+  }
+  onSubmit={[Function]}
+  validationSchema={
+    ObjectSchema {
+      "_blacklist": ReferenceSet {
+        "list": Set {},
+        "refs": Map {},
+      },
+      "_blacklistError": undefined,
+      "_excludedEdges": Array [],
+      "_nodes": Array [
+        "avatar",
+      ],
+      "_sortErrors": [Function],
+      "_typeError": [Function],
+      "_whitelist": ReferenceSet {
+        "list": Set {},
+        "refs": Map {},
+      },
+      "_whitelistError": undefined,
+      "conditions": Array [],
+      "deps": Array [],
+      "exclusiveTests": Object {},
+      "fields": Object {
+        "avatar": BaseSchema {
+          "_blacklist": ReferenceSet {
+            "list": Set {},
+            "refs": Map {},
+          },
+          "_blacklistError": undefined,
+          "_mutate": undefined,
+          "_typeError": [Function],
+          "_whitelist": ReferenceSet {
+            "list": Set {},
+            "refs": Map {},
+          },
+          "_whitelistError": undefined,
+          "conditions": Array [],
+          "deps": Array [],
+          "exclusiveTests": Object {
+            "required": true,
+          },
+          "spec": Object {
+            "abortEarly": true,
+            "label": undefined,
+            "meta": undefined,
+            "nullable": false,
+            "presence": "required",
+            "recursive": true,
+            "strict": false,
+            "strip": false,
+          },
+          "tests": Array [
+            [Function],
+          ],
+          "transforms": Array [],
+          "type": "mixed",
+        },
+      },
+      "spec": Object {
+        "abortEarly": true,
+        "label": undefined,
+        "meta": undefined,
+        "nullable": false,
+        "presence": "optional",
+        "recursive": true,
+        "strict": false,
+        "strip": false,
+      },
+      "tests": Array [],
+      "transforms": Array [
+        [Function],
+      ],
+      "type": "object",
+    }
+  }
+>
+  <BaseInput
+    name="avatar"
+    placeholder="Avatar"
+    type="file"
+  />
+</BaseForm>
+`;

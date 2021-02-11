@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ActionsListItem /> should renders correct <ActionsListItem /> 1`] = `
+<li
+  className="border-b border-primary mb-4 last:mb-0 dark:border-white"
+>
+  <button
+    className="w-full text-left"
+    onClick={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      }
+    }
+  >
+    Test name
+  </button>
+</li>
+`;

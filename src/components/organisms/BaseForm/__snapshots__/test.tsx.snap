@@ -2,25 +2,12 @@
 
 exports[`<BaseForm /> should renders correct <BaseForm /> 1`] = `
 <Formik
-  initialValues={
-    Object {
-      "email": "",
-      "firstName": "",
-      "lastName": "",
-      "login": "",
-      "password": "",
-      "phone": "",
-    }
-  }
+  initialValues={Object {}}
   onSubmit={[Function]}
   validationSchema={
     Object {
-      "email": "",
-      "firstName": "",
-      "lastName": "",
       "login": "",
       "password": "",
-      "phone": "",
     }
   }
 >

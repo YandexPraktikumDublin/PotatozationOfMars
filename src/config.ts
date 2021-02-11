@@ -7,3 +7,5 @@ export const PATHS = {
   LEADERBOARD: '/leaderboard/',
   FORUM: '/forum/'
 }
+
+export const DEFAULT_ERROR_MESSAGE = 'something went wrong'

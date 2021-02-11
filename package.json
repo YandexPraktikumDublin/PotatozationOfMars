@@ -7,7 +7,7 @@
     "start": "webpack serve --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "lint": "eslint \"src/**/*.@(tsx|ts|jsx|js)\" --fix && prettier --check \"src/**/*.@(tsx|ts|jsx|js)\" --write",
-    "test": "jest --runInBand --config .jest/config.json",
+    "test": "jest --config .jest/config.json",
     "generate": "plop"
   },
   "husky": {
