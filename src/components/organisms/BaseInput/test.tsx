@@ -6,15 +6,16 @@ import { Formik } from 'formik'
 import { BaseInput } from '.'
 
 describe('<BaseInput />', () => {
+  const initialValues = { test: '' }
+  const onSubmit = jest.fn()
+  const type = 'text'
+  const name = 'test_name'
+  const placeholder = 'Test placeholder'
+
   it('should renders correct <BaseInput />', () => {
     const wrapper = shallow(
-      <Formik
-        initialValues={{
-          test: ''
-        }}
-        onSubmit={() => {}}
-      >
-        <BaseInput type="" name="" placeholder="" />
+      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+        <BaseInput type={type} name={name} placeholder={placeholder} />
       </Formik>
     )
 

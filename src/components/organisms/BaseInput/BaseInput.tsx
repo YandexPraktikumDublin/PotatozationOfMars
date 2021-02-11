@@ -11,6 +11,7 @@ type TBaseInputProps = {
 const BaseInput: FC<TBaseInputProps> = memo(({ ...props }: TBaseInputProps) => {
   const [field, meta] = useField(props)
   const isError = meta.touched && meta.error
+
   return (
     <div
       className={classNames({
