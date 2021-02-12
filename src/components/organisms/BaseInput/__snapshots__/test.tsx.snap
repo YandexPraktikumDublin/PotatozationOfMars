@@ -50,9 +50,9 @@ exports[`<BaseInput /> should renders correct <BaseInput /> 1`] = `
   }
 >
   <BaseInput
-    name=""
-    placeholder=""
-    type=""
+    name="test_name"
+    placeholder="Test placeholder"
+    type="text"
   />
 </ContextProvider>
 `;

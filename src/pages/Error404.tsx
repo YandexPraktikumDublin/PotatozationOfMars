@@ -3,7 +3,7 @@ import { withHeaderAndFooter } from '@hocs'
 import { ErrorTemplate } from '@components/templates'
 
 const Error404 = () => {
-  return <ErrorTemplate />
+  return <ErrorTemplate title="404" />
 }
 
 export default withHeaderAndFooter(Error404)

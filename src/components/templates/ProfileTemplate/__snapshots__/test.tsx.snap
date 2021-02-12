@@ -5,7 +5,7 @@ exports[`<ProfileTemplate /> should renders correct <ProfileTemplate /> 1`] = `
   className="w-full max-w-2xl"
 >
   <Window>
-    <ProfileBoard />
+    <Profile />
   </Window>
 </div>
 `;

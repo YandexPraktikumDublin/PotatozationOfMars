@@ -3,7 +3,7 @@ import { withHeaderAndFooter } from '@hocs'
 import { LeaderboardTemplate } from '@components/templates'
 
 const Leaderboard = () => {
-  return <LeaderboardTemplate title="Leaderboard" />
+  return <LeaderboardTemplate />
 }
 
 export default withHeaderAndFooter(Leaderboard)

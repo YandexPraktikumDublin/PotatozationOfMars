@@ -3,19 +3,24 @@ import classNames from 'classnames'
 
 type TActionsListItemProps = {
   name: string
+  value?: string | number
   onClick: () => void
 }
 
 const ActionsListItem: FC<TActionsListItemProps> = memo(
-  ({ name, onClick }: TActionsListItemProps) => (
+  ({ name, value, onClick }: TActionsListItemProps) => (
     <li
       className={classNames(
         'border-b border-primary mb-4 last:mb-0',
         'dark:border-white'
       )}
     >
-      <button className="w-full text-left" onClick={onClick}>
-        {name}
+      <button
+        className="flex justify-between w-full text-left"
+        onClick={onClick}
+      >
+        <span>{name}</span>
+        <span>{value}</span>
       </button>
     </li>
   )

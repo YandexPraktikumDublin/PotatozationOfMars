@@ -7,7 +7,7 @@ type TCloseButtonProps = {
 }
 
 const CloseButton: FC<TCloseButtonProps> = memo(
-  ({ onClick, className }: TCloseButtonProps) => (
+  ({ onClick, className = '' }: TCloseButtonProps) => (
     <button className={className} onClick={onClick}>
       <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
         <path

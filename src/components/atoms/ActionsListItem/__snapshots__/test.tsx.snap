@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ActionsListItem /> should renders correct <ActionsListItem /> 1`] = `
+exports[`<ActionsListItem /> should has correct value from value prop 1`] = `
 <li
   className="border-b border-primary mb-4 last:mb-0 dark:border-white"
 >
   <button
-    className="w-full text-left"
+    className="flex justify-between w-full text-left"
     onClick={
       [MockFunction] {
         "calls": Array [
@@ -20,7 +20,40 @@ exports[`<ActionsListItem /> should renders correct <ActionsListItem /> 1`] = `
       }
     }
   >
-    Test name
+    <span>
+      Test name
+    </span>
+    <span>
+      Test value
+    </span>
+  </button>
+</li>
+`;
+
+exports[`<ActionsListItem /> should renders correct <ActionsListItem /> 1`] = `
+<li
+  className="border-b border-primary mb-4 last:mb-0 dark:border-white"
+>
+  <button
+    className="flex justify-between w-full text-left"
+    onClick={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      }
+    }
+  >
+    <span>
+      Test name
+    </span>
+    <span />
   </button>
 </li>
 `;
