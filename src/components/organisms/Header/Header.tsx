@@ -22,9 +22,12 @@ const Header: FC<THeaderProps> = memo(() => {
     setGamePauseModalDisplay((value) => !value)
   }
 
-  const escIsPressed = useCallback((evt: KeyboardEvent) => {
-    if (evt.code === 'Escape') toggleModal()
-  }, [])
+  const escIsPressed = useCallback(
+    (evt: KeyboardEvent) => {
+      if (evt.code === 'Escape') toggleModal()
+    },
+    [toggleModal]
+  )
 
   useEffect(() => {
     if (location.pathname === PATHS.GAME) {

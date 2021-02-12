@@ -19,7 +19,7 @@ const GamePauseMenu: FC<TGamePauseMenuProps> = memo(
       <>
         <Button onClick={toggleModal}>Resume</Button>
         <Button>Settings</Button>
-        <Button onClick={returnToMainPage}>Main menu</Button>
+        <Button onClick={returnToMainPage}>Quit</Button>
       </>
     )
   }
