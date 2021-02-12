@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GamePauseMenu /> should renders correct <GamePauseMenu /> 1`] = `
+<Fragment>
+  <Button
+    onClick={[MockFunction]}
+  >
+    Resume
+  </Button>
+  <Button>
+    Settings
+  </Button>
+  <Button
+    onClick={[Function]}
+  >
+    Quit
+  </Button>
+</Fragment>
+`;
