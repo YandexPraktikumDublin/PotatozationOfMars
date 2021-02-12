@@ -8,7 +8,11 @@ const GameCanvas: FC<TGameCanvasProps> = memo(() => {
   return (
     <canvas
       className="border-2 border-white rounded-2xl h-screen"
-      style={{ maxHeight: 'calc(100vh - 7rem)' }}
+      style={{
+        height: 'calc(100vh - 7rem)',
+        maxHeight: '48vw',
+        maxWidth: '96vw'
+      }}
       ref={canvasRef}
     />
   )

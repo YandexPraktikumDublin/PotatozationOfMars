@@ -10,7 +10,7 @@ exports[`<SignUpTemplate /> should renders correct <SignUpTemplate /> 1`] = `
     </Title>
     <SignUpForm />
     <FormLink
-      className="inline-block mt-4"
+      className="inline-block"
       path="/auth/"
     >
       Already have an account?
