@@ -1,9 +1,12 @@
 import React from 'react'
-import { withHeaderAndFooter } from '@hocs'
 import { ErrorTemplate } from '@components/templates'
 
 const Error500 = () => {
-  return <ErrorTemplate title="500" />
+  return (
+    <div className="flex justify-center items-center min-h-screen px-3">
+      <ErrorTemplate title="500" />
+    </div>
+  )
 }
 
-export default withHeaderAndFooter(Error500)
+export default Error500
