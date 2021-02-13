@@ -14,8 +14,8 @@ type TProfileHeaderProps = {
 
 const ProfileHeader: FC<TProfileHeaderProps> = memo(
   ({
-    firstName,
-    secondName,
+    firstName = '',
+    secondName = '',
     avatar,
     onSuccessAvatarUpdate,
     className = ''
