@@ -23,6 +23,7 @@ const BaseForm: FC<TBaseFormProps> = memo(
   }: TBaseFormProps) => {
     return (
       <Formik
+        enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
@@ -30,7 +31,7 @@ const BaseForm: FC<TBaseFormProps> = memo(
           setSubmitting(false)
         }}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, setFieldValue }) => (
           <Form noValidate>
             {children}
             <Button type="submit" disabled={isSubmitting}>

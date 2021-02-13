@@ -1,8 +1,8 @@
 import React, { FC, memo, useState } from 'react'
-import { FormikValues } from 'formik'
 import { DEFAULT_ERROR_MESSAGE } from '@config'
-import { BaseForm, BaseInput } from '@components/organisms'
+import { BaseForm, BaseFileInput } from '@components/organisms'
 import * as Yup from 'yup'
+import { updateAvatar } from '@api'
 
 type TChangeAvatarFormProps = {}
 
@@ -17,10 +17,13 @@ const initialValues = {
 const ChangeAvatarForm: FC<TChangeAvatarFormProps> = memo(() => {
   const [formError, setFormError] = useState<string>('')
 
-  const handleSubmit = (values: FormikValues) => {
+  const handleSubmit = (values: any) => {
     try {
       setFormError('')
+      const form = new FormData()
+      form.append('avatar', values.avatar)
       console.log(values)
+      updateAvatar(form)
     } catch (error) {
       setFormError(error?.message ?? DEFAULT_ERROR_MESSAGE)
     }
@@ -34,7 +37,7 @@ const ChangeAvatarForm: FC<TChangeAvatarFormProps> = memo(() => {
       buttonText="Change avatar"
       formError={formError}
     >
-      <BaseInput type="file" name="avatar" placeholder="Avatar" />
+      <BaseFileInput type="file" name="avatar" placeholder="Avatar" />
     </BaseForm>
   )
 })

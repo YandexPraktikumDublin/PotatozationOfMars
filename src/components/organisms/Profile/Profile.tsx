@@ -1,17 +1,21 @@
-import React, { FC, memo, useState } from 'react'
+import React, { FC, memo, useEffect, useState } from 'react'
 import {
   ActionsListItem,
   NameValueListItem,
   BackButton,
   EditButton
 } from '@components/atoms'
+import { getUserData, logout } from '@api'
 import { List, ProfileHeader } from '@components/molecules'
 import { ProfileForm, ProfilePasswordForm } from '@components/organisms'
+import { IUser } from '@types'
+import { initialValues } from '@consts'
 
 type TProfileProps = {}
 
 const Profile: FC<TProfileProps> = memo(() => {
   const [isShowProfileForm, setIsShowProfileForm] = useState<boolean>(false)
+  const [userData, setUserData] = useState<IUser>(initialValues)
   const [
     isShowProfilePasswordForm,
     setIsShowProfilePasswordForm
@@ -24,7 +28,20 @@ const Profile: FC<TProfileProps> = memo(() => {
     setIsShowProfilePasswordForm(false)
   }
 
-  const handleLogoutButtonClick = () => {}
+  const handleLogoutButtonClick = () => logout()
+
+  useEffect(() => {
+    getUserData().then((res) => {
+      console.log(res)
+      const result = res.data
+      result.display_name = ''
+      result.firstName = result.first_name
+      result.secondName = result.second_name
+      delete result.first_name
+      delete result.second_name
+      setUserData(result)
+    })
+  }, [])
 
   return (
     <div className="relative">
@@ -42,17 +59,22 @@ const Profile: FC<TProfileProps> = memo(() => {
         />
       )}
 
-      <ProfileHeader className="mb-6" />
+      <ProfileHeader
+        firstName={userData.firstName}
+        secondName={userData.secondName}
+        avatar={userData.avatar}
+        className="mb-6"
+      />
 
       {!isShownForms && (
         <>
           <List className="mb-12">
-            <NameValueListItem name="Email" value="ivan@yandex.ru" />
-            <NameValueListItem name="Login" value="IvanIvanov" />
-            <NameValueListItem name="First name" value="Ivan" />
-            <NameValueListItem name="Last name" value="Ivanov" />
-            <NameValueListItem name="Phone number" value="+790000000000" />
-            <NameValueListItem name="Password" value="••••••" />
+            <NameValueListItem name="Email" value={userData.email} />
+            <NameValueListItem name="Login" value={userData.login} />
+            <NameValueListItem name="First name" value={userData.firstName} />
+            <NameValueListItem name="Last name" value={userData.secondName} />
+            <NameValueListItem name="Phone number" value={userData.phone} />
+            <NameValueListItem name="Password" value="********" />
           </List>
 
           <List>
@@ -65,7 +87,7 @@ const Profile: FC<TProfileProps> = memo(() => {
         </>
       )}
 
-      {isShowProfileForm && <ProfileForm />}
+      {isShowProfileForm && <ProfileForm formValues={userData} />}
 
       {isShowProfilePasswordForm && <ProfilePasswordForm />}
     </div>

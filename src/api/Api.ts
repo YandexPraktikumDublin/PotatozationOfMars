@@ -1,10 +1,15 @@
-import axsios from 'axios'
+import axios from 'axios'
+import { baseUrl } from '@consts'
 
-const baseUrl = 'https://ya-praktikum.tech/api/v2'
+const baseApiUrl = `${baseUrl}/api/v2`
+
+const instance = axios.create({
+  withCredentials: true
+})
 
 async function signup(data: object) {
   try {
-    await axsios.post(`${baseUrl}/auth/signup`, { ...data })
+    await instance.post(`${baseApiUrl}/auth/signup`, { ...data })
   } catch (error) {
     console.error(error)
   }
@@ -12,54 +17,30 @@ async function signup(data: object) {
 
 async function signin(data: object) {
   try {
-    await axsios.post(`${baseUrl}/auth/signin`, { ...data })
+    await instance.post(`${baseApiUrl}/auth/signin`, { ...data })
   } catch (error) {
     console.error(error)
   }
 }
 
-async function logout() {
-  try {
-    await axsios.post(`${baseUrl}/auth/logout`, {})
-  } catch (error) {
-    console.error(error)
-  }
+function logout() {
+  return instance.post(`${baseApiUrl}/auth/logout`, {})
 }
 
-async function getUserData() {
-  try {
-    const result = await axsios.get(`${baseUrl}/auth/user`, {})
-    return result
-  } catch (error) {
-    console.error(error)
-  }
+function getUserData() {
+  return instance.get(`${baseApiUrl}/auth/user`, {})
 }
 
-async function changePassword(data: object) {
-  try {
-    await axsios.put(`${baseUrl}/user/password`, { ...data })
-  } catch (error) {
-    console.error(error)
-  }
+function changePassword(data: object) {
+  return instance.put(`${baseApiUrl}/user/password`, { ...data })
 }
 
-async function changeProfile(data: object) {
-  try {
-    await axsios.put(`${baseUrl}/user/password`, { ...data })
-  } catch (error) {
-    console.error(error)
-  }
+function changeProfile(data: object) {
+  return instance.put(`${baseApiUrl}/user/profile`, { ...data })
 }
 
-async function updateAvatar(form: FormData) {
-  try {
-    await axsios.put(`${baseUrl}/user/profile/avatar`, {
-      data: form,
-      isForm: true
-    })
-  } catch (error) {
-    console.error(error)
-  }
+function updateAvatar(form: FormData) {
+  return instance.put(`${baseApiUrl}/user/profile/avatar`, form)
 }
 
 export {

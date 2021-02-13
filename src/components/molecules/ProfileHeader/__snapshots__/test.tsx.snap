@@ -10,7 +10,7 @@ exports[`<ProfileHeader /> should has className from className prop 1`] = `
     <img
       alt=""
       height="80"
-      src={[Function]}
+      src="https://ya-praktikum.tech/"
       width="80"
     />
     <div
@@ -23,7 +23,7 @@ exports[`<ProfileHeader /> should has className from className prop 1`] = `
   <h1
     className="font-medium"
   >
-    Ivan Ivanov
+     
   </h1>
 </header>
 `;
@@ -38,7 +38,7 @@ exports[`<ProfileHeader /> should renders correct <ProfileHeader /> 1`] = `
     <img
       alt=""
       height="80"
-      src={[Function]}
+      src="https://ya-praktikum.tech/"
       width="80"
     />
     <div
@@ -51,7 +51,7 @@ exports[`<ProfileHeader /> should renders correct <ProfileHeader /> 1`] = `
   <h1
     className="font-medium"
   >
-    Ivan Ivanov
+     
   </h1>
 </header>
 `;

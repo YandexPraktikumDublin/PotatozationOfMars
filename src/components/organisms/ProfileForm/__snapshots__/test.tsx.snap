@@ -8,9 +8,10 @@ exports[`<ProfileForm /> should renders correct <ProfileForm /> 1`] = `
     Object {
       "email": "",
       "firstName": "",
-      "lastName": "",
       "login": "",
+      "password": "",
       "phone": "",
+      "secondName": "",
     }
   }
   onSubmit={[Function]}
@@ -24,7 +25,7 @@ exports[`<ProfileForm /> should renders correct <ProfileForm /> 1`] = `
       "_excludedEdges": Array [],
       "_nodes": Array [
         "phone",
-        "lastName",
+        "secondName",
         "firstName",
         "login",
         "email",
@@ -79,46 +80,6 @@ exports[`<ProfileForm /> should renders correct <ProfileForm /> 1`] = `
           "type": "string",
         },
         "firstName": StringSchema {
-          "_blacklist": ReferenceSet {
-            "list": Set {},
-            "refs": Map {},
-          },
-          "_blacklistError": undefined,
-          "_mutate": undefined,
-          "_typeError": [Function],
-          "_whitelist": ReferenceSet {
-            "list": Set {},
-            "refs": Map {},
-          },
-          "_whitelistError": undefined,
-          "conditions": Array [],
-          "deps": Array [],
-          "exclusiveTests": Object {
-            "max": true,
-            "min": true,
-            "required": true,
-          },
-          "spec": Object {
-            "abortEarly": true,
-            "label": undefined,
-            "meta": undefined,
-            "nullable": false,
-            "presence": "required",
-            "recursive": true,
-            "strict": false,
-            "strip": false,
-          },
-          "tests": Array [
-            [Function],
-            [Function],
-            [Function],
-          ],
-          "transforms": Array [
-            [Function],
-          ],
-          "type": "string",
-        },
-        "lastName": StringSchema {
           "_blacklist": ReferenceSet {
             "list": Set {},
             "refs": Map {},
@@ -238,6 +199,46 @@ exports[`<ProfileForm /> should renders correct <ProfileForm /> 1`] = `
           ],
           "type": "string",
         },
+        "secondName": StringSchema {
+          "_blacklist": ReferenceSet {
+            "list": Set {},
+            "refs": Map {},
+          },
+          "_blacklistError": undefined,
+          "_mutate": undefined,
+          "_typeError": [Function],
+          "_whitelist": ReferenceSet {
+            "list": Set {},
+            "refs": Map {},
+          },
+          "_whitelistError": undefined,
+          "conditions": Array [],
+          "deps": Array [],
+          "exclusiveTests": Object {
+            "max": true,
+            "min": true,
+            "required": true,
+          },
+          "spec": Object {
+            "abortEarly": true,
+            "label": undefined,
+            "meta": undefined,
+            "nullable": false,
+            "presence": "required",
+            "recursive": true,
+            "strict": false,
+            "strip": false,
+          },
+          "tests": Array [
+            [Function],
+            [Function],
+            [Function],
+          ],
+          "transforms": Array [
+            [Function],
+          ],
+          "type": "string",
+        },
       },
       "spec": Object {
         "abortEarly": true,
@@ -273,7 +274,7 @@ exports[`<ProfileForm /> should renders correct <ProfileForm /> 1`] = `
     type="text"
   />
   <BaseInput
-    name="lastName"
+    name="secondName"
     placeholder="Last name"
     type="text"
   />

@@ -2,6 +2,7 @@ import React, { FC, memo, useState } from 'react'
 import { FormikValues } from 'formik'
 import { DEFAULT_ERROR_MESSAGE } from '@config'
 import { BaseForm, BaseInput } from '@components/organisms'
+import { changePassword } from '@api'
 import * as Yup from 'yup'
 
 type TProfilePasswordFormProps = {}
@@ -22,6 +23,7 @@ const ProfilePasswordForm: FC<TProfilePasswordFormProps> = memo(() => {
   const handleSubmit = (values: FormikValues) => {
     try {
       setFormError('')
+      changePassword(values)
       console.log(values)
     } catch (error) {
       setFormError(error?.message ?? DEFAULT_ERROR_MESSAGE)
@@ -40,11 +42,13 @@ const ProfilePasswordForm: FC<TProfilePasswordFormProps> = memo(() => {
         type="password"
         name="oldPassword"
         placeholder="Old password"
+        autoComplete="on"
       />
       <BaseInput
         type="password"
         name="newPassword"
         placeholder="New password"
+        autoComplete="on"
       />
     </BaseForm>
   )

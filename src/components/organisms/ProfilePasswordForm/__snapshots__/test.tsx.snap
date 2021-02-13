@@ -130,11 +130,13 @@ exports[`<ProfilePasswordForm /> should renders correct <ProfilePasswordForm /> 
   }
 >
   <BaseInput
+    autoComplete="on"
     name="oldPassword"
     placeholder="Old password"
     type="password"
   />
   <BaseInput
+    autoComplete="on"
     name="newPassword"
     placeholder="New password"
     type="password"

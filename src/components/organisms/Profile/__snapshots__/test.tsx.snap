@@ -10,33 +10,35 @@ exports[`<Profile /> should renders correct <Profile /> 1`] = `
   />
   <ProfileHeader
     className="mb-6"
+    firstName=""
+    secondName=""
   />
   <List
     className="mb-12"
   >
     <NameValueListItem
       name="Email"
-      value="ivan@yandex.ru"
+      value=""
     />
     <NameValueListItem
       name="Login"
-      value="IvanIvanov"
+      value=""
     />
     <NameValueListItem
       name="First name"
-      value="Ivan"
+      value=""
     />
     <NameValueListItem
       name="Last name"
-      value="Ivanov"
+      value=""
     />
     <NameValueListItem
       name="Phone number"
-      value="+790000000000"
+      value=""
     />
     <NameValueListItem
       name="Password"
-      value="••••••"
+      value="********"
     />
   </List>
   <List>

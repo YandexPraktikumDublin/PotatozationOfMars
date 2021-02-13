@@ -5,10 +5,13 @@ import { profile } from '@images'
 
 type TProfileHeaderProps = {
   className?: string
+  firstName: string
+  secondName: string
+  avatar: string | undefined
 }
 
 const ProfileHeader: FC<TProfileHeaderProps> = memo(
-  ({ className }: TProfileHeaderProps) => {
+  ({ className, firstName, secondName, avatar }: TProfileHeaderProps) => {
     const [
       isShownAvatarChangeModal,
       setIsShownAvatarChangeModal
@@ -21,7 +24,12 @@ const ProfileHeader: FC<TProfileHeaderProps> = memo(
     return (
       <header className={classNames('text-center', className)}>
         <button className="group relative rounded-full border border-white outline-none overflow-hidden mx-auto mb-6">
-          <img width="80" height="80" src={profile} alt="" />
+          <img
+            width="80"
+            height="80"
+            src={`https://ya-praktikum.tech/${avatar}` || profile}
+            alt=""
+          />
 
           <div
             className="hidden group-hover:flex justify-center items-center absolute inset-0 bg-primary bg-opacity-50 text-white"
@@ -30,7 +38,7 @@ const ProfileHeader: FC<TProfileHeaderProps> = memo(
             change
           </div>
         </button>
-        <h1 className="font-medium">Ivan Ivanov</h1>
+        <h1 className="font-medium">{`${firstName} ${secondName}`}</h1>
 
         {isShownAvatarChangeModal && (
           <ChangeAvatarModal toggleModal={toggleModal} />

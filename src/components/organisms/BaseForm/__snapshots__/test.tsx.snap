@@ -2,6 +2,7 @@
 
 exports[`<BaseForm /> should renders correct <BaseForm /> 1`] = `
 <Formik
+  enableReinitialize={true}
   initialValues={Object {}}
   onSubmit={[Function]}
   validationSchema={
