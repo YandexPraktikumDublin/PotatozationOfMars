@@ -7,7 +7,9 @@ type TBaseFormProps = {
   children: ReactNode
   initialValues: FormikValues
   validationSchema: Record<string, any>
-  onSubmit: (values: Record<string, any>) => void | Promise<any>
+  onSubmit: (
+    values: Record<string, any>
+  ) => Promise<Record<string, any>> | Promise<void> | void
   buttonText: string
   formError?: string
 }
@@ -31,7 +33,7 @@ const BaseForm: FC<TBaseFormProps> = memo(
           setSubmitting(false)
         }}
       >
-        {({ isSubmitting, setFieldValue }) => (
+        {({ isSubmitting }) => (
           <Form noValidate>
             {children}
             <Button type="submit" disabled={isSubmitting}>

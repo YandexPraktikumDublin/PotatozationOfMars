@@ -51,8 +51,6 @@ exports[`<BaseFileInput /> should renders correct <BaseFileInput /> 1`] = `
 >
   <BaseInput
     name="test_name"
-    placeholder="Test placeholder"
-    type="text"
   />
 </ContextProvider>
 `;

@@ -16,8 +16,7 @@
     "@game/entities": ["<rootDir>/game/entities/index.ts"],
     "@game/controllers": ["<rootDir>/game/controllers/index.ts"],
     "@hooks": ["<rootDir>/hooks/index.ts"],
-    "@types": ["<rootDir>/types/index.ts"],
-    "@consts": ["<rootDir>/consts.ts"]
+    "@types": ["<rootDir>/types/index.ts"]
   },
   "setupFilesAfterEnv": ["../.jest/setupTests.js"],
   "transform": {

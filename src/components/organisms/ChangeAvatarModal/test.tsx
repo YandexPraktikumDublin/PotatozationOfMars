@@ -6,9 +6,15 @@ import { ChangeAvatarModal } from '.'
 
 describe('<ChangeAvatarModal />', () => {
   const toggleModal = jest.fn()
+  const onSuccessAvatarUpdate = jest.fn()
 
   it('should renders correct <ChangeAvatarModal />', () => {
-    const wrapper = shallow(<ChangeAvatarModal toggleModal={toggleModal} />)
+    const wrapper = shallow(
+      <ChangeAvatarModal
+        toggleModal={toggleModal}
+        onSuccessAvatarUpdate={onSuccessAvatarUpdate}
+      />
+    )
 
     expect(toJSON(wrapper)).toMatchSnapshot()
   })

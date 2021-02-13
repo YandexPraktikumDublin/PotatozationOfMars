@@ -12,8 +12,7 @@
   "plugins": ["@typescript-eslint", "import", "react", "react-hooks", "prettier"],
   "rules": {
     "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": ["error"],
-    "camelcase": ["error", {"allow": ["first_name", "second_name", "display_name"]}]
+    "@typescript-eslint/no-use-before-define": ["error"]
   },
   "settings": {
     "import/resolver": {

@@ -5,9 +5,19 @@ import toJSON from 'enzyme-to-json'
 import { ProfileHeader } from '.'
 
 describe('<ProfileHeader />', () => {
+  const firstName = 'Test first name'
+  const secondName = 'Test second name'
+  const avatar = 'Test avatar'
+  const onSuccessAvatarUpdate = jest.fn()
+
   it('should renders correct <ProfileHeader />', () => {
     const wrapper = shallow(
-      <ProfileHeader firstName="" secondName="" avatar="" />
+      <ProfileHeader
+        firstName={firstName}
+        secondName={secondName}
+        avatar={avatar}
+        onSuccessAvatarUpdate={onSuccessAvatarUpdate}
+      />
     )
 
     expect(toJSON(wrapper)).toMatchSnapshot()
@@ -18,9 +28,10 @@ describe('<ProfileHeader />', () => {
 
     const wrapper = shallow(
       <ProfileHeader
-        firstName=""
-        secondName=""
-        avatar=""
+        firstName={firstName}
+        secondName={secondName}
+        avatar={avatar}
+        onSuccessAvatarUpdate={onSuccessAvatarUpdate}
         className={className}
       />
     )

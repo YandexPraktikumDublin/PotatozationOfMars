@@ -6,7 +6,11 @@ import { ProfilePasswordForm } from '.'
 
 describe('<ProfilePasswordForm />', () => {
   it('should renders correct <ProfilePasswordForm />', () => {
-    const wrapper = shallow(<ProfilePasswordForm />)
+    const successCallback = jest.fn()
+
+    const wrapper = shallow(
+      <ProfilePasswordForm successCallback={successCallback} />
+    )
 
     expect(toJSON(wrapper)).toMatchSnapshot()
   })

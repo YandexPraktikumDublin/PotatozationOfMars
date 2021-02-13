@@ -35,7 +35,6 @@
       "@game/controllers": ["./src/game/controllers/index.ts"],
       "@hooks": ["./src/hooks/index.ts"],
       "@types": ["./src/types/index.ts"],
-      "@consts": ["./src/consts.ts"]
     },
     "typeRoots": [
       "node_modules/@types"

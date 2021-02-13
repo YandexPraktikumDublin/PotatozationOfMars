@@ -4,16 +4,7 @@ exports[`<ProfileForm /> should renders correct <ProfileForm /> 1`] = `
 <BaseForm
   buttonText="Save"
   formError=""
-  initialValues={
-    Object {
-      "email": "",
-      "firstName": "",
-      "login": "",
-      "password": "",
-      "phone": "",
-      "secondName": "",
-    }
-  }
+  initialValues={Object {}}
   onSubmit={[Function]}
   validationSchema={
     ObjectSchema {
@@ -276,6 +267,11 @@ exports[`<ProfileForm /> should renders correct <ProfileForm /> 1`] = `
   <BaseInput
     name="secondName"
     placeholder="Last name"
+    type="text"
+  />
+  <BaseInput
+    name="displayName"
+    placeholder="Display name"
     type="text"
   />
   <BaseInput

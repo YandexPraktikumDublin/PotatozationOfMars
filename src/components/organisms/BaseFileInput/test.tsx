@@ -8,14 +8,12 @@ import { BaseFileInput } from '.'
 describe('<BaseFileInput />', () => {
   const initialValues = { test: '' }
   const onSubmit = jest.fn()
-  const type = 'text'
   const name = 'test_name'
-  const placeholder = 'Test placeholder'
 
   it('should renders correct <BaseFileInput />', () => {
     const wrapper = shallow(
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
-        <BaseFileInput type={type} name={name} placeholder={placeholder} />
+        <BaseFileInput name={name} />
       </Formik>
     )
 

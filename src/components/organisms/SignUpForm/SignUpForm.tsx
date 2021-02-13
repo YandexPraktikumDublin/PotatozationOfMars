@@ -3,8 +3,8 @@ import { BaseForm, BaseInput } from '@components/organisms'
 import * as Yup from 'yup'
 import { signup } from '@api'
 import { FormikValues } from 'formik'
-import { DEFAULT_ERROR_MESSAGE } from '@config'
-import { initialValues } from '@consts'
+import { DEFAULT_ERROR_MESSAGE, PATHS } from '@config'
+import { useHistory } from 'react-router-dom'
 
 type TSignUpFormProps = {}
 
@@ -29,17 +29,33 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().min(8, 'Too Short!').required('Required')
 })
 
+const initialValues = {
+  email: '',
+  login: '',
+  firstName: '',
+  secondName: '',
+  phone: '',
+  password: ''
+}
+
 const SignUpForm: FC<TSignUpFormProps> = memo(() => {
+  const history = useHistory()
   const [formError, setFormError] = useState<string>('')
 
-  const handleSubmit = (values: FormikValues) => {
+  const handleSubmit = async (values: FormikValues) => {
     try {
       setFormError('')
-      values.first_name = values.firstName
-      values.second_name = values.secondName
-      delete values.firstName
-      delete values.secondName
-      signup(values)
+
+      await signup({
+        email: values.email,
+        login: values.login,
+        first_name: values.firstName,
+        second_name: values.secondName,
+        phone: values.phone,
+        password: values.phone
+      })
+
+      history.push(PATHS.BASE)
     } catch (error) {
       setFormError(error?.message ?? DEFAULT_ERROR_MESSAGE)
     }

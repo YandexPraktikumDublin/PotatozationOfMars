@@ -3,7 +3,8 @@ import * as Yup from 'yup'
 import { signin } from '@api'
 import { FormikValues } from 'formik'
 import { BaseForm, BaseInput } from '@components/organisms'
-import { DEFAULT_ERROR_MESSAGE } from '@config'
+import { DEFAULT_ERROR_MESSAGE, PATHS } from '@config'
+import { useHistory } from 'react-router-dom'
 
 type TAuthFormProps = {}
 
@@ -21,12 +22,16 @@ const initialValues = {
 }
 
 const AuthForm: FC<TAuthFormProps> = memo(() => {
+  const history = useHistory()
   const [formError, setFormError] = useState<string>('')
 
-  const handleSubmit = (values: FormikValues) => {
+  const handleSubmit = async (values: FormikValues) => {
     try {
       setFormError('')
-      signin(values)
+
+      await signin(values)
+
+      history.push(PATHS.BASE)
     } catch (error) {
       setFormError(error?.message ?? DEFAULT_ERROR_MESSAGE)
     }

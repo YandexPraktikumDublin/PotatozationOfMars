@@ -3,13 +3,19 @@ import { ChangeAvatarForm, Modal, Title } from '@components/organisms'
 
 type TChangeAvatarModalProps = {
   toggleModal: () => void
+  onSuccessAvatarUpdate: () => void
 }
 
 const ChangeAvatarModal: FC<TChangeAvatarModalProps> = memo(
-  ({ toggleModal }: TChangeAvatarModalProps) => (
+  ({ toggleModal, onSuccessAvatarUpdate }: TChangeAvatarModalProps) => (
     <Modal toggleModal={toggleModal}>
       <Title>Upload avatar</Title>
-      <ChangeAvatarForm />
+      <ChangeAvatarForm
+        successCallback={() => {
+          toggleModal()
+          onSuccessAvatarUpdate()
+        }}
+      />
     </Modal>
   )
 )
