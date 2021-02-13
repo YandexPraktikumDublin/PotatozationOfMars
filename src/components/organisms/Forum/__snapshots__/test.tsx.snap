@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Forum /> should renders correct <Forum /> 1`] = `
+<div
+  className="relative"
+>
+  <Title>
+    Forum
+  </Title>
+  <AddButton
+    className="absolute top-0 right-0"
+    onClick={[Function]}
+  />
+  <List
+    className="mb-12"
+  >
+    <ActionsListItem
+      key="1"
+      name="New Games"
+      onClick={[Function]}
+      value={10}
+    />
+    <ActionsListItem
+      key="2"
+      name="Game Designers"
+      onClick={[Function]}
+      value={23}
+    />
+  </List>
+</div>
+`;

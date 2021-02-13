@@ -5,5 +5,8 @@ export const PATHS = {
   GAME: '/game/',
   PROFILE: '/profile/',
   LEADERBOARD: '/leaderboard/',
-  FORUM: '/forum/'
+  FORUM: '/forum/',
+  FORUM_TOPIC: '/forum/topics/:id'
 }
+
+export const DEFAULT_ERROR_MESSAGE = 'something went wrong'

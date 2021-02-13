@@ -1,3 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ForumTemplate /> should renders correct <ForumTemplate /> 1`] = `<Fragment />`;
+exports[`<ForumTemplate /> should renders correct <ForumTemplate /> 1`] = `
+<div
+  className="w-full max-w-2xl"
+>
+  <Window>
+    <Forum />
+  </Window>
+</div>
+`;

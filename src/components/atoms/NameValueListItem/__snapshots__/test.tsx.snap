@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NameValueListItem /> should renders correct <NameValueListItem /> 1`] = `
+<li
+  className="flex justify-between border-b border-primary mb-4 last:mb-0 dark:border-white"
+>
+  <span>
+    Test name
+  </span>
+  <span>
+    Test value
+  </span>
+</li>
+`;

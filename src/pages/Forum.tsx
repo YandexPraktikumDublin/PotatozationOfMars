@@ -1,6 +1,6 @@
 import React from 'react'
 import { withHeaderAndFooter } from '@hocs'
-import { ForumTemplate } from '../components/templates/ForumTemplate'
+import { ForumTemplate } from '@components/templates'
 
 const Forum = () => {
   return <ForumTemplate />

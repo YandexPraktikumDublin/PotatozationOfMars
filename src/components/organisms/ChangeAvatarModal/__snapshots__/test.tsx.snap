@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ChangeAvatarModal /> should renders correct <ChangeAvatarModal /> 1`] = `
+<Modal
+  toggleModal={[MockFunction]}
+>
+  <Title>
+    Upload avatar
+  </Title>
+  <ChangeAvatarForm />
+</Modal>
+`;

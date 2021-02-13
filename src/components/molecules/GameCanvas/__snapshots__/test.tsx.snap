@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GameCanvas /> should renders correct <GameCanvas /> 1`] = `
+<canvas
+  className="border-2 border-white rounded-2xl h-screen"
+  style={
+    Object {
+      "maxHeight": "calc(100vh - 7rem)",
+    }
+  }
+/>
+`;

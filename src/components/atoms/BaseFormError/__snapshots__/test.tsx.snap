@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BaseFormError /> should renders correct <BaseFormError /> 1`] = `
+<div
+  className="text-sm text-danger text-center mt-1"
+>
+  Test children
+</div>
+`;

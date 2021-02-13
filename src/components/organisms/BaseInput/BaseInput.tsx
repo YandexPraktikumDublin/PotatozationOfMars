@@ -11,6 +11,7 @@ type TBaseInputProps = {
 const BaseInput: FC<TBaseInputProps> = memo(({ ...props }: TBaseInputProps) => {
   const [field, meta] = useField(props)
   const isError = meta.touched && meta.error
+
   return (
     <div
       className={classNames({
@@ -20,8 +21,8 @@ const BaseInput: FC<TBaseInputProps> = memo(({ ...props }: TBaseInputProps) => {
     >
       <input
         className={classNames(
-          'w-full py-2 px-4 border rounded-md bg-transparent',
-          'dark:text-white dark:border-white',
+          'w-full py-2 px-4 border rounded-md bg-transparent placeholder-primary placeholder-opacity-60',
+          'dark:text-white dark:border-white dark:placeholder-white dark:placeholder-opacity-60',
           { 'border-danger': isError }
         )}
         {...field}

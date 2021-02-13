@@ -3,7 +3,7 @@ import { withHeaderAndFooter } from '@hocs'
 import { AuthTemplate } from '@components/templates'
 
 const Auth: React.FC = () => {
-  return <AuthTemplate title="Log in" />
+  return <AuthTemplate />
 }
 
 export default withHeaderAndFooter(Auth)

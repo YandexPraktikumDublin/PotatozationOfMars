@@ -1,8 +1,13 @@
 import React, { FC, memo } from 'react'
+import { Title } from '@components/organisms'
 
-type TErrorTemplateProps = {}
+type TErrorTemplateProps = {
+  title: string
+}
 
-const ErrorTemplate: FC<TErrorTemplateProps> = memo(() => <></>)
+const ErrorTemplate: FC<TErrorTemplateProps> = memo(({ title }) => (
+  <Title>{title}</Title>
+))
 
 ErrorTemplate.displayName = 'ErrorTemplate'
 

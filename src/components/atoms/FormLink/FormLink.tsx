@@ -1,9 +1,9 @@
-import React, { FC, memo } from 'react'
+import React, { FC, memo, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 
 type TFormLinkProps = {
-  children: string
+  children: ReactNode
   path: string
   className?: string
 }

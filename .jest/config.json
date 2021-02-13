@@ -11,8 +11,11 @@
     "@config": ["<rootDir>/config.ts"],
     "@hocs": ["<rootDir>/HOCs/index.ts"],
     "@images": ["<rootDir>/images/index.ts"],
-    "@hooks": ["<rootDir>/hooks/index.ts"],
-    "@api": ["<rootDir>/api/index.ts"]
+    "@api": ["<rootDir>/api/index.ts"],
+    "@game/@types": ["<rootDir>/game/@types/index.ts"],
+    "@game/entities": ["<rootDir>/game/entities/index.ts"],
+    "@game/controllers": ["<rootDir>/game/controllers/index.ts"],
+    "@hooks": ["<rootDir>/hooks/index.ts"]
   },
   "setupFilesAfterEnv": ["../.jest/setupTests.js"],
   "transform": {
