@@ -10,7 +10,7 @@ const AuthTemplate: FC<TAuthTemplateProps> = memo(() => (
     <Window>
       <Title>Log in</Title>
       <AuthForm />
-      <FormLink path={PATHS.SIGNUP} className="inline-block mt-4">
+      <FormLink path={PATHS.SIGNUP} className="inline-block">
         Sign up
       </FormLink>
     </Window>

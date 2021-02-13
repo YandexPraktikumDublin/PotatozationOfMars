@@ -5,7 +5,9 @@ exports[`<GameCanvas /> should renders correct <GameCanvas /> 1`] = `
   className="border-2 border-white rounded-2xl h-screen"
   style={
     Object {
-      "maxHeight": "calc(100vh - 7rem)",
+      "height": "calc(100vh - 7rem)",
+      "maxHeight": "48vw",
+      "maxWidth": "96vw",
     }
   }
 />

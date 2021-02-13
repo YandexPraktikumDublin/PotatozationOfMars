@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GamePauseMenuModal /> should renders correct <GamePauseMenuModal /> 1`] = `
+<Modal
+  toggleModal={[MockFunction]}
+>
+  <Title>
+    Pause
+  </Title>
+  <GamePauseMenu
+    toggleModal={[MockFunction]}
+  />
+</Modal>
+`;

@@ -9,7 +9,7 @@ const Button: FC<TButtonProps> = memo(
   ({ isFullWidth = true, className = '', ...props }: TButtonProps) => (
     <button
       className={classNames(
-        'inline-block font-medium text-center uppercase border rounded py-2 px-4',
+        'inline-block font-medium text-center uppercase border rounded py-2 px-4 mb-4',
         'text-primary border-primary',
         'hover:text-white hover:border-white hover:bg-primary',
         'dark:text-white dark:border-white',
