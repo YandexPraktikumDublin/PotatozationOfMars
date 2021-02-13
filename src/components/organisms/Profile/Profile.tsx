@@ -1,4 +1,4 @@
-import React, { FC, memo, useEffect, useState } from 'react'
+import React, { FC, memo, useEffect, useState, useCallback } from 'react'
 import {
   ActionsListItem,
   NameValueListItem,
@@ -28,13 +28,13 @@ const Profile: FC<TProfileProps> = memo(() => {
     setIsShowPasswordForm(false)
   }
 
-  const handleLogoutButtonClick = () => {
+  const handleLogoutButtonClick = useCallback(() => {
     logout()
       .then(() => history.push(PATHS.AUTH))
       .catch()
-  }
+  }, [logout, PATHS.AUTH])
 
-  const getUserDataHandler = () => {
+  const getUserDataHandler = useCallback(() => {
     getUserData()
       .then((result) => {
         setUserData({
@@ -49,12 +49,12 @@ const Profile: FC<TProfileProps> = memo(() => {
         })
       })
       .catch()
-  }
+  }, [getUserData])
 
-  const handleSuccessUserDataUpdate = () => {
+  const handleSuccessUserDataUpdate = useCallback(() => {
     setIsShowProfileForm(false)
     getUserDataHandler()
-  }
+  }, [getUserDataHandler])
 
   useEffect(() => {
     getUserDataHandler()

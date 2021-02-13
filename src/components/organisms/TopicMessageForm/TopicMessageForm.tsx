@@ -17,7 +17,7 @@ const initialValues = {
 const TopicMessageForm: FC<TTopicMessageFormProps> = memo(() => {
   const [formError, setFormError] = useState<string>('')
 
-  const handleSubmit = (values: FormikValues) => {
+  const handleSubmit = async (values: FormikValues) => {
     try {
       setFormError('')
       console.log(values)

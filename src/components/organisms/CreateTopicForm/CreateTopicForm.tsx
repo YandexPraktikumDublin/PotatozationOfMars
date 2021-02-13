@@ -20,7 +20,7 @@ const initialValues = {
 const CreateTopicForm: FC<TCreateTopicFormProps> = memo(() => {
   const [formError, setFormError] = useState<string>('')
 
-  const handleSubmit = (values: FormikValues) => {
+  const handleSubmit = async (values: FormikValues) => {
     try {
       setFormError('')
       console.log(values)
