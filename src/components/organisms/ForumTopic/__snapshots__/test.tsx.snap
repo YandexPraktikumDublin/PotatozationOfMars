@@ -157,6 +157,7 @@ exports[`<ForumTopic /> should renders correct <ForumTopic /> 1`] = `
         }
       >
         <Formik
+          enableReinitialize={true}
           initialValues={
             Object {
               "message": "",

@@ -29,10 +29,12 @@
       "@config": ["./src/config.ts"],
       "@hocs": ["./src/HOCs/index.ts"],
       "@images": ["./src/images/index.ts"],
+      "@api": ["./src/api/index.ts"],
       "@game/@types": ["./src/game/@types/index.ts"],
       "@game/entities": ["./src/game/entities/index.ts"],
       "@game/controllers": ["./src/game/controllers/index.ts"],
-      "@hooks": ["./src/hooks/index.ts"]
+      "@hooks": ["./src/hooks/index.ts"],
+      "@types": ["./src/types/index.ts"],
     },
     "typeRoots": [
       "node_modules/@types"

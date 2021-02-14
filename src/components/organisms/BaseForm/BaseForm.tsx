@@ -7,7 +7,7 @@ type TBaseFormProps = {
   children: ReactNode
   initialValues: FormikValues
   validationSchema: Record<string, any>
-  onSubmit: (values: Record<string, any>) => void | Promise<any>
+  onSubmit: (values: FormikValues) => Promise<Record<string, any> | void>
   buttonText: string
   formError?: string
 }
@@ -23,6 +23,7 @@ const BaseForm: FC<TBaseFormProps> = memo(
   }: TBaseFormProps) => {
     return (
       <Formik
+        enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {

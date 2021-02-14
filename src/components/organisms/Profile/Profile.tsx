@@ -1,4 +1,4 @@
-import React, { FC, memo, useState } from 'react'
+import React, { FC, memo, useEffect, useState, useCallback } from 'react'
 import {
   ActionsListItem,
   NameValueListItem,
@@ -7,24 +7,58 @@ import {
 } from '@components/atoms'
 import { List, ProfileHeader } from '@components/molecules'
 import { ProfileForm, ProfilePasswordForm } from '@components/organisms'
+import { getUserData, logout } from '@api'
+import { IUser } from '@types'
+import { useHistory } from 'react-router-dom'
+import { PATHS } from '@config'
 
 type TProfileProps = {}
 
 const Profile: FC<TProfileProps> = memo(() => {
-  const [isShowProfileForm, setIsShowProfileForm] = useState<boolean>(false)
-  const [
-    isShowProfilePasswordForm,
-    setIsShowProfilePasswordForm
-  ] = useState<boolean>(false)
+  const history = useHistory()
 
-  const isShownForms = isShowProfileForm || isShowProfilePasswordForm
+  const [isShowProfileForm, setIsShowProfileForm] = useState<boolean>(false)
+  const [userData, setUserData] = useState<IUser>()
+  const [isShowPasswordForm, setIsShowPasswordForm] = useState<boolean>(false)
+
+  const isShownForms = isShowProfileForm || isShowPasswordForm
 
   const handleBackButtonClick = () => {
     setIsShowProfileForm(false)
-    setIsShowProfilePasswordForm(false)
+    setIsShowPasswordForm(false)
   }
 
-  const handleLogoutButtonClick = () => {}
+  const handleLogoutButtonClick = useCallback(() => {
+    logout()
+      .then(() => history.push(PATHS.AUTH))
+      .catch()
+  }, [logout, PATHS.AUTH])
+
+  const getUserDataHandler = useCallback(() => {
+    getUserData()
+      .then((result) => {
+        setUserData({
+          id: result?.data?.id,
+          firstName: result?.data?.first_name,
+          secondName: result?.data?.second_name,
+          displayName: result?.data?.display_name,
+          login: result?.data?.login,
+          email: result?.data?.email,
+          phone: result?.data?.phone,
+          avatar: result?.data?.avatar
+        })
+      })
+      .catch()
+  }, [getUserData])
+
+  const handleSuccessUserDataUpdate = useCallback(() => {
+    setIsShowProfileForm(false)
+    getUserDataHandler()
+  }, [getUserDataHandler])
+
+  useEffect(() => {
+    getUserDataHandler()
+  }, [])
 
   return (
     <div className="relative">
@@ -42,32 +76,51 @@ const Profile: FC<TProfileProps> = memo(() => {
         />
       )}
 
-      <ProfileHeader className="mb-6" />
+      <ProfileHeader
+        firstName={userData?.firstName}
+        secondName={userData?.secondName}
+        avatar={userData?.avatar}
+        onSuccessAvatarUpdate={() => getUserDataHandler()}
+        className="mb-6"
+      />
 
       {!isShownForms && (
         <>
           <List className="mb-12">
-            <NameValueListItem name="Email" value="ivan@yandex.ru" />
-            <NameValueListItem name="Login" value="IvanIvanov" />
-            <NameValueListItem name="First name" value="Ivan" />
-            <NameValueListItem name="Last name" value="Ivanov" />
-            <NameValueListItem name="Phone number" value="+790000000000" />
-            <NameValueListItem name="Password" value="••••••" />
+            <NameValueListItem name="Email" value={userData?.email} />
+            <NameValueListItem name="Login" value={userData?.login} />
+            <NameValueListItem name="First name" value={userData?.firstName} />
+            <NameValueListItem name="Last name" value={userData?.secondName} />
+            <NameValueListItem
+              name="Display name"
+              value={userData?.displayName}
+            />
+            <NameValueListItem name="Phone" value={userData?.phone} />
+            <NameValueListItem name="Password" value="********" />
           </List>
 
           <List>
             <ActionsListItem
               name="Change password"
-              onClick={() => setIsShowProfilePasswordForm(true)}
+              onClick={() => setIsShowPasswordForm(true)}
             />
             <ActionsListItem name="Log out" onClick={handleLogoutButtonClick} />
           </List>
         </>
       )}
 
-      {isShowProfileForm && <ProfileForm />}
+      {isShowProfileForm && (
+        <ProfileForm
+          userData={userData}
+          successCallback={handleSuccessUserDataUpdate}
+        />
+      )}
 
-      {isShowProfilePasswordForm && <ProfilePasswordForm />}
+      {isShowPasswordForm && (
+        <ProfilePasswordForm
+          successCallback={() => setIsShowPasswordForm(false)}
+        />
+      )}
     </div>
   )
 })

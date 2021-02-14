@@ -8,10 +8,10 @@ exports[`<SignUpForm /> should renders correct <SignUpForm /> 1`] = `
     Object {
       "email": "",
       "firstName": "",
-      "lastName": "",
       "login": "",
       "password": "",
       "phone": "",
+      "secondName": "",
     }
   }
   onSubmit={[Function]}
@@ -26,7 +26,7 @@ exports[`<SignUpForm /> should renders correct <SignUpForm /> 1`] = `
       "_nodes": Array [
         "password",
         "phone",
-        "lastName",
+        "secondName",
         "firstName",
         "login",
         "email",
@@ -81,46 +81,6 @@ exports[`<SignUpForm /> should renders correct <SignUpForm /> 1`] = `
           "type": "string",
         },
         "firstName": StringSchema {
-          "_blacklist": ReferenceSet {
-            "list": Set {},
-            "refs": Map {},
-          },
-          "_blacklistError": undefined,
-          "_mutate": undefined,
-          "_typeError": [Function],
-          "_whitelist": ReferenceSet {
-            "list": Set {},
-            "refs": Map {},
-          },
-          "_whitelistError": undefined,
-          "conditions": Array [],
-          "deps": Array [],
-          "exclusiveTests": Object {
-            "max": true,
-            "min": true,
-            "required": true,
-          },
-          "spec": Object {
-            "abortEarly": true,
-            "label": undefined,
-            "meta": undefined,
-            "nullable": false,
-            "presence": "required",
-            "recursive": true,
-            "strict": false,
-            "strip": false,
-          },
-          "tests": Array [
-            [Function],
-            [Function],
-            [Function],
-          ],
-          "transforms": Array [
-            [Function],
-          ],
-          "type": "string",
-        },
-        "lastName": StringSchema {
           "_blacklist": ReferenceSet {
             "list": Set {},
             "refs": Map {},
@@ -278,6 +238,46 @@ exports[`<SignUpForm /> should renders correct <SignUpForm /> 1`] = `
           ],
           "type": "string",
         },
+        "secondName": StringSchema {
+          "_blacklist": ReferenceSet {
+            "list": Set {},
+            "refs": Map {},
+          },
+          "_blacklistError": undefined,
+          "_mutate": undefined,
+          "_typeError": [Function],
+          "_whitelist": ReferenceSet {
+            "list": Set {},
+            "refs": Map {},
+          },
+          "_whitelistError": undefined,
+          "conditions": Array [],
+          "deps": Array [],
+          "exclusiveTests": Object {
+            "max": true,
+            "min": true,
+            "required": true,
+          },
+          "spec": Object {
+            "abortEarly": true,
+            "label": undefined,
+            "meta": undefined,
+            "nullable": false,
+            "presence": "required",
+            "recursive": true,
+            "strict": false,
+            "strip": false,
+          },
+          "tests": Array [
+            [Function],
+            [Function],
+            [Function],
+          ],
+          "transforms": Array [
+            [Function],
+          ],
+          "type": "string",
+        },
       },
       "spec": Object {
         "abortEarly": true,
@@ -313,7 +313,7 @@ exports[`<SignUpForm /> should renders correct <SignUpForm /> 1`] = `
     type="text"
   />
   <BaseInput
-    name="lastName"
+    name="secondName"
     placeholder="Last name"
     type="text"
   />
@@ -323,6 +323,7 @@ exports[`<SignUpForm /> should renders correct <SignUpForm /> 1`] = `
     type="tel"
   />
   <BaseInput
+    autoComplete="on"
     name="password"
     placeholder="Password"
     type="password"

@@ -10,33 +10,32 @@ exports[`<Profile /> should renders correct <Profile /> 1`] = `
   />
   <ProfileHeader
     className="mb-6"
+    onSuccessAvatarUpdate={[Function]}
   />
   <List
     className="mb-12"
   >
     <NameValueListItem
       name="Email"
-      value="ivan@yandex.ru"
     />
     <NameValueListItem
       name="Login"
-      value="IvanIvanov"
     />
     <NameValueListItem
       name="First name"
-      value="Ivan"
     />
     <NameValueListItem
       name="Last name"
-      value="Ivanov"
     />
     <NameValueListItem
-      name="Phone number"
-      value="+790000000000"
+      name="Display name"
+    />
+    <NameValueListItem
+      name="Phone"
     />
     <NameValueListItem
       name="Password"
-      value="••••••"
+      value="********"
     />
   </List>
   <List>

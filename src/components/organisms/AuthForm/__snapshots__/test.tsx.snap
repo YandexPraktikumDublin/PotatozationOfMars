@@ -137,6 +137,7 @@ exports[`<AuthForm /> should renders correct <AuthForm /> 1`] = `
     type="text"
   />
   <BaseInput
+    autoComplete="on"
     name="password"
     placeholder="Password"
     type="password"

@@ -3,8 +3,13 @@ import * as Yup from 'yup'
 import { FormikValues } from 'formik'
 import { DEFAULT_ERROR_MESSAGE } from '@config'
 import { BaseForm, BaseInput } from '@components/organisms'
+import { IUser } from '@types'
+import { changeUserData } from '@api'
 
-type TProfileFormProps = {}
+type TProfileFormProps = {
+  userData?: IUser
+  successCallback: () => void
+}
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -16,7 +21,7 @@ const validationSchema = Yup.object().shape({
     .min(2, 'Too Short!')
     .max(20, 'Too Long!')
     .required('Required'),
-  lastName: Yup.string()
+  secondName: Yup.string()
     .min(2, 'Too Short!')
     .max(20, 'Too Long!')
     .required('Required'),
@@ -26,42 +31,47 @@ const validationSchema = Yup.object().shape({
     .required('Required')
 })
 
-const initialValues = {
-  email: '',
-  login: '',
-  firstName: '',
-  lastName: '',
-  phone: ''
-}
+const ProfileForm: FC<TProfileFormProps> = memo(
+  ({ userData, successCallback }: TProfileFormProps) => {
+    const [formError, setFormError] = useState<string>('')
 
-const ProfileForm: FC<TProfileFormProps> = memo(() => {
-  const [formError, setFormError] = useState<string>('')
+    const handleSubmit = async (values: FormikValues) => {
+      try {
+        setFormError('')
 
-  const handleSubmit = (values: FormikValues) => {
-    try {
-      setFormError('')
-      console.log(values)
-    } catch (error) {
-      setFormError(error?.message ?? DEFAULT_ERROR_MESSAGE)
+        await changeUserData({
+          email: values.email,
+          login: values.login,
+          first_name: values.firstName,
+          second_name: values.secondName,
+          display_name: values.displayName,
+          phone: values.phone
+        })
+
+        successCallback()
+      } catch (error) {
+        setFormError(error?.message ?? DEFAULT_ERROR_MESSAGE)
+      }
     }
-  }
 
-  return (
-    <BaseForm
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-      buttonText="Save"
-      formError={formError}
-    >
-      <BaseInput type="email" name="email" placeholder="Email" />
-      <BaseInput type="text" name="login" placeholder="Login" />
-      <BaseInput type="text" name="firstName" placeholder="First name" />
-      <BaseInput type="text" name="lastName" placeholder="Last name" />
-      <BaseInput type="tel" name="phone" placeholder="Phone" />
-    </BaseForm>
-  )
-})
+    return (
+      <BaseForm
+        initialValues={userData || {}}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+        buttonText="Save"
+        formError={formError}
+      >
+        <BaseInput type="email" name="email" placeholder="Email" />
+        <BaseInput type="text" name="login" placeholder="Login" />
+        <BaseInput type="text" name="firstName" placeholder="First name" />
+        <BaseInput type="text" name="secondName" placeholder="Last name" />
+        <BaseInput type="text" name="displayName" placeholder="Display name" />
+        <BaseInput type="tel" name="phone" placeholder="Phone" />
+      </BaseForm>
+    )
+  }
+)
 
 ProfileForm.displayName = 'ProfileForm'
 

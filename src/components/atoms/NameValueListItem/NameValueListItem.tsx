@@ -3,7 +3,7 @@ import classNames from 'classnames'
 
 type TNameValueListItemProps = {
   name: string
-  value: string | number
+  value?: string | number
 }
 
 const NameValueListItem: FC<TNameValueListItemProps> = memo(
