@@ -28,9 +28,9 @@ const BaseFileInput: FC<TBaseFileInputProps> = memo(
         })}
       >
         <input type="file" name={props.name} onChange={handleChange} />
-        {isError ? (
+        {isError && (
           <div className="mt-1 text-left text-xs text-danger">{meta.error}</div>
-        ) : null}
+        )}
       </div>
     )
   }
