@@ -1,4 +1,4 @@
-import React, { FC, memo, useMemo, useState } from 'react'
+import React, { FC, memo, useState } from 'react'
 import classNames from 'classnames'
 import { ChangeAvatarModal } from '@components/organisms'
 import { SERVER_URL } from '@config'
@@ -25,10 +25,7 @@ const ProfileHeader: FC<TProfileHeaderProps> = memo(
       setIsShownAvatarChangeModal
     ] = useState<boolean>(false)
 
-    const avatarSrc = useMemo(
-      () => (avatar ? `${SERVER_URL}/${avatar}` : profile),
-      [avatar, SERVER_URL, profile]
-    )
+    const avatarSrc = avatar ? `${SERVER_URL}/${avatar}` : profile
 
     const toggleModal = () => {
       setIsShownAvatarChangeModal((value) => !value)
@@ -41,7 +38,7 @@ const ProfileHeader: FC<TProfileHeaderProps> = memo(
 
           <div
             className="hidden group-hover:flex justify-center items-center absolute inset-0 bg-primary bg-opacity-50 text-white"
-            onClick={() => setIsShownAvatarChangeModal(true)}
+            onClick={toggleModal}
           >
             change
           </div>
