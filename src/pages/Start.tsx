@@ -1,9 +1,7 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { withHeaderAndFooter } from '@hocs'
 import { StartTemplate } from '@components/templates'
 
-const Start: React.FC = () => {
-  return <StartTemplate />
-}
+const Start: FC = () => <StartTemplate />
 
 export default withHeaderAndFooter(Start)

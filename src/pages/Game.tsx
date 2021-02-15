@@ -1,9 +1,7 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { withHeaderAndFooter } from '@hocs'
 import { GameTemplate } from '@components/templates'
 
-const Game = () => {
-  return <GameTemplate />
-}
+const Game: FC = () => <GameTemplate />
 
 export default withHeaderAndFooter(Game)

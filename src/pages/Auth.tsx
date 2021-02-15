@@ -1,9 +1,7 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { withHeaderAndFooter } from '@hocs'
 import { AuthTemplate } from '@components/templates'
 
-const Auth: React.FC = () => {
-  return <AuthTemplate />
-}
+const Auth: FC = () => <AuthTemplate />
 
 export default withHeaderAndFooter(Auth)

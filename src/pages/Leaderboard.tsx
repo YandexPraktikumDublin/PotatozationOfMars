@@ -1,9 +1,7 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { withHeaderAndFooter } from '@hocs'
 import { LeaderboardTemplate } from '@components/templates'
 
-const Leaderboard = () => {
-  return <LeaderboardTemplate />
-}
+const Leaderboard: FC = () => <LeaderboardTemplate />
 
 export default withHeaderAndFooter(Leaderboard)
