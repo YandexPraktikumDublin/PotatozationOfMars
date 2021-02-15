@@ -8,9 +8,10 @@ describe('<ProfileHeader />', () => {
   const firstName = 'Test first name'
   const secondName = 'Test second name'
   const avatar = 'Test avatar'
-  const onSuccessAvatarUpdate = jest.fn()
 
   it('should renders correct <ProfileHeader />', () => {
+    const onSuccessAvatarUpdate = jest.fn()
+
     const wrapper = shallow(
       <ProfileHeader
         firstName={firstName}
@@ -24,6 +25,7 @@ describe('<ProfileHeader />', () => {
   })
 
   it('should has className from className prop', () => {
+    const onSuccessAvatarUpdate = jest.fn()
     const className = 'test-class-name'
 
     const wrapper = shallow(

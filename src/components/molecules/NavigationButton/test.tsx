@@ -7,9 +7,10 @@ import { NavigationButton } from '.'
 describe('<NavigationButton />', () => {
   const title = 'Test title'
   const imageSrc = 'image.jpg'
-  const handleButtonClick = jest.fn()
 
   it('should renders correct <NavigationButton />', () => {
+    const handleButtonClick = jest.fn()
+
     const wrapper = shallow(
       <NavigationButton
         title={title}

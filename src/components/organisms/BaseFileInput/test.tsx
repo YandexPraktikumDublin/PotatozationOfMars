@@ -7,10 +7,11 @@ import { BaseFileInput } from '.'
 
 describe('<BaseFileInput />', () => {
   const initialValues = { test: '' }
-  const onSubmit = jest.fn()
   const name = 'test_name'
 
   it('should renders correct <BaseFileInput />', () => {
+    const onSubmit = jest.fn()
+
     const wrapper = shallow(
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         <BaseFileInput name={name} />

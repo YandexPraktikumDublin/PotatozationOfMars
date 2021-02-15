@@ -6,9 +6,10 @@ import { ActionsListItem } from '.'
 
 describe('<ActionsListItem />', () => {
   const name = 'Test name'
-  const onClick = jest.fn()
 
   it('should renders correct <ActionsListItem />', () => {
+    const onClick = jest.fn()
+
     const wrapper = shallow(<ActionsListItem name={name} onClick={onClick} />)
 
     expect(wrapper.contains(name)).toBeTruthy()
@@ -21,6 +22,8 @@ describe('<ActionsListItem />', () => {
   })
 
   it('should has correct value from value prop', () => {
+    const onClick = jest.fn()
+
     const value = 'Test value'
 
     const wrapper = shallow(

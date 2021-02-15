@@ -7,11 +7,12 @@ import { BaseTextarea } from '.'
 
 describe('<BaseTextarea />', () => {
   const initialValues = { test: '' }
-  const onSubmit = jest.fn()
   const name = 'test_name'
   const placeholder = 'Test placeholder'
 
   it('should renders correct <BaseTextarea />', () => {
+    const onSubmit = jest.fn()
+
     const wrapper = shallow(
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         <BaseTextarea name={name} placeholder={placeholder} />
