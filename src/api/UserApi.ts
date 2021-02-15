@@ -1,10 +1,4 @@
-import axios from 'axios'
-import { BASE_API_URL } from '@config'
-
-const axiosInstance = axios.create({
-  baseURL: BASE_API_URL,
-  withCredentials: true
-})
+import { axiosInstance } from '@api'
 
 export const getUserData = () => axiosInstance.get('auth/user')
 
