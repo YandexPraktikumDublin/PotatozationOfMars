@@ -6,6 +6,7 @@ COPY . /app
 COPY package.json ./
 
 RUN yarn install --frozen-lockfile
+RUN yarn build
 
 EXPOSE 80
 
