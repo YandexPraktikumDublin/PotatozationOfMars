@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AuthTemplate /> should renders correct <AuthTemplate /> 1`] = `
+<div
+  className="w-full max-w-xs"
+>
+  <Window>
+    <Title>
+      Log in
+    </Title>
+    <AuthForm />
+    <FormLink
+      className="inline-block"
+      path="/signup/"
+    >
+      Sign up
+    </FormLink>
+  </Window>
+</div>
+`;

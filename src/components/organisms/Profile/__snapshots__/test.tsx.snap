@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Profile /> should renders correct <Profile /> 1`] = `
+<div
+  className="relative"
+>
+  <EditButton
+    className="absolute top-0 right-0"
+    onClick={[Function]}
+  />
+  <ProfileHeader
+    className="mb-6"
+    onSuccessAvatarUpdate={[Function]}
+  />
+  <List
+    className="mb-12"
+  >
+    <NameValueListItem
+      name="Email"
+    />
+    <NameValueListItem
+      name="Login"
+    />
+    <NameValueListItem
+      name="First name"
+    />
+    <NameValueListItem
+      name="Last name"
+    />
+    <NameValueListItem
+      name="Display name"
+    />
+    <NameValueListItem
+      name="Phone"
+    />
+    <NameValueListItem
+      name="Password"
+      value="********"
+    />
+  </List>
+  <List>
+    <ActionsListItem
+      name="Change password"
+      onClick={[Function]}
+    />
+    <ActionsListItem
+      name="Log out"
+      onClick={[Function]}
+    />
+  </List>
+</div>
+`;

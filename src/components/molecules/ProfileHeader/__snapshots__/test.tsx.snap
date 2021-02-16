@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProfileHeader /> should has className from className prop 1`] = `
+<header
+  className="text-center test-class-name"
+>
+  <button
+    className="group relative rounded-full border border-white outline-none overflow-hidden mx-auto mb-6"
+  >
+    <img
+      alt=""
+      height="80"
+      src="https://ya-praktikum.tech/Test avatar"
+      width="80"
+    />
+    <div
+      className="hidden group-hover:flex justify-center items-center absolute inset-0 bg-primary bg-opacity-50 text-white"
+      onClick={[Function]}
+    >
+      change
+    </div>
+  </button>
+  <h1
+    className="font-medium"
+  >
+    Test first name Test second name
+  </h1>
+</header>
+`;
+
+exports[`<ProfileHeader /> should renders correct <ProfileHeader /> 1`] = `
+<header
+  className="text-center"
+>
+  <button
+    className="group relative rounded-full border border-white outline-none overflow-hidden mx-auto mb-6"
+  >
+    <img
+      alt=""
+      height="80"
+      src="https://ya-praktikum.tech/Test avatar"
+      width="80"
+    />
+    <div
+      className="hidden group-hover:flex justify-center items-center absolute inset-0 bg-primary bg-opacity-50 text-white"
+      onClick={[Function]}
+    >
+      change
+    </div>
+  </button>
+  <h1
+    className="font-medium"
+  >
+    Test first name Test second name
+  </h1>
+</header>
+`;

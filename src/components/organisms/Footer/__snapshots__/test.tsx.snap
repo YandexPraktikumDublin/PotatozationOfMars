@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Footer /> should renders correct <Footer /> 1`] = `
+<footer
+  className="mt-auto mb-0 p-4"
+>
+  <Navigation>
+    <NavigationButton
+      imageSrc={[Function]}
+      onClick={[Function]}
+      title="Feedback"
+    />
+  </Navigation>
+</footer>
+`;

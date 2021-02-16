@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ModalBackdrop /> should renders correct <ModalBackdrop /> 1`] = `
+<Portal
+  containerInfo={<div />}
+>
+  <div
+    className="relative z-50 w-full h-full flex justify-center items-center px-3"
+  >
+    Test children
+  </div>
+  <div
+    className="fixed inset-0 bg-black opacity-80"
+  />
+</Portal>
+`;

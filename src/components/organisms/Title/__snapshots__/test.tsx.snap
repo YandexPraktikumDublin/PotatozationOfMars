@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Title /> should renders correct <Title /> 1`] = `
+<h1
+  className="text-4xl mb-6 font-medium dark:text-white"
+>
+  Test children
+</h1>
+`;

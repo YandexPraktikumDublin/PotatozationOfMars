@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GameTemplate /> should renders correct <GameTemplate /> 1`] = `
+<div
+  className="flex justify-center flex-grow"
+>
+  <GameWindow />
+</div>
+`;

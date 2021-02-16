@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FormLink /> should renders correct <FormLink /> 1`] = `
+<Link
+  className="underline"
+  to="/test"
+>
+  Test children
+</Link>
+`;

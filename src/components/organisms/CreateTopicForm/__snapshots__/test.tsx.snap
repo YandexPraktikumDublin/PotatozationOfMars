@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CreateTopicForm /> should renders correct <CreateTopicForm /> 1`] = `
+<BaseForm
+  buttonText="Create"
+  formError=""
+  initialValues={
+    Object {
+      "title": "",
+    }
+  }
+  onSubmit={[Function]}
+  validationSchema={
+    ObjectSchema {
+      "_blacklist": ReferenceSet {
+        "list": Set {},
+        "refs": Map {},
+      },
+      "_blacklistError": undefined,
+      "_excludedEdges": Array [],
+      "_nodes": Array [
+        "title",
+      ],
+      "_sortErrors": [Function],
+      "_typeError": [Function],
+      "_whitelist": ReferenceSet {
+        "list": Set {},
+        "refs": Map {},
+      },
+      "_whitelistError": undefined,
+      "conditions": Array [],
+      "deps": Array [],
+      "exclusiveTests": Object {},
+      "fields": Object {
+        "title": StringSchema {
+          "_blacklist": ReferenceSet {
+            "list": Set {},
+            "refs": Map {},
+          },
+          "_blacklistError": undefined,
+          "_mutate": undefined,
+          "_typeError": [Function],
+          "_whitelist": ReferenceSet {
+            "list": Set {},
+            "refs": Map {},
+          },
+          "_whitelistError": undefined,
+          "conditions": Array [],
+          "deps": Array [],
+          "exclusiveTests": Object {
+            "max": true,
+            "min": true,
+            "required": true,
+          },
+          "spec": Object {
+            "abortEarly": true,
+            "label": undefined,
+            "meta": undefined,
+            "nullable": false,
+            "presence": "required",
+            "recursive": true,
+            "strict": false,
+            "strip": false,
+          },
+          "tests": Array [
+            [Function],
+            [Function],
+            [Function],
+          ],
+          "transforms": Array [
+            [Function],
+          ],
+          "type": "string",
+        },
+      },
+      "spec": Object {
+        "abortEarly": true,
+        "label": undefined,
+        "meta": undefined,
+        "nullable": false,
+        "presence": "optional",
+        "recursive": true,
+        "strict": false,
+        "strip": false,
+      },
+      "tests": Array [],
+      "transforms": Array [
+        [Function],
+      ],
+      "type": "object",
+    }
+  }
+>
+  <BaseInput
+    name="title"
+    placeholder="Title"
+    type="text"
+  />
+</BaseForm>
+`;

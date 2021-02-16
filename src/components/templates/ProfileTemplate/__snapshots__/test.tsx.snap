@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProfileTemplate /> should renders correct <ProfileTemplate /> 1`] = `
+<div
+  className="w-full max-w-2xl"
+>
+  <Window>
+    <Profile />
+  </Window>
+</div>
+`;

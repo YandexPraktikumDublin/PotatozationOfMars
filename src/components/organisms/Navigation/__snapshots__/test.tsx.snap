@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Navigation /> should renders correct <Navigation /> 1`] = `
+<nav
+  className="flex items-center justify-end gap-x-4"
+>
+  Test children
+</nav>
+`;
