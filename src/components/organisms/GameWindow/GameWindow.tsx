@@ -1,22 +1,32 @@
-import React, {FC, memo, useEffect, useRef, useState} from 'react'
+import React, { FC, memo, useEffect, useRef, useState } from 'react'
 import { GameCanvas, NavigationButton } from '@components/molecules'
-import {fullscreenOn, fullscreenOff} from '@images'
+import { fullscreenOn, fullscreenOff } from '@images'
 import { InputsController } from '@game/controllers'
 
 type TGameWindowProps = {}
 
 const GameWindow: FC<TGameWindowProps> = memo(() => {
   const windowRef = useRef<HTMLDivElement>(null)
-  const [FSIcon, setFSIcon] = useState(fullscreenOn);
+  const [FSIcon, setFSIcon] = useState(fullscreenOn)
 
   const toggleFullScreen = (toggle = true) => {
     if (!toggle) return
     const gameWindow = windowRef.current as HTMLDivElement
     if (!document.fullscreenElement && document.fullscreenEnabled) {
-      gameWindow.requestFullscreen().then(()=>{setFSIcon(fullscreenOff)}).catch()
+      gameWindow
+        .requestFullscreen()
+        .then(() => {
+          setFSIcon(fullscreenOff)
+        })
+        .catch()
     } else {
       if (document.exitFullscreen) {
-        document.exitFullscreen().then(()=>{setFSIcon(fullscreenOn)}).catch()
+        document
+          .exitFullscreen()
+          .then(() => {
+            setFSIcon(fullscreenOn)
+          })
+          .catch()
       }
     }
   }
