@@ -2,6 +2,7 @@
 
 exports[`<NavigationButton /> should renders correct <NavigationButton /> 1`] = `
 <button
+  className=""
   onClick={
     [MockFunction] {
       "calls": Array [
