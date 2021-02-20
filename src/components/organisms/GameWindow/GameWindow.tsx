@@ -11,29 +11,26 @@ const GameWindow: FC<TGameWindowProps> = memo(() => {
 
   const toggleFullScreen = (toggle = true) => {
     if (!toggle) return
-    const gameWindow = windowRef.current as HTMLDivElement
     if (!document.fullscreenElement && document.fullscreenEnabled) {
-      gameWindow
-        .requestFullscreen()
+      windowRef.current
+        ?.requestFullscreen()
         .then(() => {
           setFSIcon(fullscreenOff)
         })
         .catch()
     } else {
-      if (document.exitFullscreen) {
-        document
-          .exitFullscreen()
-          .then(() => {
-            setFSIcon(fullscreenOn)
-          })
-          .catch()
-      }
+      document
+        .exitFullscreen()
+        ?.then(() => {
+          setFSIcon(fullscreenOn)
+        })
+        .catch()
     }
   }
 
   useEffect(() => {
     return InputsController.onKeyPress(toggleFullScreen, ['KeyF'])
-  }, [windowRef.current])
+  }, [])
 
   return (
     <div className="relative flex justify-center items-center" ref={windowRef}>

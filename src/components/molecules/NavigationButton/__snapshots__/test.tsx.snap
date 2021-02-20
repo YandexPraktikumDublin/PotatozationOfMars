@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<NavigationButton /> should have className from className prop 1`] = `
+<button
+  className="test-class-name"
+  onClick={[MockFunction]}
+  title="Test title"
+>
+  <img
+    alt="Test title"
+    className="w-6 h-6"
+    height="24"
+    src="image.jpg"
+    width="24"
+  />
+</button>
+`;
+
 exports[`<NavigationButton /> should renders correct <NavigationButton /> 1`] = `
 <button
   className=""
