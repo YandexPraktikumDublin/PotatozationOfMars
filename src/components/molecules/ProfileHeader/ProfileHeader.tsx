@@ -1,35 +1,23 @@
-import React, { FC, memo, useState } from 'react'
+import React, { FC, memo } from 'react'
+import { useSelector } from 'react-redux'
 import classNames from 'classnames'
 import { ChangeAvatarModal } from '@components/organisms'
 import { SERVER_URL } from '@config'
 import { profile } from '@images'
+import { useToggle } from '@hooks'
+import { getUserSelector } from '@store/user/selectors'
 
 type TProfileHeaderProps = {
-  firstName?: string
-  secondName?: string
-  avatar?: string
-  onSuccessAvatarUpdate: () => void
   className?: string
 }
 
 const ProfileHeader: FC<TProfileHeaderProps> = memo(
-  ({
-    firstName = '',
-    secondName = '',
-    avatar,
-    onSuccessAvatarUpdate,
-    className = ''
-  }: TProfileHeaderProps) => {
-    const [
-      isShownAvatarChangeModal,
-      setIsShownAvatarChangeModal
-    ] = useState<boolean>(false)
+  ({ className = '' }: TProfileHeaderProps) => {
+    const [isShownAvatarChangeModal, toggleAvatarChangeModal] = useToggle(false)
 
-    const avatarSrc = avatar ? `${SERVER_URL}/${avatar}` : profile
-
-    const toggleModal = () => {
-      setIsShownAvatarChangeModal((value) => !value)
-    }
+    const user = useSelector(getUserSelector)
+    const avatarSrc = user?.avatar ? `${SERVER_URL}/${user?.avatar}` : profile
+    const name = user?.displayName || `${user?.firstName} ${user?.secondName}`
 
     return (
       <header className={classNames('text-center', className)}>
@@ -38,18 +26,15 @@ const ProfileHeader: FC<TProfileHeaderProps> = memo(
 
           <div
             className="hidden group-hover:flex justify-center items-center absolute inset-0 bg-primary bg-opacity-50 text-white"
-            onClick={toggleModal}
+            onClick={toggleAvatarChangeModal}
           >
             change
           </div>
         </button>
-        <h1 className="font-medium">{`${firstName} ${secondName}`}</h1>
+        <h1 className="font-medium">{name}</h1>
 
         {isShownAvatarChangeModal && (
-          <ChangeAvatarModal
-            toggleModal={toggleModal}
-            onSuccessAvatarUpdate={onSuccessAvatarUpdate}
-          />
+          <ChangeAvatarModal toggleModal={toggleAvatarChangeModal} />
         )}
       </header>
     )

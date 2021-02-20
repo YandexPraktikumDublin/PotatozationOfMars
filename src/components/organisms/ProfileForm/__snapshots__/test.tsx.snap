@@ -1,283 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProfileForm /> should renders correct <ProfileForm /> 1`] = `
-<BaseForm
-  buttonText="Save"
-  formError=""
-  initialValues={Object {}}
-  onSubmit={[Function]}
-  validationSchema={
-    ObjectSchema {
-      "_blacklist": ReferenceSet {
-        "list": Set {},
-        "refs": Map {},
+<ContextProvider
+  value={
+    Object {
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
       },
-      "_blacklistError": undefined,
-      "_excludedEdges": Array [],
-      "_nodes": Array [
-        "phone",
-        "secondName",
-        "firstName",
-        "login",
-        "email",
-      ],
-      "_sortErrors": [Function],
-      "_typeError": [Function],
-      "_whitelist": ReferenceSet {
-        "list": Set {},
-        "refs": Map {},
+      "subscription": Subscription {
+        "handleChangeWrapper": [Function],
+        "listeners": Object {
+          "notify": [Function],
+        },
+        "onStateChange": [Function],
+        "parentSub": undefined,
+        "store": Object {
+          "clearActions": [Function],
+          "dispatch": [Function],
+          "getActions": [Function],
+          "getState": [Function],
+          "replaceReducer": [Function],
+          "subscribe": [Function],
+        },
+        "unsubscribe": null,
       },
-      "_whitelistError": undefined,
-      "conditions": Array [],
-      "deps": Array [],
-      "exclusiveTests": Object {},
-      "fields": Object {
-        "email": StringSchema {
-          "_blacklist": ReferenceSet {
-            "list": Set {},
-            "refs": Map {},
-          },
-          "_blacklistError": undefined,
-          "_mutate": undefined,
-          "_typeError": [Function],
-          "_whitelist": ReferenceSet {
-            "list": Set {},
-            "refs": Map {},
-          },
-          "_whitelistError": undefined,
-          "conditions": Array [],
-          "deps": Array [],
-          "exclusiveTests": Object {
-            "email": false,
-            "required": true,
-          },
-          "spec": Object {
-            "abortEarly": true,
-            "label": undefined,
-            "meta": undefined,
-            "nullable": false,
-            "presence": "required",
-            "recursive": true,
-            "strict": false,
-            "strip": false,
-          },
-          "tests": Array [
-            [Function],
-            [Function],
-          ],
-          "transforms": Array [
-            [Function],
-          ],
-          "type": "string",
-        },
-        "firstName": StringSchema {
-          "_blacklist": ReferenceSet {
-            "list": Set {},
-            "refs": Map {},
-          },
-          "_blacklistError": undefined,
-          "_mutate": undefined,
-          "_typeError": [Function],
-          "_whitelist": ReferenceSet {
-            "list": Set {},
-            "refs": Map {},
-          },
-          "_whitelistError": undefined,
-          "conditions": Array [],
-          "deps": Array [],
-          "exclusiveTests": Object {
-            "max": true,
-            "min": true,
-            "required": true,
-          },
-          "spec": Object {
-            "abortEarly": true,
-            "label": undefined,
-            "meta": undefined,
-            "nullable": false,
-            "presence": "required",
-            "recursive": true,
-            "strict": false,
-            "strip": false,
-          },
-          "tests": Array [
-            [Function],
-            [Function],
-            [Function],
-          ],
-          "transforms": Array [
-            [Function],
-          ],
-          "type": "string",
-        },
-        "login": StringSchema {
-          "_blacklist": ReferenceSet {
-            "list": Set {},
-            "refs": Map {},
-          },
-          "_blacklistError": undefined,
-          "_mutate": undefined,
-          "_typeError": [Function],
-          "_whitelist": ReferenceSet {
-            "list": Set {},
-            "refs": Map {},
-          },
-          "_whitelistError": undefined,
-          "conditions": Array [],
-          "deps": Array [],
-          "exclusiveTests": Object {
-            "max": true,
-            "min": true,
-            "required": true,
-          },
-          "spec": Object {
-            "abortEarly": true,
-            "label": undefined,
-            "meta": undefined,
-            "nullable": false,
-            "presence": "required",
-            "recursive": true,
-            "strict": false,
-            "strip": false,
-          },
-          "tests": Array [
-            [Function],
-            [Function],
-            [Function],
-          ],
-          "transforms": Array [
-            [Function],
-          ],
-          "type": "string",
-        },
-        "phone": StringSchema {
-          "_blacklist": ReferenceSet {
-            "list": Set {},
-            "refs": Map {},
-          },
-          "_blacklistError": undefined,
-          "_mutate": undefined,
-          "_typeError": [Function],
-          "_whitelist": ReferenceSet {
-            "list": Set {},
-            "refs": Map {},
-          },
-          "_whitelistError": undefined,
-          "conditions": Array [],
-          "deps": Array [],
-          "exclusiveTests": Object {
-            "max": true,
-            "min": true,
-            "required": true,
-          },
-          "spec": Object {
-            "abortEarly": true,
-            "label": undefined,
-            "meta": undefined,
-            "nullable": false,
-            "presence": "required",
-            "recursive": true,
-            "strict": false,
-            "strip": false,
-          },
-          "tests": Array [
-            [Function],
-            [Function],
-            [Function],
-          ],
-          "transforms": Array [
-            [Function],
-          ],
-          "type": "string",
-        },
-        "secondName": StringSchema {
-          "_blacklist": ReferenceSet {
-            "list": Set {},
-            "refs": Map {},
-          },
-          "_blacklistError": undefined,
-          "_mutate": undefined,
-          "_typeError": [Function],
-          "_whitelist": ReferenceSet {
-            "list": Set {},
-            "refs": Map {},
-          },
-          "_whitelistError": undefined,
-          "conditions": Array [],
-          "deps": Array [],
-          "exclusiveTests": Object {
-            "max": true,
-            "min": true,
-            "required": true,
-          },
-          "spec": Object {
-            "abortEarly": true,
-            "label": undefined,
-            "meta": undefined,
-            "nullable": false,
-            "presence": "required",
-            "recursive": true,
-            "strict": false,
-            "strip": false,
-          },
-          "tests": Array [
-            [Function],
-            [Function],
-            [Function],
-          ],
-          "transforms": Array [
-            [Function],
-          ],
-          "type": "string",
-        },
-      },
-      "spec": Object {
-        "abortEarly": true,
-        "label": undefined,
-        "meta": undefined,
-        "nullable": false,
-        "presence": "optional",
-        "recursive": true,
-        "strict": false,
-        "strip": false,
-      },
-      "tests": Array [],
-      "transforms": Array [
-        [Function],
-      ],
-      "type": "object",
     }
   }
 >
-  <BaseInput
-    name="email"
-    placeholder="Email"
-    type="email"
+  <ProfileForm
+    successCallback={[MockFunction]}
   />
-  <BaseInput
-    name="login"
-    placeholder="Login"
-    type="text"
-  />
-  <BaseInput
-    name="firstName"
-    placeholder="First name"
-    type="text"
-  />
-  <BaseInput
-    name="secondName"
-    placeholder="Last name"
-    type="text"
-  />
-  <BaseInput
-    name="displayName"
-    placeholder="Display name"
-    type="text"
-  />
-  <BaseInput
-    name="phone"
-    placeholder="Phone"
-    type="tel"
-  />
-</BaseForm>
+</ContextProvider>
 `;

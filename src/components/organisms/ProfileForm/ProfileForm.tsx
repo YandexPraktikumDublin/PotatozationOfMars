@@ -1,13 +1,13 @@
 import React, { FC, memo, useState } from 'react'
+import { useSelector } from 'react-redux'
 import * as Yup from 'yup'
 import { FormikValues } from 'formik'
 import { DEFAULT_ERROR_MESSAGE } from '@config'
 import { BaseForm, BaseInput } from '@components/organisms'
-import { IUser } from '@types'
 import { changeUserData } from '@api'
+import { getUserSelector } from '@store/user/selectors'
 
 type TProfileFormProps = {
-  userData?: IUser
   successCallback: () => void
 }
 
@@ -32,8 +32,10 @@ const validationSchema = Yup.object().shape({
 })
 
 const ProfileForm: FC<TProfileFormProps> = memo(
-  ({ userData, successCallback }: TProfileFormProps) => {
+  ({ successCallback }: TProfileFormProps) => {
     const [formError, setFormError] = useState<string>('')
+
+    const user = useSelector(getUserSelector)
 
     const handleSubmit = async (values: FormikValues) => {
       try {
@@ -56,7 +58,7 @@ const ProfileForm: FC<TProfileFormProps> = memo(
 
     return (
       <BaseForm
-        initialValues={userData || {}}
+        initialValues={user}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
         buttonText="Save"
