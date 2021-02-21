@@ -1,4 +1,5 @@
-type TCallback = (...rest: Array<unknown>) => void
+type TKeyCallback = (pressed: boolean, ...rest: Array<unknown>) => void
+type TMouseCallback = (...rest: Array<unknown>) => void
 
 class InputsController {
   private static __instance: InputsController
@@ -11,7 +12,7 @@ class InputsController {
   }
 
   onKeyPress = (
-    callback: TCallback,
+    callback: TKeyCallback,
     keyCodes: Array<string>,
     ...rest: Array<unknown>
   ) => {
@@ -24,6 +25,7 @@ class InputsController {
     }
 
     const onKeyDown = (evt: KeyboardEvent) => {
+      if (evt.repeat) return
       const pressed = isPressed(evt.code)
       if (pressed) callback(pressed, ...rest)
     }
@@ -44,7 +46,7 @@ class InputsController {
 
   onMouseDrag = (
     context: HTMLElement,
-    callback: TCallback,
+    callback: TMouseCallback,
     ...rest: Array<unknown>
   ) => {
     let tracking = false

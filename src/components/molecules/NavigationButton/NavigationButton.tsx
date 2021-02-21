@@ -4,11 +4,12 @@ type TNavigationButtonProps = {
   title: string
   onClick: () => void
   imageSrc: string
+  className?: string
 }
 
 const NavigationButton: FC<TNavigationButtonProps> = memo(
-  ({ title, onClick, imageSrc }: TNavigationButtonProps) => (
-    <button title={title} onClick={onClick}>
+  ({ title, onClick, imageSrc, className = '' }: TNavigationButtonProps) => (
+    <button className={className} title={title} onClick={onClick}>
       <img
         width="24"
         height="24"

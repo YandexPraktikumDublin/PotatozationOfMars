@@ -1,10 +1,10 @@
 class ContextController {
   instance: CanvasRenderingContext2D
   coefficient: { cx: number; cy: number }
-  constructor(context: CanvasRenderingContext2D) {
+  constructor(context: CanvasRenderingContext2D, width = 1500, height = 750) {
     this.instance = context
-    this.instance.canvas.width = 1000
-    this.instance.canvas.height = 500
+    this.instance.canvas.width = width
+    this.instance.canvas.height = height
     this.coefficient = { cx: 1, cy: 1 }
   }
 
