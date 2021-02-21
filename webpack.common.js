@@ -4,11 +4,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: {
+    main: './src/index.tsx', 
+    sw: './src/sw.js'
+  },
   output: {
     publicPath: '/',
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle-[hash].js'
+    filename: '[name].js'
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.json'],
