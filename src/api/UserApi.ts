@@ -1,7 +1,5 @@
 import { axiosInstance } from '@api'
 
-export const getUserData = () => axiosInstance.get('auth/user')
-
 export const changeUserPassword = (data: Record<string, any>) =>
   axiosInstance.put('user/password', data)
 

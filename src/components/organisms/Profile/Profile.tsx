@@ -1,4 +1,8 @@
-import React, { FC, memo, useEffect, useState, useCallback } from 'react'
+import React, { FC, memo, useEffect, useCallback } from 'react'
+import { useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUserSelector } from '@store/user/selectors'
+import { fetchUserRequest } from '@store/user/actions'
 import {
   ActionsListItem,
   NameValueListItem,
@@ -7,26 +11,26 @@ import {
 } from '@components/atoms'
 import { List, ProfileHeader } from '@components/molecules'
 import { ProfileForm, ProfilePasswordForm } from '@components/organisms'
-import { getUserData, logout } from '@api'
-import { IUser } from '@types'
-import { useHistory } from 'react-router-dom'
+import { logout } from '@api'
 import { PATHS } from '@config'
+import { useToggle } from '@hooks'
 
 type TProfileProps = {}
 
 const Profile: FC<TProfileProps> = memo(() => {
   const history = useHistory()
 
-  const [isShowProfileForm, setIsShowProfileForm] = useState<boolean>(false)
-  const [userData, setUserData] = useState<IUser>()
-  const [isShowPasswordForm, setIsShowPasswordForm] = useState<boolean>(false)
+  const user = useSelector(getUserSelector)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchUserRequest())
+  }, [])
+
+  const [isShowProfileForm, toggleProfileForm] = useToggle(false)
+  const [isShowPasswordForm, togglePasswordForm] = useToggle(false)
 
   const isShownForms = isShowProfileForm || isShowPasswordForm
-
-  const handleBackButtonClick = () => {
-    setIsShowProfileForm(false)
-    setIsShowPasswordForm(false)
-  }
 
   const handleLogoutButtonClick = useCallback(() => {
     logout()
@@ -34,92 +38,57 @@ const Profile: FC<TProfileProps> = memo(() => {
       .catch()
   }, [logout, PATHS.AUTH])
 
-  const getUserDataHandler = useCallback(() => {
-    getUserData()
-      .then((result) => {
-        setUserData({
-          id: result?.data?.id,
-          firstName: result?.data?.first_name,
-          secondName: result?.data?.second_name,
-          displayName: result?.data?.display_name,
-          login: result?.data?.login,
-          email: result?.data?.email,
-          phone: result?.data?.phone,
-          avatar: result?.data?.avatar
-        })
-      })
-      .catch()
-  }, [getUserData])
-
-  const handleSuccessUserDataUpdate = useCallback(() => {
-    setIsShowProfileForm(false)
-    getUserDataHandler()
-  }, [getUserDataHandler])
-
-  useEffect(() => {
-    getUserDataHandler()
-  }, [])
-
   return (
     <div className="relative">
-      {!isShownForms && (
-        <EditButton
-          onClick={() => setIsShowProfileForm(true)}
-          className="absolute top-0 right-0"
-        />
-      )}
-
-      {isShownForms && (
+      {isShowProfileForm && (
         <BackButton
-          onClick={handleBackButtonClick}
+          onClick={toggleProfileForm}
           className="absolute top-0 left-0"
         />
       )}
 
-      <ProfileHeader
-        firstName={userData?.firstName}
-        secondName={userData?.secondName}
-        avatar={userData?.avatar}
-        onSuccessAvatarUpdate={() => getUserDataHandler()}
-        className="mb-6"
-      />
+      {isShowPasswordForm && (
+        <BackButton
+          onClick={togglePasswordForm}
+          className="absolute top-0 left-0"
+        />
+      )}
+
+      {!isShownForms && (
+        <EditButton
+          onClick={toggleProfileForm}
+          className="absolute top-0 right-0"
+        />
+      )}
+
+      <ProfileHeader className="mb-6" />
 
       {!isShownForms && (
         <>
           <List className="mb-12">
-            <NameValueListItem name="Email" value={userData?.email} />
-            <NameValueListItem name="Login" value={userData?.login} />
-            <NameValueListItem name="First name" value={userData?.firstName} />
-            <NameValueListItem name="Last name" value={userData?.secondName} />
-            <NameValueListItem
-              name="Display name"
-              value={userData?.displayName}
-            />
-            <NameValueListItem name="Phone" value={userData?.phone} />
+            <NameValueListItem name="Email" value={user?.email} />
+            <NameValueListItem name="Login" value={user?.login} />
+            <NameValueListItem name="First name" value={user?.firstName} />
+            <NameValueListItem name="Last name" value={user?.secondName} />
+            <NameValueListItem name="Display name" value={user?.displayName} />
+            <NameValueListItem name="Phone" value={user?.phone} />
             <NameValueListItem name="Password" value="********" />
           </List>
 
           <List>
             <ActionsListItem
               name="Change password"
-              onClick={() => setIsShowPasswordForm(true)}
+              onClick={togglePasswordForm}
             />
             <ActionsListItem name="Log out" onClick={handleLogoutButtonClick} />
           </List>
         </>
       )}
 
-      {isShowProfileForm && (
-        <ProfileForm
-          userData={userData}
-          successCallback={handleSuccessUserDataUpdate}
-        />
-      )}
+      {isShowProfileForm && <ProfileForm successCallback={toggleProfileForm} />}
 
       {isShowPasswordForm && (
-        <ProfilePasswordForm
-          successCallback={() => setIsShowPasswordForm(false)}
-        />
+        <ProfilePasswordForm successCallback={togglePasswordForm} />
       )}
     </div>
   )
