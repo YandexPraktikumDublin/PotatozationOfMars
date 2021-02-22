@@ -1,9 +1,10 @@
 import React, { StrictMode } from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { Router, Switch, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import ErrorBoundary from './ErrorBoundary'
-import store from './store'
 import { PATHS } from '@config'
+import ErrorBoundary from './ErrorBoundary'
+import history from './history'
+import store from './store'
 import {
   Start,
   Auth,
@@ -31,7 +32,7 @@ const App: React.FC = () => (
     <StrictMode>
       <ErrorBoundary>
         <Provider store={store}>
-          <BrowserRouter>
+          <Router history={history}>
             <Switch>
               <Route exact path={PATHS.BASE} component={Start} />
               <Route path={PATHS.AUTH} component={Auth} />
@@ -43,7 +44,7 @@ const App: React.FC = () => (
               <Route path={PATHS.PROFILE} component={Profile} />
               <Route path="*" component={Error404} />
             </Switch>
-          </BrowserRouter>
+          </Router>
         </Provider>
       </ErrorBoundary>
     </StrictMode>
