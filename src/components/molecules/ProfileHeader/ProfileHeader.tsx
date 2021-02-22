@@ -17,7 +17,8 @@ const ProfileHeader: FC<TProfileHeaderProps> = memo(
 
     const user = useSelector(getUserSelector)
     const avatarSrc = user?.avatar ? `${SERVER_URL}/${user?.avatar}` : profile
-    const name = user?.displayName || `${user?.firstName} ${user?.secondName}`
+    const name =
+      user?.displayName || `${user?.firstName ?? ''} ${user?.secondName ?? ''}`
 
     return (
       <header className={classNames('text-center', className)}>

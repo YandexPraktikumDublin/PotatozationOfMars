@@ -38,7 +38,7 @@ exports[`<ProfileHeader /> should has className from className prop 1`] = `
       <h1
         className="font-medium"
       >
-        undefined undefined
+         
       </h1>
     </header>
   </ProfileHeader>
