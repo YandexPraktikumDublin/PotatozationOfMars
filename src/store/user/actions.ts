@@ -4,27 +4,27 @@ import {
   FETCH_USER_SUCCESS
 } from './actionTypes'
 import {
-  FetchUserRequest,
-  FetchUserSuccess,
-  FetchUserSuccessPayload,
-  FetchUserFailure,
-  FetchUserFailurePayload
+  TFetchUserRequest,
+  TFetchUserSuccess,
+  IFetchUserSuccessPayload,
+  TFetchUserFailure,
+  IFetchUserFailurePayload
 } from './types'
 
-export const fetchUserRequest = (): FetchUserRequest => ({
+export const fetchUserRequest = (): TFetchUserRequest => ({
   type: FETCH_USER_REQUEST
 })
 
 export const fetchUserSuccess = (
-  payload: FetchUserSuccessPayload
-): FetchUserSuccess => ({
+  payload: IFetchUserSuccessPayload
+): TFetchUserSuccess => ({
   type: FETCH_USER_SUCCESS,
   payload
 })
 
 export const fetchUserFailure = (
-  payload: FetchUserFailurePayload
-): FetchUserFailure => ({
+  payload: IFetchUserFailurePayload
+): TFetchUserFailure => ({
   type: FETCH_USER_FAILURE,
   payload
 })

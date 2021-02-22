@@ -11,35 +11,40 @@ export interface IUserState {
   error: string | null
 }
 
-export interface FetchUserSuccessPayload {
-  user: Omit<IUser, 'firstName' | 'secondName' | 'displayName'> & {
+export interface IFetchUserSuccessPayload {
+  user: {
+    id?: number
     /* eslint-disable camelcase */
     first_name?: string
     second_name?: string
     display_name?: string
     /* eslint-enable camelcase */
+    login?: string
+    email?: string
+    phone?: string
+    avatar?: string
   }
 }
 
-export interface FetchUserFailurePayload {
+export interface IFetchUserFailurePayload {
   error: string
 }
 
-export interface FetchUserRequest {
+export type TFetchUserRequest = {
   type: typeof FETCH_USER_REQUEST
 }
 
-export type FetchUserSuccess = {
+export type TFetchUserSuccess = {
   type: typeof FETCH_USER_SUCCESS
-  payload: FetchUserSuccessPayload
+  payload: IFetchUserSuccessPayload
 }
 
-export type FetchUserFailure = {
+export type TFetchUserFailure = {
   type: typeof FETCH_USER_FAILURE
-  payload: FetchUserFailurePayload
+  payload: IFetchUserFailurePayload
 }
 
 export type TUserActions =
-  | FetchUserRequest
-  | FetchUserSuccess
-  | FetchUserFailure
+  | TFetchUserRequest
+  | TFetchUserSuccess
+  | TFetchUserFailure

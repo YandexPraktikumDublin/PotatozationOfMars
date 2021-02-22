@@ -23,8 +23,8 @@ function* fetchUserSaga() {
   }
 }
 
-function* userSaga() {
+function* saga() {
   yield all([takeLatest(FETCH_USER_REQUEST, fetchUserSaga)])
 }
 
-export default userSaga
+export default saga
