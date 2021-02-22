@@ -1,10 +1,10 @@
-import React, { FC, memo, useState } from 'react'
-import { BaseForm, BaseInput } from '@components/organisms'
+import React, { FC, memo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import * as Yup from 'yup'
-import { signup } from '@api'
 import { FormikValues } from 'formik'
-import { DEFAULT_ERROR_MESSAGE, PATHS } from '@config'
-import { useHistory } from 'react-router-dom'
+import { BaseForm, BaseInput } from '@components/organisms'
+import { signupRequest } from '@store/signup/actions'
+import { getSignupErrorSelector } from '@store/signup/selectors'
 
 type TSignUpFormProps = {}
 
@@ -39,26 +39,21 @@ const initialValues = {
 }
 
 const SignUpForm: FC<TSignUpFormProps> = memo(() => {
-  const history = useHistory()
-  const [formError, setFormError] = useState<string>('')
+  const dispatch = useDispatch()
 
-  const handleSubmit = async (values: FormikValues) => {
-    try {
-      setFormError('')
+  const signupError = useSelector(getSignupErrorSelector) ?? ''
 
-      await signup({
+  const handleSubmit = (values: FormikValues) => {
+    dispatch(
+      signupRequest({
         email: values.email,
         login: values.login,
         first_name: values.firstName,
         second_name: values.secondName,
         phone: values.phone,
-        password: values.phone
+        password: values.password
       })
-
-      history.push(PATHS.BASE)
-    } catch (error) {
-      setFormError(error?.message ?? DEFAULT_ERROR_MESSAGE)
-    }
+    )
   }
 
   return (
@@ -67,7 +62,7 @@ const SignUpForm: FC<TSignUpFormProps> = memo(() => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
       buttonText="Sign up"
-      formError={formError}
+      formError={signupError}
     >
       <BaseInput type="email" name="email" placeholder="Email" />
       <BaseInput type="text" name="login" placeholder="Login" />
