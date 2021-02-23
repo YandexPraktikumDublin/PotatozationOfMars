@@ -1,10 +1,10 @@
-import React, { FC, memo, useState } from 'react'
+import React, { FC, memo } from 'react'
 import * as Yup from 'yup'
-import { signin } from '@api'
 import { FormikValues } from 'formik'
 import { BaseForm, BaseInput } from '@components/organisms'
-import { DEFAULT_ERROR_MESSAGE, PATHS } from '@config'
-import { useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAuthErrorSelector } from '@store/auth/selectors'
+import { authRequest } from '@store/auth/actions'
 
 type TAuthFormProps = {}
 
@@ -22,19 +22,17 @@ const initialValues = {
 }
 
 const AuthForm: FC<TAuthFormProps> = memo(() => {
-  const history = useHistory()
-  const [formError, setFormError] = useState<string>('')
+  const dispatch = useDispatch()
 
-  const handleSubmit = async (values: FormikValues) => {
-    try {
-      setFormError('')
+  const authError = useSelector(getAuthErrorSelector) ?? ''
 
-      await signin(values)
-
-      history.push(PATHS.BASE)
-    } catch (error) {
-      setFormError(error?.message ?? DEFAULT_ERROR_MESSAGE)
-    }
+  const handleSubmit = (values: FormikValues) => {
+    dispatch(
+      authRequest({
+        login: values.login,
+        password: values.password
+      })
+    )
   }
 
   return (
@@ -43,7 +41,7 @@ const AuthForm: FC<TAuthFormProps> = memo(() => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
       buttonText="Log in"
-      formError={formError}
+      formError={authError}
     >
       <BaseInput type="text" name="login" placeholder="Login" />
       <BaseInput

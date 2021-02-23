@@ -12,6 +12,6 @@ export const getUserPendingSelector = createSelector(
   (pending) => pending
 )
 
-export const getUserSelector = createSelector(getUser, (user) => user ?? {})
+export const getUserSelector = createSelector(getUser, (user) => user)
 
 export const getUserErrorSelector = createSelector(getError, (error) => error)

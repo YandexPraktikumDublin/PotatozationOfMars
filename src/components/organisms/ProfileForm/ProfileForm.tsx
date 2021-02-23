@@ -58,7 +58,7 @@ const ProfileForm: FC<TProfileFormProps> = memo(
 
     return (
       <BaseForm
-        initialValues={user}
+        initialValues={user ?? {}}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
         buttonText="Save"

@@ -5,7 +5,7 @@ import { getUserSelector } from '@store/user/selectors'
 import { Redirect } from 'react-router'
 import { PATHS } from '@config'
 
-export default function withAuth<T>(Component: React.FC<T>) {
+export default function withAuthCheck<T>(Component: React.FC<T>) {
   return (props: any) => {
     const dispatch = useDispatch()
     const user = useSelector(getUserSelector)
@@ -14,6 +14,6 @@ export default function withAuth<T>(Component: React.FC<T>) {
       dispatch(fetchUserRequest())
     }, [])
 
-    return user ? <Component {...props} /> : <Redirect to={PATHS.AUTH} />
+    return user ? <Redirect to={PATHS.BASE} /> : <Component {...props} />
   }
 }
