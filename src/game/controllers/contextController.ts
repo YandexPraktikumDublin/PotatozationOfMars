@@ -33,16 +33,16 @@ class ContextController {
     x: number,
     y: number,
     width?: number,
-    height: number | undefined = width,
+    height?: number,
     pivotX = 0.5,
     pivotY = 0.5
   ) => {
     const { ox, oy } = this.center
-    width = width || image.width
-    height = height || image.height
-    x -= pivotX * width - ox
-    y -= pivotY * height - oy
-    this.instance.drawImage(image, x, y, width, height)
+    const imageWidth = width ?? image.width
+    const imageHeight = height ?? width ?? image.height
+    x -= pivotX * imageWidth - ox
+    y -= pivotY * imageHeight - oy
+    this.instance.drawImage(image, x, y, imageWidth, imageHeight)
   }
 
   clearFrame = () => {
