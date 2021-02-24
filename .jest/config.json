@@ -12,6 +12,7 @@
     "@hocs": ["<rootDir>/HOCs/index.ts"],
     "@images": ["<rootDir>/images/index.ts"],
     "@api": ["<rootDir>/api/index.ts"],
+    "@game/([^\\.]*)$": ["<rootDir>/game/$1"],
     "@game/@types": ["<rootDir>/game/@types/index.ts"],
     "@game/entities": ["<rootDir>/game/entities/index.ts"],
     "@game/controllers": ["<rootDir>/game/controllers/index.ts"],
@@ -26,5 +27,7 @@
     "^.+\\.svg$": "jest-svg-transformer",
     ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
   },
-  "transformIgnorePatterns": ["/node_modules/(?!register-service-worker).+\\.js$"]
+  "transformIgnorePatterns": [
+    "/node_modules/(?!register-service-worker).+\\.js$"
+  ]
 }
