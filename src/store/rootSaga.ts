@@ -5,5 +5,10 @@ import authSaga from '@store/auth/sagas'
 import logoutSaga from '@store/logout/sagas'
 
 export function* rootSaga() {
-  yield all([fork(userSaga), fork(signupSaga), fork(authSaga), fork(logoutSaga)])
+  yield all([
+    fork(userSaga),
+    fork(signupSaga),
+    fork(authSaga),
+    fork(logoutSaga)
+  ])
 }
