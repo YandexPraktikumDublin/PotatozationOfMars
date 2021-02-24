@@ -26,7 +26,7 @@ class Player {
     this.destination = this.position
     this.size = size
     this.velocity = new Vector(velocity)
-    this.firePeriod = 50
+    this.firePeriod = 40
     this.fireCooldown = this.firePeriod
     this.fireQuantity = 3
     this.projectiles = []

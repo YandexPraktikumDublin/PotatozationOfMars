@@ -32,7 +32,7 @@ class ContextController {
     image: HTMLImageElement,
     x: number,
     y: number,
-    width?: number | undefined,
+    width?: number,
     height: number | undefined = width,
     pivotX = 0.5,
     pivotY = 0.5
