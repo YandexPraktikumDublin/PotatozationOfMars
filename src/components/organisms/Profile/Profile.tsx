@@ -1,8 +1,7 @@
-import React, { FC, memo, useEffect, useCallback } from 'react'
+import React, { FC, memo, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { getUserSelector } from '@store/user/selectors'
-import { fetchUserRequest } from '@store/user/actions'
 import {
   ActionsListItem,
   NameValueListItem,
@@ -21,11 +20,6 @@ const Profile: FC<TProfileProps> = memo(() => {
   const history = useHistory()
 
   const user = useSelector(getUserSelector)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(fetchUserRequest())
-  }, [])
 
   const [isShowProfileForm, toggleProfileForm] = useToggle(false)
   const [isShowPasswordForm, togglePasswordForm] = useToggle(false)

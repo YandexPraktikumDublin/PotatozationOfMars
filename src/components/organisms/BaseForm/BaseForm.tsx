@@ -7,7 +7,7 @@ type TBaseFormProps = {
   children: ReactNode
   initialValues: FormikValues
   validationSchema: Record<string, any>
-  onSubmit: (values: FormikValues) => Promise<Record<string, any> | void>
+  onSubmit: (values: FormikValues) => Promise<Record<string, any> | void> | void
   buttonText: string
   formError?: string
 }
