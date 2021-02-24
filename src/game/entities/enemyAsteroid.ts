@@ -1,8 +1,8 @@
 import { asteroid } from '@images'
 import { ContextController, GameClock } from '@game/controllers'
-import { Enemy } from '@game/entities'
+import { Entity } from '@game/entities'
 
-class EnemyAsteroid extends Enemy {
+class EnemyAsteroid extends Entity {
   constructor(killCallback = () => {}, v = 5) {
     super(killCallback, Math.random() * v + v)
   }
@@ -10,6 +10,7 @@ class EnemyAsteroid extends Enemy {
   init = (clock: GameClock, context: ContextController) => {
     const { width, height } = context.getSize()
     const { ox, oy } = context.center
+    this.isAlive = true
     this.position = {
       x: width + Math.random() * width - ox,
       y: Math.random() * height - oy
@@ -20,7 +21,7 @@ class EnemyAsteroid extends Enemy {
     this.render(clock)
   }
 
-  moveTo = (x: number, y: number) => {
+  private moveTo = (x: number, y: number) => {
     this.destination = { x, y }
   }
 
@@ -34,7 +35,7 @@ class EnemyAsteroid extends Enemy {
       this.kill()
       return
     }
-    context.drawImage(this.image, this.position.x, this.position.y, 50, 50)
+    context.drawImage(this.image, this.position.x, this.position.y, this.size)
   }
 
   render = (clock: GameClock) => {

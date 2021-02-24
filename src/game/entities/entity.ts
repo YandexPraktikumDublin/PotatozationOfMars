@@ -3,25 +3,29 @@ import { ContextController, GameClock } from '@game/controllers'
 import { Vector } from '@game/entities'
 import { asteroid } from '@images'
 
-class Enemy {
+class Entity {
   readonly image = new Image()
-  clockEvent: () => void
+  protected clockEvent: () => void
   protected destination: TPosition
+  isAlive: boolean
   position: TPosition
+  size: number
   velocity: Vector
-  killCallback: ()=>void
+  killCallback: () => void
 
-  constructor(killCallback = () => {}, v = 5) {
+  constructor(killCallback = () => {}, velocity = 5, size = 50) {
     this.clockEvent = () => {}
+    this.isAlive = true
     this.position = { x: 0, y: 0 }
     this.destination = this.position
-    this.velocity = new Vector(v)
+    this.size = size
+    this.velocity = new Vector(velocity)
     this.killCallback = killCallback
   }
 
   public init = (clock: GameClock, context: ContextController) => {
-    const { ox, oy } = context.center
-    this.position = { x: ox, y: oy }
+    this.isAlive = !!context
+    this.position = { x: 0, y: 0 }
     this.destination = { x: 0, y: 0 }
     this.render(clock)
   }
@@ -29,10 +33,14 @@ class Enemy {
   protected move = (context: ContextController) => {
     this.velocity.defineByDirection(this.destination, this.position)
     this.position = this.velocity.applyTo(this.position)
-    context.drawImage(this.image, this.position.x, this.position.y, 150, 50)
+    context.drawImage(this.image, this.position.x, this.position.y, this.size)
   }
 
-  public render = (clock: GameClock) => {
+  public getProjectile = () => {
+    return [this]
+  }
+
+  protected render = (clock: GameClock) => {
     this.image.onload = () => {
       this.clockEvent = clock.startEvent(this.move)
     }
@@ -40,9 +48,10 @@ class Enemy {
   }
 
   public kill = () => {
+    this.isAlive = false
     this.clockEvent()
     this.killCallback()
   }
 }
 
-export default Enemy
+export default Entity

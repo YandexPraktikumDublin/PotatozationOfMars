@@ -4,6 +4,7 @@ import {
   EnemyController
 } from '@game/controllers'
 import { EnemyAsteroid, Player } from '@game/entities'
+import TPosition from '@game/@types/position'
 
 class GameplayController {
   canvas: HTMLCanvasElement
@@ -31,8 +32,60 @@ class GameplayController {
       canvasResize: this.context.resize(),
       playerControl: this.player.controlWithMouse(this.canvas, this.context)
     }
-    this.levels[this.currentLevel].init(this.clock, this.context, 1000, 10, 5)
-    this.player.render(this.clock)
+    const level = this.levels[this.currentLevel]
+    level.init(this.clock, this.context, 1000, 10, 5)
+    const collisionHandler = this.clock.startEvent(() => {
+      this.isCollidedPlayer(level)
+      this.isHitEnemy(level)
+      if (level.quantity <= 0) {
+        collisionHandler()
+      }
+    })
+    this.player.init(this.clock)
+  }
+
+  private static getDistance(positionA: TPosition, positionB: TPosition) {
+    const dx = positionA.x - positionB.x
+    const dy = positionA.y - positionB.y
+    return Math.sqrt(dx ** 2 + dy ** 2)
+  }
+
+  private isHitEnemy = (enemies: EnemyController) => {
+    const projectiles = this.player.projectiles
+    const entities = enemies.entities
+    projectiles.forEach((projectile) => {
+      const projectileSize = projectile.size
+      const projectilePos = projectile.position
+      entities.forEach((entity) => {
+        const entitySize = entity.size
+        const entityPos = entity.position
+        const distance = GameplayController.getDistance(
+          entityPos,
+          projectilePos
+        )
+        if (
+          distance <= projectileSize + entitySize &&
+          projectile.isAlive &&
+          entity.isAlive
+        ) {
+          projectile.kill()
+          entity.kill()
+        }
+      })
+    })
+  }
+
+  private isCollidedPlayer = (enemies: EnemyController) => {
+    const playerPos = this.player.position
+    const projectiles = enemies.getProjectiles()
+    projectiles.forEach((projectile) => {
+      const projectilePos = projectile.position
+      const projectileSize = projectile.size
+      const distance = GameplayController.getDistance(playerPos, projectilePos)
+      if (distance <= projectileSize && projectile.isAlive) {
+        projectile.kill()
+      }
+    })
   }
 
   controlWithKeyboard = () => {

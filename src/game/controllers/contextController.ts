@@ -33,7 +33,7 @@ class ContextController {
     x: number,
     y: number,
     width?: number | undefined,
-    height?: number | undefined,
+    height: number | undefined = width,
     pivotX = 0.5,
     pivotY = 0.5
   ) => {

@@ -5,20 +5,60 @@ import {
   InputsController
 } from '@game/controllers'
 import { TPosition } from '@game/@types'
-import { Vector } from '@game/entities'
+import { Vector, Projectile } from '@game/entities'
 import { KEYS } from '@game/config'
 
 class Player {
   readonly image = new Image()
   private clockEvent: () => void
   position: TPosition
-  destination: TPosition
+  destination: TPosition | { x: null; y: null }
+  size: number
   velocity: Vector
-  constructor() {
+  firePeriod: number
+  fireCooldown: number
+  fireQuantity: number
+  projectiles: Array<Projectile>
+
+  constructor(size = 50, velocity = 10) {
     this.clockEvent = () => {}
     this.position = { x: 0, y: 0 }
     this.destination = this.position
-    this.velocity = new Vector(10)
+    this.size = size
+    this.velocity = new Vector(velocity)
+    this.firePeriod = 50
+    this.fireCooldown = this.firePeriod
+    this.fireQuantity = 3
+    this.projectiles = []
+  }
+
+  public init = (clock: GameClock) => {
+    const fire = this.initFire(clock)
+    const callBack = (context: ContextController) => {
+      fire(context)
+      this.move(context)
+    }
+    this.render(clock, callBack)
+  }
+
+  private initFire = (clock: GameClock) => {
+    return (context: ContextController) => {
+      this.fireCooldown--
+      if (this.fireCooldown <= 0) {
+        this.fireCooldown = this.firePeriod
+        for (let i = 0; i < this.fireQuantity; i++) {
+          if (this.projectiles.length >= 100) {
+            this.projectiles[0].kill()
+            this.projectiles.shift()
+          }
+          const projectile = new Projectile()
+          this.projectiles.push(projectile)
+          const angle =
+            (i - (this.fireQuantity - 1) / 2) / (2 * this.fireQuantity)
+          projectile.init(clock, context, this.position, angle)
+        }
+      }
+    }
   }
 
   private moveTo = (destination: unknown, controller: unknown) => {
@@ -31,7 +71,7 @@ class Player {
 
   private moveInDirection = (move: unknown, moveFunc: unknown) => {
     const go = moveFunc as (move: boolean) => void
-    this.destination = { x: -1, y: -1 }
+    this.destination = { x: null, y: null }
     go(move as boolean)
     this.velocity.correct()
   }
@@ -107,12 +147,21 @@ class Player {
   private move = (context: ContextController) => {
     this.velocity.defineByDirection(this.destination, this.position)
     this.position = this.velocity.applyTo(this.position)
-    context.drawImage(this.image, this.position.x, this.position.y, 150, 50)
+    context.drawImage(
+      this.image,
+      this.position.x,
+      this.position.y,
+      this.size * 3,
+      this.size
+    )
   }
 
-  render = (clock: GameClock) => {
+  render = (
+    clock: GameClock,
+    callback: (context: ContextController) => void
+  ) => {
     this.image.onload = () => {
-      this.clockEvent = clock.startEvent(this.move)
+      this.clockEvent = clock.startEvent(callback)
     }
     this.image.src = teslaWithAGun
   }
