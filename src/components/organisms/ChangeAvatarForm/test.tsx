@@ -21,7 +21,6 @@ describe('<ChangeAvatarForm />', () => {
   })
 
   it('should renders correct <ChangeAvatarForm />', () => {
-
     const wrapper = shallow(
       <Provider store={store}>
         <ChangeAvatarForm successCallback={successCallback} />

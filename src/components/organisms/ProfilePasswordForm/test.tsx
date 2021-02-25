@@ -22,7 +22,6 @@ describe('<ProfilePasswordForm />', () => {
   })
 
   it('should renders correct <ProfilePasswordForm />', () => {
-
     const wrapper = shallow(
       <Provider store={store}>
         <ProfilePasswordForm successCallback={successCallback} />
