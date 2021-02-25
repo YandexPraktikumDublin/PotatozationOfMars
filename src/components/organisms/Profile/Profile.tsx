@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react'
+import React, { FC, memo, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserSelector } from '@store/user/fetchUser/selectors'
 import {
@@ -27,6 +27,16 @@ const Profile: FC<TProfileProps> = memo(() => {
   const handleLogoutButtonClick = () => {
     dispatch(logoutRequest())
   }
+
+  useEffect(() => {
+    if (isShowProfileForm) {
+      toggleProfileForm()
+    }
+
+    if (isShowPasswordForm) {
+      togglePasswordForm()
+    }
+  }, [user])
 
   return (
     <div className="relative">
@@ -75,11 +85,9 @@ const Profile: FC<TProfileProps> = memo(() => {
         </>
       )}
 
-      {isShowProfileForm && <ProfileForm successCallback={toggleProfileForm} />}
+      {isShowProfileForm && <ProfileForm />}
 
-      {isShowPasswordForm && (
-        <ProfilePasswordForm successCallback={togglePasswordForm} />
-      )}
+      {isShowPasswordForm && <ProfilePasswordForm />}
     </div>
   )
 })

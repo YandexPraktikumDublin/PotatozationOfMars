@@ -1,6 +1,6 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects'
 import { axiosInstance } from '@api'
-import { updateAvatarRequest, updateAvatarFailure } from './actions'
+import { updateAvatarSuccess, updateAvatarFailure } from './actions'
 import { UPDATE_AVATAR_REQUEST } from './actionTypes'
 import { IUpdateAvatarRequestPayload } from './types'
 
@@ -11,7 +11,7 @@ function* updateAvatarSaga(data: Record<string, any>) {
   try {
     const response = yield call(updateAvatar, data.payload)
 
-    yield put(updateAvatarRequest(response.data))
+    yield put(updateAvatarSuccess(response.data))
   } catch (error) {
     yield put(
       updateAvatarFailure({

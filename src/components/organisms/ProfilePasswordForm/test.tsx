@@ -11,8 +11,6 @@ const mockStore = configureStore([])
 describe('<ProfilePasswordForm />', () => {
   let store: Store
 
-  const successCallback = jest.fn()
-
   const initialState = {
     user: {}
   }
@@ -24,7 +22,7 @@ describe('<ProfilePasswordForm />', () => {
   it('should renders correct <ProfilePasswordForm />', () => {
     const wrapper = shallow(
       <Provider store={store}>
-        <ProfilePasswordForm successCallback={successCallback} />
+        <ProfilePasswordForm />
       </Provider>
     )
 

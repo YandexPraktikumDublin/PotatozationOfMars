@@ -21,11 +21,9 @@ describe('<ProfileForm />', () => {
   })
 
   it('should renders correct <ProfileForm />', () => {
-    const successCallback = jest.fn()
-
     const wrapper = shallow(
       <Provider store={store}>
-        <ProfileForm successCallback={successCallback} />
+        <ProfileForm />
       </Provider>
     )
 

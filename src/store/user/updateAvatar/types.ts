@@ -9,7 +9,16 @@ export interface IUpdateAvatarRequestPayload {
 }
 
 export interface IUpdateAvatarSuccessPayload {
-  payload: string
+  id?: number
+  /* eslint-disable camelcase */
+  first_name?: string
+  second_name?: string
+  display_name?: string
+  /* eslint-enable camelcase */
+  login?: string
+  email?: string
+  phone?: string
+  avatar?: string
 }
 
 export interface IUpdateAvatarFailurePayload {

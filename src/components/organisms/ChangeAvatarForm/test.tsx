@@ -10,7 +10,6 @@ const mockStore = configureStore([])
 
 describe('<ChangeAvatarForm />', () => {
   let store: Store
-  const successCallback = jest.fn()
 
   const initialState = {
     user: {}
@@ -23,7 +22,7 @@ describe('<ChangeAvatarForm />', () => {
   it('should renders correct <ChangeAvatarForm />', () => {
     const wrapper = shallow(
       <Provider store={store}>
-        <ChangeAvatarForm successCallback={successCallback} />
+        <ChangeAvatarForm />
       </Provider>
     )
 

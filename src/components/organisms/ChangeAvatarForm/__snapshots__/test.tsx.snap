@@ -32,8 +32,6 @@ exports[`<ChangeAvatarForm /> should renders correct <ChangeAvatarForm /> 1`] = 
     }
   }
 >
-  <ChangeAvatarForm
-    successCallback={[MockFunction]}
-  />
+  <ChangeAvatarForm />
 </ContextProvider>
 `;

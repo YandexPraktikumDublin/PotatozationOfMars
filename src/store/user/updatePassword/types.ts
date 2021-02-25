@@ -10,7 +10,16 @@ export interface IUpdatePasswordRequestPayload {
 }
 
 export interface IUpdatePasswordSuccessPayload {
-  payload: string
+  id?: number
+  /* eslint-disable camelcase */
+  first_name?: string
+  second_name?: string
+  display_name?: string
+  /* eslint-enable camelcase */
+  login?: string
+  email?: string
+  phone?: string
+  avatar?: string
 }
 
 export interface IUpdatePasswordFailurePayload {

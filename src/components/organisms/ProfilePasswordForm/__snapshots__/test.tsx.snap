@@ -32,8 +32,6 @@ exports[`<ProfilePasswordForm /> should renders correct <ProfilePasswordForm /> 
     }
   }
 >
-  <ProfilePasswordForm
-    successCallback={[MockFunction]}
-  />
+  <ProfilePasswordForm />
 </ContextProvider>
 `;

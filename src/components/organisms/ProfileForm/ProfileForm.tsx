@@ -9,9 +9,7 @@ import {
 } from '@store/user/fetchUser/selectors'
 import { updateUserRequest } from '@store/user/updateUser/actions'
 
-type TProfileFormProps = {
-  successCallback: () => void
-}
+type TProfileFormProps = {}
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -33,45 +31,42 @@ const validationSchema = Yup.object().shape({
     .required('Required')
 })
 
-const ProfileForm: FC<TProfileFormProps> = memo(
-  ({ successCallback }: TProfileFormProps) => {
-    const dispatch = useDispatch()
+const ProfileForm: FC<TProfileFormProps> = memo(() => {
+  const dispatch = useDispatch()
 
-    const user = useSelector(getUserSelector)
-    const profileError = useSelector(getUserErrorSelector) ?? ''
+  const user = useSelector(getUserSelector)
+  const profileError = useSelector(getUserErrorSelector) ?? ''
 
-    const handleSubmit = async (values: FormikValues) => {
-      dispatch(
-        updateUserRequest({
-          email: values.email,
-          login: values.login,
-          first_name: values.firstName,
-          second_name: values.secondName,
-          display_name: values.displayName,
-          phone: values.phone
-        })
-      )
-      successCallback()
-    }
-
-    return (
-      <BaseForm
-        initialValues={user ?? {}}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-        buttonText="Save"
-        formError={profileError}
-      >
-        <BaseInput type="email" name="email" placeholder="Email" />
-        <BaseInput type="text" name="login" placeholder="Login" />
-        <BaseInput type="text" name="firstName" placeholder="First name" />
-        <BaseInput type="text" name="secondName" placeholder="Last name" />
-        <BaseInput type="text" name="displayName" placeholder="Display name" />
-        <BaseInput type="tel" name="phone" placeholder="Phone" />
-      </BaseForm>
+  const handleSubmit = (values: FormikValues) => {
+    dispatch(
+      updateUserRequest({
+        email: values.email,
+        login: values.login,
+        first_name: values.firstName,
+        second_name: values.secondName,
+        display_name: values.displayName,
+        phone: values.phone
+      })
     )
   }
-)
+
+  return (
+    <BaseForm
+      initialValues={user ?? {}}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+      buttonText="Save"
+      formError={profileError}
+    >
+      <BaseInput type="email" name="email" placeholder="Email" />
+      <BaseInput type="text" name="login" placeholder="Login" />
+      <BaseInput type="text" name="firstName" placeholder="First name" />
+      <BaseInput type="text" name="secondName" placeholder="Last name" />
+      <BaseInput type="text" name="displayName" placeholder="Display name" />
+      <BaseInput type="tel" name="phone" placeholder="Phone" />
+    </BaseForm>
+  )
+})
 
 ProfileForm.displayName = 'ProfileForm'
 
