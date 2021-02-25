@@ -1,9 +1,10 @@
-import React, { FC, memo, useState } from 'react'
+import React, { FC, memo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { FormikValues } from 'formik'
-import { DEFAULT_ERROR_MESSAGE } from '@config'
-import { BaseForm, BaseInput } from '@components/organisms'
-import { changeUserPassword } from '@api'
 import * as Yup from 'yup'
+import { BaseForm, BaseInput } from '@components/organisms'
+import { getUserErrorSelector } from '@store/user/fetchUser/selectors'
+import { updatePasswordRequest } from '@store/user/updatePassword/actions'
 
 type TProfilePasswordFormProps = {
   successCallback: () => void
@@ -21,18 +22,17 @@ const initialValues = {
 
 const ProfilePasswordForm: FC<TProfilePasswordFormProps> = memo(
   ({ successCallback }: TProfilePasswordFormProps) => {
-    const [formError, setFormError] = useState<string>('')
-
+    const dispatch = useDispatch()
+    const passwordError = useSelector(getUserErrorSelector) ?? ''
     const handleSubmit = async (values: FormikValues) => {
-      try {
-        setFormError('')
+      dispatch(
+        updatePasswordRequest({
+          oldPassword: values.oldPassword,
+          newPassword: values.newPassword
+        })
+      )
 
-        await changeUserPassword(values)
-
-        successCallback()
-      } catch (error) {
-        setFormError(error?.message ?? DEFAULT_ERROR_MESSAGE)
-      }
+      successCallback()
     }
 
     return (
@@ -41,7 +41,7 @@ const ProfilePasswordForm: FC<TProfilePasswordFormProps> = memo(
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
         buttonText="Change password"
-        formError={formError}
+        formError={passwordError}
       >
         <BaseInput
           type="password"

@@ -5,7 +5,7 @@ import { ChangeAvatarModal } from '@components/organisms'
 import { SERVER_URL } from '@config'
 import { profile } from '@images'
 import { useToggle } from '@hooks'
-import { getUserSelector } from '@store/user/selectors'
+import { getUserSelector } from '@store/user/fetchUser/selectors'
 
 type TProfileHeaderProps = {
   className?: string

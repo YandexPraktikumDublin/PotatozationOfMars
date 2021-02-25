@@ -1,9 +1,10 @@
-import React, { FC, memo, useState } from 'react'
-import { DEFAULT_ERROR_MESSAGE } from '@config'
+import React, { FC, memo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUserErrorSelector } from '@store/user/fetchUser/selectors'
 import { BaseForm, BaseFileInput } from '@components/organisms'
 import * as Yup from 'yup'
 import { FormikValues } from 'formik'
-import { updateUserAvatar } from '@api'
+import { updateAvatarRequest } from '@store/user/updateAvatar/actions'
 
 type TChangeAvatarFormProps = {
   successCallback: () => void
@@ -19,21 +20,16 @@ const initialValues = {
 
 const ChangeAvatarForm: FC<TChangeAvatarFormProps> = memo(
   ({ successCallback }: TChangeAvatarFormProps) => {
-    const [formError, setFormError] = useState<string>('')
+    const dispatch = useDispatch()
+    const avatarError = useSelector(getUserErrorSelector) ?? ''
 
     const handleSubmit = async (values: FormikValues) => {
-      try {
-        setFormError('')
+      const formData = new FormData()
+      formData.append('avatar', values.avatar)
 
-        const form = new FormData()
-        form.append('avatar', values.avatar)
+      dispatch(updateAvatarRequest({ formData }))
 
-        await updateUserAvatar(form)
-
-        successCallback()
-      } catch (error) {
-        setFormError(error?.message ?? DEFAULT_ERROR_MESSAGE)
-      }
+      successCallback()
     }
 
     return (
@@ -42,7 +38,7 @@ const ChangeAvatarForm: FC<TChangeAvatarFormProps> = memo(
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
         buttonText="Change avatar"
-        formError={formError}
+        formError={avatarError}
       >
         <BaseFileInput name="avatar" />
       </BaseForm>

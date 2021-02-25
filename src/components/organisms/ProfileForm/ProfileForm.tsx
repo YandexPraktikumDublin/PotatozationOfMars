@@ -1,11 +1,13 @@
-import React, { FC, memo, useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { FC, memo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import * as Yup from 'yup'
 import { FormikValues } from 'formik'
-import { DEFAULT_ERROR_MESSAGE } from '@config'
 import { BaseForm, BaseInput } from '@components/organisms'
-import { changeUserData } from '@api'
-import { getUserSelector } from '@store/user/selectors'
+import {
+  getUserSelector,
+  getUserErrorSelector
+} from '@store/user/fetchUser/selectors'
+import { updateUserRequest } from '@store/user/updateUser/actions'
 
 type TProfileFormProps = {
   successCallback: () => void
@@ -33,15 +35,14 @@ const validationSchema = Yup.object().shape({
 
 const ProfileForm: FC<TProfileFormProps> = memo(
   ({ successCallback }: TProfileFormProps) => {
-    const [formError, setFormError] = useState<string>('')
+    const dispatch = useDispatch()
 
     const user = useSelector(getUserSelector)
+    const profileError = useSelector(getUserErrorSelector) ?? ''
 
     const handleSubmit = async (values: FormikValues) => {
-      try {
-        setFormError('')
-
-        await changeUserData({
+      dispatch(
+        updateUserRequest({
           email: values.email,
           login: values.login,
           first_name: values.firstName,
@@ -49,11 +50,8 @@ const ProfileForm: FC<TProfileFormProps> = memo(
           display_name: values.displayName,
           phone: values.phone
         })
-
-        successCallback()
-      } catch (error) {
-        setFormError(error?.message ?? DEFAULT_ERROR_MESSAGE)
-      }
+      )
+      successCallback()
     }
 
     return (
@@ -62,7 +60,7 @@ const ProfileForm: FC<TProfileFormProps> = memo(
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
         buttonText="Save"
-        formError={formError}
+        formError={profileError}
       >
         <BaseInput type="email" name="email" placeholder="Email" />
         <BaseInput type="text" name="login" placeholder="Login" />

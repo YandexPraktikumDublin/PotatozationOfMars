@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchUserRequest } from '@store/user/actions'
-import { getUserSelector } from '@store/user/selectors'
+import { fetchUserRequest } from '@store/user/fetchUser/actions'
+import { getUserSelector } from '@store/user/fetchUser/selectors'
 import { Redirect } from 'react-router'
 import { PATHS } from '@config'
 

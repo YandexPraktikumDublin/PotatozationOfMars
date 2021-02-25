@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserSelector } from '@store/user/selectors'
+import { getUserSelector } from '@store/user/fetchUser/selectors'
 import {
   ActionsListItem,
   NameValueListItem,
