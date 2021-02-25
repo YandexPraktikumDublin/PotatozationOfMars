@@ -3,10 +3,8 @@ import ContextController from './contextController'
 type TCallback = (context: ContextController) => void
 
 class GameClock {
-  context: ContextController
   events: Array<TCallback>
-  constructor(context: ContextController) {
-    this.context = context
+  constructor() {
     this.events = []
   }
 
@@ -15,19 +13,19 @@ class GameClock {
   }
 
   startEvent = (callback: TCallback) => {
-    if (this.running(callback)) return
-    this.events.push(callback)
+    if (!this.running(callback)) {
+      this.events.push(callback)
+    }
+    return () => {
+      if (!this.running(callback)) return
+      this.events = this.events.filter((event) => event !== callback)
+    }
   }
 
-  endEvent = (callback: TCallback) => {
-    if (!this.running(callback)) return
-    this.events = this.events.filter((event) => event !== callback)
-  }
-
-  draw = () => {
-    this.context.clearFrame()
+  draw = (context: ContextController) => {
+    context.clearFrame()
     this.events.forEach((event) => {
-      event(this.context)
+      event(context)
     })
   }
 }

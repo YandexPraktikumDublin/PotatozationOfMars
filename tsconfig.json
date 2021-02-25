@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "es2017"
-    ],
+    "lib": ["dom", "es2017"],
     "module": "esnext",
     "moduleResolution": "node",
     "target": "es5",
@@ -30,24 +27,17 @@
       "@hocs": ["./src/HOCs/index.ts"],
       "@images": ["./src/images/index.ts"],
       "@api": ["./src/api/index.ts"],
+      "@game/*": ["./src/game/*"],
       "@game/@types": ["./src/game/@types/index.ts"],
       "@game/entities": ["./src/game/entities/index.ts"],
       "@game/controllers": ["./src/game/controllers/index.ts"],
       "@hooks": ["./src/hooks/index.ts"],
       "@types": ["./src/types/index.ts"],
       "@store/*": ["./src/store/*"],
-      "@history": ["./src/history.ts"],
+      "@history": ["./src/history.ts"]
     },
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "typeRoots": ["node_modules/@types"]
   },
-  "include": [
-    "src",
-    "src/custom.d.ts",
-    "./node_modules/@types"
-  ],
-  "exclude": [
-    "**/*.js"
-  ]
+  "include": ["src", "src/custom.d.ts", "./node_modules/@types"],
+  "exclude": ["**/*.js"]
 }

@@ -1,11 +1,18 @@
 class ContextController {
   instance: CanvasRenderingContext2D
   coefficient: { cx: number; cy: number }
-  constructor(context: CanvasRenderingContext2D, width = 1500, height = 750) {
+  center: { ox: number; oy: number }
+  constructor(context: CanvasRenderingContext2D, width = 2000, height = 1000) {
     this.instance = context
     this.instance.canvas.width = width
     this.instance.canvas.height = height
+    this.center = { ox: width / 2, oy: height / 2 }
     this.coefficient = { cx: 1, cy: 1 }
+  }
+
+  getSize = () => {
+    const { width, height } = this.instance.canvas
+    return { width, height }
   }
 
   resize = () => {
@@ -25,16 +32,17 @@ class ContextController {
     image: HTMLImageElement,
     x: number,
     y: number,
-    width?: number | undefined,
-    height?: number | undefined,
+    width?: number,
+    height?: number,
     pivotX = 0.5,
     pivotY = 0.5
   ) => {
-    width = width || image.width
-    height = height || image.height
-    x -= pivotX * width
-    y -= pivotY * height
-    this.instance.drawImage(image, x, y, width, height)
+    const { ox, oy } = this.center
+    const imageWidth = width ?? image.width
+    const imageHeight = height ?? width ?? image.height
+    x -= pivotX * imageWidth - ox
+    y -= pivotY * imageHeight - oy
+    this.instance.drawImage(image, x, y, imageWidth, imageHeight)
   }
 
   clearFrame = () => {
