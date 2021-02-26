@@ -1,72 +1,41 @@
-import React, { FC, memo, useCallback, useEffect, useState } from 'react'
-import {
-  GamePauseMenuModal,
-  Navigation,
-  TumblerTheme
-} from '@components/organisms'
-import { NavigationButton, NavigationLink } from '@components/molecules'
+import React, { FC, memo } from 'react'
+import { Navigation, TumblerTheme } from '@components/organisms'
+import { NavigationLink } from '@components/molecules'
 import { PATHS } from '@config'
-import { home, pause, profile, forum, leaderboard } from '@images'
-import { useLocation } from 'react-router-dom'
+import { home, profile, forum, leaderboard } from '@images'
+import { useSelector } from 'react-redux'
+import { getUserSelector } from '@store/user/fetchUser/selectors'
 
 type THeaderProps = {}
 
 const Header: FC<THeaderProps> = memo(() => {
-  const location = useLocation()
-
-  const [gamePauseModalDisplay, setGamePauseModalDisplay] = useState<boolean>(
-    false
-  )
-
-  const toggleModal = () => {
-    setGamePauseModalDisplay((value) => !value)
-  }
-
-  const escIsPressed = useCallback(
-    (evt: KeyboardEvent) => {
-      if (evt.code === 'Escape') toggleModal()
-    },
-    [toggleModal]
-  )
-
-  useEffect(() => {
-    if (location.pathname === PATHS.GAME) {
-      document.addEventListener('keydown', escIsPressed)
-    }
-
-    return () => {
-      document.removeEventListener('keydown', escIsPressed)
-    }
-  }, [])
+  const user = useSelector(getUserSelector)
 
   return (
     <header className="flex items-center justify-between p-4">
       <Navigation>
-        <NavigationLink title="Home" href={PATHS.BASE} imageSrc={home} />
-        {location.pathname === PATHS.GAME && (
-          <NavigationButton
-            title="Pause"
-            onClick={toggleModal}
-            imageSrc={pause}
-          />
-        )}
-        {gamePauseModalDisplay && (
-          <GamePauseMenuModal toggleModal={toggleModal} />
+        {user && (
+          <NavigationLink title="Home" href={PATHS.BASE} imageSrc={home} />
         )}
       </Navigation>
 
       <Navigation>
-        <NavigationLink
-          title="Profile"
-          href={PATHS.PROFILE}
-          imageSrc={profile}
-        />
-        <NavigationLink title="Forum" href={PATHS.FORUM} imageSrc={forum} />
-        <NavigationLink
-          title="Leaderboard"
-          href={PATHS.LEADERBOARD}
-          imageSrc={leaderboard}
-        />
+        {user && (
+          <>
+            <NavigationLink
+              title="Profile"
+              href={PATHS.PROFILE}
+              imageSrc={profile}
+            />
+            <NavigationLink title="Forum" href={PATHS.FORUM} imageSrc={forum} />
+            <NavigationLink
+              title="Leaderboard"
+              href={PATHS.LEADERBOARD}
+              imageSrc={leaderboard}
+            />
+          </>
+        )}
+
         <TumblerTheme />
       </Navigation>
     </header>

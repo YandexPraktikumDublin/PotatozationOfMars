@@ -1,92 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ChangeAvatarForm /> should renders correct <ChangeAvatarForm /> 1`] = `
-<BaseForm
-  buttonText="Change avatar"
-  formError=""
-  initialValues={
+<ContextProvider
+  value={
     Object {
-      "avatar": "",
-    }
-  }
-  onSubmit={[Function]}
-  validationSchema={
-    ObjectSchema {
-      "_blacklist": ReferenceSet {
-        "list": Set {},
-        "refs": Map {},
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
       },
-      "_blacklistError": undefined,
-      "_excludedEdges": Array [],
-      "_nodes": Array [
-        "avatar",
-      ],
-      "_sortErrors": [Function],
-      "_typeError": [Function],
-      "_whitelist": ReferenceSet {
-        "list": Set {},
-        "refs": Map {},
-      },
-      "_whitelistError": undefined,
-      "conditions": Array [],
-      "deps": Array [],
-      "exclusiveTests": Object {},
-      "fields": Object {
-        "avatar": BaseSchema {
-          "_blacklist": ReferenceSet {
-            "list": Set {},
-            "refs": Map {},
-          },
-          "_blacklistError": undefined,
-          "_mutate": undefined,
-          "_typeError": [Function],
-          "_whitelist": ReferenceSet {
-            "list": Set {},
-            "refs": Map {},
-          },
-          "_whitelistError": undefined,
-          "conditions": Array [],
-          "deps": Array [],
-          "exclusiveTests": Object {
-            "required": true,
-          },
-          "spec": Object {
-            "abortEarly": true,
-            "label": undefined,
-            "meta": undefined,
-            "nullable": false,
-            "presence": "required",
-            "recursive": true,
-            "strict": false,
-            "strip": false,
-          },
-          "tests": Array [
-            [Function],
-          ],
-          "transforms": Array [],
-          "type": "mixed",
+      "subscription": Subscription {
+        "handleChangeWrapper": [Function],
+        "listeners": Object {
+          "notify": [Function],
         },
+        "onStateChange": [Function],
+        "parentSub": undefined,
+        "store": Object {
+          "clearActions": [Function],
+          "dispatch": [Function],
+          "getActions": [Function],
+          "getState": [Function],
+          "replaceReducer": [Function],
+          "subscribe": [Function],
+        },
+        "unsubscribe": null,
       },
-      "spec": Object {
-        "abortEarly": true,
-        "label": undefined,
-        "meta": undefined,
-        "nullable": false,
-        "presence": "optional",
-        "recursive": true,
-        "strict": false,
-        "strip": false,
-      },
-      "tests": Array [],
-      "transforms": Array [
-        [Function],
-      ],
-      "type": "object",
     }
   }
 >
-  <BaseInput
-    name="avatar"
-  />
-</BaseForm>
+  <ChangeAvatarForm />
+</ContextProvider>
 `;

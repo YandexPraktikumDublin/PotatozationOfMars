@@ -1,19 +1,34 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchUserRequest } from '@store/user/actions'
-import { getUserSelector } from '@store/user/selectors'
+import { fetchUserRequest } from '@store/user/fetchUser/actions'
+import {
+  getUserPendingSelector,
+  getUserSelector
+} from '@store/user/fetchUser/selectors'
 import { Redirect } from 'react-router'
 import { PATHS } from '@config'
 
 export default function withAuth<T>(Component: React.FC<T>) {
   return (props: any) => {
+    const [isInitialized, setIsInitialized] = useState<boolean>(false)
+
     const dispatch = useDispatch()
     const user = useSelector(getUserSelector)
+    const pendingUser = useSelector(getUserPendingSelector)
 
     useEffect(() => {
+      setIsInitialized(true)
       dispatch(fetchUserRequest())
     }, [])
 
-    return user ? <Component {...props} /> : <Redirect to={PATHS.AUTH} />
+    if (!isInitialized || (!user && pendingUser)) {
+      return null // TODO: add loader
+    }
+
+    if (isInitialized && !user && !pendingUser) {
+      return <Redirect to={PATHS.AUTH} />
+    }
+
+    return <Component {...props} />
   }
 }

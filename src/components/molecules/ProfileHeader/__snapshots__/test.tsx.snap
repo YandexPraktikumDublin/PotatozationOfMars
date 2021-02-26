@@ -24,6 +24,7 @@ exports[`<ProfileHeader /> should has className from className prop 1`] = `
       >
         <img
           alt=""
+          className="w-20 h-20"
           height="80"
           src={[Function]}
           width="80"

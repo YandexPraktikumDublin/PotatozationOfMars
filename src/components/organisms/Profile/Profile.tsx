@@ -1,7 +1,6 @@
-import React, { FC, memo, useCallback } from 'react'
-import { useHistory } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { getUserSelector } from '@store/user/selectors'
+import React, { FC, memo, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUserSelector } from '@store/user/fetchUser/selectors'
 import {
   ActionsListItem,
   NameValueListItem,
@@ -10,14 +9,13 @@ import {
 } from '@components/atoms'
 import { List, ProfileHeader } from '@components/molecules'
 import { ProfileForm, ProfilePasswordForm } from '@components/organisms'
-import { logout } from '@api'
-import { PATHS } from '@config'
+import { logoutRequest } from '@store/logout/actions'
 import { useToggle } from '@hooks'
 
 type TProfileProps = {}
 
 const Profile: FC<TProfileProps> = memo(() => {
-  const history = useHistory()
+  const dispatch = useDispatch()
 
   const user = useSelector(getUserSelector)
 
@@ -26,11 +24,19 @@ const Profile: FC<TProfileProps> = memo(() => {
 
   const isShownForms = isShowProfileForm || isShowPasswordForm
 
-  const handleLogoutButtonClick = useCallback(() => {
-    logout()
-      .then(() => history.push(PATHS.AUTH))
-      .catch()
-  }, [logout, PATHS.AUTH])
+  const handleLogoutButtonClick = () => {
+    dispatch(logoutRequest())
+  }
+
+  useEffect(() => {
+    if (isShowProfileForm) {
+      toggleProfileForm()
+    }
+
+    if (isShowPasswordForm) {
+      togglePasswordForm()
+    }
+  }, [user])
 
   return (
     <div className="relative">
@@ -79,11 +85,9 @@ const Profile: FC<TProfileProps> = memo(() => {
         </>
       )}
 
-      {isShowProfileForm && <ProfileForm successCallback={toggleProfileForm} />}
+      {isShowProfileForm && <ProfileForm />}
 
-      {isShowPasswordForm && (
-        <ProfilePasswordForm successCallback={togglePasswordForm} />
-      )}
+      {isShowPasswordForm && <ProfilePasswordForm />}
     </div>
   )
 })
