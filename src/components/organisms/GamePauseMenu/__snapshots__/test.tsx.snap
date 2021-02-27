@@ -7,7 +7,9 @@ exports[`<GamePauseMenu /> should renders correct <GamePauseMenu /> 1`] = `
   >
     Resume
   </Button>
-  <Button>
+  <Button
+    onClick={[Function]}
+  >
     Settings
   </Button>
   <Button

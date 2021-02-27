@@ -40,8 +40,8 @@ class ContextController {
     const { ox, oy } = this.center
     const imageWidth = width ?? image.width
     const imageHeight = height ?? width ?? image.height
-    x -= pivotX * imageWidth - ox
-    y -= pivotY * imageHeight - oy
+    x += ox - pivotX * imageWidth
+    y += oy - pivotY * imageHeight
     this.instance.drawImage(image, x, y, imageWidth, imageHeight)
   }
 

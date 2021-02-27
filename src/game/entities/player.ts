@@ -26,9 +26,9 @@ class Player {
     this.destination = this.position
     this.size = size
     this.velocity = new Vector(velocity)
-    this.firePeriod = 40
+    this.firePeriod = 50
     this.fireCooldown = this.firePeriod
-    this.fireQuantity = 3
+    this.fireQuantity = 1
     this.projectiles = []
   }
 
@@ -47,7 +47,7 @@ class Player {
       if (this.fireCooldown <= 0) {
         this.fireCooldown = this.firePeriod
         for (let i = 0; i < this.fireQuantity; i++) {
-          if (this.projectiles.length >= 100) {
+          if (this.projectiles.length >= 200) {
             this.projectiles[0].kill()
             this.projectiles.shift()
           }
@@ -127,22 +127,22 @@ class Player {
       this.velocity.correct()
     }
 
-    const upHandler = InputsController.onKeyPress(move, KEYS.up, stay, KEYS.up)
+    const upHandler = InputsController.onKeyPress(KEYS.up, move, stay, KEYS.up)
     const downHandler = InputsController.onKeyPress(
-      move,
       KEYS.down,
+      move,
       stay,
       KEYS.down
     )
     const leftHandler = InputsController.onKeyPress(
-      move,
       KEYS.left,
+      move,
       stay,
       KEYS.left
     )
     const rightHandler = InputsController.onKeyPress(
-      move,
       KEYS.right,
+      move,
       stay,
       KEYS.right
     )

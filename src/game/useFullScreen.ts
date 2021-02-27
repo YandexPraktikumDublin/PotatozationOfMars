@@ -27,7 +27,7 @@ const useFullScreen = () => {
   }
 
   useEffect(() => {
-    return InputsController.onKeyPress(toggleFullScreen, KEYS.fullscreen)
+    return InputsController.onKeyPress(KEYS.fullscreen, toggleFullScreen)
   }, [])
 
   return { windowRef, FSIcon, toggleFullScreen }

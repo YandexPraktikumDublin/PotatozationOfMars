@@ -14,8 +14,8 @@ class InputsController {
   }
 
   onKeyPress = (
-    callbackDown: TKeyCallback,
     keyCodes: Array<string>,
+    callbackDown: TKeyCallback,
     callbackUp: TKeyCallback = () => {},
     ...rest: Array<unknown>
   ) => {

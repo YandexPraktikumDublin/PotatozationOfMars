@@ -8,7 +8,12 @@ import { pause } from '@images'
 type TGameWindowProps = {}
 
 const GameWindow: FC<TGameWindowProps> = memo(() => {
-  const { canvasRef, gamePauseModalDisplay, toggleModal } = useRenderCanvas()
+  const {
+    canvasRef,
+    gamePauseDisplay,
+    toggleModal,
+    settings
+  } = useRenderCanvas()
   const { windowRef, FSIcon, toggleFullScreen } = useFullScreen()
 
   return (
@@ -20,8 +25,8 @@ const GameWindow: FC<TGameWindowProps> = memo(() => {
         onClick={toggleModal}
         imageSrc={pause}
       />
-      {gamePauseModalDisplay && (
-        <GamePauseMenuModal toggleModal={toggleModal} />
+      {gamePauseDisplay && (
+        <GamePauseMenuModal toggleModal={toggleModal} settings={settings} />
       )}
       <NavigationButton
         className="absolute top-3 right-3"
