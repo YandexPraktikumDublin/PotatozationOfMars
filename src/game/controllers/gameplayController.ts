@@ -12,7 +12,7 @@ class GameplayController {
   clock: GameClock
   player: Player
   private currentLevel: number = 0
-  private levels: Array<EnemyController>
+  readonly levels: Array<EnemyController>
   private handlers: Record<string, () => void>
   private animationFrameId: number
 
@@ -67,7 +67,7 @@ class GameplayController {
           projectilePos
         )
         if (
-          distance <= projectileSize + entitySize &&
+          distance <= projectileSize / 2 + entitySize / 2 &&
           projectile.isAlive &&
           entity.isAlive
         ) {
@@ -80,12 +80,16 @@ class GameplayController {
 
   private isCollidedPlayer = (enemies: EnemyController) => {
     const playerPos = this.player.position
+    const playerSize = this.player.size
     const projectiles = enemies.getProjectiles()
     projectiles.forEach((projectile) => {
       const projectilePos = projectile.position
       const projectileSize = projectile.size
       const distance = GameplayController.getDistance(playerPos, projectilePos)
-      if (distance <= projectileSize && projectile.isAlive) {
+      if (
+        distance <= projectileSize / 2 + playerSize / 2 &&
+        projectile.isAlive
+      ) {
         projectile.kill()
       }
     })

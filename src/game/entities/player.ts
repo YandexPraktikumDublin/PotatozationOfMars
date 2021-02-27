@@ -162,15 +162,16 @@ class Player {
   }
 
   private move = (context: ContextController) => {
+    const { top, right, bottom, left } = context.getBorders()
     this.velocity.defineByDirection(this.destination, this.position)
     this.position = this.velocity.applyTo(this.position)
-    context.drawImage(
-      this.image,
-      this.position.x,
-      this.position.y,
-      this.size * 3,
-      this.size
-    )
+    const { x, y } = this.position
+    this.position.x = x > right ? right : x < left ? left : this.position.x
+    this.position.y = y > bottom ? bottom : y < top ? top : this.position.y
+    context.drawImage(this.image, this.position.x, this.position.y, {
+      width: this.size * 3,
+      height: this.size
+    })
   }
 
   render = (
