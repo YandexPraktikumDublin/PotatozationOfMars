@@ -36,7 +36,7 @@ class GameplayController {
       playerControl: this.player.controlWithMouse(this.canvas, this.context)
     }
     const level = this.levels[this.currentLevel]
-    level.init(this.clock, this.context, 1000, 10, 5)
+    level.init(this.clock, this.context, 1000000, 10, 5)
     const collisionHandler = this.clock.startEvent(() => {
       this.isCollidedPlayer(level)
       this.isHitEnemy(level)
@@ -57,20 +57,18 @@ class GameplayController {
     const projectiles = this.player.projectiles
     const entities = enemies.entities
     projectiles.forEach((projectile) => {
+      if (!projectile.isAlive) return
       const projectileSize = projectile.size
       const projectilePos = projectile.position
       entities.forEach((entity) => {
+        if (!entity.isAlive) return
         const entitySize = entity.size
         const entityPos = entity.position
         const distance = GameplayController.getDistance(
           entityPos,
           projectilePos
         )
-        if (
-          distance <= projectileSize / 2 + entitySize / 2 &&
-          projectile.isAlive &&
-          entity.isAlive
-        ) {
+        if (distance <= projectileSize / 2 + entitySize / 2) {
           projectile.kill()
           entity.kill()
         }
@@ -83,13 +81,11 @@ class GameplayController {
     const playerSize = this.player.size
     const projectiles = enemies.getProjectiles()
     projectiles.forEach((projectile) => {
+      if (!projectile.isAlive) return
       const projectilePos = projectile.position
       const projectileSize = projectile.size
       const distance = GameplayController.getDistance(playerPos, projectilePos)
-      if (
-        distance <= projectileSize / 2 + playerSize / 2 &&
-        projectile.isAlive
-      ) {
+      if (distance <= projectileSize / 2 + playerSize / 2) {
         projectile.kill()
       }
     })

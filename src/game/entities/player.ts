@@ -54,7 +54,7 @@ class Player {
           const projectile = new Projectile()
           this.projectiles.push(projectile)
           const angle =
-            (i - (this.fireQuantity - 1) / 2) / (2 * this.fireQuantity)
+            (i - (this.fireQuantity - 1) / 2) / (6 * this.fireQuantity)
           projectile.init(clock, context, this.position, angle)
         }
       }
