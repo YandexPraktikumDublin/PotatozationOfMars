@@ -61,7 +61,7 @@ class Player {
     }
   }
 
-  private moveTo = (destination: unknown, controller: unknown) => {
+  private moveTo = (destination: TPosition, controller: unknown) => {
     const { coefficient, center } = controller as ContextController
     const { x, y } = destination as TPosition
     const { cx, cy } = coefficient
@@ -69,65 +69,82 @@ class Player {
     this.destination = { x: x * cx - ox, y: y * cy - oy }
   }
 
-  private moveInDirection = (move: unknown, moveFunc: unknown) => {
-    const go = moveFunc as (move: boolean) => void
-    this.destination = { x: null, y: null }
-    go(move as boolean)
-    this.velocity.correct()
-  }
-
-  private moveUp = (move: boolean) => {
-    this.velocity.y = move
-      ? -this.velocity.magnitude
-      : this.velocity.y < 0
-      ? 0
-      : this.velocity.y
-  }
-
-  private moveLeft = (move: boolean) => {
-    this.velocity.x = move
-      ? -this.velocity.magnitude
-      : this.velocity.x < 0
-      ? 0
-      : this.velocity.x
-  }
-
-  private moveRight = (move: boolean) => {
-    this.velocity.x = move
-      ? this.velocity.magnitude
-      : this.velocity.x > 0
-      ? 0
-      : this.velocity.x
-  }
-
-  private moveDown = (move: boolean) => {
-    this.velocity.y = move
-      ? this.velocity.magnitude
-      : this.velocity.y > 0
-      ? 0
-      : this.velocity.y
-  }
-
   controlWithKeyboard = () => {
-    const upHandler = InputsController.onKeyPress(
-      this.moveInDirection,
-      KEYS.up,
-      this.moveUp
-    )
+    const keysPressed = {
+      up: false,
+      down: false,
+      left: false,
+      right: false
+    }
+
+    const move = (key: unknown) => {
+      switch (key) {
+        case KEYS.up:
+          this.velocity.y = -this.velocity.magnitude
+          keysPressed.up = true
+          break
+        case KEYS.down:
+          this.velocity.y = this.velocity.magnitude
+          keysPressed.down = true
+          break
+        case KEYS.left:
+          this.velocity.x = -this.velocity.magnitude
+          keysPressed.left = true
+          break
+        case KEYS.right:
+          this.velocity.x = this.velocity.magnitude
+          keysPressed.right = true
+          break
+        default:
+          return
+      }
+      this.destination = { x: null, y: null }
+      this.velocity.correct()
+    }
+
+    const stay = (key: unknown) => {
+      switch (key) {
+        case KEYS.up:
+          this.velocity.y = keysPressed.down ? this.velocity.magnitude : 0
+          keysPressed.up = false
+          break
+        case KEYS.down:
+          this.velocity.y = keysPressed.up ? -this.velocity.magnitude : 0
+          keysPressed.down = false
+          break
+        case KEYS.left:
+          this.velocity.x = keysPressed.right ? this.velocity.magnitude : 0
+          keysPressed.left = false
+          break
+        case KEYS.right:
+          this.velocity.x = keysPressed.left ? -this.velocity.magnitude : 0
+          keysPressed.right = false
+          break
+        default:
+          return
+      }
+      this.destination = { x: null, y: null }
+      this.velocity.correct()
+    }
+
+    const upHandler = InputsController.onKeyPress(move, KEYS.up, stay, KEYS.up)
     const downHandler = InputsController.onKeyPress(
-      this.moveInDirection,
+      move,
       KEYS.down,
-      this.moveDown
+      stay,
+      KEYS.down
     )
     const leftHandler = InputsController.onKeyPress(
-      this.moveInDirection,
+      move,
       KEYS.left,
-      this.moveLeft
+      stay,
+      KEYS.left
     )
     const rightHandler = InputsController.onKeyPress(
-      this.moveInDirection,
+      move,
       KEYS.right,
-      this.moveRight
+      stay,
+      KEYS.right
     )
     return () => {
       upHandler()

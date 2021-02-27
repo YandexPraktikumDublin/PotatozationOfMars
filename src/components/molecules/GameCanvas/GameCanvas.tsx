@@ -1,10 +1,8 @@
-import React, { FC, memo } from 'react'
-import { useRenderCanvas } from '@game/controllers'
+import React, { FC, memo, Ref } from 'react'
 
-type TGameCanvasProps = {}
+type TGameCanvasProps = { forwardRef?: Ref<HTMLCanvasElement> }
 
-const GameCanvas: FC<TGameCanvasProps> = memo(() => {
-  const canvasRef = useRenderCanvas()
+const GameCanvas: FC<TGameCanvasProps> = memo(({ forwardRef }) => {
   return (
     <canvas
       className="border-2 border-white rounded-2xl h-screen"
@@ -13,7 +11,7 @@ const GameCanvas: FC<TGameCanvasProps> = memo(() => {
         maxHeight: '48vw',
         maxWidth: '96vw'
       }}
-      ref={canvasRef}
+      ref={forwardRef}
     />
   )
 })

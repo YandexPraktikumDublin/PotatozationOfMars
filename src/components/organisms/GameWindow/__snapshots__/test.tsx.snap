@@ -4,7 +4,19 @@ exports[`<GameWindow /> should renders correct <GameWindow /> 1`] = `
 <div
   className="relative flex justify-center items-center"
 >
-  <GameCanvas />
+  <GameCanvas
+    forwardRef={
+      Object {
+        "current": null,
+      }
+    }
+  />
+  <NavigationButton
+    className="absolute top-3 left-3"
+    imageSrc={[Function]}
+    onClick={[Function]}
+    title="Pause"
+  />
   <NavigationButton
     className="absolute top-3 right-3"
     imageSrc={

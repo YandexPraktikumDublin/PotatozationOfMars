@@ -1,23 +1,49 @@
-import { useRef, useEffect } from 'react'
-import { GameplayController } from '@game/controllers'
+import { useRef, useEffect, useState, useCallback } from 'react'
+import { GameplayController, InputsController } from '@game/controllers'
+import { KEYS } from '@game/config'
 
 const useRenderCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [gamePauseModalDisplay, setGamePauseModalDisplay] = useState<boolean>(
+    false
+  )
+
+  const game = new GameplayController()
+
+  let pause = false
+
+  const toggleModal = useCallback(() => {
+    pause = !pause
+    setGamePauseModalDisplay(pause)
+    if (pause) {
+      game.stop()
+    } else {
+      game.start()
+    }
+  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current as HTMLCanvasElement
-    const game = new GameplayController(canvas)
 
-    game.init()
+    const handlePause = InputsController.onKeyPress(toggleModal, KEYS.pause)
+
+    game.init(canvas)
     game.start()
 
     return () => {
       game.stop()
       game.kill()
+      handlePause()
     }
   }, [])
 
-  return canvasRef
+  return {
+    canvasRef,
+    gamePauseModalDisplay,
+    toggleModal: () => {
+      toggleModal()
+    }
+  }
 }
 
 export default useRenderCanvas

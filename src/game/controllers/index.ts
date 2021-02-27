@@ -1,6 +1,5 @@
 export { default as GameClock } from './gameClock'
 export { default as ContextController } from './contextController'
-export { default as useRenderCanvas } from '../useRenderCanvas'
 export { default as InputsController } from './inputsController'
 export { default as GameplayController } from './gameplayController'
 export { default as EnemyController } from './enemyController'

@@ -7,19 +7,18 @@ import { EnemyAsteroid, Player } from '@game/entities'
 import TPosition from '@game/@types/position'
 
 class GameplayController {
-  canvas: HTMLCanvasElement
-  context: ContextController
+  canvas: HTMLCanvasElement | null
+  context: ContextController | null
   clock: GameClock
   player: Player
   private currentLevel: number = 0
   private levels: Array<EnemyController>
   private handlers: Record<string, () => void>
   private animationFrameId: number
-  constructor(canvas: HTMLCanvasElement) {
-    this.canvas = canvas
-    this.context = new ContextController(
-      canvas.getContext('2d') as CanvasRenderingContext2D
-    )
+
+  constructor() {
+    this.canvas = null
+    this.context = null
     this.clock = new GameClock()
     this.player = new Player()
     this.levels = [new EnemyController(EnemyAsteroid)]
@@ -27,7 +26,11 @@ class GameplayController {
     this.animationFrameId = 0
   }
 
-  init = () => {
+  init = (canvas: HTMLCanvasElement) => {
+    this.canvas = canvas
+    this.context = new ContextController(
+      this.canvas.getContext('2d') as CanvasRenderingContext2D
+    )
     this.handlers = {
       canvasResize: this.context.resize(),
       playerControl: this.player.controlWithMouse(this.canvas, this.context)
@@ -94,6 +97,7 @@ class GameplayController {
   }
 
   controlWithMouse = () => {
+    if (!this.canvas || !this.context) return
     this.handlers.playerControl()
     this.handlers.playerControl = this.player.controlWithMouse(
       this.canvas,
@@ -102,6 +106,7 @@ class GameplayController {
   }
 
   start = () => {
+    if (!this.context) return
     this.clock.draw(this.context)
     this.animationFrameId = window.requestAnimationFrame(this.start)
   }
