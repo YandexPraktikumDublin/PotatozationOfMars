@@ -9,7 +9,7 @@ const ChangeAvatarModal: FC<TChangeAvatarModalProps> = memo(
   ({ toggleModal }: TChangeAvatarModalProps) => (
     <Modal toggleModal={toggleModal}>
       <Title>Upload avatar</Title>
-      <ChangeAvatarForm successCallback={toggleModal} />
+      <ChangeAvatarForm />
     </Modal>
   )
 )

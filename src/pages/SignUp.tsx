@@ -1,13 +1,7 @@
 import React, { FC } from 'react'
-import { withAuthCheck } from '@hocs'
+import { withAuthCheck, withHeaderAndFooter } from '@hocs'
 import { SignUpTemplate } from '@components/templates'
 
-const SignUp: FC = () => (
-  <div className="relative flex flex-col min-h-screen">
-    <main className="flex flex-grow justify-center items-center px-3">
-      <SignUpTemplate />
-    </main>
-  </div>
-)
+const SignUp: FC = () => <SignUpTemplate />
 
-export default withAuthCheck(SignUp)
+export default withAuthCheck(withHeaderAndFooter(SignUp))

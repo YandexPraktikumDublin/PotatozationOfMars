@@ -12,18 +12,16 @@ export interface IUserState {
 }
 
 export interface IFetchUserSuccessPayload {
-  user: {
-    id?: number
-    /* eslint-disable camelcase */
-    first_name?: string
-    second_name?: string
-    display_name?: string
-    /* eslint-enable camelcase */
-    login?: string
-    email?: string
-    phone?: string
-    avatar?: string
-  }
+  id?: number
+  /* eslint-disable camelcase */
+  first_name?: string
+  second_name?: string
+  display_name?: string
+  /* eslint-enable camelcase */
+  login?: string
+  email?: string
+  phone?: string
+  avatar?: string
 }
 
 export interface IFetchUserFailurePayload {
