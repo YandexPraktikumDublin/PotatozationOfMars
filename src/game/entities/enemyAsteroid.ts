@@ -8,7 +8,7 @@ class EnemyAsteroid extends Entity {
   constructor(killCallback = () => {}, v = 5) {
     super(killCallback, Math.random() * v + v, Math.random() * 50 + 50)
     this.angle = 0
-    this.rotation = Math.random() / 100
+    this.rotation = (Math.random() - 0.5) / 100
   }
 
   init = (clock: GameClock, context: ContextController) => {
