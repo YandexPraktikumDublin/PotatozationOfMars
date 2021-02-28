@@ -33,7 +33,9 @@ class Entity {
   protected move = (context: ContextController) => {
     this.velocity.defineByDirection(this.destination, this.position)
     this.position = this.velocity.applyTo(this.position)
-    context.drawImage(this.image, this.position.x, this.position.y, this.size)
+    context.drawImage(this.image, this.position.x, this.position.y, {
+      width: this.size
+    })
   }
 
   public getProjectile = () => {

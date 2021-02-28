@@ -3,8 +3,12 @@ import { ContextController, GameClock } from '@game/controllers'
 import { Entity } from '@game/entities'
 
 class EnemyAsteroid extends Entity {
+  angle: number
+  rotation: number
   constructor(killCallback = () => {}, v = 5) {
-    super(killCallback, Math.random() * v + v)
+    super(killCallback, Math.random() * v + v, Math.random() * 50 + 50)
+    this.angle = 0
+    this.rotation = (Math.random() - 0.5) / 100
   }
 
   init = (clock: GameClock, context: ContextController) => {
@@ -35,7 +39,11 @@ class EnemyAsteroid extends Entity {
       this.kill()
       return
     }
-    context.drawImage(this.image, this.position.x, this.position.y, this.size)
+    this.angle += this.rotation
+    context.drawImage(this.image, this.position.x, this.position.y, {
+      width: this.size,
+      angle: this.angle
+    })
   }
 
   render = (clock: GameClock) => {

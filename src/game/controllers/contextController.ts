@@ -15,6 +15,12 @@ class ContextController {
     return { width, height }
   }
 
+  getBorders = () => {
+    const { width, height } = this.instance.canvas
+    const { ox, oy } = this.center
+    return { top: 0 - oy, right: width - ox, bottom: height - oy, left: 0 - ox }
+  }
+
   resize = () => {
     const resizeCanvas = () => {
       const { width, height } = this.instance.canvas.getBoundingClientRect()
@@ -32,17 +38,32 @@ class ContextController {
     image: HTMLImageElement,
     x: number,
     y: number,
-    width?: number,
-    height?: number,
-    pivotX = 0.5,
-    pivotY = 0.5
+    options: {
+      width?: number
+      height?: number
+      angle?: number
+      pivotX?: number
+      pivotY?: number
+    }
   ) => {
+    const context = this.instance
+
+    context.save()
+
+    const imageWidth = options.width ?? image.width
+    const imageHeight = options.height ?? options.width ?? image.height
+    const pivotX = options.pivotX ?? 0.5
+    const pivotY = options.pivotY ?? 0.5
+    const angle = options.angle ?? 0
     const { ox, oy } = this.center
-    const imageWidth = width ?? image.width
-    const imageHeight = height ?? width ?? image.height
-    x -= pivotX * imageWidth - ox
-    y -= pivotY * imageHeight - oy
-    this.instance.drawImage(image, x, y, imageWidth, imageHeight)
+    const offsetX = pivotX * imageWidth
+    const offsetY = pivotY * imageHeight
+    context.translate(x + ox, y + oy)
+    context.rotate(angle * Math.PI)
+    context.translate(-offsetX, -offsetY)
+
+    context.drawImage(image, 0, 0, imageWidth, imageHeight)
+    context.restore()
   }
 
   clearFrame = () => {

@@ -30,7 +30,9 @@ class Projectile extends Entity {
       this.kill()
     }
     this.position = this.velocity.applyTo(this.position)
-    context.drawImage(this.image, this.position.x, this.position.y, this.size)
+    context.drawImage(this.image, this.position.x, this.position.y, {
+      width: this.size
+    })
   }
 
   public render = (clock: GameClock) => {

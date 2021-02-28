@@ -13,7 +13,7 @@ const Modal: FC<TModalProps> = memo(
     <ModalBackdrop>
       <div
         className={classNames(
-          'relative text-center border border-primary rounded-3xl p-6 bg-white',
+          'flex flex-col w-full max-w-md relative text-center border border-primary rounded-3xl p-6 bg-white',
           'dark:text-white dark:border-white dark:bg-primary'
         )}
       >

@@ -26,9 +26,9 @@ class Player {
     this.destination = this.position
     this.size = size
     this.velocity = new Vector(velocity)
-    this.firePeriod = 40
+    this.firePeriod = 50
     this.fireCooldown = this.firePeriod
-    this.fireQuantity = 3
+    this.fireQuantity = 1
     this.projectiles = []
   }
 
@@ -47,21 +47,21 @@ class Player {
       if (this.fireCooldown <= 0) {
         this.fireCooldown = this.firePeriod
         for (let i = 0; i < this.fireQuantity; i++) {
-          if (this.projectiles.length >= 100) {
+          if (this.projectiles.length >= 200) {
             this.projectiles[0].kill()
             this.projectiles.shift()
           }
           const projectile = new Projectile()
           this.projectiles.push(projectile)
           const angle =
-            (i - (this.fireQuantity - 1) / 2) / (2 * this.fireQuantity)
+            (i - (this.fireQuantity - 1) / 2) / (6 * this.fireQuantity)
           projectile.init(clock, context, this.position, angle)
         }
       }
     }
   }
 
-  private moveTo = (destination: unknown, controller: unknown) => {
+  private moveTo = (destination: TPosition, controller: unknown) => {
     const { coefficient, center } = controller as ContextController
     const { x, y } = destination as TPosition
     const { cx, cy } = coefficient
@@ -69,65 +69,82 @@ class Player {
     this.destination = { x: x * cx - ox, y: y * cy - oy }
   }
 
-  private moveInDirection = (move: unknown, moveFunc: unknown) => {
-    const go = moveFunc as (move: boolean) => void
-    this.destination = { x: null, y: null }
-    go(move as boolean)
-    this.velocity.correct()
-  }
-
-  private moveUp = (move: boolean) => {
-    this.velocity.y = move
-      ? -this.velocity.magnitude
-      : this.velocity.y < 0
-      ? 0
-      : this.velocity.y
-  }
-
-  private moveLeft = (move: boolean) => {
-    this.velocity.x = move
-      ? -this.velocity.magnitude
-      : this.velocity.x < 0
-      ? 0
-      : this.velocity.x
-  }
-
-  private moveRight = (move: boolean) => {
-    this.velocity.x = move
-      ? this.velocity.magnitude
-      : this.velocity.x > 0
-      ? 0
-      : this.velocity.x
-  }
-
-  private moveDown = (move: boolean) => {
-    this.velocity.y = move
-      ? this.velocity.magnitude
-      : this.velocity.y > 0
-      ? 0
-      : this.velocity.y
-  }
-
   controlWithKeyboard = () => {
-    const upHandler = InputsController.onKeyPress(
-      this.moveInDirection,
-      KEYS.up,
-      this.moveUp
-    )
+    const keysPressed = {
+      up: false,
+      down: false,
+      left: false,
+      right: false
+    }
+
+    const move = (key: unknown) => {
+      switch (key) {
+        case KEYS.up:
+          this.velocity.y = -this.velocity.magnitude
+          keysPressed.up = true
+          break
+        case KEYS.down:
+          this.velocity.y = this.velocity.magnitude
+          keysPressed.down = true
+          break
+        case KEYS.left:
+          this.velocity.x = -this.velocity.magnitude
+          keysPressed.left = true
+          break
+        case KEYS.right:
+          this.velocity.x = this.velocity.magnitude
+          keysPressed.right = true
+          break
+        default:
+          return
+      }
+      this.destination = { x: null, y: null }
+      this.velocity.correct()
+    }
+
+    const stay = (key: unknown) => {
+      switch (key) {
+        case KEYS.up:
+          this.velocity.y = keysPressed.down ? this.velocity.magnitude : 0
+          keysPressed.up = false
+          break
+        case KEYS.down:
+          this.velocity.y = keysPressed.up ? -this.velocity.magnitude : 0
+          keysPressed.down = false
+          break
+        case KEYS.left:
+          this.velocity.x = keysPressed.right ? this.velocity.magnitude : 0
+          keysPressed.left = false
+          break
+        case KEYS.right:
+          this.velocity.x = keysPressed.left ? -this.velocity.magnitude : 0
+          keysPressed.right = false
+          break
+        default:
+          return
+      }
+      this.destination = { x: null, y: null }
+      this.velocity.correct()
+    }
+
+    const upHandler = InputsController.onKeyPress(KEYS.up, move, stay, KEYS.up)
     const downHandler = InputsController.onKeyPress(
-      this.moveInDirection,
       KEYS.down,
-      this.moveDown
+      move,
+      stay,
+      KEYS.down
     )
     const leftHandler = InputsController.onKeyPress(
-      this.moveInDirection,
       KEYS.left,
-      this.moveLeft
+      move,
+      stay,
+      KEYS.left
     )
     const rightHandler = InputsController.onKeyPress(
-      this.moveInDirection,
       KEYS.right,
-      this.moveRight
+      move,
+      stay,
+      KEYS.right
     )
     return () => {
       upHandler()
@@ -145,15 +162,16 @@ class Player {
   }
 
   private move = (context: ContextController) => {
+    const { top, right, bottom, left } = context.getBorders()
     this.velocity.defineByDirection(this.destination, this.position)
     this.position = this.velocity.applyTo(this.position)
-    context.drawImage(
-      this.image,
-      this.position.x,
-      this.position.y,
-      this.size * 3,
-      this.size
-    )
+    const { x, y } = this.position
+    this.position.x = x > right ? right : x < left ? left : this.position.x
+    this.position.y = y > bottom ? bottom : y < top ? top : this.position.y
+    context.drawImage(this.image, this.position.x, this.position.y, {
+      width: this.size * 3,
+      height: this.size
+    })
   }
 
   render = (
