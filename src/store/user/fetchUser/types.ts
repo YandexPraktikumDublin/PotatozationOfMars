@@ -12,7 +12,7 @@ export interface IUserState {
 }
 
 export interface IFetchUserSuccessPayload {
-  id?: number
+  id: number
   /* eslint-disable camelcase */
   first_name?: string
   second_name?: string
