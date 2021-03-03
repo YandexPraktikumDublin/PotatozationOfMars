@@ -11,7 +11,7 @@ function* updatePasswordSaga(data: Record<string, any>) {
   try {
     const response = yield call(updatePassword, data.payload)
 
-    yield put(updatePasswordSuccess(response.data))
+    yield put(updatePasswordSuccess({ user: response.data }))
   } catch (error) {
     yield put(
       updatePasswordFailure({

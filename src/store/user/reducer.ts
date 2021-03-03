@@ -50,14 +50,14 @@ export default (state = initialState, action: TCommonAction) => {
         ...state,
         pending: false,
         user: {
-          id: action.payload?.id,
-          firstName: action.payload?.first_name ?? '',
-          secondName: action.payload?.second_name ?? '',
-          displayName: action.payload?.display_name ?? '',
-          login: action.payload?.login ?? '',
-          email: action.payload?.email ?? '',
-          phone: action.payload?.phone ?? '',
-          avatar: action.payload?.avatar ?? ''
+          id: action.payload?.user?.id,
+          firstName: action.payload?.user?.first_name ?? '',
+          secondName: action.payload?.user?.second_name ?? '',
+          displayName: action.payload?.user?.display_name ?? '',
+          login: action.payload?.user?.login ?? '',
+          email: action.payload?.user?.email ?? '',
+          phone: action.payload?.user?.phone ?? '',
+          avatar: action.payload?.user?.avatar ?? ''
         },
         error: null
       }
@@ -67,12 +67,12 @@ export default (state = initialState, action: TCommonAction) => {
         pending: false,
         user: {
           ...state.user,
-          firstName: action.payload?.first_name ?? '',
-          secondName: action.payload?.second_name ?? '',
-          displayName: action.payload?.display_name ?? '',
-          login: action.payload?.login ?? '',
-          email: action.payload?.email ?? '',
-          phone: action.payload?.phone ?? ''
+          firstName: action.payload?.user?.first_name ?? '',
+          secondName: action.payload?.user?.second_name ?? '',
+          displayName: action.payload?.user?.display_name ?? '',
+          login: action.payload?.user?.login ?? '',
+          email: action.payload?.user?.email ?? '',
+          phone: action.payload?.user?.phone ?? ''
         },
         error: null
       }
@@ -82,7 +82,7 @@ export default (state = initialState, action: TCommonAction) => {
         pending: false,
         user: {
           ...state.user,
-          avatar: action?.payload?.avatar ?? ''
+          avatar: action?.payload?.user?.avatar ?? ''
         }
       }
     case UPDATE_PASSWORD_SUCCESS:

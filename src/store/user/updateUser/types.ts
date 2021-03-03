@@ -5,7 +5,6 @@ import {
 } from './actionTypes'
 
 export interface IUpdateUserRequestPayload {
-  id?: number
   /* eslint-disable camelcase */
   first_name?: string
   second_name?: string
@@ -14,20 +13,21 @@ export interface IUpdateUserRequestPayload {
   login?: string
   email?: string
   phone?: string
-  avatar?: string
 }
 
 export interface IUpdateUserSuccessPayload {
-  id?: number
-  /* eslint-disable camelcase */
-  first_name?: string
-  second_name?: string
-  display_name?: string
-  /* eslint-enable camelcase */
-  login?: string
-  email?: string
-  phone?: string
-  avatar?: string
+  user: {
+    id: number
+    /* eslint-disable camelcase */
+    first_name?: string
+    second_name?: string
+    display_name?: string
+    /* eslint-enable camelcase */
+    login?: string
+    email?: string
+    phone?: string
+    avatar?: string
+  }
 }
 
 export interface IUpdateUserFailurePayload {

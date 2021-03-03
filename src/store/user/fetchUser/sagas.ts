@@ -9,7 +9,7 @@ function* fetchUserSaga() {
   try {
     const response = yield call(getUser)
 
-    yield put(fetchUserSuccess(response.data))
+    yield put(fetchUserSuccess({ user: response.data }))
   } catch (error) {
     yield put(
       fetchUserFailure({

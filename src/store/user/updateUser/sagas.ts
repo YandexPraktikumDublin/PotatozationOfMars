@@ -11,7 +11,7 @@ function* updateUserSaga(data: Record<string, any>) {
   try {
     const response = yield call(changeUserData, data.payload)
 
-    yield put(updateUserSuccess(response.data))
+    yield put(updateUserSuccess({ user: response.data }))
   } catch (error) {
     yield put(
       updateUserFailure({
