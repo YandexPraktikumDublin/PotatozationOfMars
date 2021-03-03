@@ -7,13 +7,13 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker
       .register('/sw.js')
       .then((registration) => {
-        console.log(
+        console.info(
           'ServiceWorker registration successful with scope: ',
           registration.scope
         )
       })
       .catch((error: string) => {
-        console.log('ServiceWorker registration failed: ', error)
+        console.error('ServiceWorker registration failed: ', error)
       })
   })
 }
