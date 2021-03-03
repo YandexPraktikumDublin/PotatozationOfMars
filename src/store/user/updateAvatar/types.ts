@@ -3,24 +3,14 @@ import {
   UPDATE_AVATAR_SUCCESS,
   UPDATE_AVATAR_FAILURE
 } from './actionTypes'
+import { IServerUser } from '@types'
 
 export interface IUpdateAvatarRequestPayload {
   formData: FormData
 }
 
 export interface IUpdateAvatarSuccessPayload {
-  user: {
-    id: number
-    /* eslint-disable camelcase */
-    first_name?: string
-    second_name?: string
-    display_name?: string
-    /* eslint-enable camelcase */
-    login?: string
-    email?: string
-    phone?: string
-    avatar?: string
-  }
+  user: IServerUser
 }
 
 export interface IUpdateAvatarFailurePayload {

@@ -3,6 +3,7 @@ import {
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE
 } from './actionTypes'
+import { IServerUser } from '@types'
 
 export interface IUpdateUserRequestPayload {
   /* eslint-disable camelcase */
@@ -16,18 +17,7 @@ export interface IUpdateUserRequestPayload {
 }
 
 export interface IUpdateUserSuccessPayload {
-  user: {
-    id: number
-    /* eslint-disable camelcase */
-    first_name?: string
-    second_name?: string
-    display_name?: string
-    /* eslint-enable camelcase */
-    login?: string
-    email?: string
-    phone?: string
-    avatar?: string
-  }
+  user: IServerUser
 }
 
 export interface IUpdateUserFailurePayload {

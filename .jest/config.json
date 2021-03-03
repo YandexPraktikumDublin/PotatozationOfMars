@@ -19,6 +19,7 @@
     "@hooks": ["<rootDir>/hooks/index.ts"],
     "@types": ["<rootDir>/types/index.ts"],
     "@store/([^\\.]*)$": ["<rootDir>/store/$1"],
+    "@utils/([^\\.]*)$": ["<rootDir>/utils/$1"],
     "@history": ["<rootDir>/history.ts"]
   },
   "setupFilesAfterEnv": ["../.jest/setupTests.js"],

@@ -22,6 +22,7 @@ import { TUserActions, IUserState } from './fetchUser/types'
 import { TUpdateUserActions } from './updateUser/types'
 import { TUpdateAvatarActions } from './updateAvatar/types'
 import { TUpdatePasswordActions } from './updatePassword/types'
+import { normalizeUserKeys } from '@utils/user'
 
 type TCommonAction =
   | TUserActions
@@ -49,41 +50,21 @@ export default (state = initialState, action: TCommonAction) => {
       return {
         ...state,
         pending: false,
-        user: {
-          id: action.payload?.user?.id,
-          firstName: action.payload?.user?.first_name ?? '',
-          secondName: action.payload?.user?.second_name ?? '',
-          displayName: action.payload?.user?.display_name ?? '',
-          login: action.payload?.user?.login ?? '',
-          email: action.payload?.user?.email ?? '',
-          phone: action.payload?.user?.phone ?? '',
-          avatar: action.payload?.user?.avatar ?? ''
-        },
+        user: normalizeUserKeys(action.payload?.user),
         error: null
       }
     case UPDATE_USER_SUCCESS:
       return {
         ...state,
         pending: false,
-        user: {
-          ...state.user,
-          firstName: action.payload?.user?.first_name ?? '',
-          secondName: action.payload?.user?.second_name ?? '',
-          displayName: action.payload?.user?.display_name ?? '',
-          login: action.payload?.user?.login ?? '',
-          email: action.payload?.user?.email ?? '',
-          phone: action.payload?.user?.phone ?? ''
-        },
+        user: normalizeUserKeys(action.payload?.user),
         error: null
       }
     case UPDATE_AVATAR_SUCCESS:
       return {
         ...state,
         pending: false,
-        user: {
-          ...state.user,
-          avatar: action?.payload?.user?.avatar ?? ''
-        }
+        user: normalizeUserKeys(action.payload?.user)
       }
     case UPDATE_PASSWORD_SUCCESS:
       return {

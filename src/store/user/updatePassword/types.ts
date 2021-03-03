@@ -3,6 +3,7 @@ import {
   UPDATE_PASSWORD_SUCCESS,
   UPDATE_PASSWORD_FAILURE
 } from './actionTypes'
+import { IServerUser } from '@types'
 
 export interface IUpdatePasswordRequestPayload {
   oldPassword: string
@@ -10,18 +11,7 @@ export interface IUpdatePasswordRequestPayload {
 }
 
 export interface IUpdatePasswordSuccessPayload {
-  user: {
-    id: number
-    /* eslint-disable camelcase */
-    first_name?: string
-    second_name?: string
-    display_name?: string
-    /* eslint-enable camelcase */
-    login?: string
-    email?: string
-    phone?: string
-    avatar?: string
-  }
+  user: IServerUser
 }
 
 export interface IUpdatePasswordFailurePayload {

@@ -3,7 +3,7 @@ import {
   FETCH_USER_SUCCESS,
   FETCH_USER_FAILURE
 } from './actionTypes'
-import { IUser } from '@types'
+import { IServerUser, IUser } from '@types'
 
 export interface IUserState {
   pending: boolean
@@ -12,18 +12,7 @@ export interface IUserState {
 }
 
 export interface IFetchUserSuccessPayload {
-  user: {
-    id: number
-    /* eslint-disable camelcase */
-    first_name?: string
-    second_name?: string
-    display_name?: string
-    /* eslint-enable camelcase */
-    login?: string
-    email?: string
-    phone?: string
-    avatar?: string
-  }
+  user: IServerUser
 }
 
 export interface IFetchUserFailurePayload {
