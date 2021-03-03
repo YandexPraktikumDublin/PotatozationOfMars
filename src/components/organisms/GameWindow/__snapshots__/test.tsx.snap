@@ -17,6 +17,20 @@ exports[`<GameWindow /> should renders correct <GameWindow /> 1`] = `
     onClick={[Function]}
     title="Pause"
   />
+  <GamePauseMenuDisplay
+    isGamePaused={false}
+    settings={
+      Object {
+        "addProjectile": [Function],
+        "controlWithMouse": false,
+        "decreaseFireRate": [Function],
+        "increaseFireRate": [Function],
+        "removeProjectile": [Function],
+        "toggleControlInput": [Function],
+      }
+    }
+    toggleModal={[Function]}
+  />
   <NavigationButton
     className="absolute top-3 right-3"
     imageSrc={

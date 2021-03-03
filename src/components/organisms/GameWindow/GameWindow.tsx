@@ -1,19 +1,14 @@
 import React, { FC, memo } from 'react'
 import { GameCanvas, NavigationButton } from '@components/molecules'
-import { GamePauseMenuModal } from '@components/organisms'
 import useRenderCanvas from '@game/useRenderCanvas'
 import useFullScreen from '@game/useFullScreen'
 import { pause } from '@images'
+import { GamePauseMenuDisplay } from '@components/organisms'
 
 type TGameWindowProps = {}
 
 const GameWindow: FC<TGameWindowProps> = memo(() => {
-  const {
-    canvasRef,
-    gamePauseDisplay,
-    toggleModal,
-    settings
-  } = useRenderCanvas()
+  const { canvasRef, isGamePaused, toggleModal, settings } = useRenderCanvas()
   const { windowRef, FSIcon, toggleFullScreen } = useFullScreen()
 
   return (
@@ -25,9 +20,11 @@ const GameWindow: FC<TGameWindowProps> = memo(() => {
         onClick={toggleModal}
         imageSrc={pause}
       />
-      {gamePauseDisplay && (
-        <GamePauseMenuModal toggleModal={toggleModal} settings={settings} />
-      )}
+      <GamePauseMenuDisplay
+        isGamePaused={isGamePaused}
+        toggleModal={toggleModal}
+        settings={settings}
+      />
       <NavigationButton
         className="absolute top-3 right-3"
         title="Full screen"

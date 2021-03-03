@@ -4,18 +4,18 @@ import { KEYS } from '@game/config'
 
 const useRenderCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [gamePauseDisplay, setGamePauseDisplay] = useState<boolean>(false)
+  const [isGamePaused, setIsGamePaused] = useState<boolean>(false)
   const [controlWithMouse, setControlWithMouse] = useState<boolean>(
     window.localStorage.controlWithMouse === 'true'
   )
 
   const game = new GameplayController()
 
-  let pause = gamePauseDisplay
+  let pause = isGamePaused
 
   const toggleModal = useCallback(() => {
     pause = !pause
-    setGamePauseDisplay(pause)
+    setIsGamePaused(pause)
     if (pause) {
       game.stop()
     } else {
@@ -79,7 +79,7 @@ const useRenderCanvas = () => {
 
   return {
     canvasRef,
-    gamePauseDisplay,
+    isGamePaused,
     toggleModal,
     settings: {
       controlWithMouse,

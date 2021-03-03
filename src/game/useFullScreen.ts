@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from 'react'
 import { InputsController } from '@game/controllers'
 import { fullscreenOff, fullscreenOn } from '@images'
 import { KEYS } from '@game/config'
+import { disableFullScreen, enableFullScreen } from '@game/utils'
 
 const useFullScreen = () => {
   const [FSIcon, setFSIcon] = useState(fullscreenOn)
@@ -10,19 +11,9 @@ const useFullScreen = () => {
 
   const toggleFullScreen = () => {
     if (!document.fullscreenElement && document.fullscreenEnabled) {
-      windowRef.current
-        ?.requestFullscreen()
-        .then(() => {
-          setFSIcon(fullscreenOff)
-        })
-        .catch()
+      enableFullScreen(windowRef, setFSIcon, fullscreenOff)
     } else {
-      document
-        .exitFullscreen()
-        ?.then(() => {
-          setFSIcon(fullscreenOn)
-        })
-        .catch()
+      disableFullScreen(setFSIcon, fullscreenOn)
     }
   }
 
