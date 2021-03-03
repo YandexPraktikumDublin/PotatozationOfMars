@@ -1,32 +1,24 @@
 import React, { FC, memo, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { getUserSelector } from '@store/user/fetchUser/selectors'
+import { BackButton, EditButton } from '@components/atoms'
+import { ProfileHeader } from '@components/molecules'
 import {
-  ActionsListItem,
-  NameValueListItem,
-  BackButton,
-  EditButton
-} from '@components/atoms'
-import { List, ProfileHeader } from '@components/molecules'
-import { ProfileForm, ProfilePasswordForm } from '@components/organisms'
-import { logoutRequest } from '@store/logout/actions'
+  ProfileForm,
+  ProfileBody,
+  ProfilePasswordForm
+} from '@components/organisms'
 import { useToggle } from '@hooks'
 
 type TProfileProps = {}
 
 const Profile: FC<TProfileProps> = memo(() => {
-  const dispatch = useDispatch()
-
   const user = useSelector(getUserSelector)
 
   const [isShowProfileForm, toggleProfileForm] = useToggle(false)
   const [isShowPasswordForm, togglePasswordForm] = useToggle(false)
 
   const isShownForms = isShowProfileForm || isShowPasswordForm
-
-  const handleLogoutButtonClick = () => {
-    dispatch(logoutRequest())
-  }
 
   useEffect(() => {
     if (isShowProfileForm) {
@@ -63,27 +55,7 @@ const Profile: FC<TProfileProps> = memo(() => {
 
       <ProfileHeader className="mb-6" />
 
-      {!isShownForms && (
-        <>
-          <List className="mb-12">
-            <NameValueListItem name="Email" value={user?.email} />
-            <NameValueListItem name="Login" value={user?.login} />
-            <NameValueListItem name="First name" value={user?.firstName} />
-            <NameValueListItem name="Last name" value={user?.secondName} />
-            <NameValueListItem name="Display name" value={user?.displayName} />
-            <NameValueListItem name="Phone" value={user?.phone} />
-            <NameValueListItem name="Password" value="********" />
-          </List>
-
-          <List>
-            <ActionsListItem
-              name="Change password"
-              onClick={togglePasswordForm}
-            />
-            <ActionsListItem name="Log out" onClick={handleLogoutButtonClick} />
-          </List>
-        </>
-      )}
+      {!isShownForms && <ProfileBody togglePasswordForm={togglePasswordForm} />}
 
       {isShowProfileForm && <ProfileForm />}
 
