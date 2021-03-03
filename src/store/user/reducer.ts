@@ -22,7 +22,7 @@ import { TUserActions, IUserState } from './fetchUser/types'
 import { TUpdateUserActions } from './updateUser/types'
 import { TUpdateAvatarActions } from './updateAvatar/types'
 import { TUpdatePasswordActions } from './updatePassword/types'
-import { normalizeUserKeys } from '@utils/user'
+import { normalizeUser } from '@utils/user'
 
 type TCommonAction =
   | TUserActions
@@ -50,21 +50,21 @@ export default (state = initialState, action: TCommonAction) => {
       return {
         ...state,
         pending: false,
-        user: normalizeUserKeys(action.payload?.user),
+        user: normalizeUser(action.payload?.user),
         error: null
       }
     case UPDATE_USER_SUCCESS:
       return {
         ...state,
         pending: false,
-        user: normalizeUserKeys(action.payload?.user),
+        user: normalizeUser(action.payload?.user),
         error: null
       }
     case UPDATE_AVATAR_SUCCESS:
       return {
         ...state,
         pending: false,
-        user: normalizeUserKeys(action.payload?.user)
+        user: normalizeUser(action.payload?.user)
       }
     case UPDATE_PASSWORD_SUCCESS:
       return {

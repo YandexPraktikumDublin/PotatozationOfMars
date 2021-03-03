@@ -2,8 +2,6 @@ import React, { FC, memo, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import classNames from 'classnames'
 import { ChangeAvatarModal } from '@components/organisms'
-import { SERVER_URL } from '@config'
-import { profile } from '@images'
 import { useToggle } from '@hooks'
 import { getUserSelector } from '@store/user/fetchUser/selectors'
 
@@ -16,9 +14,6 @@ const ProfileHeader: FC<TProfileHeaderProps> = memo(
     const [isShownAvatarChangeModal, toggleAvatarChangeModal] = useToggle(false)
 
     const user = useSelector(getUserSelector)
-    const avatarSrc = user?.avatar ? `${SERVER_URL}/${user?.avatar}` : profile
-    const name =
-      user?.displayName || `${user?.firstName ?? ''} ${user?.secondName ?? ''}`
 
     useEffect(() => {
       if (isShownAvatarChangeModal) {
@@ -32,7 +27,7 @@ const ProfileHeader: FC<TProfileHeaderProps> = memo(
           <img
             width="80"
             height="80"
-            src={avatarSrc}
+            src={user?.avatar}
             className="w-20 h-20"
             alt=""
           />
@@ -44,7 +39,7 @@ const ProfileHeader: FC<TProfileHeaderProps> = memo(
             change
           </div>
         </button>
-        <h1 className="font-medium">{name}</h1>
+        <h1 className="font-medium">{user?.displayName}</h1>
 
         {isShownAvatarChangeModal && (
           <ChangeAvatarModal toggleModal={toggleAvatarChangeModal} />
