@@ -29,12 +29,12 @@ const GamePauseMenu: FC<TGamePauseMenuProps> = memo(
       history.push(PATHS.BASE)
     }, [history])
 
-    const Menus = {
-      main: 'main',
-      setting: 'settings'
+    enum Menus {
+      main,
+      setting
     }
 
-    const [currentMenu, setCurrentMenu] = useState<string>(Menus.main)
+    const [currentMenu, setCurrentMenu] = useState<Menus>(Menus.main)
 
     const toSettingsMenu = () => {
       setCurrentMenu(Menus.setting)
