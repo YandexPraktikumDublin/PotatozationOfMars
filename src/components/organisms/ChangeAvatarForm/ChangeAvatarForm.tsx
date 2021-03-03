@@ -18,7 +18,7 @@ const initialValues = {
 
 const ChangeAvatarForm: FC<TChangeAvatarFormProps> = memo(() => {
   const dispatch = useDispatch()
-  const avatarError = useSelector(getUserErrorSelector) ?? ''
+  const avatarError = useSelector(getUserErrorSelector)
 
   const handleSubmit = (values: FormikValues) => {
     const formData = new FormData()
@@ -33,7 +33,7 @@ const ChangeAvatarForm: FC<TChangeAvatarFormProps> = memo(() => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
       buttonText="Change avatar"
-      formError={avatarError}
+      formError={avatarError ?? ''}
     >
       <BaseFileInput name="avatar" />
     </BaseForm>
