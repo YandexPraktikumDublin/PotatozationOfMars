@@ -36,7 +36,7 @@ const initialState: IUserState = {
   error: null
 }
 
-export default (state = initialState, action: TCommonAction) => {
+export default (state = initialState, action: TCommonAction): IUserState => {
   switch (action.type) {
     case FETCH_USER_REQUEST:
     case UPDATE_USER_REQUEST:
@@ -69,10 +69,7 @@ export default (state = initialState, action: TCommonAction) => {
     case UPDATE_PASSWORD_SUCCESS:
       return {
         ...state,
-        pending: false,
-        user: {
-          ...state.user
-        }
+        pending: false
       }
     case FETCH_USER_FAILURE:
       return {
