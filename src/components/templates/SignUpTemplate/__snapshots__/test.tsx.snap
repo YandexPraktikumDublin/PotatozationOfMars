@@ -11,7 +11,7 @@ exports[`<SignUpTemplate /> should renders correct <SignUpTemplate /> 1`] = `
     <SignUpForm />
     <FormLink
       className="inline-block"
-      path="/auth/"
+      path="/auth"
     >
       Already have an account?
     </FormLink>

@@ -1,4 +1,7 @@
-type TCallback = (...rest: Array<unknown>) => void
+import TPosition from '@game/@types/position'
+
+type TKeyCallback = (...rest: Array<unknown>) => void
+type TMouseCallback = (mousePos: TPosition, ...rest: Array<unknown>) => void
 
 class InputsController {
   private static __instance: InputsController
@@ -11,8 +14,9 @@ class InputsController {
   }
 
   onKeyPress = (
-    callback: TCallback,
     keyCodes: Array<string>,
+    callbackDown: TKeyCallback,
+    callbackUp: TKeyCallback = () => {},
     ...rest: Array<unknown>
   ) => {
     const isPressed = (keyPressed: string) => {
@@ -24,13 +28,14 @@ class InputsController {
     }
 
     const onKeyDown = (evt: KeyboardEvent) => {
+      if (evt.repeat) return
       const pressed = isPressed(evt.code)
-      if (pressed) callback(pressed, ...rest)
+      if (pressed) callbackDown(...rest)
     }
 
     const onKeyUp = (evt: KeyboardEvent) => {
       const pressed = !isPressed(evt.code)
-      if (!pressed) callback(pressed, ...rest)
+      if (!pressed) callbackUp(...rest)
     }
 
     window.addEventListener('keydown', onKeyDown)
@@ -44,7 +49,7 @@ class InputsController {
 
   onMouseDrag = (
     context: HTMLElement,
-    callback: TCallback,
+    callback: TMouseCallback,
     ...rest: Array<unknown>
   ) => {
     let tracking = false

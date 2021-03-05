@@ -24,13 +24,13 @@ class Vector {
   }
 
   defineByDirection = (
-    position: TPosition,
-    entityPosition: TPosition = { x: 0, y: 0 }
+    destination: TPosition | { x: null; y: null },
+    position: TPosition = { x: 0, y: 0 }
   ) => {
-    const [ex, ey] = [entityPosition.x, entityPosition.y]
-    const [x, y] = [position.x, position.y]
+    const [x, y] = [destination.x, destination.y]
+    if (!(x && y)) return
+    const [ex, ey] = [position.x, position.y]
     const [dx, dy] = [x - ex, y - ey]
-    if (x === -1 && y === -1) return
     const magnitude = Math.sqrt(dx ** 2 + dy ** 2)
     if (magnitude <= this.magnitude) {
       this.x = dx

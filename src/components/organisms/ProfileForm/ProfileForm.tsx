@@ -1,15 +1,15 @@
-import React, { FC, memo, useState } from 'react'
+import React, { FC, memo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import * as Yup from 'yup'
 import { FormikValues } from 'formik'
-import { DEFAULT_ERROR_MESSAGE } from '@config'
 import { BaseForm, BaseInput } from '@components/organisms'
-import { IUser } from '@types'
-import { changeUserData } from '@api'
+import {
+  getUserSelector,
+  getUserErrorSelector
+} from '@store/user/fetchUser/selectors'
+import { updateUserRequest } from '@store/user/updateUser/actions'
 
-type TProfileFormProps = {
-  userData?: IUser
-  successCallback: () => void
-}
+type TProfileFormProps = {}
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -31,47 +31,42 @@ const validationSchema = Yup.object().shape({
     .required('Required')
 })
 
-const ProfileForm: FC<TProfileFormProps> = memo(
-  ({ userData, successCallback }: TProfileFormProps) => {
-    const [formError, setFormError] = useState<string>('')
+const ProfileForm: FC<TProfileFormProps> = memo(() => {
+  const dispatch = useDispatch()
 
-    const handleSubmit = async (values: FormikValues) => {
-      try {
-        setFormError('')
+  const user = useSelector(getUserSelector)
+  const profileError = useSelector(getUserErrorSelector) ?? ''
 
-        await changeUserData({
-          email: values.email,
-          login: values.login,
-          first_name: values.firstName,
-          second_name: values.secondName,
-          display_name: values.displayName,
-          phone: values.phone
-        })
-
-        successCallback()
-      } catch (error) {
-        setFormError(error?.message ?? DEFAULT_ERROR_MESSAGE)
-      }
-    }
-
-    return (
-      <BaseForm
-        initialValues={userData || {}}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-        buttonText="Save"
-        formError={formError}
-      >
-        <BaseInput type="email" name="email" placeholder="Email" />
-        <BaseInput type="text" name="login" placeholder="Login" />
-        <BaseInput type="text" name="firstName" placeholder="First name" />
-        <BaseInput type="text" name="secondName" placeholder="Last name" />
-        <BaseInput type="text" name="displayName" placeholder="Display name" />
-        <BaseInput type="tel" name="phone" placeholder="Phone" />
-      </BaseForm>
+  const handleSubmit = (values: FormikValues) => {
+    dispatch(
+      updateUserRequest({
+        email: values.email,
+        login: values.login,
+        first_name: values.firstName,
+        second_name: values.secondName,
+        display_name: values.displayName,
+        phone: values.phone
+      })
     )
   }
-)
+
+  return (
+    <BaseForm
+      initialValues={user ?? {}}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+      buttonText="Save"
+      formError={profileError}
+    >
+      <BaseInput type="email" name="email" placeholder="Email" />
+      <BaseInput type="text" name="login" placeholder="Login" />
+      <BaseInput type="text" name="firstName" placeholder="First name" />
+      <BaseInput type="text" name="secondName" placeholder="Last name" />
+      <BaseInput type="text" name="displayName" placeholder="Display name" />
+      <BaseInput type="tel" name="phone" placeholder="Phone" />
+    </BaseForm>
+  )
+})
 
 ProfileForm.displayName = 'ProfileForm'
 

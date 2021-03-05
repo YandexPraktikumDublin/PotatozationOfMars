@@ -29,4 +29,22 @@ describe('<NavigationButton />', () => {
 
     expect(toJSON(wrapper)).toMatchSnapshot()
   })
+
+  it('should have className from className prop', () => {
+    const handleButtonClick = jest.fn()
+    const className = 'test-class-name'
+
+    const wrapper = shallow(
+      <NavigationButton
+        title={title}
+        onClick={handleButtonClick}
+        imageSrc={imageSrc}
+        className={className}
+      />
+    )
+
+    expect(wrapper.prop('className')).toContain(className)
+
+    expect(toJSON(wrapper)).toMatchSnapshot()
+  })
 })

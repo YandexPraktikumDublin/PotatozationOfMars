@@ -1,44 +1,45 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 import toJSON from 'enzyme-to-json'
+import { Store } from 'redux'
+import { Provider } from 'react-redux'
+import configureStore from 'redux-mock-store'
 
 import { ProfileHeader } from '.'
 
+const mockStore = configureStore([])
+
 describe('<ProfileHeader />', () => {
-  const firstName = 'Test first name'
-  const secondName = 'Test second name'
-  const avatar = 'Test avatar'
+  let store: Store
+
+  const initialState = {
+    user: {}
+  }
+
+  beforeEach(() => {
+    store = mockStore(initialState)
+  })
 
   it('should renders correct <ProfileHeader />', () => {
-    const onSuccessAvatarUpdate = jest.fn()
-
     const wrapper = shallow(
-      <ProfileHeader
-        firstName={firstName}
-        secondName={secondName}
-        avatar={avatar}
-        onSuccessAvatarUpdate={onSuccessAvatarUpdate}
-      />
+      <Provider store={store}>
+        <ProfileHeader />
+      </Provider>
     )
 
     expect(toJSON(wrapper)).toMatchSnapshot()
   })
 
   it('should has className from className prop', () => {
-    const onSuccessAvatarUpdate = jest.fn()
     const className = 'test-class-name'
 
-    const wrapper = shallow(
-      <ProfileHeader
-        firstName={firstName}
-        secondName={secondName}
-        avatar={avatar}
-        onSuccessAvatarUpdate={onSuccessAvatarUpdate}
-        className={className}
-      />
+    const wrapper = mount(
+      <Provider store={store}>
+        <ProfileHeader className={className} />
+      </Provider>
     )
 
-    expect(wrapper.prop('className')).toMatch(className)
+    expect(wrapper.find('header').prop('className')).toMatch(className)
 
     expect(toJSON(wrapper)).toMatchSnapshot()
   })

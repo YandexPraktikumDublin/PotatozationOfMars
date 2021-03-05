@@ -1,3 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<GameWindow /> should renders correct <GameWindow /> 1`] = `<GameCanvas />`;
+exports[`<GameWindow /> should renders correct <GameWindow /> 1`] = `
+<div
+  className="relative flex justify-center items-center"
+>
+  <GameCanvas
+    forwardRef={
+      Object {
+        "current": null,
+      }
+    }
+  />
+  <NavigationButton
+    className="absolute top-3 left-3"
+    imageSrc={[Function]}
+    onClick={[Function]}
+    title="Pause"
+  />
+  <GamePauseMenuDisplay
+    isGamePaused={false}
+    settings={
+      Object {
+        "addProjectile": [Function],
+        "controlWithMouse": false,
+        "decreaseFireRate": [Function],
+        "increaseFireRate": [Function],
+        "removeProjectile": [Function],
+        "toggleControlInput": [Function],
+      }
+    }
+    toggleModal={[Function]}
+  />
+  <NavigationButton
+    className="absolute top-3 right-3"
+    imageSrc={
+      <svg
+        data-file-name="SvgFullscreenOn"
+      />
+    }
+    onClick={[Function]}
+    title="Full screen"
+  />
+</div>
+`;

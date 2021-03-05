@@ -1,55 +1,48 @@
-import React, { FC, memo, useState } from 'react'
+import React, { FC, memo, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import classNames from 'classnames'
 import { ChangeAvatarModal } from '@components/organisms'
-import { SERVER_URL } from '@config'
-import { profile } from '@images'
+import { useToggle } from '@hooks'
+import { getUserSelector } from '@store/user/fetchUser/selectors'
 
 type TProfileHeaderProps = {
-  firstName?: string
-  secondName?: string
-  avatar?: string
-  onSuccessAvatarUpdate: () => void
   className?: string
 }
 
 const ProfileHeader: FC<TProfileHeaderProps> = memo(
-  ({
-    firstName = '',
-    secondName = '',
-    avatar,
-    onSuccessAvatarUpdate,
-    className = ''
-  }: TProfileHeaderProps) => {
-    const [
-      isShownAvatarChangeModal,
-      setIsShownAvatarChangeModal
-    ] = useState<boolean>(false)
+  ({ className = '' }: TProfileHeaderProps) => {
+    const [isShownAvatarChangeModal, toggleAvatarChangeModal] = useToggle(false)
 
-    const avatarSrc = avatar ? `${SERVER_URL}/${avatar}` : profile
+    const user = useSelector(getUserSelector)
 
-    const toggleModal = () => {
-      setIsShownAvatarChangeModal((value) => !value)
-    }
+    useEffect(() => {
+      if (isShownAvatarChangeModal) {
+        toggleAvatarChangeModal()
+      }
+    }, [user?.avatar])
 
     return (
       <header className={classNames('text-center', className)}>
         <button className="group relative rounded-full border border-white outline-none overflow-hidden mx-auto mb-6">
-          <img width="80" height="80" src={avatarSrc} alt="" />
+          <img
+            width="80"
+            height="80"
+            src={user?.avatar}
+            className="w-20 h-20"
+            alt=""
+          />
 
           <div
             className="hidden group-hover:flex justify-center items-center absolute inset-0 bg-primary bg-opacity-50 text-white"
-            onClick={toggleModal}
+            onClick={toggleAvatarChangeModal}
           >
             change
           </div>
         </button>
-        <h1 className="font-medium">{`${firstName} ${secondName}`}</h1>
+        <h1 className="font-medium">{user?.displayName}</h1>
 
         {isShownAvatarChangeModal && (
-          <ChangeAvatarModal
-            toggleModal={toggleModal}
-            onSuccessAvatarUpdate={onSuccessAvatarUpdate}
-          />
+          <ChangeAvatarModal toggleModal={toggleAvatarChangeModal} />
         )}
       </header>
     )

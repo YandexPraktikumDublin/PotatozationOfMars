@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import { withHeaderAndFooter } from '@hocs'
+import { withAuth, withHeaderAndFooter } from '@hocs'
 import { ForumTemplate } from '@components/templates'
 
 const Forum: FC = () => <ForumTemplate />
 
-export default withHeaderAndFooter(Forum)
+export default withAuth(withHeaderAndFooter(Forum))

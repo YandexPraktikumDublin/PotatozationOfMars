@@ -7,8 +7,6 @@ exports[`<ChangeAvatarModal /> should renders correct <ChangeAvatarModal /> 1`] 
   <Title>
     Upload avatar
   </Title>
-  <ChangeAvatarForm
-    successCallback={[Function]}
-  />
+  <ChangeAvatarForm />
 </Modal>
 `;

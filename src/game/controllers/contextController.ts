@@ -1,11 +1,24 @@
 class ContextController {
   instance: CanvasRenderingContext2D
   coefficient: { cx: number; cy: number }
-  constructor(context: CanvasRenderingContext2D) {
+  center: { ox: number; oy: number }
+  constructor(context: CanvasRenderingContext2D, width = 2000, height = 1000) {
     this.instance = context
-    this.instance.canvas.width = 1000
-    this.instance.canvas.height = 500
+    this.instance.canvas.width = width
+    this.instance.canvas.height = height
+    this.center = { ox: width / 2, oy: height / 2 }
     this.coefficient = { cx: 1, cy: 1 }
+  }
+
+  getSize = () => {
+    const { width, height } = this.instance.canvas
+    return { width, height }
+  }
+
+  getBorders = () => {
+    const { width, height } = this.instance.canvas
+    const { ox, oy } = this.center
+    return { top: 0 - oy, right: width - ox, bottom: height - oy, left: 0 - ox }
   }
 
   resize = () => {
@@ -25,16 +38,32 @@ class ContextController {
     image: HTMLImageElement,
     x: number,
     y: number,
-    width?: number | undefined,
-    height?: number | undefined,
-    pivotX = 0.5,
-    pivotY = 0.5
+    options: {
+      width?: number
+      height?: number
+      angle?: number
+      pivotX?: number
+      pivotY?: number
+    }
   ) => {
-    width = width || image.width
-    height = height || image.height
-    x -= pivotX * width
-    y -= pivotY * height
-    this.instance.drawImage(image, x, y, width, height)
+    const context = this.instance
+
+    context.save()
+
+    const imageWidth = options.width ?? image.width
+    const imageHeight = options.height ?? options.width ?? image.height
+    const pivotX = options.pivotX ?? 0.5
+    const pivotY = options.pivotY ?? 0.5
+    const angle = options.angle ?? 0
+    const { ox, oy } = this.center
+    const offsetX = pivotX * imageWidth
+    const offsetY = pivotY * imageHeight
+    context.translate(x + ox, y + oy)
+    context.rotate(angle * Math.PI)
+    context.translate(-offsetX, -offsetY)
+
+    context.drawImage(image, 0, 0, imageWidth, imageHeight)
+    context.restore()
   }
 
   clearFrame = () => {
