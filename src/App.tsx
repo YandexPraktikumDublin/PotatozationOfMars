@@ -1,10 +1,8 @@
 import React, { StrictMode } from 'react'
 import { Router, Switch, Route } from 'react-router-dom'
-import { Provider } from 'react-redux'
 import { PATHS } from '@config'
 import ErrorBoundary from './ErrorBoundary'
 import history from './history'
-import store from './store'
 import {
   Start,
   Auth,
@@ -31,21 +29,19 @@ const App: React.FC = () => (
 
     <StrictMode>
       <ErrorBoundary>
-        <Provider store={store}>
-          <Router history={history}>
-            <Switch>
-              <Route exact path={PATHS.BASE} component={Start} />
-              <Route path={PATHS.AUTH} component={Auth} />
-              <Route path={PATHS.SIGNUP} component={SignUp} />
-              <Route path={PATHS.FORUM_TOPIC} component={ForumTopic} />
-              <Route path={PATHS.FORUM} component={Forum} />
-              <Route path={PATHS.GAME} component={Game} />
-              <Route path={PATHS.LEADERBOARD} component={Leaderboard} />
-              <Route path={PATHS.PROFILE} component={Profile} />
-              <Route path="*" component={Error404} />
-            </Switch>
-          </Router>
-        </Provider>
+        <Router history={history}>
+          <Switch>
+            <Route exact path={PATHS.BASE} component={Start} />
+            <Route path={PATHS.AUTH} component={Auth} />
+            <Route path={PATHS.SIGNUP} component={SignUp} />
+            <Route path={PATHS.FORUM_TOPIC} component={ForumTopic} />
+            <Route path={PATHS.FORUM} component={Forum} />
+            <Route path={PATHS.GAME} component={Game} />
+            <Route path={PATHS.LEADERBOARD} component={Leaderboard} />
+            <Route path={PATHS.PROFILE} component={Profile} />
+            <Route path="*" component={Error404} />
+          </Switch>
+        </Router>
       </ErrorBoundary>
     </StrictMode>
   </div>

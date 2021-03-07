@@ -1,12 +1,16 @@
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+// const { InjectManifest } = require('workbox-webpack-plugin')
 
 module.exports = {
   entry: {
     main: {
       import: './src/index.tsx',
+      dependOn: 'shared'
+    },
+    server: {
+      import: './src/server.ts',
       dependOn: 'shared'
     }, 
     sw: {
@@ -61,15 +65,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      minify: {
-        collapseWhitespace: true,
-        removeComments: true,
-        removeRedundantAttributes: true,
-        useShortDoctype: true
-      }
-    })
+    new CleanWebpackPlugin()
   ]
 }
