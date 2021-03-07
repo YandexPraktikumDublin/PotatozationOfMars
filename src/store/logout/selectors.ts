@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect'
-import { AppState } from '@store/rootReducer'
+import { IAppState } from '@types'
 
-const getPending = (state: AppState) => state.logout.pending
+const getPending = (state: IAppState) => state.logout.pending
 
-const getError = (state: AppState) => state.logout.error
+const getError = (state: IAppState) => state.logout.error
 
 export const getLogoutPendingSelector = createSelector(
   getPending,
