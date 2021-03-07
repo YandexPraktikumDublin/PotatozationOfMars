@@ -1,3 +1,5 @@
-import { createBrowserHistory } from 'history'
+import { configureStore } from '@store/index'
 
-export default createBrowserHistory()
+const { history } = configureStore({})
+
+export default history

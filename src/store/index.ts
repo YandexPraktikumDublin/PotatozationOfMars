@@ -5,7 +5,12 @@ import { routerMiddleware } from 'connected-react-router'
 import logger from 'redux-logger'
 import createRootReducer from '@store/rootReducer'
 import rootSaga from '@store/rootSaga'
-import { isServer } from '@utils/server'
+
+export const isServer = !(
+  typeof window !== 'undefined' &&
+  window.document &&
+  window.document.createElement
+)
 
 function getComposeEnhancers() {
   if (process.env.NODE_ENV !== 'production' && !isServer) {
