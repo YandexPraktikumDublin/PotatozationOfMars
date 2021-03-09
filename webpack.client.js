@@ -3,7 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
 module.exports = {
-  entry: path.join(__dirname, './src/index.tsx'),
+  entry: [path.join(__dirname, './src/index.tsx')],
   module: {
     rules: [
       {
