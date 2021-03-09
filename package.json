@@ -7,7 +7,7 @@
     "start:webpack": "webpack --mode=development --watch --config webpack.server.js",
     "start:server": "nodemon index.js --watch dist/server.js",
     "start": "NODE_ENV=development npm-run-all --print-label --parallel start:*",
-    "build": "webpack --config ./webpack.prod.js",
+    "build": "NODE_ENV=production NODE_PATH=. webpack --mode production --config webpack.client.js",
     "lint": "eslint \"src/**/*.@(tsx|ts|jsx|js)\" --fix && prettier --check \"src/**/*.@(tsx|ts|jsx|js)\" --write",
     "test": "jest --config .jest/config.json --runInBand",
     "generate": "plop"

@@ -34,8 +34,7 @@
       "@hooks": ["./src/hooks/index.ts"],
       "@types": ["./src/types/index.ts"],
       "@store/*": ["./src/store/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@history": ["./src/history.ts"]
+      "@utils/*": ["./src/utils/*"]
     },
     "typeRoots": ["node_modules/@types"]
   },

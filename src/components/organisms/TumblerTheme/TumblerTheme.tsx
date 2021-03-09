@@ -5,10 +5,14 @@ type TTumblerThemeProps = {}
 
 const darkThemeClass = 'dark'
 
+let isDefaultLightTheme = false
+
+if (typeof window !== 'undefined') {
+  isDefaultLightTheme = window.localStorage.isLightTheme === 'true'
+}
+
 const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
-  const [isLightTheme, setIsLightTheme] = useState(
-    window.localStorage.isLightTheme === 'true'
-  )
+  const [isLightTheme, setIsLightTheme] = useState<boolean>(isDefaultLightTheme)
 
   const toggleTheme = () => {
     setIsLightTheme((value) => !value)
@@ -17,10 +21,16 @@ const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
   useEffect(() => {
     if (isLightTheme) {
       document.documentElement.classList.remove(darkThemeClass)
-      window.localStorage.isLightTheme = 'true'
+
+      if (typeof window !== 'undefined') {
+        window.localStorage.isLightTheme = 'true'
+      }
     } else {
       document.documentElement.classList.add(darkThemeClass)
-      window.localStorage.isLightTheme = 'false'
+
+      if (typeof window !== 'undefined') {
+        window.localStorage.isLightTheme = 'false'
+      }
     }
   }, [isLightTheme])
 

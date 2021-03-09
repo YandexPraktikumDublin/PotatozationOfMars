@@ -1,40 +1,9 @@
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
-// const { InjectManifest } = require('workbox-webpack-plugin')
 
 module.exports = {
-  entry: {
-    main: {
-      import: './src/index.tsx',
-      dependOn: 'shared'
-    },
-    server: {
-      import: './src/server.ts',
-      dependOn: 'shared'
-    }, 
-    sw: {
-      import: './src/sw.js',
-      dependOn: 'shared'
-    },
-    shared: 'lodash',
-  },
-  output: {
-    publicPath: '/',
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
-  },
-  optimization: {
-    runtimeChunk: 'single',
-  },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.json'],
-    plugins: [
-      new TsconfigPathsPlugin({
-        configFile: './tsconfig.json'
-      })
-    ]
-  },
+  entry: path.join(__dirname, './src/index.tsx'),
   module: {
     rules: [
       {
@@ -64,7 +33,15 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new CleanWebpackPlugin()
-  ]
+  output: {
+    publicPath: '/',
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js'
+  },
+  resolve: {
+    modules: ['src', 'node_modules'],
+    extensions: ['*', '.js', '.jsx', '.json', '.ts', '.tsx'],
+    plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })]
+  },
+  plugins: [new CleanWebpackPlugin()]
 }
