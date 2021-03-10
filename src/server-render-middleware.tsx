@@ -25,6 +25,7 @@ function getHtml(reactHtml: string, reduxState = {}) {
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}
         </script>
+        <script src="/main.js"></script>
     </body>
   </html>
   `

@@ -6,7 +6,7 @@ import serverRenderMiddleware from './server-render-middleware'
 
 const app = express()
 
-app.use(compression()).use(express.static(path.resolve(__dirname, 'dist')))
+app.use(compression()).use(express.static(path.resolve(__dirname, '../dist')))
 
 app.get('*', serverRenderMiddleware)
 
