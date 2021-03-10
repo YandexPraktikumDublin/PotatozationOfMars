@@ -18,6 +18,7 @@ function getHtml(reactHtml: string, reduxState = {}) {
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+        <link href="/main.css" rel="stylesheet">
         <title>Potatozation of Mars</title>
     </head>
     <body>
