@@ -1,4 +1,5 @@
 import React from 'react'
+import Helmet, { HelmetData } from 'react-helmet'
 import { Provider as ReduxProvider } from 'react-redux'
 import { configureStore } from '@store/index'
 import { renderToString } from 'react-dom/server'
@@ -7,7 +8,7 @@ import { StaticRouterContext } from 'react-router'
 import { Request, Response } from 'express'
 import App from './App'
 
-function getHtml(reactHtml: string, reduxState = {}) {
+function getHtml(reactHtml: string, reduxState = {}, helmet: HelmetData) {
   return `
     <!doctype html>
     <html lang="en">
@@ -19,7 +20,8 @@ function getHtml(reactHtml: string, reduxState = {}) {
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
         <link href="/main.css" rel="stylesheet">
-        <title>Potatozation of Mars</title>
+        ${helmet.title.toString()}
+        ${helmet.meta.toString()}
     </head>
     <body>
         <div id="root">${reactHtml}</div>
@@ -45,11 +47,14 @@ export default (req: Request, res: Response) => {
   )
   const reactHtml = renderToString(jsx)
   const reduxState = store.getState()
+  const helmet = Helmet.renderStatic()
 
   if (context.url) {
     res.redirect(context.url)
     return
   }
 
-  res.status(context.statusCode || 200).send(getHtml(reactHtml, reduxState))
+  res
+    .status(context.statusCode || 200)
+    .send(getHtml(reactHtml, reduxState, helmet))
 }
