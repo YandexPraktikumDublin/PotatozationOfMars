@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PageMeta /> should renders correct <PageMeta /> 1`] = `
+<HelmetWrapper
+  defer={true}
+  encodeSpecialCharacters={true}
+>
+  <title>
+    Potatozation of Mars
+  </title>
+  <meta
+    content="The main character is a 
+businessman Elon Musk, who is flying to Mars for the purpose 
+of colonization, the cargo of his spaceship is potatoes, the 
+cultivation of which he wants to establish in a future colony. 
+After losing all his cargo, he returns to Earth to try again 
+and the game starts again."
+    name="description"
+  />
+</HelmetWrapper>
+`;
