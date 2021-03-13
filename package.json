@@ -6,16 +6,15 @@
   "scripts": {
     "start:webpack": "webpack --mode=development --watch --config webpack.config.js",
     "start:server": "nodemon index.js --watch dist/server.js",
-    "start": "NODE_ENV=development npm-run-all --print-label --parallel start:*",
-    "build": "NODE_ENV=production NODE_PATH=. webpack --mode production --config webpack.client.js",
+    "start": "cross-env NODE_ENV=development npm-run-all --print-label --parallel start:*",
+    "build": "cross-env NODE_ENV=production NODE_PATH=. webpack --mode production --config webpack.client.js",
     "lint": "eslint \"src/**/*.@(tsx|ts|jsx|js)\" --fix && prettier --check \"src/**/*.@(tsx|ts|jsx|js)\" --write",
     "test": "jest --config .jest/config.json --runInBand",
     "generate": "plop"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm-run-all lint test",
-      "pre-push": "npm-run-all lint test"
+      "pre-commit": "npm-run-all lint test"
     }
   },
   "repository": {
@@ -55,6 +54,7 @@
     "babel-jest": "26.6.3",
     "babel-plugin-require-context-hook": "1.0.0",
     "clean-webpack-plugin": "3.0.0",
+    "cross-env": "7.0.3",
     "css-loader": "5.1.1",
     "enzyme": "3.11.0",
     "enzyme-to-json": "3.6.1",
