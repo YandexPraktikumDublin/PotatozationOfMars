@@ -1,10 +1,11 @@
 import { createStore, compose, applyMiddleware } from 'redux'
-import createSagaMiddleware from 'redux-saga'
+import createSagaMiddleware, { END } from 'redux-saga'
 import { createBrowserHistory, createMemoryHistory } from 'history'
 import { routerMiddleware } from 'connected-react-router'
 import logger from 'redux-logger'
 import createRootReducer from '@store/rootReducer'
 import rootSaga from '@store/rootSaga'
+import { IAppStore } from '@types'
 
 export const isServer = !(
   typeof window !== 'undefined' &&
@@ -33,7 +34,10 @@ export function configureStore(initialState: {}, url = '/') {
     createRootReducer(history),
     initialState,
     composeEnhancers(applyMiddleware(...middlewares, logger))
-  )
+  ) as IAppStore
+
+  store.runSaga = sagaMiddleware.run
+  store.close = () => store.dispatch(END)
 
   if (!isServer) {
     sagaMiddleware.run(rootSaga)

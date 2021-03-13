@@ -13,33 +13,10 @@ exports[`<TumblerTheme /> should renders correct <TumblerTheme /> 1`] = `
     style={
       Object {
         "top": "calc(50% - 0.75rem)",
-        "transform": "translateX(-2px)",
+        "transform": "translateX(100%)",
       }
     }
     width="24"
   />
 </button>
-`;
-
-exports[`<TumblerTheme /> should toggle theme 1`] = `
-<TumblerTheme>
-  <button
-    className="relative bg-primary border-2 border-white rounded-2xl w-12	h-5 outline-none"
-    onClick={[Function]}
-  >
-    <img
-      alt="Toggle theme"
-      className="absolute transition ease-in-out w-6 h-6"
-      height="24"
-      src={[Function]}
-      style={
-        Object {
-          "top": "calc(50% - 0.75rem)",
-          "transform": "translateX(-2px)",
-        }
-      }
-      width="24"
-    />
-  </button>
-</TumblerTheme>
 `;

@@ -1,11 +1,13 @@
 import React from 'react'
-import Helmet, { HelmetData } from 'react-helmet'
+import { Helmet, HelmetData } from 'react-helmet'
 import { Provider as ReduxProvider } from 'react-redux'
 import { configureStore } from '@store/index'
+import rootSaga from '@store/rootSaga'
 import { renderToString } from 'react-dom/server'
-import { StaticRouter } from 'react-router-dom'
+import { StaticRouter, matchPath } from 'react-router-dom'
 import { StaticRouterContext } from 'react-router'
 import { Request, Response } from 'express'
+import routes from '@routes'
 import App from './App'
 
 function getHtml(reactHtml: string, reduxState = {}, helmet: HelmetData) {
@@ -38,23 +40,59 @@ export default (req: Request, res: Response) => {
   const location = req.url
   const { store } = configureStore({}, location)
   const context: StaticRouterContext = {}
-  const jsx = (
-    <ReduxProvider store={store}>
-      <StaticRouter context={context} location={location}>
-        <App />
-      </StaticRouter>
-    </ReduxProvider>
-  )
-  const reactHtml = renderToString(jsx)
-  const reduxState = store.getState()
-  const helmet = Helmet.renderStatic()
+  function renderApp() {
+    const jsx = (
+      <ReduxProvider store={store}>
+        <StaticRouter context={context} location={location}>
+          <App />
+        </StaticRouter>
+      </ReduxProvider>
+    )
+    const reactHtml = renderToString(jsx)
+    const reduxState = store.getState()
+    const helmet = Helmet.renderStatic()
 
-  if (context.url) {
-    res.redirect(context.url)
-    return
+    if (context.url) {
+      res.redirect(context.url)
+      return
+    }
+
+    res
+      .status(context.statusCode || 200)
+      .send(getHtml(reactHtml, reduxState, helmet))
   }
 
-  res
-    .status(context.statusCode || 200)
-    .send(getHtml(reactHtml, reduxState, helmet))
+  store
+    .runSaga(rootSaga)
+    .toPromise()
+    .then(() => renderApp())
+    .catch((err) => {
+      throw err
+    })
+
+  const dataRequirements: (Promise<void> | void)[] = []
+
+  routes.some((route) => {
+    const { fetchData: fetchMethod } = route
+    // @ts-ignore
+    // eslint-disable-next-line node/no-deprecated-api
+    const match = matchPath<{ slug: string }>(location, route)
+
+    if (match && fetchMethod) {
+      dataRequirements.push(
+        fetchMethod({
+          dispatch: store.dispatch,
+          match
+        })
+      )
+    }
+
+    return Boolean(match)
+  })
+
+  return Promise.all(dataRequirements)
+    .then(() => store.close())
+    .catch((err) => {
+      throw err
+    })
 }

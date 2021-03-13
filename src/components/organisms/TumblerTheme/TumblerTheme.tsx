@@ -1,38 +1,14 @@
-import React, { FC, memo, useEffect, useState } from 'react'
+import React, { FC, memo, useState } from 'react'
 import { moon } from '@images'
 
 type TTumblerThemeProps = {}
 
-const darkThemeClass = 'dark'
-
-let isDefaultLightTheme = false
-
-if (typeof window !== 'undefined') {
-  isDefaultLightTheme = window.localStorage.isLightTheme === 'true'
-}
-
 const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
-  const [isLightTheme, setIsLightTheme] = useState<boolean>(isDefaultLightTheme)
+  const [isLightTheme, setIsLightTheme] = useState<boolean>(true)
 
   const toggleTheme = () => {
     setIsLightTheme((value) => !value)
   }
-
-  useEffect(() => {
-    if (isLightTheme) {
-      document.documentElement.classList.remove(darkThemeClass)
-
-      if (typeof window !== 'undefined') {
-        window.localStorage.isLightTheme = 'true'
-      }
-    } else {
-      document.documentElement.classList.add(darkThemeClass)
-
-      if (typeof window !== 'undefined') {
-        window.localStorage.isLightTheme = 'false'
-      }
-    }
-  }, [isLightTheme])
 
   return (
     <button

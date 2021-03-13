@@ -1,5 +1,5 @@
 import React, { FC, memo } from 'react'
-import Helmet from 'react-helmet'
+import { Helmet } from 'react-helmet'
 import { DEFAULT_TITLE, DEFAULT_DESCRIPTION } from '@config'
 
 type TPageMetaProps = {

@@ -10,7 +10,7 @@ export const PATHS = {
 }
 
 export const SERVER_URL = 'https://ya-praktikum.tech'
-export const BASE_API_URL = 'https://ya-praktikum.tech/api/v2'
+export const BASE_API_URL = `${SERVER_URL}/api/v2`
 
 export const DEFAULT_ERROR_MESSAGE = 'something went wrong'
 export const DEFAULT_TITLE = 'Potatozation of Mars'
