@@ -13,7 +13,7 @@ exports[`<TumblerTheme /> should renders correct <TumblerTheme /> 1`] = `
     style={
       Object {
         "top": "calc(50% - 0.75rem)",
-        "transform": "translateX(100%)",
+        "transform": "translateX(-2px)",
       }
     }
     width="24"

@@ -1,14 +1,52 @@
-import React, { FC, memo, useState } from 'react'
+import React, { FC, memo, useState, useEffect } from 'react'
 import { moon } from '@images'
 
 type TTumblerThemeProps = {}
 
+const darkThemeClass = 'dark'
+
+let isDefaultLightTheme = true
+
+if (typeof window !== 'undefined') {
+  isDefaultLightTheme = window.localStorage.isLightTheme === 'true'
+}
+
 const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
-  const [isLightTheme, setIsLightTheme] = useState<boolean>(true)
+  const [isLightTheme, setIsLightTheme] = useState<boolean>(isDefaultLightTheme)
+  const [style, setStyle] = useState({
+    top: 'calc(50% - 0.75rem)',
+    transform: 'translateX(-2px)'
+  })
 
   const toggleTheme = () => {
     setIsLightTheme((value) => !value)
   }
+
+  useEffect(() => {
+    if (isLightTheme) {
+      document.documentElement.classList.remove(darkThemeClass)
+
+      if (typeof window !== 'undefined') {
+        window.localStorage.isLightTheme = 'true'
+      }
+
+      setStyle({
+        top: 'calc(50% - 0.75rem)',
+        transform: 'translateX(100%)'
+      })
+    } else {
+      document.documentElement.classList.add(darkThemeClass)
+
+      if (typeof window !== 'undefined') {
+        window.localStorage.isLightTheme = 'false'
+      }
+
+      setStyle({
+        top: 'calc(50% - 0.75rem)',
+        transform: 'translateX(-2px)'
+      })
+    }
+  }, [isLightTheme])
 
   return (
     <button
@@ -20,10 +58,7 @@ const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
         height="24"
         src={moon}
         className="absolute transition ease-in-out w-6 h-6"
-        style={{
-          top: 'calc(50% - 0.75rem)',
-          transform: isLightTheme ? 'translateX(100%)' : 'translateX(-2px)'
-        }}
+        style={style}
         alt="Toggle theme"
       />
     </button>
