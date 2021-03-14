@@ -1,7 +1,6 @@
-import React from 'react'
+import { createContext } from 'react'
+import { ClientManager } from '@cookies'
 
-const context: any = 'cookies'
-
-const CookiesContext = React.createContext(context)
+const CookiesContext = createContext(new ClientManager())
 
 export default CookiesContext

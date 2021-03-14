@@ -1,5 +1,5 @@
-type CookiesType = {
-  [key: string]: any
+type TCookiesType = {
+  [key: string]: string
 }
 
 export default class ClientManager {
@@ -11,7 +11,7 @@ export default class ClientManager {
 
   getAll() {
     const pairs = document.cookie.split(';')
-    const cookies: CookiesType = {}
+    const cookies: TCookiesType = {}
 
     for (let i = 0; i < pairs.length; i++) {
       const pair = pairs[i].split('=')
@@ -21,16 +21,14 @@ export default class ClientManager {
     return cookies
   }
 
-  set(name: string, value = '', days = 30) {
+  set(name: string, value: string = '', days = 30) {
     const date = new Date()
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000)
 
-    const chunks = [
+    document.cookie = [
       `${name}=${value}`,
       `expires=${date.toUTCString()}`,
       'path=/'
     ].join('; ')
-
-    document.cookie = chunks
   }
 }

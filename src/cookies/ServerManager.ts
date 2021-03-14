@@ -1,19 +1,19 @@
-type reqType = {
+type TReqType = {
   cookies: {
-    [key: string]: any
+    [key: string]: string
   }
 }
 
-type resType = {
-  cookie: (name: string, value: string, obj: object) => any
+type TResType = {
+  cookie: (name: string, value: string, obj: object) => void
 }
 
 export default class ServerManager {
-  _req: reqType
+  _req: TReqType
 
-  _res: resType
+  _res: TResType
 
-  constructor(req: reqType, res: resType) {
+  constructor(req: TReqType, res: TResType) {
     this._req = req
     this._res = res
   }
@@ -26,7 +26,7 @@ export default class ServerManager {
     return this._req.cookies
   }
 
-  set(name: string, value: any, days = 30) {
+  set(name: string, value: string = '', days = 30) {
     const maxAge = days * 24 * 60 * 60 * 1000
 
     this._res.cookie(name, value, { maxAge })
