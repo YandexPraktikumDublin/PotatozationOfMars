@@ -4,6 +4,7 @@ import { Provider as ReduxProvider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
 import App from './App'
 import { configureStore } from '@store/index'
+import { CookiesProvider } from '@components/atoms'
 
 const initialState = window.__INITIAL_STATE__
 const { store, history } = configureStore(initialState)
@@ -32,10 +33,12 @@ declare global {
 // }
 
 ReactDOM.hydrate(
-  <ReduxProvider store={store}>
-    <ConnectedRouter history={history}>
-      <App />
-    </ConnectedRouter>
-  </ReduxProvider>,
+  <CookiesProvider>
+    <ReduxProvider store={store}>
+      <ConnectedRouter history={history}>
+        <App />
+      </ConnectedRouter>
+    </ReduxProvider>
+  </CookiesProvider>,
   document.getElementById('root')
 )
