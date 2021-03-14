@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CookiesContext /> should renders correct <CookiesContext /> 1`] = `<Fragment />`;

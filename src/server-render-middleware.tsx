@@ -8,6 +8,8 @@ import { StaticRouter, matchPath } from 'react-router-dom'
 import { StaticRouterContext } from 'react-router'
 import { Request, Response } from 'express'
 import routes from '@routes'
+import { CookiesProvider } from '@components/atoms'
+import { ServerManager } from '@cookies'
 import App from './App'
 
 function getHtml(reactHtml: string, reduxState = {}, helmet: HelmetData) {
@@ -40,13 +42,16 @@ export default (req: Request, res: Response) => {
   const location = req.url
   const { store } = configureStore({}, location)
   const context: StaticRouterContext = {}
+  const cookieManager = new ServerManager(req, res)
   function renderApp() {
     const jsx = (
-      <ReduxProvider store={store}>
-        <StaticRouter context={context} location={location}>
-          <App />
-        </StaticRouter>
-      </ReduxProvider>
+      <CookiesProvider manager={cookieManager}>
+        <ReduxProvider store={store}>
+          <StaticRouter context={context} location={location}>
+            <App />
+          </StaticRouter>
+        </ReduxProvider>
+      </CookiesProvider>
     )
     const reactHtml = renderToString(jsx)
     const reduxState = store.getState()

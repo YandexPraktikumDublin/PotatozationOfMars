@@ -35,7 +35,8 @@
       "@types": ["./src/types/index.ts"],
       "@store/*": ["./src/store/*"],
       "@utils/*": ["./src/utils/*"],
-      "@routes": ["./src/routes.ts"]
+      "@routes": ["./src/routes.ts"],
+      "@cookies": ["./src/cookies/index.ts"]
     },
     "typeRoots": ["node_modules/@types"]
   },
