@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { CookiesContext } from '@components/atoms'
 
-export default function useCookies(name: string) {
+export const useCookies = (name: string) => {
   const manager = useContext(CookiesContext)
 
   if (!manager) {
