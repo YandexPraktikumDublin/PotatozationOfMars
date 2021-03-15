@@ -24,7 +24,7 @@ exports[`<ProfileHeader /> should has className from className prop 1`] = `
       >
         <img
           alt=""
-          className="w-20 h-20"
+          className="w-20 h-20 object-cover"
           height="80"
           width="80"
         />
