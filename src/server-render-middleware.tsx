@@ -43,7 +43,6 @@ export default (req: Request, res: Response) => {
   const { store } = configureStore({}, location)
   const context: StaticRouterContext = {}
   const cookieManager = new ServerManager(req, res)
-
   function renderApp() {
     const jsx = (
       <CookiesProvider manager={cookieManager}>
@@ -80,6 +79,8 @@ export default (req: Request, res: Response) => {
 
   routes.some((route) => {
     const { fetchData: fetchMethod } = route
+    // @ts-ignore
+    // eslint-disable-next-line node/no-deprecated-api
     const match = matchPath<{ slug: string }>(location, route)
 
     if (match && fetchMethod) {

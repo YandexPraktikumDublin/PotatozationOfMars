@@ -3,10 +3,8 @@ import { CookiesContext } from '@components/atoms'
 
 type ComposedComponentType = {
   children?: ReactNode
-  cookies: {
-    [key: string]: string
-  }
-  setCookie: (name: string, value?: string, days?: number) => void
+  cookies: any
+  setCookie: any
 }
 
 export default function withCookies(

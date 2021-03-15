@@ -5,6 +5,7 @@ import { ConnectedRouter } from 'connected-react-router'
 import App from './App'
 import { configureStore } from '@store/index'
 import { CookiesProvider } from '@components/atoms'
+import { CookiesNotification } from '@components/organisms'
 
 const initialState = window.__INITIAL_STATE__
 const { store, history } = configureStore(initialState)
@@ -37,6 +38,7 @@ ReactDOM.hydrate(
     <ReduxProvider store={store}>
       <ConnectedRouter history={history}>
         <App />
+        <CookiesNotification />
       </ConnectedRouter>
     </ReduxProvider>
   </CookiesProvider>,
