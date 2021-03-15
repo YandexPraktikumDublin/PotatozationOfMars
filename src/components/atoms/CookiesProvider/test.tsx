@@ -7,7 +7,7 @@ import { CookiesProvider } from '.'
 describe('<CookiesProvider />', () => {
   it('should renders correct <CookiesProvider />', () => {
     const wrapper = shallow(
-      <CookiesProvider>
+      <CookiesProvider manager={() => console.log()}>
         <></>
       </CookiesProvider>
     )

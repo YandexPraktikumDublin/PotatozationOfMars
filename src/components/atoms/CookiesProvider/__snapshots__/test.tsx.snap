@@ -2,6 +2,6 @@
 
 exports[`<CookiesProvider /> should renders correct <CookiesProvider /> 1`] = `
 <ContextProvider
-  value={ClientManager {}}
+  value={[Function]}
 />
 `;

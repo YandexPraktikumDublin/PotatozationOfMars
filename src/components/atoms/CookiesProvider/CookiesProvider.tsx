@@ -3,21 +3,16 @@ import { CookiesContext } from '@components/atoms'
 import { ClientManager } from '@cookies'
 
 type TCookiesProviderProps = {
-  manager?: any
+  manager: any
   children: React.ReactChild
 }
 
 const CookiesProvider: FC<TCookiesProviderProps> = memo(
-  ({ manager, children }: TCookiesProviderProps) => {
-    if (!manager) {
-      manager = new ClientManager()
-    }
-    return (
-      <CookiesContext.Provider value={manager}>
-        {children}
-      </CookiesContext.Provider>
-    )
-  }
+  ({ manager = new ClientManager(), children }: TCookiesProviderProps) => (
+    <CookiesContext.Provider value={manager}>
+      {children}
+    </CookiesContext.Provider>
+  )
 )
 
 CookiesProvider.displayName = 'CookiesProvider'
