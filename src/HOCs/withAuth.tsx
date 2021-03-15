@@ -1,5 +1,6 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchUserRequest } from '@store/user/fetchUser/actions'
 import {
   getUserErrorSelector,
   getUserPendingSelector,
@@ -12,12 +13,19 @@ export default function withAuth<T>(Component: React.FC<T>) {
   return (props: any) => {
     const location = useLocation()
 
+    const dispatch = useDispatch()
     const user = useSelector(getUserSelector)
     const pendingUser = useSelector(getUserPendingSelector)
     const errorUser = useSelector(getUserErrorSelector)
 
     const isAuthOrSignup =
       location.pathname === PATHS.AUTH || location.pathname === PATHS.SIGNUP
+
+    useEffect(() => {
+      if (!user) {
+        dispatch(fetchUserRequest())
+      }
+    }, [])
 
     if (pendingUser) {
       return null // TODO: add loader

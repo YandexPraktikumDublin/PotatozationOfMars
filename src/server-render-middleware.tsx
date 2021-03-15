@@ -39,6 +39,9 @@ function getHtml(reactHtml: string, reduxState = {}, helmet: HelmetData) {
 }
 
 export default (req: Request, res: Response) => {
+  // @ts-ignore
+  console.log('Cookies: ', req.universalCookies)
+
   const location = req.url
   const { store } = configureStore({}, location)
   const context: StaticRouterContext = {}
