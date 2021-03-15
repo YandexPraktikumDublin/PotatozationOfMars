@@ -25,58 +25,37 @@ export default [
   {
     path: PATHS.AUTH,
     exact: false,
-    component: Auth,
-    fetchData({ dispatch }: IRouterFetchDataArgs) {
-      dispatch(fetchUserRequest())
-    }
+    component: Auth
   },
   {
     path: PATHS.FORUM,
     exact: true,
-    component: Forum,
-    fetchData({ dispatch }: IRouterFetchDataArgs) {
-      dispatch(fetchUserRequest())
-    }
+    component: Forum
   },
   {
     path: PATHS.FORUM_TOPIC,
     exact: false,
-    component: ForumTopic,
-    fetchData({ dispatch }: IRouterFetchDataArgs) {
-      dispatch(fetchUserRequest())
-    }
+    component: ForumTopic
   },
   {
     path: PATHS.GAME,
     exact: false,
-    component: Game,
-    fetchData({ dispatch }: IRouterFetchDataArgs) {
-      dispatch(fetchUserRequest())
-    }
+    component: Game
   },
   {
     path: PATHS.LEADERBOARD,
     exact: false,
-    component: Leaderboard,
-    fetchData({ dispatch }: IRouterFetchDataArgs) {
-      dispatch(fetchUserRequest())
-    }
+    component: Leaderboard
   },
   {
     path: PATHS.PROFILE,
     exact: false,
-    component: Profile,
-    fetchData({ dispatch }: IRouterFetchDataArgs) {
-      dispatch(fetchUserRequest())
-    }
+    component: Profile
   },
   {
     path: PATHS.SIGNUP,
     exact: false,
-    component: SignUp,
-    fetchData({ dispatch }: IRouterFetchDataArgs) {
-      dispatch(fetchUserRequest())
-    }
+    component: SignUp
   },
   {
     path: '*',
