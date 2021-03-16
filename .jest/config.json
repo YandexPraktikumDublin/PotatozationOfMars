@@ -20,7 +20,7 @@
     "@types": ["<rootDir>/types/index.ts"],
     "@store/([^\\.]*)$": ["<rootDir>/store/$1"],
     "@utils/([^\\.]*)$": ["<rootDir>/utils/$1"],
-    "@history": ["<rootDir>/history.ts"]
+    "@routes": ["<rootDir>/routes.ts"]
   },
   "setupFilesAfterEnv": ["../.jest/setupTests.js"],
   "transform": {

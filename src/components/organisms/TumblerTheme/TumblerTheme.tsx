@@ -1,14 +1,25 @@
-import React, { FC, memo, useEffect, useState } from 'react'
+import React, { FC, memo, useState, useEffect } from 'react'
 import { moon } from '@images'
 
 type TTumblerThemeProps = {}
 
 const darkThemeClass = 'dark'
 
+let isDefaultLightTheme = true
+
+if (typeof window !== 'undefined') {
+  isDefaultLightTheme = window.localStorage.isLightTheme === 'true'
+}
+
+const defaultImageStyle = {
+  display: 'none',
+  top: 'calc(50% - 0.75rem)',
+  transform: 'translateX(100%)'
+}
+
 const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
-  const [isLightTheme, setIsLightTheme] = useState(
-    window.localStorage.isLightTheme === 'true'
-  )
+  const [isLightTheme, setIsLightTheme] = useState<boolean>(isDefaultLightTheme)
+  const [style, setStyle] = useState(defaultImageStyle)
 
   const toggleTheme = () => {
     setIsLightTheme((value) => !value)
@@ -17,10 +28,28 @@ const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
   useEffect(() => {
     if (isLightTheme) {
       document.documentElement.classList.remove(darkThemeClass)
-      window.localStorage.isLightTheme = 'true'
+
+      if (typeof window !== 'undefined') {
+        window.localStorage.isLightTheme = 'true'
+      }
+
+      setStyle({
+        ...defaultImageStyle,
+        display: 'block',
+        transform: 'translateX(100%)'
+      })
     } else {
       document.documentElement.classList.add(darkThemeClass)
-      window.localStorage.isLightTheme = 'false'
+
+      if (typeof window !== 'undefined') {
+        window.localStorage.isLightTheme = 'false'
+      }
+
+      setStyle({
+        ...defaultImageStyle,
+        display: 'block',
+        transform: 'translateX(-2px)'
+      })
     }
   }, [isLightTheme])
 
@@ -34,10 +63,7 @@ const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
         height="24"
         src={moon}
         className="absolute transition ease-in-out w-6 h-6"
-        style={{
-          top: 'calc(50% - 0.75rem)',
-          transform: isLightTheme ? 'translateX(100%)' : 'translateX(-2px)'
-        }}
+        style={style}
         alt="Toggle theme"
       />
     </button>

@@ -5,6 +5,54 @@ exports[`<ForumTopic /> should renders correct <ForumTopic /> 1`] = `
   <div
     className="relative"
   >
+    <PageMeta
+      title="New Games"
+    >
+      <HelmetWrapper
+        defer={true}
+        encodeSpecialCharacters={true}
+      >
+        <SideEffect(NullComponent)
+          defer={true}
+          encodeSpecialCharacters={true}
+          meta={
+            Array [
+              Object {
+                "content": "The main character is a 
+businessman Elon Musk, who is flying to Mars for the purpose 
+of colonization, the cargo of his spaceship is potatoes, the 
+cultivation of which he wants to establish in a future colony. 
+After losing all his cargo, he returns to Earth to try again 
+and the game starts again.",
+                "name": "description",
+              },
+            ]
+          }
+          title="New Games | Potatozation of Mars"
+          titleAttributes={Object {}}
+        >
+          <NullComponent
+            defer={true}
+            encodeSpecialCharacters={true}
+            meta={
+              Array [
+                Object {
+                  "content": "The main character is a 
+businessman Elon Musk, who is flying to Mars for the purpose 
+of colonization, the cargo of his spaceship is potatoes, the 
+cultivation of which he wants to establish in a future colony. 
+After losing all his cargo, he returns to Earth to try again 
+and the game starts again.",
+                  "name": "description",
+                },
+              ]
+            }
+            title="New Games | Potatozation of Mars"
+            titleAttributes={Object {}}
+          />
+        </SideEffect(NullComponent)>
+      </HelmetWrapper>
+    </PageMeta>
     <Title>
       <h1
         className="text-4xl mb-6 font-medium dark:text-white"

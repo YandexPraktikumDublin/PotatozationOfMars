@@ -1,15 +1,13 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects'
 import { axiosInstance } from '@api'
-import history from '@history'
 import { PATHS } from '@config'
+import { redirectTo } from '@utils/misc'
 import { authFailure, authSuccess } from './actions'
 import { AUTH_REQUEST } from './actionTypes'
 import { IAuthRequestPayload } from '@store/auth/types'
 
 const signin = (data: IAuthRequestPayload) =>
   axiosInstance.post('auth/signin', data)
-
-const redirectTo = (location: string) => history.push(location)
 
 function* authSaga(data: Record<string, any>) {
   try {

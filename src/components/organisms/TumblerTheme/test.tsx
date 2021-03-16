@@ -17,6 +17,7 @@ describe('<TumblerTheme />', () => {
     const wrapper = mount(<TumblerTheme />)
 
     expect(wrapper.find('img').prop('style')).toEqual({
+      display: 'block',
       top: 'calc(50% - 0.75rem)',
       transform: 'translateX(-2px)'
     })
@@ -28,6 +29,7 @@ describe('<TumblerTheme />', () => {
     wrapper.simulate('click')
 
     expect(wrapper.find('img').prop('style')).toEqual({
+      display: 'block',
       top: 'calc(50% - 0.75rem)',
       transform: 'translateX(100%)'
     })
@@ -39,6 +41,7 @@ describe('<TumblerTheme />', () => {
     wrapper.simulate('click')
 
     expect(wrapper.find('img').prop('style')).toEqual({
+      display: 'block',
       top: 'calc(50% - 0.75rem)',
       transform: 'translateX(-2px)'
     })
