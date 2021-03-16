@@ -7,17 +7,19 @@ const darkThemeClass = 'dark'
 
 let isDefaultLightTheme = true
 
-const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
-  if (typeof window !== 'undefined') {
-    isDefaultLightTheme = window.localStorage.isLightTheme === 'true'
-  }
+if (typeof window !== 'undefined') {
+  isDefaultLightTheme = window.localStorage.isLightTheme === 'true'
+}
 
+const defaultImageStyle = {
+  display: 'none',
+  top: 'calc(50% - 0.75rem)',
+  transform: 'translateX(100%)'
+}
+
+const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
   const [isLightTheme, setIsLightTheme] = useState<boolean>(isDefaultLightTheme)
-  const [style, setStyle] = useState({
-    display: 'none',
-    top: 'calc(50% - 0.75rem)',
-    transform: 'translateX(100%)'
-  })
+  const [style, setStyle] = useState(defaultImageStyle)
 
   const toggleTheme = () => {
     setIsLightTheme((value) => !value)
@@ -32,8 +34,8 @@ const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
       }
 
       setStyle({
+        ...defaultImageStyle,
         display: 'block',
-        top: 'calc(50% - 0.75rem)',
         transform: 'translateX(100%)'
       })
     } else {
@@ -44,8 +46,8 @@ const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
       }
 
       setStyle({
+        ...defaultImageStyle,
         display: 'block',
-        top: 'calc(50% - 0.75rem)',
         transform: 'translateX(-2px)'
       })
     }
