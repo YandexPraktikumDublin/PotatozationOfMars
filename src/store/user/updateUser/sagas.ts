@@ -1,11 +1,11 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects'
-import { axiosInstance } from '@api'
+import { getAxiosInstance } from '@api'
 import { updateUserSuccess, updateUserFailure } from './actions'
 import { UPDATE_USER_REQUEST } from './actionTypes'
 import { IUpdateUserRequestPayload } from './types'
 
 const changeUserData = (data: IUpdateUserRequestPayload) =>
-  axiosInstance.put('user/profile', data)
+  getAxiosInstance().put('user/profile', data)
 
 function* updateUserSaga(data: Record<string, any>) {
   try {

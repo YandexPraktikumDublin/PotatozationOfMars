@@ -1,5 +1,5 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects'
-import { axiosInstance } from '@api'
+import { getAxiosInstance } from '@api'
 import { PATHS } from '@config'
 import { redirectTo } from '@utils/misc'
 import { authFailure, authSuccess } from './actions'
@@ -7,7 +7,7 @@ import { AUTH_REQUEST } from './actionTypes'
 import { IAuthRequestPayload } from '@store/auth/types'
 
 const signin = (data: IAuthRequestPayload) =>
-  axiosInstance.post('auth/signin', data)
+  getAxiosInstance().post('auth/signin', data)
 
 function* authSaga(data: Record<string, any>) {
   try {

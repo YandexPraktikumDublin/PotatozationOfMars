@@ -1,11 +1,11 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects'
-import { axiosInstance } from '@api'
+import { getAxiosInstance } from '@api'
 import { PATHS } from '@config'
 import { redirectTo } from '@utils/misc'
 import { logoutFailure, logoutSuccess } from './actions'
 import { LOGOUT_REQUEST } from './actionTypes'
 
-const logout = () => axiosInstance.post('auth/logout')
+const logout = () => getAxiosInstance().post('auth/logout')
 
 function* logoutSaga() {
   try {
