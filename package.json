@@ -106,6 +106,7 @@
     "express-http-context": "1.2.4",
     "file-loader": "6.2.0",
     "formik": "2.2.6",
+    "open": "8.0.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-helmet": "6.1.0",

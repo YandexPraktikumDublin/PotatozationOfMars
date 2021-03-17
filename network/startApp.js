@@ -1,6 +1,7 @@
 const https = require('https')
 const { readFileSync } = require('fs')
 const { resolve } = require('path')
+const open = require('open')
 
 const { findIP } = require('./findIP')
 const { makeStartLogsText } = require('./startLogs')
@@ -35,6 +36,8 @@ function startApp(app) {
           PORT
         )
       )
+
+      open(`https://${devHosts[0].host}:3000`)
     })
 
     return
