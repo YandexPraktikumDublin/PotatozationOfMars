@@ -1,7 +1,7 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects'
 import { getAxiosInstance } from '@api'
 import { PATHS } from '@config'
-import { redirectTo } from '@utils/misc'
+import { hardRedirectTo, clearCookies } from '@utils/misc'
 import { logoutFailure, logoutSuccess } from './actions'
 import { LOGOUT_REQUEST } from './actionTypes'
 
@@ -12,7 +12,8 @@ function* logoutSaga() {
     const response = yield call(logout)
 
     yield put(logoutSuccess(response.data))
-    yield call(redirectTo, PATHS.AUTH)
+    yield call(clearCookies)
+    yield call(hardRedirectTo, PATHS.AUTH)
   } catch (error) {
     yield put(
       logoutFailure({
