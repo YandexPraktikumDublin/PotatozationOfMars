@@ -1,6 +1,6 @@
 const { execSync } = require('child_process')
 const { readFileSync } = require('fs')
-const hosts = require('./hosts.json')
+const hosts = require('./config/hosts.json')
 
 function addAliases(aliases, prefix) {
   const currentHosts = readFileSync('/etc/hosts').toString()
