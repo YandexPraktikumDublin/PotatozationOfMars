@@ -1,11 +1,11 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects'
-import { axiosInstance } from '@api'
+import { getAxiosInstance } from '@api'
 import { updatePasswordSuccess, updatePasswordFailure } from './actions'
 import { UPDATE_PASSWORD_REQUEST } from './actionTypes'
 import { IUpdatePasswordRequestPayload } from './types'
 
 const updatePassword = (data: IUpdatePasswordRequestPayload) =>
-  axiosInstance.put('user/password', data)
+  getAxiosInstance().put('user/password', data)
 
 function* updatePasswordSaga(data: Record<string, any>) {
   try {

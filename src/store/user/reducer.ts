@@ -67,8 +67,11 @@ export default (state = initialState, action: TCommonAction): IUserState => {
         user: normalizeUser(action.payload?.user)
       }
     case UPDATE_PASSWORD_SUCCESS:
-      return {
+      return <IUserState>{
         ...state,
+        user: {
+          ...state.user
+        },
         pending: false
       }
     case FETCH_USER_FAILURE:

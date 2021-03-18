@@ -1,20 +1,15 @@
 import { createStore, compose, applyMiddleware } from 'redux'
 import createSagaMiddleware, { END } from 'redux-saga'
-import { createBrowserHistory, createMemoryHistory } from 'history'
+import { createMemoryHistory, createBrowserHistory } from 'history'
 import { routerMiddleware } from 'connected-react-router'
 import logger from 'redux-logger'
 import createRootReducer from '@store/rootReducer'
 import rootSaga from '@store/rootSaga'
 import { IAppStore } from '@types'
-
-export const isServer = !(
-  typeof window !== 'undefined' &&
-  window.document &&
-  window.document.createElement
-)
+import { isServer } from '@utils/misc'
 
 function getComposeEnhancers() {
-  if (process.env.NODE_ENV !== 'production' && !isServer) {
+  if (process.env.NODE_ENV !== 'production' && !isServer()) {
     return window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
   }
 
@@ -22,7 +17,7 @@ function getComposeEnhancers() {
 }
 
 export function configureStore(initialState: {}, url = '/') {
-  const history = isServer
+  const history = isServer()
     ? createMemoryHistory({ initialEntries: [url] })
     : createBrowserHistory()
 
@@ -39,7 +34,7 @@ export function configureStore(initialState: {}, url = '/') {
   store.runSaga = sagaMiddleware.run
   store.close = () => store.dispatch(END)
 
-  if (!isServer) {
+  if (!isServer()) {
     sagaMiddleware.run(rootSaga)
   }
 

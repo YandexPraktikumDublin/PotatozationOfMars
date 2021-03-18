@@ -6,6 +6,7 @@ import App from './App'
 import { configureStore } from '@store/index'
 
 const initialState = window.__INITIAL_STATE__
+
 const { store, history } = configureStore(initialState)
 
 declare global {

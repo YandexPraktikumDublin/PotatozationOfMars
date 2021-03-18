@@ -1,13 +1,14 @@
 import React, { FC, memo, useState, useEffect } from 'react'
+import { isServer } from '@utils/misc'
 import { moon } from '@images'
 
 type TTumblerThemeProps = {}
 
 const darkThemeClass = 'dark'
 
-let isDefaultLightTheme = true
+let isDefaultLightTheme = false
 
-if (typeof window !== 'undefined') {
+if (!isServer()) {
   isDefaultLightTheme = window.localStorage.isLightTheme === 'true'
 }
 
@@ -29,7 +30,7 @@ const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
     if (isLightTheme) {
       document.documentElement.classList.remove(darkThemeClass)
 
-      if (typeof window !== 'undefined') {
+      if (!isServer()) {
         window.localStorage.isLightTheme = 'true'
       }
 
@@ -41,7 +42,7 @@ const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
     } else {
       document.documentElement.classList.add(darkThemeClass)
 
-      if (typeof window !== 'undefined') {
+      if (!isServer()) {
         window.localStorage.isLightTheme = 'false'
       }
 
