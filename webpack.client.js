@@ -1,11 +1,15 @@
 const path = require('path')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-  entry: [path.join(__dirname, './src/index.tsx')],
+  name: "client",
+  entry: ([
+    process.env.NODE_ENV !== 'production' && 'react-hot-loader/patch',
+    path.join(__dirname, '/src/index.tsx'),
+  ].filter(Boolean)),
   devtool: 'eval',
+  mode: process.env.NODE_ENV,
   module: {
     rules: [
       {
@@ -45,12 +49,12 @@ module.exports = {
     filename: '[name].js'
   },
   resolve: {
+    alias: { 'react-dom': '@hot-loader/react-dom' },
     modules: ['src', 'node_modules'],
     extensions: ['*', '.js', '.jsx', '.json', '.ts', '.tsx'],
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })]
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({ filename: '[name].css' })
   ]
 }
