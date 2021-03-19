@@ -1,7 +1,12 @@
 const https = require('https')
 const { readFileSync } = require('fs')
 const { resolve } = require('path')
-const open = require('open')
+const webpackDevMiddleware = require('webpack-dev-middleware')
+const webpackHotMiddleware = require('webpack-hot-middleware')
+const webpack = require('webpack')
+const config = require('../webpack.config.js')
+const compiler = webpack(config)
+// const reload = require('reload')
 
 const { findIP } = require('./findIP')
 const { makeStartLogsText } = require('./startLogs')
@@ -23,6 +28,16 @@ if (isDev) {
 
 function startApp(app) {
   if (isDev) {
+    app.use(
+      webpackDevMiddleware(compiler, {
+        publicPath: '/'
+      })
+    )
+    
+    app.use(
+      webpackHotMiddleware(compiler)
+    )
+
     const options = {
       key: readFileSync(resolve('network/config/key.pem'), 'utf8'),
       cert: readFileSync(resolve('network/config/server.crt'), 'utf8')
@@ -36,10 +51,12 @@ function startApp(app) {
           PORT
         )
       )
-
-      open(`https://${devHosts[0].host}:3000`)
     })
 
+    // reload(app).catch(e => {
+    //   console.log('Reload could not start, could not start server/sample app', e)
+    // })
+    
     return
   }
 

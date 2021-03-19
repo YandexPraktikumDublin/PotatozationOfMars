@@ -1,4 +1,5 @@
 import React from 'react'
+import { hot } from 'react-hot-loader/root'
 import { Switch, Route } from 'react-router-dom'
 import ErrorBoundary from './ErrorBoundary'
 import { background } from '@images'
@@ -28,4 +29,4 @@ const App: React.FC = () => (
   </div>
 )
 
-export default App
+export default hot(App)
