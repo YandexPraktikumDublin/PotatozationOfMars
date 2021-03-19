@@ -14,6 +14,7 @@ function getHtml(reactHtml: string, reduxState = {}, helmet: HelmetData) {
   return `
     <!doctype html>
     <html lang="en">
+    <!--suppress HtmlRequiredTitleElement -->
     <head>
         <meta charset="UTF-8">
         <meta name="viewport"

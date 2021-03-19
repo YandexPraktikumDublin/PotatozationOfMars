@@ -5,6 +5,9 @@ import { BaseForm, BaseInput, Button } from '@components/organisms'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAuthErrorSelector } from '@store/auth/selectors'
 import { authRequest } from '@store/auth/actions'
+import { getAxiosInstance } from '@api'
+import { hardRedirectTo } from '@utils/misc'
+import { YANDEX_OAUTH_REDIRECT_URL } from '@config'
 
 type TAuthFormProps = {}
 
@@ -35,6 +38,20 @@ const AuthForm: FC<TAuthFormProps> = memo(() => {
     )
   }
 
+  const handleOAuth = () => {
+    const redirectUri = window ? window.location.origin : null
+    getAxiosInstance()
+      .get('/oauth/yandex/service-id')
+      .then((response) => {
+        if (response.data.service_id && redirectUri) {
+          hardRedirectTo(
+            `${YANDEX_OAUTH_REDIRECT_URL}?response_type=code&client_id=${response.data.service_id}&redirect_uri=${redirectUri}`
+          )
+        }
+      })
+      .catch()
+  }
+
   return (
     <>
       <BaseForm
@@ -52,7 +69,7 @@ const AuthForm: FC<TAuthFormProps> = memo(() => {
           placeholder="Password"
         />
       </BaseForm>
-      <Button>Log in with Yandex</Button>
+      <Button onClick={handleOAuth}>Log in with Yandex</Button>
     </>
   )
 })

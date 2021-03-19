@@ -8,6 +8,7 @@ import {
 } from '@store/user/fetchUser/selectors'
 import { Redirect, useLocation } from 'react-router'
 import { PATHS } from '@config'
+import { getAxiosInstance } from '@api'
 
 export default function withAuth<T>(Component: React.FC<T>) {
   return (props: any) => {
@@ -19,13 +20,21 @@ export default function withAuth<T>(Component: React.FC<T>) {
     const errorUser = useSelector(getUserErrorSelector)
 
     const code = /code=([^&]+)/.exec(location.search)?.[1]
-    console.log(code)
 
     const isAuthOrSignup =
       location.pathname === PATHS.AUTH || location.pathname === PATHS.SIGNUP
 
     useEffect(() => {
-        if (!user) dispatch(fetchUserRequest())
+      if (!user) {
+        if (code) {
+          getAxiosInstance()
+            .post('oauth/yandex', { code })
+            .then(() => dispatch(fetchUserRequest()))
+            .catch()
+        } else {
+          dispatch(fetchUserRequest())
+        }
+      }
     }, [])
 
     if (pendingUser) {
