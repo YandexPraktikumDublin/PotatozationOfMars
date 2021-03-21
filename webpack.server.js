@@ -52,7 +52,7 @@ module.exports = {
     extensions: ['*', '.js', '.jsx', '.json', '.ts', '.tsx'],
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })]
   },
-  devtool: 'source-map',
+  devtool: 'eval',
   performance: {
     hints: false
   },

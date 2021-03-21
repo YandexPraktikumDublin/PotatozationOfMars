@@ -12,6 +12,7 @@ import {
   Start
 } from '@pages'
 import { PATHS } from '@config'
+import { fetchLeaderboardRequest } from '@store/leaderboard/fetchLeaderboard/actions'
 
 export default [
   {
@@ -60,6 +61,7 @@ export default [
     exact: false,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
       dispatch(fetchUserRequest())
+      dispatch(fetchLeaderboardRequest({ cursor: 0 }))
     }
   },
   {
