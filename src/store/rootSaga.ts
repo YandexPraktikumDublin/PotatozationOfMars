@@ -7,6 +7,7 @@ import signupSaga from '@store/signup/sagas'
 import authSaga from '@store/auth/sagas'
 import logoutSaga from '@store/logout/sagas'
 import leaderboardSaga from '@store/leaderboard/fetchLeaderboard/sagas'
+import updateLeaderboardSaga from '@store/leaderboard/updateLeaderboard/sagas'
 
 export default function* rootSaga() {
   yield all([
@@ -17,6 +18,7 @@ export default function* rootSaga() {
     fork(signupSaga),
     fork(authSaga),
     fork(logoutSaga),
-    fork(leaderboardSaga)
+    fork(leaderboardSaga),
+    fork(updateLeaderboardSaga)
   ])
 }
