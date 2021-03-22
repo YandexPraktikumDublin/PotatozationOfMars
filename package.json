@@ -5,10 +5,11 @@
   "main": "webpack.prod.js",
   "scripts": {
     "make-aliases": "node network/makeAliases.js",
-    "start:webpack": "webpack --mode=development --watch --config webpack.config.js",
+    "start:hmr": "node network/startHmr.js",
+    "start:webpack": "webpack --mode=development --watch --progress --config webpack.config.js",
     "start:server": "nodemon index.js --watch dist/server.js",
     "start": "cross-env NODE_ENV=development npm-run-all --print-label --parallel start:*",
-    "build": "cross-env NODE_ENV=production NODE_PATH=. webpack --mode production --config webpack.client.js",
+    "build": "cross-env NODE_ENV=production NODE_PATH=. webpack --mode=production --config webpack.client.js",
     "lint": "eslint \"src/**/*.@(tsx|ts|jsx|js)\" --fix && prettier --check \"src/**/*.@(tsx|ts|jsx|js)\" --write",
     "test": "jest --config .jest/config.json --runInBand",
     "generate": "plop"
@@ -119,7 +120,6 @@
     "react-router-dom": "5.2.0",
     "redux": "4.0.5",
     "redux-saga": "1.1.3",
-    "reload": "3.1.1",
     "reselect": "4.0.0",
     "tailwindcss": "2.0.2",
     "universal-cookie": "4.0.4",

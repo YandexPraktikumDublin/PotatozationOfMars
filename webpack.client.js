@@ -1,15 +1,19 @@
 const path = require('path')
+const webpack = require('webpack')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
+const IS_DEV = process.env.NODE_ENV !== 'production'
+
 module.exports = {
-  name: "client",
-  entry: ([
-    process.env.NODE_ENV !== 'production' && 'react-hot-loader/patch',
-    path.join(__dirname, '/src/index.tsx'),
-  ].filter(Boolean)),
-  devtool: 'source-map',
-  mode: process.env.NODE_ENV,
+  name: 'client',
+  entry: [
+    IS_DEV && 'react-hot-loader/patch',
+    IS_DEV &&
+      'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
+    path.join(__dirname, '/src/index.tsx')
+  ].filter(Boolean),
+  devtool: 'eval',
   module: {
     rules: [
       {
@@ -55,6 +59,7 @@ module.exports = {
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })]
   },
   plugins: [
+    IS_DEV && new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({ filename: '[name].css' })
-  ]
+  ].filter(Boolean)
 }
