@@ -1,26 +1,34 @@
 import { TPosition } from '@game/@types'
 import { ContextController, GameClock } from '@game/controllers'
 import { Vector } from '@game/entities'
-import { asteroid } from '@images'
 
 class Entity {
   readonly image = new Image()
   protected clockEvent: () => void
   protected destination: TPosition
+  health: number
   isAlive: boolean
   position: TPosition
   size: number
   velocity: Vector
   killCallback: () => void
 
-  constructor(killCallback = () => {}, velocity = 5, size = 50) {
+  constructor(
+    killCallback = () => {},
+    velocity = 5,
+    size = 50,
+    health = 1,
+    image = ''
+  ) {
     this.clockEvent = () => {}
+    this.health = health
     this.isAlive = true
     this.position = { x: 0, y: 0 }
     this.destination = this.position
     this.size = size
     this.velocity = new Vector(velocity)
     this.killCallback = killCallback
+    this.image.src = image
   }
 
   public init = (clock: GameClock, context: ContextController) => {
@@ -46,7 +54,6 @@ class Entity {
     this.image.onload = () => {
       this.clockEvent = clock.startEvent(this.move)
     }
-    this.image.src = asteroid
   }
 
   public kill = () => {

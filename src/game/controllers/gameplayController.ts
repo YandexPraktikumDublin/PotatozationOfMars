@@ -36,7 +36,7 @@ class GameplayController {
       playerControl: this.player.controlWithMouse(this.canvas, this.context)
     }
     const level = this.levels[this.currentLevel]
-    level.init(this.clock, this.context, 1000000, 10, 5)
+    level.init(this.clock, this.context, 1000000, 10)
     const collisionHandler = this.clock.startEvent(() => {
       this.isCollidedPlayer(level)
       this.isHitEnemy(level)

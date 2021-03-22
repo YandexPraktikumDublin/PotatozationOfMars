@@ -16,21 +16,21 @@ class EnemyController {
     clock: GameClock,
     context: ContextController,
     quantity: number = 1,
-    simultaneously: number = 1,
-    velocity: number = 1
+    simultaneously: number = 1
   ) => {
     this.quantity = quantity
     console.log(quantity, simultaneously)
 
     for (let i = 0; i < simultaneously; i++) {
       const callback = () => {
+        if (this.entities[i].isAlive) return
         this.quantity--
         if (this.quantity > simultaneously) {
-          this.entities[i] = new this.EnemyType(callback, velocity)
+          this.entities[i] = new this.EnemyType(callback)
           this.entities[i].init(clock, context)
         }
       }
-      this.entities[i] = new this.EnemyType(callback, velocity)
+      this.entities[i] = new this.EnemyType(callback)
       this.entities[i].init(clock, context)
     }
   }

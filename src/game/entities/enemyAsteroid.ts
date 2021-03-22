@@ -6,7 +6,12 @@ class EnemyAsteroid extends Entity {
   angle: number
   rotation: number
   constructor(killCallback = () => {}, v = 5) {
-    super(killCallback, Math.random() * v + v, Math.random() * 50 + 50)
+    super(
+      killCallback,
+      Math.random() * v + v,
+      Math.random() * 50 + 50,
+        asteroid
+    )
     this.angle = 0
     this.rotation = (Math.random() - 0.5) / 100
   }
