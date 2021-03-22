@@ -1,13 +1,12 @@
 const https = require('https')
 const { readFileSync } = require('fs')
 const { resolve } = require('path')
-const open = require('open')
 
 const { findIP } = require('./findIP')
 const { makeStartLogsText } = require('./startLogs')
 const devHosts = require('./config/hosts.json')
 
-const { PORT = 3000, NODE_ENV } = process.env
+const { PORT = 5000, NODE_ENV } = process.env
 
 const isDev = NODE_ENV === 'development'
 
@@ -36,8 +35,6 @@ function startApp(app) {
           PORT
         )
       )
-
-      open(`https://${devHosts[0].host}:3000`)
     })
 
     return
