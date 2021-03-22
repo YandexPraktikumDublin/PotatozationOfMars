@@ -22,3 +22,6 @@ of colonization, the cargo of his spaceship is potatoes, the
 cultivation of which he wants to establish in a future colony.
 After losing all his cargo, he returns to Earth to try again
 and the game starts again.`
+
+export const RATING_FIELD_NAME = 'potatozationOfMarsScores'
+export const RATING_LIMIT = 10

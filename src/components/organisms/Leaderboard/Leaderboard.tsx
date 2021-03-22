@@ -1,36 +1,40 @@
-import React, { FC, memo } from 'react'
+import React, { FC, memo, useState, useEffect } from 'react'
 import classNames from 'classnames'
+import { useDispatch, useSelector } from 'react-redux'
 import { NameValueListItem } from '@components/atoms'
 import { List } from '@components/molecules'
+import { getLeaderboardSelector } from '@store/leaderboard/fetchLeaderboard/selectors'
+import { fetchLeaderboardRequest } from '@store/leaderboard/fetchLeaderboard/actions'
+import { ILeader } from '@types'
 
 type TLeaderboardProps = {}
 
-const leaders = [
-  {
-    position: 1,
-    login: 'IvanIvanov',
-    scores: 1023
-  },
-  {
-    position: 2,
-    login: 'PetrPetrov',
-    scores: 1010
-  }
-]
+const Leaderboard: FC<TLeaderboardProps> = memo(() => {
+  const [cursor] = useState(0)
 
-const Leaderboard: FC<TLeaderboardProps> = memo(() => (
-  <div className={classNames('text-primary', 'dark:text-white')}>
-    <List>
-      {leaders.map((leader) => (
-        <NameValueListItem
-          key={leader.login}
-          name={`${leader.position} ${leader.login}`}
-          value={leader.scores}
-        />
-      ))}
-    </List>
-  </div>
-))
+  const dispatch = useDispatch()
+  const leaderboard = useSelector(getLeaderboardSelector)
+
+  useEffect(() => {
+    if (leaderboard.length === 0) {
+      dispatch(fetchLeaderboardRequest({ cursor }))
+    }
+  }, [])
+
+  return (
+    <div className={classNames('text-primary', 'dark:text-white')}>
+      <List>
+        {leaderboard?.map((leader: ILeader, index) => (
+          <NameValueListItem
+            key={leader?.data?.potatozationOfMarsUserId}
+            name={`${++index}. ${leader?.data?.potatozationOfMarsUserLogin}`}
+            value={leader?.data?.potatozationOfMarsScores}
+          />
+        ))}
+      </List>
+    </div>
+  )
+})
 
 Leaderboard.displayName = 'Leaderboard'
 

@@ -1,20 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Leaderboard /> should renders correct <Leaderboard /> 1`] = `
-<div
-  className="text-primary dark:text-white"
+<ContextProvider
+  value={
+    Object {
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Subscription {
+        "handleChangeWrapper": [Function],
+        "listeners": Object {
+          "notify": [Function],
+        },
+        "onStateChange": [Function],
+        "parentSub": undefined,
+        "store": Object {
+          "clearActions": [Function],
+          "dispatch": [Function],
+          "getActions": [Function],
+          "getState": [Function],
+          "replaceReducer": [Function],
+          "subscribe": [Function],
+        },
+        "unsubscribe": null,
+      },
+    }
+  }
 >
-  <List>
-    <NameValueListItem
-      key="IvanIvanov"
-      name="1 IvanIvanov"
-      value={1023}
-    />
-    <NameValueListItem
-      key="PetrPetrov"
-      name="2 PetrPetrov"
-      value={1010}
-    />
-  </List>
-</div>
+  <Leaderboard />
+</ContextProvider>
 `;
