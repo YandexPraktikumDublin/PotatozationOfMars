@@ -8,7 +8,6 @@ module.exports = {
   target: 'node',
   node: { __dirname: false },
   entry: path.join(__dirname, '/src/server.ts'),
-  mode: process.env.NODE_ENV,
   module: {
     rules: [
       {
@@ -58,7 +57,5 @@ module.exports = {
   },
   externals: [nodeExternals({ allowlist: [/\.(?!(?:tsx?|json)$).{1,5}$/i] })],
   optimization: { nodeEnv: false },
-  plugins: [
-    new MiniCssExtractPlugin({ filename: '[name].css' })
-  ]
+  plugins: [new MiniCssExtractPlugin({ filename: '[name].css' })]
 }
