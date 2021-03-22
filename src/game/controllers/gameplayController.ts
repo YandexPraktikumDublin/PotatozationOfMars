@@ -55,6 +55,7 @@ class GameplayController {
 
   private isHitEnemy = (enemies: EnemyController) => {
     const projectiles = this.player.projectiles
+    const damage = this.player.fireDamage
     const entities = enemies.entities
     projectiles.forEach((projectile) => {
       if (!projectile.isAlive) return
@@ -70,7 +71,7 @@ class GameplayController {
         )
         if (distance <= projectileSize / 2 + entitySize / 2) {
           projectile.kill()
-          entity.kill()
+          entity.takeDamage(damage)
         }
       })
     })

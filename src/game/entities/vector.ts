@@ -10,6 +10,11 @@ class Vector {
     this.y = 0
   }
 
+  reverse = () => {
+    this.x = -this.x
+    this.y = -this.y
+  }
+
   correct = () => {
     const magnitude = Math.sqrt(this.x ** 2 + this.y ** 2)
     if (magnitude === 0) return

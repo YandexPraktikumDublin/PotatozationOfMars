@@ -1,38 +1,30 @@
-import { teslaWithAGun } from '@images'
+import {laser, teslaWithAGun} from '@images'
 import {
   ContextController,
   GameClock,
   InputsController
 } from '@game/controllers'
 import { TPosition } from '@game/@types'
-import { Vector, Projectile } from '@game/entities'
+import { Projectile, Entity } from '@game/entities'
 import { KEYS } from '@game/config'
 
-class Player {
-  readonly image = new Image()
-  private clockEvent: () => void
-  position: TPosition
-  destination: TPosition | { x: null; y: null }
-  size: number
-  velocity: Vector
+class Player extends Entity {
   firePeriod: number
   fireCooldown: number
   fireQuantity: number
+  fireDamage: number
   projectiles: Array<Projectile>
 
-  constructor(size = 50, velocity = 10) {
-    this.clockEvent = () => {}
-    this.position = { x: 0, y: 0 }
-    this.destination = this.position
-    this.size = size
-    this.velocity = new Vector(velocity)
+  constructor(velocity = 10, size = 50) {
+    super(() => {}, velocity, size, teslaWithAGun, 3)
     this.firePeriod = 50
     this.fireCooldown = this.firePeriod
     this.fireQuantity = 1
+    this.fireDamage = 10
     this.projectiles = []
   }
 
-  public init = (clock: GameClock) => {
+  init = (clock: GameClock) => {
     const fire = this.initFire(clock)
     const callBack = (context: ContextController) => {
       fire(context)
@@ -51,7 +43,7 @@ class Player {
             this.projectiles[0].kill()
             this.projectiles.shift()
           }
-          const projectile = new Projectile()
+          const projectile = new Projectile(30, 10, laser)
           this.projectiles.push(projectile)
           const angle =
             (i - (this.fireQuantity - 1) / 2) / (6 * this.fireQuantity)
@@ -69,7 +61,7 @@ class Player {
     this.destination = { x: x * cx - ox, y: y * cy - oy }
   }
 
-  controlWithKeyboard = () => {
+  public controlWithKeyboard = () => {
     const keysPressed = {
       up: false,
       down: false,
@@ -154,38 +146,22 @@ class Player {
     }
   }
 
-  controlWithMouse = (
+  public controlWithMouse = (
     context: HTMLCanvasElement,
     controller: ContextController
   ) => {
     return InputsController.onMouseDrag(context, this.moveTo, controller)
   }
 
-  private move = (context: ContextController) => {
+  protected move = (context: ContextController) => {
     const { top, right, bottom, left } = context.getBorders()
     this.velocity.defineByDirection(this.destination, this.position)
     this.position = this.velocity.applyTo(this.position)
-    const { x, y } = this.position
-    this.position.x = x > right ? right : x < left ? left : this.position.x
-    this.position.y = y > bottom ? bottom : y < top ? top : this.position.y
+    this.getBoundByBorders(top, right, bottom, left)
     context.drawImage(this.image, this.position.x, this.position.y, {
       width: this.size * 3,
       height: this.size
     })
-  }
-
-  render = (
-    clock: GameClock,
-    callback: (context: ContextController) => void
-  ) => {
-    this.image.onload = () => {
-      this.clockEvent = clock.startEvent(callback)
-    }
-    this.image.src = teslaWithAGun
-  }
-
-  kill = () => {
-    this.clockEvent()
   }
 }
 

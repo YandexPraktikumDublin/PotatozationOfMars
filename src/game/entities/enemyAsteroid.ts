@@ -1,17 +1,20 @@
-import { asteroid } from '@images'
+import {asteroid, explosion} from '@images'
 import { ContextController, GameClock } from '@game/controllers'
 import { Entity } from '@game/entities'
 
 class EnemyAsteroid extends Entity {
   angle: number
   rotation: number
+
   constructor(killCallback = () => {}, v = 5) {
     super(
       killCallback,
-      Math.random() * v + v,
-      Math.random() * 50 + 50,
-        asteroid
+      Math.round(Math.random() * v + v),
+      Math.round(Math.random() * 50 + 50),
+      asteroid,
+      1
     )
+    this.health = this.size - 50
     this.angle = 0
     this.rotation = (Math.random() - 0.5) / 100
   }
@@ -26,8 +29,9 @@ class EnemyAsteroid extends Entity {
     }
     const x = 0 - ox
     const y = Math.random() * height - oy
-    this.moveTo(x, y)
-    this.render(clock)
+    this.moveTo(x - this.size, y - this.size)
+    this.deathAnimation = this.initDeathAnimation(clock, explosion)
+    this.render(clock, this.move)
   }
 
   private moveTo = (x: number, y: number) => {
@@ -49,13 +53,6 @@ class EnemyAsteroid extends Entity {
       width: this.size,
       angle: this.angle
     })
-  }
-
-  render = (clock: GameClock) => {
-    this.image.onload = () => {
-      this.clockEvent = clock.startEvent(this.move)
-    }
-    this.image.src = asteroid
   }
 }
 
