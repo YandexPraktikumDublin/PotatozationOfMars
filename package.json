@@ -5,12 +5,12 @@
   "main": "webpack.prod.js",
   "scripts": {
     "make-aliases": "node network/makeAliases.js",
-    "clear": "rimraf build",
+    "clear": "rimraf dist",
     "build:server": "webpack --config webpack.server.js",
     "start:server": "node index.js",
-    "dev:server": "nodemon --ignore dist --exec 'run-s clear build:server start:server'",
+    "dev:server": "nodemon --delay 0 --ignore dist --exec 'run-s build:server start:server' -e js,ts,tsx",
     "dev:client": "webpack serve --config webpack.client.js",
-    "dev": "cross-env NODE_ENV=development run-p dev:client dev:server",
+    "dev": "cross-env NODE_ENV=development npm-run-all clear --parallel dev:client dev:server",
     "lint": "eslint \"src/**/*.@(tsx|ts|jsx|js)\" --fix && prettier --check \"src/**/*.@(tsx|ts|jsx|js)\" --write",
     "test": "jest --config .jest/config.json --runInBand",
     "generate": "plop"
