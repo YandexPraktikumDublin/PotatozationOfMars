@@ -2,6 +2,7 @@ const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 const IS_DEV = process.env.NODE_ENV !== 'production'
 
@@ -68,7 +69,13 @@ module.exports = {
   optimization: {
     removeAvailableModules: false,
     removeEmptyChunks: false,
-    splitChunks: false
+    splitChunks: false,
+    minimize: !IS_DEV,
+    minimizer: [
+      new CssMinimizerPlugin({
+        parallel: 4
+      })
+    ]
   },
   resolve: {
     modules: ['src', 'node_modules'],
