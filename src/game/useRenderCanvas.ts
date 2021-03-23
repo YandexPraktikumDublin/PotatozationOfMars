@@ -4,6 +4,7 @@ import { KEYS } from '@game/config'
 
 const useRenderCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const backgroundRef = useRef<HTMLCanvasElement>(null)
   const [isGamePaused, setIsGamePaused] = useState<boolean>(false)
   const [controlWithMouse, setControlWithMouse] = useState<boolean>(
     window.localStorage.controlWithMouse === 'true'
@@ -60,10 +61,11 @@ const useRenderCanvas = () => {
 
   useEffect(() => {
     const canvas = canvasRef.current as HTMLCanvasElement
+    const backgroundCanvas = backgroundRef.current as HTMLCanvasElement
 
     const handlePause = InputsController.onKeyPress(KEYS.pause, toggleModal)
 
-    game.init(canvas)
+    game.init(canvas, backgroundCanvas)
     game.start()
 
     if (!controlWithMouse) {
@@ -79,6 +81,7 @@ const useRenderCanvas = () => {
 
   return {
     canvasRef,
+    backgroundRef,
     isGamePaused,
     toggleModal,
     settings: {

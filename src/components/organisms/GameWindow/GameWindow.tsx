@@ -15,14 +15,14 @@ const GameWindow: FC<TGameWindowProps> = memo(() => {
       <div className="relative flex justify-center items-center">
         <GameCanvas />
         <NavigationButton
-          className="absolute top-3 left-3"
+          className="z-20 absolute top-3 left-3"
           title="Pause"
           onClick={onClick}
           imageSrc={pause}
         />
         <GamePauseMenuDisplay isGamePaused={false} toggleModal={onClick} />
         <NavigationButton
-          className="absolute top-3 right-3"
+          className="z-20 absolute top-3 right-3"
           title="Full screen"
           onClick={onClick}
           imageSrc={fullscreenOn}
@@ -30,13 +30,19 @@ const GameWindow: FC<TGameWindowProps> = memo(() => {
       </div>
     )
   }
-  const { canvasRef, isGamePaused, toggleModal, settings } = useRenderCanvas()
+  const {
+    canvasRef,
+    backgroundRef,
+    isGamePaused,
+    toggleModal,
+    settings
+  } = useRenderCanvas()
   const { windowRef, FSIcon, toggleFullScreen } = useFullScreen()
   return (
     <div className="relative flex justify-center items-center" ref={windowRef}>
-      <GameCanvas forwardRef={canvasRef} />
+      <GameCanvas forwardRef={canvasRef} backgroundRef={backgroundRef} />
       <NavigationButton
-        className="absolute top-3 left-3"
+        className="z-20 absolute top-3 left-3"
         title="Pause"
         onClick={toggleModal}
         imageSrc={pause}
@@ -47,7 +53,7 @@ const GameWindow: FC<TGameWindowProps> = memo(() => {
         settings={settings}
       />
       <NavigationButton
-        className="absolute top-3 right-3"
+        className="z-20 absolute top-3 right-3"
         title="Full screen"
         onClick={toggleFullScreen}
         imageSrc={FSIcon}

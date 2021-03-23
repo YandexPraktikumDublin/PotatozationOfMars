@@ -5,10 +5,14 @@ import {
 } from '@game/controllers'
 import { EnemyAsteroid, Player } from '@game/entities'
 import TPosition from '@game/@types/position'
+import { starsBack, starsFront, starsMiddle } from '@images'
 
 class GameplayController {
   canvas: HTMLCanvasElement | null
   context: ContextController | null
+  backgroundCanvas: HTMLCanvasElement | null
+  background: ContextController | null
+  backgroundLayers: Array<HTMLImageElement>
   clock: GameClock
   player: Player
   private currentLevel: number = 0
@@ -19,6 +23,9 @@ class GameplayController {
   constructor() {
     this.canvas = null
     this.context = null
+    this.backgroundCanvas = null
+    this.background = null
+    this.backgroundLayers = [new Image(), new Image(), new Image()]
     this.clock = new GameClock()
     this.player = new Player()
     this.levels = [new EnemyController(EnemyAsteroid)]
@@ -26,11 +33,12 @@ class GameplayController {
     this.animationFrameId = 0
   }
 
-  init = (canvas: HTMLCanvasElement) => {
+  init = (canvas: HTMLCanvasElement, backgroundCanvas: HTMLCanvasElement) => {
     this.canvas = canvas
     this.context = new ContextController(
       this.canvas.getContext('2d') as CanvasRenderingContext2D
     )
+    this.initBackground(backgroundCanvas)
     this.handlers = {
       canvasResize: this.context.resize(),
       playerControl: this.player.controlWithMouse(this.canvas, this.context)
@@ -45,6 +53,16 @@ class GameplayController {
       }
     })
     this.player.init(this.clock)
+  }
+
+  private initBackground = (backgroundCanvas: HTMLCanvasElement) => {
+    this.backgroundCanvas = backgroundCanvas
+    this.background = new ContextController(
+      this.backgroundCanvas.getContext('2d') as CanvasRenderingContext2D
+    )
+    this.backgroundLayers[0].src = starsBack
+    this.backgroundLayers[1].src = starsMiddle
+    this.backgroundLayers[2].src = starsFront
   }
 
   private static getDistance(positionA: TPosition, positionB: TPosition) {
@@ -106,9 +124,44 @@ class GameplayController {
     )
   }
 
+  drawBackground = () => {
+    let now = this.clock.now()
+    if (now % 5 === 0 && this.background) {
+      now = now / 5
+      const size = this.background?.getSize()
+      this.background.fillFrame('#000000')
+      this.background.drawImage(this.backgroundLayers[0], 0, 0, size)
+      this.background.drawImage(
+        this.backgroundLayers[1],
+        -((now + size.width) % (size.width * 2)) + size.width,
+        0,
+        size
+      )
+      this.background.drawImage(
+        this.backgroundLayers[1],
+        -(now % (size.width * 2)) + size.width,
+        0,
+        size
+      )
+      this.background.drawImage(
+        this.backgroundLayers[2],
+        -((now * 2 + size.width) % (size.width * 2)) + size.width,
+        0,
+        size
+      )
+      this.background.drawImage(
+        this.backgroundLayers[2],
+        -((now * 2) % (size.width * 2)) + size.width,
+        0,
+        size
+      )
+    }
+  }
+
   start = () => {
     if (!this.context) return
     this.clock.draw(this.context)
+    this.drawBackground()
     this.animationFrameId = window.requestAnimationFrame(this.start)
   }
 

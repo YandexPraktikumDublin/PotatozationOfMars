@@ -18,7 +18,12 @@ const GamePauseMenuDisplay: FC<TGamePauseMenuDisplayProps> = memo(
   ({ isGamePaused, toggleModal, settings }: TGamePauseMenuDisplayProps) => (
     <>
       {isGamePaused && (
-        <GamePauseMenuModal toggleModal={toggleModal} settings={settings} />
+        <div className="z-50 fixed inset-0 overflow-y-auto">
+          <div className="fixed inset-0 bg-black opacity-80" />
+          <div className="relative w-full h-full flex justify-center items-center px-3">
+            <GamePauseMenuModal toggleModal={toggleModal} settings={settings} />
+          </div>
+        </div>
       )}
     </>
   )

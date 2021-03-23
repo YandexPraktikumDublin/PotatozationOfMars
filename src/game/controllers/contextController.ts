@@ -77,9 +77,18 @@ class ContextController {
     context.restore()
   }
 
-  clearFrame = () => {
-    this.instance.fillStyle = '#000000'
+  fillFrame = (color: string) => {
+    this.instance.fillStyle = color
     this.instance.fillRect(
+      0,
+      0,
+      this.instance.canvas.width,
+      this.instance.canvas.height
+    )
+  }
+
+  clearFrame = () => {
+    this.instance.clearRect(
       0,
       0,
       this.instance.canvas.width,
