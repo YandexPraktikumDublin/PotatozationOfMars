@@ -1,18 +1,15 @@
 const path = require('path')
-const webpack = require('webpack')
 const { readFileSync } = require('fs')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 const IS_DEV = process.env.NODE_ENV !== 'production'
 
 module.exports = {
   name: 'client',
   target: 'web',
-  entry: [
-    IS_DEV && 'react-hot-loader/patch',
-    path.join(__dirname, '/src/index.tsx')
-  ].filter(Boolean),
+  entry: [path.join(__dirname, '/src/index.tsx')],
   mode: IS_DEV ? 'development' : 'production',
   devtool: 'eval',
   devServer: {
@@ -38,9 +35,19 @@ module.exports = {
         test: /\.tsx?$/,
         use: [
           {
-            loader: 'ts-loader',
+            loader: 'babel-loader',
             options: {
-              configFile: path.resolve(__dirname, 'tsconfig.json')
+              cacheDirectory: true,
+              babelrc: false,
+              presets: [
+                ['@babel/preset-env', { targets: { node: 'current' } }],
+                '@babel/preset-typescript',
+                '@babel/preset-react'
+              ],
+              plugins: [
+                ['@babel/plugin-proposal-class-properties', { loose: true }],
+                'react-hot-loader/babel'
+              ]
             }
           }
         ],
@@ -77,7 +84,7 @@ module.exports = {
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })]
   },
   plugins: [
-    IS_DEV && new webpack.HotModuleReplacementPlugin(),
+    IS_DEV && new ForkTsCheckerWebpackPlugin(),
     new MiniCssExtractPlugin({ filename: '[name].css' })
   ].filter(Boolean)
 }

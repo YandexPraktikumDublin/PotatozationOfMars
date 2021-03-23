@@ -16,9 +16,18 @@ module.exports = {
         test: /\.tsx?$/,
         use: [
           {
-            loader: 'ts-loader',
+            loader: 'babel-loader',
             options: {
-              configFile: path.resolve(__dirname, 'tsconfig.json')
+              cacheDirectory: true,
+              babelrc: false,
+              presets: [
+                ['@babel/preset-env', { targets: { node: 'current' } }],
+                '@babel/preset-typescript',
+                '@babel/preset-react'
+              ],
+              plugins: [
+                ['@babel/plugin-proposal-class-properties', { loose: true }]
+              ]
             }
           }
         ],
