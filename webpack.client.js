@@ -14,7 +14,7 @@ module.exports = {
   devtool: 'eval',
   devServer: {
     historyApiFallback: true,
-    hotOnly: true,
+    hot: true,
     port: 8080,
     liveReload: false,
     https: {
@@ -59,13 +59,20 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
+        test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: 'file-loader',
+            loader: 'url-loader'
+          }
+        ]
+      },
+      {
+        test: /\.svg$/i,
+        use: [
+          {
+            loader: 'svg-url-loader',
             options: {
-              name: '[name].[ext]',
-              publicPath: '/'
+              iesafe: true
             }
           }
         ]

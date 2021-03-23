@@ -39,13 +39,20 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
+        test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: 'file-loader',
+            loader: 'url-loader'
+          }
+        ]
+      },
+      {
+        test: /\.svg$/i,
+        use: [
+          {
+            loader: 'svg-url-loader',
             options: {
-              name: '[name].[ext]',
-              publicPath: '/'
+              limit: false
             }
           }
         ]
@@ -55,7 +62,13 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'server.js',
-    libraryTarget: 'commonjs2'
+    libraryTarget: 'commonjs2',
+    pathinfo: false
+  },
+  optimization: {
+    removeAvailableModules: false,
+    removeEmptyChunks: false,
+    splitChunks: false
   },
   resolve: {
     modules: ['src', 'node_modules'],
