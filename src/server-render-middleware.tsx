@@ -30,7 +30,7 @@ function getHtml(reactHtml: string, reduxState = {}, helmet: HelmetData) {
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}
         </script>
-        <script src="/main.js"></script>
+        <script src="https://localhost:8080/main.js"></script>
     </body>
   </html>
   `

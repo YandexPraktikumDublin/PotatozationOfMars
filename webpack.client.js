@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const { readFileSync } = require('fs')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
@@ -7,13 +8,30 @@ const IS_DEV = process.env.NODE_ENV !== 'production'
 
 module.exports = {
   name: 'client',
+  target: 'web',
   entry: [
     IS_DEV && 'react-hot-loader/patch',
-    IS_DEV &&
-      'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
     path.join(__dirname, '/src/index.tsx')
   ].filter(Boolean),
+  mode: IS_DEV ? 'development' : 'production',
   devtool: 'eval',
+  devServer: {
+    historyApiFallback: true,
+    hotOnly: true,
+    port: 8080,
+    liveReload: false,
+    https: {
+      key: readFileSync(path.resolve('network/config/key.pem'), 'utf8'),
+      cert: readFileSync(path.resolve('network/config/server.crt'), 'utf8')
+    },
+    disableHostCheck: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+      'Access-Control-Allow-Headers':
+        'X-Requested-With, content-type, Authorization'
+    }
+  },
   module: {
     rules: [
       {
@@ -48,7 +66,7 @@ module.exports = {
     ]
   },
   output: {
-    publicPath: '/',
+    publicPath: 'https://localhost:8080/',
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js'
   },
