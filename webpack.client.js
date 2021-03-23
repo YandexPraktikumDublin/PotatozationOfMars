@@ -2,6 +2,7 @@ const path = require('path')
 const { readFileSync } = require('fs')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 const IS_DEV = process.env.NODE_ENV !== 'production'
@@ -89,6 +90,14 @@ module.exports = {
     modules: ['src', 'node_modules'],
     extensions: ['*', '.js', '.jsx', '.json', '.ts', '.tsx'],
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })]
+  },
+  optimization: {
+    minimize: !IS_DEV,
+    minimizer: [
+      new CssMinimizerPlugin({
+        parallel: 4
+      })
+    ]
   },
   plugins: [
     IS_DEV && new ForkTsCheckerWebpackPlugin(),

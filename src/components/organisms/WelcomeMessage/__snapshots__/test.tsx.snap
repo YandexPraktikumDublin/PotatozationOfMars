@@ -18,12 +18,7 @@ exports[`<WelcomeMessage /> should renders correct <WelcomeMessage /> 1`] = `
       className="bg-contain bg-no-repeat text-center absolute top-0 z-10 flex px-14"
       style={
         Object {
-          "backgroundImage": "url(function SvgBubble(props) {
-  return React.createElement(
-    'svg', 
-    Object.assign({}, props, {'data-file-name': SvgBubble.name})
-  );
-})",
+          "backgroundImage": "url()",
           "height": "18.75rem",
           "left": "0",
           "width": "25rem",

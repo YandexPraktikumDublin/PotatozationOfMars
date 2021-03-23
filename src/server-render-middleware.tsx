@@ -10,10 +10,15 @@ import { Request, Response } from 'express'
 import routes from '@routes'
 import App from './App'
 
+const IS_DEV = process.env.NODE_ENV !== 'production'
+
 function getHtml(reactHtml: string, reduxState = {}, helmet: HelmetData) {
+  const cssUrl = IS_DEV ? 'https://localhost:8080/main.css' : '/main.css'
+  const jsUrl = IS_DEV ? 'https://localhost:8080/main.js' : '/main.js'
+
   return `
     <!doctype html>
-    <html lang="en">
+    <html lang="en" class="dark">
     <!--suppress HtmlRequiredTitleElement -->
     <head>
         <meta charset="UTF-8">
@@ -22,7 +27,7 @@ function getHtml(reactHtml: string, reduxState = {}, helmet: HelmetData) {
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-        <link href="/main.css" rel="stylesheet">
+        <link href="${cssUrl}" rel="stylesheet">
         ${helmet.title.toString()}
         ${helmet.meta.toString()}
     </head>
@@ -31,7 +36,7 @@ function getHtml(reactHtml: string, reduxState = {}, helmet: HelmetData) {
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}
         </script>
-        <script src="https://localhost:8080/main.js"></script>
+        <script src="${jsUrl}"></script>
     </body>
   </html>
   `
@@ -41,6 +46,7 @@ export default (req: Request, res: Response) => {
   const location = req.url
   const { store } = configureStore({}, location)
   const context: StaticRouterContext = {}
+
   function renderApp() {
     const jsx = (
       <ReduxProvider store={store}>
