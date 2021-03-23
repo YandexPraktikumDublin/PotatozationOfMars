@@ -3,10 +3,12 @@ const nodeExternals = require('webpack-node-externals')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
+const IS_DEV = process.env.NODE_ENV !== 'production'
+
 module.exports = {
   name: 'server',
   target: 'node',
-  node: { __dirname: false },
+  mode: IS_DEV ? 'development' : 'production',
   entry: path.join(__dirname, '/src/server.ts'),
   module: {
     rules: [
@@ -52,10 +54,6 @@ module.exports = {
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })]
   },
   devtool: 'eval',
-  performance: {
-    hints: false
-  },
-  externals: [nodeExternals({ allowlist: [/\.(?!(?:tsx?|json)$).{1,5}$/i] })],
-  optimization: { nodeEnv: false },
+  externals: [nodeExternals()],
   plugins: [new MiniCssExtractPlugin({ filename: '[name].css' })]
 }

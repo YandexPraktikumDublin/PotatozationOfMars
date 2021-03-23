@@ -11,7 +11,8 @@ function startHmr() {
 
   app.use(
     webpackDevMiddleware(compiler, {
-      publicPath: clientConfig.output.publicPath
+      publicPath: clientConfig.output.publicPath,
+      writeToDisk: true
     })
   )
 

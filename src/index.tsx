@@ -32,11 +32,13 @@ declare global {
 //   })
 // }
 
-ReactDOM.hydrate(
-  <ReduxProvider store={store}>
-    <ConnectedRouter history={history}>
-      <App />
-    </ConnectedRouter>
-  </ReduxProvider>,
-  document.getElementById('root')
-)
+window.addEventListener('DOMContentLoaded', () => {
+  ReactDOM.hydrate(
+    <ReduxProvider store={store}>
+      <ConnectedRouter history={history}>
+        <App />
+      </ConnectedRouter>
+    </ReduxProvider>,
+    document.getElementById('root')
+  )
+})
