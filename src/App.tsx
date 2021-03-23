@@ -1,4 +1,3 @@
-import { hot } from 'react-hot-loader/root'
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import ErrorBoundary from './ErrorBoundary'
@@ -29,4 +28,4 @@ const App: React.FC = () => (
   </div>
 )
 
-export default hot(App)
+export default App
