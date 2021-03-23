@@ -4,5 +4,5 @@ export const KEYS = {
   left: ['KeyA', 'ArrowLeft'],
   right: ['KeyD', 'ArrowRight'],
   fullscreen: ['KeyF'],
-  pause: ['Escape']
+  pause: ['Escape', 'KeyP']
 }

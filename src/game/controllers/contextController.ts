@@ -49,8 +49,6 @@ class ContextController {
   ) => {
     const context = this.instance
 
-    context.save()
-
     const imageWidth = options.width ?? image.width
     const imageHeight = options.height ?? options.width ?? image.height
     const pivotX = options.pivotX ?? 0.5
@@ -60,12 +58,22 @@ class ContextController {
     const { ox, oy } = this.center
     const offsetX = pivotX * imageWidth
     const offsetY = pivotY * imageHeight
-    context.translate(x + ox, y + oy)
+
+    context.save()
+
+    context.translate(Math.round(x + ox), Math.round(y + oy))
     context.rotate(angle * Math.PI)
-    context.translate(-offsetX, -offsetY)
+    context.translate(Math.round(-offsetX), Math.round(-offsetY))
     context.globalAlpha = opacity
 
-    context.drawImage(image, 0, 0, imageWidth, imageHeight)
+    context.drawImage(
+      image,
+      0,
+      0,
+      Math.round(imageWidth),
+      Math.round(imageHeight)
+    )
+
     context.restore()
   }
 
