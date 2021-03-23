@@ -8,7 +8,7 @@
     "clear": "rimraf build",
     "build:server": "webpack --config webpack.server.js",
     "start:server": "node index.js",
-    "dev:server": "nodemon --ignore dist --exec 'run-s clear build:server start:server' -e js,ts,tsx",
+    "dev:server": "nodemon --ignore dist --exec 'run-s clear build:server start:server'",
     "dev:client": "webpack serve --config webpack.client.js",
     "dev": "cross-env NODE_ENV=development run-p dev:client dev:server",
     "lint": "eslint \"src/**/*.@(tsx|ts|jsx|js)\" --fix && prettier --check \"src/**/*.@(tsx|ts|jsx|js)\" --write",
