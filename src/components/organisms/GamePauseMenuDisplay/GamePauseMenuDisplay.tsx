@@ -6,11 +6,7 @@ type TGamePauseMenuDisplayProps = {
   toggleModal: () => void
   settings?: {
     toggleControlInput: () => void
-    controlWithMouse: boolean
-    increaseFireRate: () => void
-    decreaseFireRate: () => void
-    addProjectile: () => void
-    removeProjectile: () => void
+    controls: string
   }
 }
 

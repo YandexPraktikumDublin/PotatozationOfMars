@@ -6,3 +6,8 @@ export const KEYS = {
   fullscreen: ['KeyF'],
   pause: ['Escape', 'KeyP']
 }
+
+export const controlTypes = {
+  mouse: 'mouse',
+  keyboard: 'keyboard'
+}

@@ -1,11 +1,13 @@
 class ContextController {
   instance: CanvasRenderingContext2D
+  canvas: HTMLCanvasElement
   coefficient: { cx: number; cy: number }
   center: { ox: number; oy: number }
-  constructor(context: CanvasRenderingContext2D, width = 2000, height = 1000) {
-    this.instance = context
-    this.instance.canvas.width = width
-    this.instance.canvas.height = height
+  constructor(canvas: HTMLCanvasElement, width = 2000, height = 1000) {
+    this.instance = canvas.getContext('2d') as CanvasRenderingContext2D
+    this.canvas = canvas
+    this.canvas.width = width
+    this.canvas.height = height
     this.center = { ox: width / 2, oy: height / 2 }
     this.coefficient = { cx: 1, cy: 1 }
   }

@@ -7,11 +7,7 @@ type TGamePauseMenuModalProps = {
   toggleModal: () => void
   settings?: {
     toggleControlInput: () => void
-    controlWithMouse: boolean
-    increaseFireRate: () => void
-    decreaseFireRate: () => void
-    addProjectile: () => void
-    removeProjectile: () => void
+    controls: string
   }
 }
 
@@ -28,12 +24,8 @@ const GamePauseMenuModal: FC<TGamePauseMenuModalProps> = memo(
           <Title>Pause</Title>
           <GamePauseMenu
             toggleModal={toggleModal}
-            controlWithMouse={settings?.controlWithMouse}
+            controls={settings?.controls}
             toggleControlInput={settings?.toggleControlInput}
-            increaseFireRate={settings?.increaseFireRate}
-            decreaseFireRate={settings?.decreaseFireRate}
-            addProjectile={settings?.addProjectile}
-            removeProjectile={settings?.removeProjectile}
           />
         </div>
         <CloseButton onClick={toggleModal} className="absolute top-4 right-4" />

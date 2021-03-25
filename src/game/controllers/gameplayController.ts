@@ -8,10 +8,8 @@ import TPosition from '@game/@types/position'
 import { starsBack, starsFront, starsMiddle } from '@images'
 
 class GameplayController {
-  canvas: HTMLCanvasElement | null
-  context: ContextController | null
-  backgroundCanvas: HTMLCanvasElement | null
-  background: ContextController | null
+  context: ContextController
+  background: ContextController
   backgroundLayers: Array<HTMLImageElement>
   clock: GameClock
   player: Player
@@ -20,11 +18,9 @@ class GameplayController {
   private handlers: Record<string, () => void>
   private animationFrameId: number
 
-  constructor() {
-    this.canvas = null
-    this.context = null
-    this.backgroundCanvas = null
-    this.background = null
+  constructor(canvas: HTMLCanvasElement, backgroundCanvas: HTMLCanvasElement) {
+    this.context = new ContextController(canvas)
+    this.background = new ContextController(backgroundCanvas)
     this.backgroundLayers = [new Image(), new Image(), new Image()]
     this.clock = new GameClock()
     this.player = new Player()
@@ -33,15 +29,14 @@ class GameplayController {
     this.animationFrameId = 0
   }
 
-  init = (canvas: HTMLCanvasElement, backgroundCanvas: HTMLCanvasElement) => {
-    this.canvas = canvas
-    this.context = new ContextController(
-      this.canvas.getContext('2d') as CanvasRenderingContext2D
-    )
-    this.initBackground(backgroundCanvas)
+  init = () => {
+    this.initBackground()
     this.handlers = {
       canvasResize: this.context.resize(),
-      playerControl: this.player.controlWithMouse(this.canvas, this.context)
+      playerControl: this.player.controlWithMouse(
+        this.context.canvas,
+        this.context
+      )
     }
     const level = this.levels[this.currentLevel]
     level.init(this.clock, this.context, 1000000, 10)
@@ -55,11 +50,7 @@ class GameplayController {
     this.player.init(this.clock)
   }
 
-  private initBackground = (backgroundCanvas: HTMLCanvasElement) => {
-    this.backgroundCanvas = backgroundCanvas
-    this.background = new ContextController(
-      this.backgroundCanvas.getContext('2d') as CanvasRenderingContext2D
-    )
+  private initBackground = () => {
     this.backgroundLayers[0].src = starsBack
     this.backgroundLayers[1].src = starsMiddle
     this.backgroundLayers[2].src = starsFront
@@ -116,10 +107,10 @@ class GameplayController {
   }
 
   controlWithMouse = () => {
-    if (!this.canvas || !this.context) return
+    if (!this.context.canvas || !this.context) return
     this.handlers.playerControl()
     this.handlers.playerControl = this.player.controlWithMouse(
-      this.canvas,
+      this.context.canvas,
       this.context
     )
   }

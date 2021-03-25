@@ -6,23 +6,11 @@ import { PATHS } from '@config'
 type TGamePauseMenuProps = {
   toggleModal: () => void
   toggleControlInput?: () => void
-  controlWithMouse?: boolean
-  increaseFireRate?: () => void
-  decreaseFireRate?: () => void
-  addProjectile?: () => void
-  removeProjectile?: () => void
+  controls?: string
 }
 
 const GamePauseMenu: FC<TGamePauseMenuProps> = memo(
-  ({
-    toggleModal,
-    toggleControlInput,
-    controlWithMouse,
-    increaseFireRate,
-    decreaseFireRate,
-    addProjectile,
-    removeProjectile
-  }: TGamePauseMenuProps) => {
+  ({ toggleModal, toggleControlInput, controls }: TGamePauseMenuProps) => {
     const history = useHistory()
 
     const returnToMainPage = useCallback(() => {
@@ -55,13 +43,7 @@ const GamePauseMenu: FC<TGamePauseMenuProps> = memo(
         )}
         {currentMenu === Menus.setting && (
           <>
-            <Button onClick={increaseFireRate}>Increase fire rate</Button>
-            <Button onClick={decreaseFireRate}>Decrease fire rate</Button>
-            <Button onClick={addProjectile}>Add projectile</Button>
-            <Button onClick={removeProjectile}>Remove projectile</Button>
-            <Button onClick={toggleControlInput}>
-              {controlWithMouse ? 'Mouse' : 'Keyboard'} control
-            </Button>
+            <Button onClick={toggleControlInput}>{controls} control</Button>
             <Button onClick={toMainMenu}>Back</Button>
           </>
         )}

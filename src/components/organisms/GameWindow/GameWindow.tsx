@@ -1,43 +1,43 @@
-import React, { FC, memo } from 'react'
+import React, { FC, memo, useCallback } from 'react'
 import { GameCanvas, NavigationButton } from '@components/molecules'
 import useRenderCanvas from '@game/useRenderCanvas'
 import useFullScreen from '@game/useFullScreen'
-import { fullscreenOn, pause } from '@images'
+import { pause } from '@images'
 import { GamePauseMenuDisplay } from '@components/organisms'
-import { isServer } from '@utils/misc'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  getControlsSelector,
+  getFullscreenSelector,
+  getPauseSelector
+} from '@store/game/selectors'
+import { toggleControls, togglePause } from '@store/game/actions'
+import { controlTypes } from '@game/config'
 
 type TGameWindowProps = {}
 
 const GameWindow: FC<TGameWindowProps> = memo(() => {
-  if (isServer()) {
-    const onClick = () => {}
-    return (
-      <div className="relative flex justify-center items-center">
-        <GameCanvas />
-        <NavigationButton
-          className="z-20 absolute top-3 left-3"
-          title="Pause"
-          onClick={onClick}
-          imageSrc={pause}
-        />
-        <GamePauseMenuDisplay isGamePaused={false} toggleModal={onClick} />
-        <NavigationButton
-          className="z-20 absolute top-3 right-3"
-          title="Full screen"
-          onClick={onClick}
-          imageSrc={fullscreenOn}
-        />
-      </div>
-    )
+  const dispatch = useDispatch()
+  const isPaused = useSelector(getPauseSelector)
+  const fullscreenIcon = useSelector(getFullscreenSelector)
+  const controls = useSelector(getControlsSelector)
+  const toggleModal = useCallback(() => {
+    dispatch(togglePause({ isPaused: !isPaused }))
+  }, [isPaused])
+  const toggleControlInput = useCallback(() => {
+    const newControls =
+      controls === controlTypes.keyboard
+        ? controlTypes.mouse
+        : controlTypes.keyboard
+    dispatch(toggleControls({ controls: newControls }))
+  }, [controls])
+  const settings = {
+    toggleControlInput,
+    controls
   }
-  const {
-    canvasRef,
-    backgroundRef,
-    isGamePaused,
-    toggleModal,
-    settings
-  } = useRenderCanvas()
-  const { windowRef, FSIcon, toggleFullScreen } = useFullScreen()
+
+  const { canvasRef, backgroundRef } = useRenderCanvas()
+  const { windowRef, toggleFullScreen } = useFullScreen()
+
   return (
     <div className="relative flex justify-center items-center" ref={windowRef}>
       <GameCanvas forwardRef={canvasRef} backgroundRef={backgroundRef} />
@@ -48,7 +48,7 @@ const GameWindow: FC<TGameWindowProps> = memo(() => {
         imageSrc={pause}
       />
       <GamePauseMenuDisplay
-        isGamePaused={isGamePaused}
+        isGamePaused={isPaused}
         toggleModal={toggleModal}
         settings={settings}
       />
@@ -56,7 +56,7 @@ const GameWindow: FC<TGameWindowProps> = memo(() => {
         className="z-20 absolute top-3 right-3"
         title="Full screen"
         onClick={toggleFullScreen}
-        imageSrc={FSIcon}
+        imageSrc={fullscreenIcon}
       />
     </div>
   )
