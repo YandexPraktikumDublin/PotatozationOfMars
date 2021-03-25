@@ -1,20 +1,54 @@
 const path = require('path')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const { readFileSync } = require('fs')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+
+const IS_DEV = process.env.NODE_ENV !== 'production'
 
 module.exports = {
-  entry: [path.join(__dirname, './src/index.tsx')],
+  name: 'client',
+  target: 'web',
+  entry: [path.join(__dirname, '/src/index.tsx')],
+  mode: IS_DEV ? 'development' : 'production',
   devtool: 'eval',
+  devServer: {
+    historyApiFallback: true,
+    hot: true,
+    port: 8080,
+    liveReload: false,
+    https: {
+      key: readFileSync(path.resolve('network/config/key.pem'), 'utf8'),
+      cert: readFileSync(path.resolve('network/config/server.crt'), 'utf8')
+    },
+    disableHostCheck: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+      'Access-Control-Allow-Headers':
+        'X-Requested-With, content-type, Authorization'
+    }
+  },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         use: [
           {
-            loader: 'ts-loader',
+            loader: 'babel-loader',
             options: {
-              configFile: path.resolve(__dirname, 'tsconfig.json')
+              cacheDirectory: true,
+              babelrc: false,
+              presets: [
+                ['@babel/preset-env', { targets: { node: 'current' } }],
+                '@babel/preset-typescript',
+                '@babel/preset-react'
+              ],
+              plugins: [
+                ['@babel/plugin-proposal-class-properties', { loose: true }],
+                'react-hot-loader/babel'
+              ]
             }
           }
         ],
@@ -26,13 +60,20 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
+        test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: 'file-loader',
+            loader: 'url-loader'
+          }
+        ]
+      },
+      {
+        test: /\.svg$/i,
+        use: [
+          {
+            loader: 'svg-url-loader',
             options: {
-              name: '[name].[ext]',
-              publicPath: '/'
+              iesafe: true
             }
           }
         ]
@@ -40,17 +81,26 @@ module.exports = {
     ]
   },
   output: {
-    publicPath: '/',
+    publicPath: 'https://localhost:8080/',
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js'
   },
   resolve: {
+    alias: { 'react-dom': '@hot-loader/react-dom' },
     modules: ['src', 'node_modules'],
     extensions: ['*', '.js', '.jsx', '.json', '.ts', '.tsx'],
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })]
   },
+  optimization: {
+    minimize: !IS_DEV,
+    minimizer: [
+      new CssMinimizerPlugin({
+        parallel: 4
+      })
+    ]
+  },
   plugins: [
-    new CleanWebpackPlugin(),
+    IS_DEV && new ForkTsCheckerWebpackPlugin(),
     new MiniCssExtractPlugin({ filename: '[name].css' })
-  ]
+  ].filter(Boolean)
 }
