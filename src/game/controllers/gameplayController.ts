@@ -78,11 +78,11 @@ class GameplayController {
     projectiles.forEach((projectile) => {
       if (!projectile.isAlive) return
       const projectileSize = projectile.size
-      const projectilePos = projectile.position
+      const projectilePos = projectile.velocity.applyTo(projectile.position)
       entities.forEach((entity) => {
         if (!entity.isAlive) return
         const entitySize = entity.size
-        const entityPos = entity.position
+        const entityPos = entity.velocity.applyTo(entity.position)
         const distance = GameplayController.getDistance(
           entityPos,
           projectilePos
@@ -130,31 +130,20 @@ class GameplayController {
       now = now / 5
       const size = this.background?.getSize()
       this.background.fillFrame('#000000')
-      this.background.drawImage(this.backgroundLayers[0], 0, 0, size)
-      this.background.drawImage(
-        this.backgroundLayers[1],
-        -((now + size.width) % (size.width * 2)) + size.width,
-        0,
-        size
-      )
-      this.background.drawImage(
-        this.backgroundLayers[1],
-        -(now % (size.width * 2)) + size.width,
-        0,
-        size
-      )
-      this.background.drawImage(
-        this.backgroundLayers[2],
-        -((now * 2 + size.width) % (size.width * 2)) + size.width,
-        0,
-        size
-      )
-      this.background.drawImage(
-        this.backgroundLayers[2],
-        -((now * 2) % (size.width * 2)) + size.width,
-        0,
-        size
-      )
+      for (let i = 0; i < this.backgroundLayers.length; i++) {
+        this.background.drawImage(
+          this.backgroundLayers[i],
+          -((now * i + size.width) % (size.width * 2)) + size.width,
+          0,
+          size
+        )
+        this.background.drawImage(
+          this.backgroundLayers[i],
+          -((now * i) % (size.width * 2)) + size.width,
+          0,
+          size
+        )
+      }
     }
   }
 

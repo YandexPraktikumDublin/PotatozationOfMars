@@ -1,6 +1,7 @@
 import { TPosition } from '@game/@types'
 import { ContextController, GameClock } from '@game/controllers'
 import { Vector } from '@game/entities'
+import { explosion } from '@images'
 
 class Entity {
   readonly image = new Image()
@@ -41,8 +42,8 @@ class Entity {
     this.render(clock, this.move)
   }
 
-  protected initDeathAnimation = (clock: GameClock, src = this.image.src) => {
-    let size = this.size * 1.5
+  protected initDeathAnimation = (clock: GameClock, src = explosion) => {
+    let size = this.size * 2
     let opacity = 1
     const image = new Image()
     image.src = src

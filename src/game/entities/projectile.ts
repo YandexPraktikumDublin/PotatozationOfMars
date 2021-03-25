@@ -4,7 +4,12 @@ import { laser } from '@images'
 import TPosition from '@game/@types/position'
 
 class Projectile extends Entity {
-  constructor(velocity = 20, size = 10, image = laser, killCallback = () => {}) {
+  constructor(
+    velocity = 20,
+    size = 10,
+    image = laser,
+    killCallback = () => {}
+  ) {
     super(killCallback, velocity, size, image)
   }
 
@@ -18,6 +23,7 @@ class Projectile extends Entity {
     this.isAlive = true
     this.position = position || { x: ox, y: oy }
     this.velocity.defineByAngle(angle)
+    this.deathAnimation = this.initDeathAnimation(clock)
     this.render(clock, this.move)
   }
 

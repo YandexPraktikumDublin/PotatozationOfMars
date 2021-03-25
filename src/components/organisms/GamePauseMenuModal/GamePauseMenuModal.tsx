@@ -24,7 +24,6 @@ const GamePauseMenuModal: FC<TGamePauseMenuModalProps> = memo(
           'dark:text-white dark:border-white dark:bg-primary'
         )}
       >
-        <CloseButton onClick={toggleModal} className="absolute top-4 right-4" />
         <div className="relative w-full h-full flex flex-col justify-center items-center px-3">
           <Title>Pause</Title>
           <GamePauseMenu
@@ -37,6 +36,7 @@ const GamePauseMenuModal: FC<TGamePauseMenuModalProps> = memo(
             removeProjectile={settings?.removeProjectile}
           />
         </div>
+        <CloseButton onClick={toggleModal} className="absolute top-4 right-4" />
       </div>
     )
   }
