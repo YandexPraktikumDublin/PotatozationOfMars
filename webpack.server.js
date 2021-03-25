@@ -1,23 +1,34 @@
 const path = require('path')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+
+const IS_DEV = process.env.NODE_ENV !== 'production'
 
 module.exports = {
   name: 'server',
   target: 'node',
-  node: { __dirname: false },
-  entry: path.join(__dirname, './src/server.ts'),
+  mode: IS_DEV ? 'development' : 'production',
+  entry: path.join(__dirname, '/src/server.ts'),
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         use: [
           {
-            loader: 'ts-loader',
+            loader: 'babel-loader',
             options: {
-              configFile: path.resolve(__dirname, 'tsconfig.json')
+              cacheDirectory: true,
+              babelrc: false,
+              presets: [
+                ['@babel/preset-env', { targets: { node: 'current' } }],
+                '@babel/preset-typescript',
+                '@babel/preset-react'
+              ],
+              plugins: [
+                ['@babel/plugin-proposal-class-properties', { loose: true }]
+              ]
             }
           }
         ],
@@ -29,13 +40,20 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
+        test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: 'file-loader',
+            loader: 'url-loader'
+          }
+        ]
+      },
+      {
+        test: /\.svg$/i,
+        use: [
+          {
+            loader: 'svg-url-loader',
             options: {
-              name: '[name].[ext]',
-              publicPath: '/'
+              limit: false
             }
           }
         ]
@@ -45,7 +63,19 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'server.js',
-    libraryTarget: 'commonjs2'
+    libraryTarget: 'commonjs2',
+    pathinfo: false
+  },
+  optimization: {
+    removeAvailableModules: false,
+    removeEmptyChunks: false,
+    splitChunks: false,
+    minimize: !IS_DEV,
+    minimizer: [
+      new CssMinimizerPlugin({
+        parallel: 4
+      })
+    ]
   },
   resolve: {
     modules: ['src', 'node_modules'],
@@ -53,13 +83,6 @@ module.exports = {
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })]
   },
   devtool: 'eval',
-  performance: {
-    hints: false
-  },
-  externals: [nodeExternals({ allowlist: [/\.(?!(?:tsx?|json)$).{1,5}$/i] })],
-  optimization: { nodeEnv: false },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({ filename: '[name].css' })
-  ]
+  externals: [nodeExternals()],
+  plugins: [new MiniCssExtractPlugin({ filename: '[name].css' })]
 }
