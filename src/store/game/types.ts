@@ -1,4 +1,8 @@
-import { TOGGLE_CONTROLS, SET_FULLSCREEN_ICON, TOGGLE_PAUSE } from './actionTypes'
+import {
+  TOGGLE_CONTROLS,
+  SET_FULLSCREEN_ICON,
+  TOGGLE_PAUSE
+} from './actionTypes'
 
 export interface IGameState {
   controls: string

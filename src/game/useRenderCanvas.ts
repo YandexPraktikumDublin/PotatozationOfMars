@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react'
 import { GameplayController, InputsController } from '@game/controllers'
-import {controlTypes, KEYS} from '@game/config'
+import { controlTypes, KEYS } from '@game/config'
 import { useDispatch, useSelector, useStore } from 'react-redux'
 import { getControlsSelector } from '@store/game/selectors'
 import { togglePause } from '@store/game/actions'
@@ -33,7 +33,7 @@ const useRenderCanvas = () => {
       if (controls === controlTypes.mouse) {
         game.controlWithMouse()
       }
-      if (controls === controlTypes.keyboard){
+      if (controls === controlTypes.keyboard) {
         game.controlWithKeyboard()
       }
       if (isPaused === newIsPaused) return
@@ -54,7 +54,7 @@ const useRenderCanvas = () => {
     if (controls === controlTypes.mouse) {
       game.controlWithMouse()
     }
-    if (controls === controlTypes.keyboard){
+    if (controls === controlTypes.keyboard) {
       game.controlWithKeyboard()
     }
 

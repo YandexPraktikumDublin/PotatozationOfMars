@@ -1,4 +1,4 @@
-import {asteroid, explosion} from '@images'
+import { asteroid, explosion } from '@images'
 import { ContextController, GameClock } from '@game/controllers'
 import { Entity } from '@game/entities'
 

@@ -1,4 +1,4 @@
-import {laser, teslaWithAGun} from '@images'
+import { laser, teslaWithAGun } from '@images'
 import {
   ContextController,
   GameClock,

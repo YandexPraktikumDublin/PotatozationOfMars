@@ -4,7 +4,7 @@ import { ILogoutState } from '@store/logout/types'
 import { ISignupState } from '@store/signup/types'
 import { IUserState } from '@store/user/fetchUser/types'
 import { ILeaderboardState } from '@store/leaderboard/fetchLeaderboard/types'
-import {IGameState} from "@store/game/types";
+import { IGameState } from '@store/game/types'
 
 export interface IAppState {
   auth: IAuthState

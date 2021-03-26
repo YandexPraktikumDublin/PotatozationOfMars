@@ -8,7 +8,7 @@
     "make-aliases": "node network/makeAliases.js",
     "clear": "rimraf dist",
     "start:server": "node index.js",
-    "start:nodemon": "nodemon --ignore dist --exec 'run-s start:build-server start:server' -e js,ts,tsx",
+    "start:nodemon": "nodemon --ignore dist --exec \"run-s start:build-server start:server\" -e js,ts,tsx",
     "start:build-server": "webpack --config webpack.server.js",
     "start:build-client": "webpack serve --config webpack.client.js",
     "start": "cross-env NODE_ENV=development npm-run-all clear --parallel start:build-client start:nodemon",
