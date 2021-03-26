@@ -1,13 +1,14 @@
 import {
   TOGGLE_CONTROLS,
   SET_FULLSCREEN_ICON,
-  TOGGLE_PAUSE
-} from './actionTypes'
+  TOGGLE_PAUSE, UPDATE_PLAYER_HEALTH
+} from "./actionTypes";
 
 export interface IGameState {
   controls: string
   fullscreenIcon: string
   isPaused: boolean
+  health: number
 }
 
 export interface ITogglePausePayload {
@@ -20,6 +21,10 @@ export interface IToggleFullscreenPayload {
 
 export interface IToggleControlsPayload {
   controls: string
+}
+
+export interface IUpdateHealthPayload {
+  health: number
 }
 
 export type TTogglePause = {
@@ -37,4 +42,9 @@ export type TToggleControls = {
   payload: IToggleControlsPayload
 }
 
-export type TGameActions = TTogglePause | TToggleFullscreen | TToggleControls
+export type TUpdateHealth = {
+  type: typeof UPDATE_PLAYER_HEALTH
+  payload: IUpdateHealthPayload
+}
+
+export type TGameActions = TTogglePause | TToggleFullscreen | TToggleControls | TUpdateHealth

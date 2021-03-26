@@ -17,6 +17,7 @@ class Player extends Entity {
 
   constructor(velocity = 10, size = 50) {
     super(() => {}, velocity, size, teslaWithAGun, 3)
+    this.health = 10
     this.firePeriod = 50
     this.fireCooldown = this.firePeriod
     this.fireQuantity = 1
@@ -59,6 +60,13 @@ class Player extends Entity {
     const { cx, cy } = coefficient
     const { ox, oy } = center
     this.destination = { x: x * cx - ox, y: y * cy - oy }
+  }
+
+  public controlWithMouse = (
+    controlSurface: HTMLElement,
+    context: ContextController
+  ) => {
+    return InputsController.onMouseDrag(controlSurface, this.moveTo, context)
   }
 
   public controlWithKeyboard = () => {
@@ -144,13 +152,6 @@ class Player extends Entity {
       leftHandler()
       rightHandler()
     }
-  }
-
-  public controlWithMouse = (
-    context: HTMLCanvasElement,
-    controller: ContextController
-  ) => {
-    return InputsController.onMouseDrag(context, this.moveTo, controller)
   }
 
   protected move = (context: ContextController) => {

@@ -7,6 +7,8 @@ const getPause = (state: IAppState) => state.game.isPaused
 
 const getControls = (state: IAppState) => state.game.controls
 
+const getHealth = (state: IAppState) => state.game.health
+
 export const getFullscreenSelector = createSelector(
   getFullscreen,
   (fullscreen) => fullscreen
@@ -18,3 +20,5 @@ export const getControlsSelector = createSelector(
   getControls,
   (controls) => controls
 )
+
+export const getHealthSelector = createSelector(getHealth, (health) => health)

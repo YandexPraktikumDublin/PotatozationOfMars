@@ -1,15 +1,18 @@
 import {
-  TOGGLE_CONTROLS,
   SET_FULLSCREEN_ICON,
-  TOGGLE_PAUSE
+  TOGGLE_CONTROLS,
+  TOGGLE_PAUSE,
+  UPDATE_PLAYER_HEALTH
 } from './actionTypes'
 import {
   IToggleControlsPayload,
   IToggleFullscreenPayload,
   ITogglePausePayload,
+  IUpdateHealthPayload,
   TToggleControls,
   TToggleFullscreen,
-  TTogglePause
+  TTogglePause,
+  TUpdateHealth
 } from './types'
 
 export const togglePause = (payload: ITogglePausePayload): TTogglePause => ({
@@ -28,5 +31,12 @@ export const toggleControls = (
   payload: IToggleControlsPayload
 ): TToggleControls => ({
   type: TOGGLE_CONTROLS,
+  payload
+})
+
+export const updatePlayerHealth = (
+  payload: IUpdateHealthPayload
+): TUpdateHealth => ({
+  type: UPDATE_PLAYER_HEALTH,
   payload
 })

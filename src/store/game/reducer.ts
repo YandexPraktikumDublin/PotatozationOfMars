@@ -1,8 +1,8 @@
 import {
   TOGGLE_CONTROLS,
   SET_FULLSCREEN_ICON,
-  TOGGLE_PAUSE
-} from './actionTypes'
+  TOGGLE_PAUSE, UPDATE_PLAYER_HEALTH
+} from "./actionTypes";
 import { IGameState, TGameActions } from './types'
 import { controlTypes } from '@game/config'
 import { fullscreenOn } from '@images'
@@ -10,7 +10,8 @@ import { fullscreenOn } from '@images'
 const initialState: IGameState = {
   isPaused: false,
   fullscreenIcon: fullscreenOn,
-  controls: controlTypes.mouse
+  controls: controlTypes.mouse,
+  health: 0
 }
 
 export default (state = initialState, action: TGameActions) => {
@@ -26,6 +27,11 @@ export default (state = initialState, action: TGameActions) => {
         ...action.payload
       }
     case TOGGLE_PAUSE:
+      return {
+        ...state,
+        ...action.payload
+      }
+    case UPDATE_PLAYER_HEALTH:
       return {
         ...state,
         ...action.payload

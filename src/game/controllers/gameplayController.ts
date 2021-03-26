@@ -3,9 +3,10 @@ import {
   GameClock,
   EnemyController
 } from '@game/controllers'
-import { EnemyAsteroid, Player } from '@game/entities'
+import { EnemyAsteroid, Entity, Player } from '@game/entities'
 import TPosition from '@game/@types/position'
 import { starsBack, starsFront, starsMiddle } from '@images'
+import {TDispatchers,TLevel} from "@game/@types";
 
 class GameplayController {
   context: ContextController
@@ -13,20 +14,29 @@ class GameplayController {
   backgroundLayers: Array<HTMLImageElement>
   clock: GameClock
   player: Player
+  score: number
   private currentLevel: number = 0
-  readonly levels: Array<EnemyController>
+  readonly levels: Array<TLevel>
+  private enemyController: EnemyController
   private handlers: Record<string, () => void>
   private animationFrameId: number
+  private dispatchers: TDispatchers
 
-  constructor(canvas: HTMLCanvasElement, backgroundCanvas: HTMLCanvasElement) {
+
+  constructor(canvas: HTMLCanvasElement, backgroundCanvas: HTMLCanvasElement, dispatchers:TDispatchers ) {
     this.context = new ContextController(canvas)
     this.background = new ContextController(backgroundCanvas)
     this.backgroundLayers = [new Image(), new Image(), new Image()]
     this.clock = new GameClock()
     this.player = new Player()
-    this.levels = [new EnemyController(EnemyAsteroid)]
+    this.score = 0
+    this.levels = [
+      { enemyType: EnemyAsteroid, quantity: 100000, simultaneously: 10 }
+    ]
+    this.enemyController = new EnemyController(Entity)
     this.handlers = {}
     this.animationFrameId = 0
+    this.dispatchers = dispatchers
   }
 
   init = () => {
@@ -38,16 +48,25 @@ class GameplayController {
         this.context
       )
     }
-    const level = this.levels[this.currentLevel]
-    level.init(this.clock, this.context, 1000000, 10)
+    const { enemyType, quantity, simultaneously } = this.levels[
+      this.currentLevel
+    ]
+    this.enemyController = new EnemyController(enemyType)
+    this.enemyController.init(
+      this.clock,
+      this.context,
+      quantity,
+      simultaneously
+    )
     const collisionHandler = this.clock.startEvent(() => {
-      this.isCollidedPlayer(level)
-      this.isHitEnemy(level)
-      if (level.quantity <= 0) {
+      this.isCollidedPlayer(this.enemyController)
+      this.isHitEnemy(this.enemyController)
+      if (this.enemyController.quantity <= 0) {
         collisionHandler()
       }
     })
     this.player.init(this.clock)
+    this.dispatchers.updateHealth(this.player.health)
   }
 
   private initBackground = () => {
@@ -96,6 +115,8 @@ class GameplayController {
       const projectileSize = projectile.size
       const distance = GameplayController.getDistance(playerPos, projectilePos)
       if (distance <= projectileSize / 2 + playerSize / 2) {
+        this.player.takeDamage(1)
+        this.dispatchers.updateHealth(this.player.health)
         projectile.kill()
       }
     })
@@ -117,9 +138,9 @@ class GameplayController {
 
   drawBackground = () => {
     let now = this.clock.now()
-    if (now % 5 === 0 && this.background) {
+    if (now % 5 === 0) {
       now = now / 5
-      const size = this.background?.getSize()
+      const size = this.background.getSize()
       this.background.fillFrame('#000000')
       for (let i = 0; i < this.backgroundLayers.length; i++) {
         this.background.drawImage(
