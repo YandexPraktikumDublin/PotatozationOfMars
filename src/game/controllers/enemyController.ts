@@ -38,7 +38,7 @@ class EnemyController {
   getProjectiles = () => {
     const projectiles: Array<Entity> = []
     this.entities.forEach((entity) => {
-      projectiles.push(...entity.getProjectile())
+      projectiles.push(...entity.getProjectiles())
     })
     return projectiles
   }

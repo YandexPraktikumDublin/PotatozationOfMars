@@ -4,6 +4,7 @@ type TLevel = {
   enemyType: typeof Entity
   quantity: number
   simultaneously: number
+  bossType: typeof Entity
 }
 
 export default TLevel

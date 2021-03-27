@@ -3,7 +3,12 @@ import { GameplayController, InputsController } from '@game/controllers'
 import { controlTypes, KEYS } from '@game/config'
 import { useDispatch, useSelector, useStore } from 'react-redux'
 import { getControlsSelector } from '@store/game/selectors'
-import { togglePause, updatePlayerHealth } from '@store/game/actions'
+import {
+  requestNewGame, resetScore,
+  togglePause,
+  updatePlayerHealth,
+  updateScore
+} from "@store/game/actions";
 import { isServer } from '@utils/misc'
 
 const useRenderCanvas = () => {
@@ -21,12 +26,23 @@ const useRenderCanvas = () => {
     dispatch(updatePlayerHealth({ health }))
   }
 
+  const updateGameScore = (score: number) => {
+    dispatch(updateScore({ score }))
+  }
+
+  const initNewGame = () =>{
+    dispatch(requestNewGame({ newGame: false }))
+    dispatch(resetScore())
+  }
+
   useEffect(() => {
     const canvas = canvasRef.current as HTMLCanvasElement
     const backgroundCanvas = backgroundRef.current as HTMLCanvasElement
 
     const game = new GameplayController(canvas, backgroundCanvas, {
-      updateHealth
+      updateHealth,
+      updateGameScore,
+      initNewGame
     })
 
     const toggleModal = () => {
@@ -36,6 +52,10 @@ const useRenderCanvas = () => {
     const listener = () => {
       const newIsPaused = store.getState().game.isPaused
       const newControls = store.getState().game.controls
+      const newGame = store.getState().game.newGame
+      if (newGame) {
+        game.newGame()
+      }
       if (controls !== newControls) {
         controls = newControls
         if (newControls === controlTypes.mouse) {

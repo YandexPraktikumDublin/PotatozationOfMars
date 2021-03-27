@@ -5,14 +5,10 @@ import { CloseButton } from '@components/atoms'
 
 type TGamePauseMenuModalProps = {
   toggleModal: () => void
-  settings?: {
-    toggleControlInput: () => void
-    controls: string
-  }
 }
 
 const GamePauseMenuModal: FC<TGamePauseMenuModalProps> = memo(
-  ({ toggleModal, settings }: TGamePauseMenuModalProps) => {
+  ({ toggleModal }: TGamePauseMenuModalProps) => {
     return (
       <div
         className={classNames(
@@ -24,8 +20,6 @@ const GamePauseMenuModal: FC<TGamePauseMenuModalProps> = memo(
           <Title>Pause</Title>
           <GamePauseMenu
             toggleModal={toggleModal}
-            controls={settings?.controls}
-            toggleControlInput={settings?.toggleControlInput}
           />
         </div>
         <CloseButton onClick={toggleModal} className="absolute top-4 right-4" />

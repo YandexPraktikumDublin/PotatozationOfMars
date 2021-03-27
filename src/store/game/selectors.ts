@@ -9,6 +9,8 @@ const getControls = (state: IAppState) => state.game.controls
 
 const getHealth = (state: IAppState) => state.game.health
 
+const getScore = (state: IAppState) => state.game.score
+
 export const getFullscreenSelector = createSelector(
   getFullscreen,
   (fullscreen) => fullscreen
@@ -22,3 +24,5 @@ export const getControlsSelector = createSelector(
 )
 
 export const getHealthSelector = createSelector(getHealth, (health) => health)
+
+export const getScoreSelector = createSelector(getScore, (score) => score)

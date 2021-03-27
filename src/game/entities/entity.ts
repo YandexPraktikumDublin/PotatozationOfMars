@@ -14,6 +14,10 @@ class Entity {
   velocity: Vector
   deathAnimation: () => void
   killCallback: () => void
+  reward: {
+    score: number
+    upgrade?: string
+  }
 
   constructor(
     killCallback = () => {},
@@ -32,6 +36,9 @@ class Entity {
     this.deathAnimation = () => {}
     this.killCallback = killCallback
     this.image.src = image
+    this.reward = {
+      score: 0
+    }
   }
 
   public init = (clock: GameClock, context: ContextController) => {
@@ -82,7 +89,7 @@ class Entity {
     this.position.y = y > bottom ? bottom : y < top ? top : this.position.y
   }
 
-  public getProjectile = () => {
+  public getProjectiles = () => {
     return [this]
   }
 
@@ -95,15 +102,16 @@ class Entity {
     }
   }
 
-  public takeDamage = (damage: number) => {
+  public takeDamage = (damage: number, dispatcher: (score: number) => void) => {
     this.health -= damage
-    if (this.health <= 0) this.kill()
+    if (this.health <= 0) this.kill(dispatcher)
   }
 
-  public kill = () => {
+  public kill = (dispatcher: (score: number) => void = () => {}) => {
     this.isAlive = false
     this.clockEvent()
     this.deathAnimation()
+    dispatcher(this.reward.score)
     this.killCallback()
   }
 }

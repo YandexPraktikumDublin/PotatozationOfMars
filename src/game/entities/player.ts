@@ -9,6 +9,8 @@ import { Projectile, Entity } from '@game/entities'
 import { KEYS } from '@game/config'
 
 class Player extends Entity {
+  damagePeriod: number
+  damageCooldown: number
   firePeriod: number
   fireCooldown: number
   fireQuantity: number
@@ -22,6 +24,8 @@ class Player extends Entity {
     this.fireCooldown = this.firePeriod
     this.fireQuantity = 1
     this.fireDamage = 10
+    this.damagePeriod = 60
+    this.damageCooldown = this.damagePeriod
     this.projectiles = []
   }
 
@@ -163,6 +167,12 @@ class Player extends Entity {
       width: this.size * 3,
       height: this.size
     })
+  }
+
+  takeDamage = (damage = 1, dispatcher: (health: number) => void) => {
+    this.health -= damage
+    dispatcher(this.health)
+    if (this.health <= 0) this.kill()
   }
 }
 

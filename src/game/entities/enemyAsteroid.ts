@@ -9,14 +9,16 @@ class EnemyAsteroid extends Entity {
   constructor(killCallback = () => {}, velocity = 5, size = 50) {
     super(
       killCallback,
-      Math.round(Math.random() * velocity + velocity),
+      velocity,
       Math.round(Math.random() * size + size),
       asteroid,
       1
     )
+    this.velocity.magnitude = velocity * ((size * 2) / this.size)
     this.health = this.size - 50
     this.angle = 0
     this.rotation = (Math.random() - 0.5) / 100
+    this.reward.score = this.size
   }
 
   init = (clock: GameClock, context: ContextController) => {

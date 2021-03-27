@@ -2,16 +2,35 @@ import React, { FC, memo, useCallback, useState } from 'react'
 import { Button } from '@components/organisms'
 import { useHistory } from 'react-router-dom'
 import { PATHS } from '@config'
+import { controlTypes } from '@game/config'
+import { requestNewGame, toggleControls } from '@store/game/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { getControlsSelector } from '@store/game/selectors'
 
 type TGamePauseMenuProps = {
   toggleModal: () => void
-  toggleControlInput?: () => void
-  controls?: string
 }
 
 const GamePauseMenu: FC<TGamePauseMenuProps> = memo(
-  ({ toggleModal, toggleControlInput, controls }: TGamePauseMenuProps) => {
+  ({ toggleModal }: TGamePauseMenuProps) => {
     const history = useHistory()
+
+    const dispatch = useDispatch()
+
+    const controls = useSelector(getControlsSelector)
+
+    const toggleControlInput = useCallback(() => {
+      const newControls =
+        controls === controlTypes.keyboard
+          ? controlTypes.mouse
+          : controlTypes.keyboard
+      dispatch(toggleControls({ controls: newControls }))
+    }, [controls])
+
+    const startNewGame = () => {
+      dispatch(requestNewGame({ newGame: true }))
+      toggleModal()
+    }
 
     const returnToMainPage = useCallback(() => {
       history.push(PATHS.BASE)
@@ -37,6 +56,7 @@ const GamePauseMenu: FC<TGamePauseMenuProps> = memo(
         {currentMenu === Menus.main && (
           <>
             <Button onClick={toggleModal}>Resume</Button>
+            <Button onClick={startNewGame}>New game</Button>
             <Button onClick={toSettingsMenu}>Settings</Button>
             <Button onClick={returnToMainPage}>Quit</Button>
           </>
