@@ -2,13 +2,15 @@ import React, { FC, memo, useCallback } from 'react'
 import { GameCanvas, NavigationButton } from '@components/molecules'
 import useRenderCanvas from '@game/useRenderCanvas'
 import useFullScreen from '@game/useFullScreen'
-import { moon, pause, potato } from "@images";
+import { moon, pause, potato } from '@images'
 import { GameHud, GamePauseMenuDisplay } from '@components/organisms'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  getFullscreenSelector, getHealthSelector,
-  getPauseSelector, getScoreSelector
-} from "@store/game/selectors";
+  getFullscreenSelector,
+  getHealthSelector,
+  getPauseSelector,
+  getScoreSelector
+} from '@store/game/selectors'
 import { togglePause } from '@store/game/actions'
 
 type TGameWindowProps = {}
@@ -46,10 +48,7 @@ const GameWindow: FC<TGameWindowProps> = memo(() => {
         onClick={toggleModal}
         imageSrc={pause}
       />
-      <GamePauseMenuDisplay
-        isGamePaused={isPaused}
-        toggleModal={toggleModal}
-      />
+      <GamePauseMenuDisplay isGamePaused={isPaused} toggleModal={toggleModal} />
       <NavigationButton
         className="z-20 absolute bottom-3 right-3"
         title="Full screen"

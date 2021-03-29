@@ -18,9 +18,7 @@ const GamePauseMenuModal: FC<TGamePauseMenuModalProps> = memo(
       >
         <div className="relative w-full h-full flex flex-col justify-center items-center px-3">
           <Title>Pause</Title>
-          <GamePauseMenu
-            toggleModal={toggleModal}
-          />
+          <GamePauseMenu toggleModal={toggleModal} />
         </div>
         <CloseButton onClick={toggleModal} className="absolute top-4 right-4" />
       </div>

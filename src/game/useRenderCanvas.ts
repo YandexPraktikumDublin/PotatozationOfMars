@@ -4,11 +4,12 @@ import { controlTypes, KEYS } from '@game/config'
 import { useDispatch, useSelector, useStore } from 'react-redux'
 import { getControlsSelector } from '@store/game/selectors'
 import {
-  requestNewGame, resetScore,
+  requestNewGame,
+  resetScore,
   togglePause,
   updatePlayerHealth,
   updateScore
-} from "@store/game/actions";
+} from '@store/game/actions'
 import { isServer } from '@utils/misc'
 
 const useRenderCanvas = () => {
@@ -30,7 +31,7 @@ const useRenderCanvas = () => {
     dispatch(updateScore({ score }))
   }
 
-  const initNewGame = () =>{
+  const initNewGame = () => {
     dispatch(requestNewGame({ newGame: false }))
     dispatch(resetScore())
   }

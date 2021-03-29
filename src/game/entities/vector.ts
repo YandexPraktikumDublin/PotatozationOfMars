@@ -15,17 +15,47 @@ class Vector {
     this.y = -this.y
   }
 
-  correct = () => {
-    const magnitude = Math.sqrt(this.x ** 2 + this.y ** 2)
-    if (magnitude === 0) return
-    const k = this.magnitude / magnitude
-    this.x *= k
-    this.y *= k
+  correct = (
+    position: TPosition | undefined = undefined,
+    magnitude = this.magnitude
+  ): TPosition => {
+    const { x, y } = position ?? this
+    const wrongMagnitude = Math.sqrt(x ** 2 + y ** 2)
+    if (wrongMagnitude === 0) return { x, y }
+    const k = magnitude / wrongMagnitude
+    if (!position) {
+      this.x = x * k
+      this.y = y * k
+      this.magnitude = magnitude
+    }
+    return { x: x * k, y: y * k }
+  }
+
+  deflectTo = (
+    destination: TPosition | { x: null; y: null },
+    position: TPosition = { x: 0, y: 0 },
+    intensity = 5
+  ) => {
+    const { x, y } = destination
+    if (x === null || y === null) return
+    const [ex, ey] = [position.x, position.y]
+    const [dx, dy] = [x - ex, y - ey]
+    this.add(this.correct({ x: dx, y: dy }, intensity))
+    this.correct()
+  }
+
+  add = (vector: TPosition) => {
+    this.x += vector.x
+    this.y += vector.y
   }
 
   defineByAngle = (a: number) => {
     this.x = this.magnitude * Math.cos(a * Math.PI)
     this.y = this.magnitude * Math.sin(a * Math.PI)
+  }
+
+  getAngle = () => {
+    return Math.atan2(this.y, this.x) / Math.PI
   }
 
   defineByDirection = (
@@ -37,14 +67,12 @@ class Vector {
     const [ex, ey] = [position.x, position.y]
     const [dx, dy] = [x - ex, y - ey]
     const magnitude = Math.sqrt(dx ** 2 + dy ** 2)
+    this.x = dx
+    this.y = dy
     if (magnitude <= this.magnitude) {
-      this.x = dx
-      this.y = dy
       return
     }
-    const k = this.magnitude / magnitude
-    this.x = k * dx
-    this.y = k * dy
+    this.correct()
   }
 
   applyTo = (position: TPosition): TPosition => {

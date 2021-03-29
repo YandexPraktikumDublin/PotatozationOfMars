@@ -8,7 +8,9 @@ describe('<GameHud />', () => {
   it('should renders correct <GameHud />', () => {
     const string = ''
     const number = 0
-    const wrapper = shallow(<GameHud title={string} imageSrc={string} value={number} />)
+    const wrapper = shallow(
+      <GameHud title={string} imageSrc={string} value={number} />
+    )
 
     expect(toJSON(wrapper)).toMatchSnapshot()
   })

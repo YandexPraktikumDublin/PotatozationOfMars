@@ -12,8 +12,14 @@ class Entity {
   position: TPosition
   size: number
   velocity: Vector
+  damage: number
   deathAnimation: () => void
   killCallback: () => void
+  modifiers: {
+    invincible?: boolean
+    homingProjectiles?: boolean
+  }
+
   reward: {
     score: number
     upgrade?: string
@@ -32,10 +38,12 @@ class Entity {
     this.position = { x: 0, y: 0 }
     this.destination = this.position
     this.size = size
+    this.damage = 1
     this.velocity = new Vector(velocity)
     this.deathAnimation = () => {}
     this.killCallback = killCallback
     this.image.src = image
+    this.modifiers = {}
     this.reward = {
       score: 0
     }
@@ -50,11 +58,11 @@ class Entity {
   }
 
   protected initDeathAnimation = (clock: GameClock, src = explosion) => {
-    let size = this.size * 2
-    let opacity = 1
     const image = new Image()
     image.src = src
     return () => {
+      let size = this.size * 2
+      let opacity = 1
       const deathAnimation = clock.startEvent((context) => {
         size -= 1
         opacity = opacity - 0.03
@@ -85,11 +93,18 @@ class Entity {
     left: number
   ) => {
     const { x, y } = this.position
-    this.position.x = x > right ? right : x < left ? left : this.position.x
-    this.position.y = y > bottom ? bottom : y < top ? top : this.position.y
+    if (x > right || x < left || y > bottom || y < top) {
+      this.position.x = x > right ? right : x < left ? left : this.position.x
+      this.position.y = y > bottom ? bottom : y < top ? top : this.position.y
+      return true
+    }
   }
 
-  public getProjectiles = () => {
+  public getEntities = (): Array<Entity> => {
+    return [this]
+  }
+
+  public getProjectiles = (): Array<Entity> => {
     return [this]
   }
 
@@ -105,6 +120,10 @@ class Entity {
   public takeDamage = (damage: number, dispatcher: (score: number) => void) => {
     this.health -= damage
     if (this.health <= 0) this.kill(dispatcher)
+  }
+
+  public hit = () => {
+    this.kill()
   }
 
   public kill = (dispatcher: (score: number) => void = () => {}) => {

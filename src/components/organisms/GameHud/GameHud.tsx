@@ -7,7 +7,7 @@ type TGameHudProps = {
 }
 
 const GameHud: FC<TGameHudProps> = memo(
-  ({ title, value, imageSrc}: TGameHudProps) => {
+  ({ title, value, imageSrc }: TGameHudProps) => {
     return (
       <div className="flex ml-4">
         <img

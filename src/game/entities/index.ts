@@ -1,5 +1,7 @@
 export { default as Entity } from './entity'
 export { default as Vector } from './vector'
+export { default as Projectile } from './projectile'
 export { default as Player } from './player'
 export { default as EnemyAsteroid } from './enemyAsteroid'
-export { default as Projectile } from './projectile'
+export { default as AsteroidSnakeTail } from './asteroidSnakeTail'
+export { default as AsteroidSnake } from './asteroidSnake'

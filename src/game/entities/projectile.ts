@@ -8,9 +8,11 @@ class Projectile extends Entity {
     velocity = 20,
     size = 10,
     image = laser,
+    damage = 1,
     killCallback = () => {}
   ) {
     super(killCallback, velocity, size, image)
+    this.damage = damage
   }
 
   public init = (

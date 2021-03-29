@@ -36,6 +36,22 @@ class ContextController {
     }
   }
 
+  drawText = (text: string, x = 0, y = 0) => {
+    const context = this.instance
+    context.save()
+
+    const { ox, oy } = this.center
+    context.translate(Math.round(x + ox), Math.round(y + oy))
+
+    context.font = '120px serif'
+    context.fillStyle = 'white'
+    context.textAlign = 'center'
+
+    context.fillText(text, 0, 0)
+
+    context.restore()
+  }
+
   drawImage = (
     image: HTMLImageElement,
     x: number,

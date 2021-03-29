@@ -3,10 +3,12 @@ import {
   GameClock,
   EnemyController
 } from '@game/controllers'
-import { EnemyAsteroid, Entity, Player } from '@game/entities'
+import { AsteroidSnake, EnemyAsteroid, Entity, Player } from '@game/entities'
 import TPosition from '@game/@types/position'
 import { starsBack, starsFront, starsMiddle } from '@images'
 import { TDispatchers, TLevel } from '@game/@types'
+import Reward from '@game/entities/reward'
+import { getDistance } from '@game/utils'
 
 class GameplayController {
   context: ContextController
@@ -19,6 +21,7 @@ class GameplayController {
   private currentLevel: number = 0
   private enemyController: EnemyController
   private boss: Entity
+  private reward: Reward
   private handlers: Record<string, () => void>
   private animationFrameId: number
   private dispatchers: TDispatchers
@@ -37,13 +40,15 @@ class GameplayController {
     this.levels = [
       {
         enemyType: EnemyAsteroid,
-        quantity: 10,
+        quantity: 20,
         simultaneously: 10,
-        bossType: EnemyAsteroid
+        bossType: AsteroidSnake,
+        scalable: true
       }
     ]
     this.enemyController = new EnemyController(Entity)
     this.boss = new Entity()
+    this.reward = new Reward()
     this.handlers = {}
     this.animationFrameId = 0
     this.dispatchers = dispatchers
@@ -64,21 +69,23 @@ class GameplayController {
     this.initLevel(this.levels[this.currentLevel])
     this.player.init(this.clock)
     this.dispatchers.updateHealth(this.player.health)
+    this.getRandomReward()
   }
 
   private initLevel = (level: TLevel) => {
-    const { enemyType, quantity, simultaneously, bossType } = level
-    this.enemyController = new EnemyController(enemyType)
-    this.enemyController.init(
-      this.clock,
-      this.context,
-      quantity,
-      simultaneously
+    const { enemyType, simultaneously, scalable, quantity, bossType } = level
+    const difficulty = scalable ? this.currentLevel + 1 : 1
+    this.enemyController = new EnemyController(
+      enemyType,
+      simultaneously,
+      difficulty,
+      quantity * difficulty
     )
+    this.enemyController.init(this.clock, this.context)
     const collisionHandler = this.clock.startEvent(() => {
       this.isCollidedPlayer(this.enemyController.getProjectiles())
-      this.isHitEnemy(this.enemyController.entities)
-      if (this.enemyController.quantity <= 0) {
+      this.isHitEnemy(this.enemyController.getEntities())
+      if (this.enemyController.current <= 0) {
         this.initBoss(bossType)
         collisionHandler()
       }
@@ -90,14 +97,33 @@ class GameplayController {
     this.boss.init(this.clock, this.context)
     const collisionHandler = this.clock.startEvent(() => {
       this.isCollidedPlayer(this.boss.getProjectiles())
-      this.isHitEnemy([this.boss])
+      this.isHitEnemy(this.boss.getEntities())
       if (!this.boss.isAlive) {
         this.currentLevel++
+        if (this.player.isAlive) {
+          this.player.health++
+          this.dispatchers.updateHealth(this.player.health)
+        }
+        this.initReward(this.boss.position)
         const level =
           this.levels.length > this.currentLevel
             ? this.levels[this.currentLevel]
             : this.levels[this.levels.length - 1]
         this.initLevel(level)
+        collisionHandler()
+      }
+    })
+  }
+
+  private initReward = (position: TPosition) => {
+    this.reward.killCallback = () => {}
+    this.reward.kill()
+    this.reward = new Reward(this.getRandomReward)
+    this.reward.position = position
+    this.reward.init(this.clock, this.context)
+    const collisionHandler = this.clock.startEvent(() => {
+      this.isCollidedPlayer([this.reward])
+      if (!this.reward.isAlive) {
         collisionHandler()
       }
     })
@@ -109,32 +135,39 @@ class GameplayController {
     this.backgroundLayers[2].src = starsFront
   }
 
-  private static getDistance(positionA: TPosition, positionB: TPosition) {
-    const dx = positionA.x - positionB.x
-    const dy = positionA.y - positionB.y
-    return Math.sqrt(dx ** 2 + dy ** 2)
-  }
-
   private isHitEnemy = (enemies: Array<Entity>) => {
     const projectiles = this.player.projectiles
-    const damage = this.player.fireDamage
+    const damage = this.player.damage
     projectiles.forEach((projectile) => {
       if (!projectile.isAlive) return
       const projectileSize = projectile.size
       const projectilePos = projectile.velocity.applyTo(projectile.position)
+      let closest: number
+      let target: TPosition | undefined
       enemies.forEach((entity) => {
         if (!entity.isAlive) return
         const entitySize = entity.size
         const entityPos = entity.velocity.applyTo(entity.position)
-        const distance = GameplayController.getDistance(
-          entityPos,
-          projectilePos
-        )
+        const distance = getDistance(entityPos, projectilePos)
+        if (
+          this.player.modifiers.homingProjectiles &&
+          (!closest || distance < closest)
+        ) {
+          closest = distance
+          target = entityPos
+        }
         if (distance <= projectileSize / 2 + entitySize / 2) {
-          projectile.kill()
+          projectile.hit()
           entity.takeDamage(damage, this.dispatchers.updateGameScore)
         }
       })
+      if (target) {
+        projectile.velocity.deflectTo(
+          target,
+          projectilePos,
+          this.player.homingIntensity
+        )
+      }
     })
   }
 
@@ -146,11 +179,76 @@ class GameplayController {
       if (!projectile.isAlive) return
       const projectilePos = projectile.position
       const projectileSize = projectile.size
-      const distance = GameplayController.getDistance(playerPos, projectilePos)
+      const distance = getDistance(playerPos, projectilePos)
       if (distance <= projectileSize / 2 + playerSize / 2) {
-        this.player.takeDamage(1, this.dispatchers.updateHealth)
-        projectile.kill()
+        this.player.takeDamage(projectile.damage, this.dispatchers.updateHealth)
+        projectile.hit()
       }
+    })
+  }
+
+  increaseDamage = () => {
+    if (this.player.isAlive) {
+      this.player.damage *= 1.2
+    }
+  }
+
+  addProjectile = () => {
+    if (this.player.isAlive) {
+      if (this.player.fireQuantity < 8) this.player.fireQuantity += 2
+      else this.getRandomReward()
+    }
+  }
+
+  increaseAttackSpeed = () => {
+    const maxSpeed = 5
+    if (this.player.isAlive) {
+      if (this.player.firePeriod === maxSpeed) {
+        this.getRandomReward()
+        return
+      }
+      this.player.firePeriod =
+        this.player.firePeriod * 0.8 < maxSpeed
+          ? maxSpeed
+          : this.player.firePeriod * 0.8
+    }
+  }
+
+  homingProjectile = () => {
+    if (
+      this.player.modifiers.homingProjectiles &&
+      this.player.homingIntensity
+    ) {
+      this.player.homingIntensity++
+      return
+    }
+    this.player.modifiers.homingProjectiles = true
+    this.player.homingIntensity = 1
+  }
+
+  getRandomReward = () => {
+    const rarity = {
+      common: 4,
+      rare: 2
+    }
+    const rewards = [
+      { upgrade: this.increaseDamage, rarity: rarity.common },
+      { upgrade: this.addProjectile, rarity: rarity.rare },
+      { upgrade: this.increaseAttackSpeed, rarity: rarity.common },
+      { upgrade: this.homingProjectile, rarity: rarity.rare }
+    ]
+    let commonRarity = rewards.reduceRight(
+      (acc, value) => value.rarity + acc,
+      0
+    )
+    const random = Math.random() * commonRarity
+    rewards.some((reward) => {
+      commonRarity -= reward.rarity
+      if (commonRarity <= random) {
+        reward.upgrade()
+        return true
+      }
+      return false
     })
   }
 

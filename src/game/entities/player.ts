@@ -9,21 +9,23 @@ import { Projectile, Entity } from '@game/entities'
 import { KEYS } from '@game/config'
 
 class Player extends Entity {
+  opacity: number
   damagePeriod: number
   damageCooldown: number
   firePeriod: number
   fireCooldown: number
   fireQuantity: number
-  fireDamage: number
   projectiles: Array<Projectile>
+  homingIntensity?: number
 
   constructor(velocity = 10, size = 50) {
     super(() => {}, velocity, size, teslaWithAGun, 3)
-    this.health = 10
+    this.opacity = 1
+    this.health = 3
     this.firePeriod = 50
     this.fireCooldown = this.firePeriod
     this.fireQuantity = 1
-    this.fireDamage = 10
+    this.damage = 10
     this.damagePeriod = 60
     this.damageCooldown = this.damagePeriod
     this.projectiles = []
@@ -35,7 +37,16 @@ class Player extends Entity {
       fire(context)
       this.move(context)
     }
+    this.deathAnimation = this.initDeathAnimation(clock)
     this.render(clock, callBack)
+  }
+
+  initDeathAnimation = (clock: GameClock) => {
+    return () => {
+      clock.startEvent((context) => {
+        context.drawText('Game over')
+      })
+    }
   }
 
   private initFire = (clock: GameClock) => {
@@ -45,10 +56,11 @@ class Player extends Entity {
         this.fireCooldown = this.firePeriod
         for (let i = 0; i < this.fireQuantity; i++) {
           if (this.projectiles.length >= 200) {
+            this.projectiles[0].deathAnimation = () => {}
             this.projectiles[0].kill()
             this.projectiles.shift()
           }
-          const projectile = new Projectile(30, 10, laser)
+          const projectile = new Projectile(30, 10, laser, 10)
           this.projectiles.push(projectile)
           const angle =
             (i - (this.fireQuantity - 1) / 2) / (6 * this.fireQuantity)
@@ -159,17 +171,30 @@ class Player extends Entity {
   }
 
   protected move = (context: ContextController) => {
-    const { top, right, bottom, left } = context.getBorders()
     this.velocity.defineByDirection(this.destination, this.position)
     this.position = this.velocity.applyTo(this.position)
+
+    if (this.damageCooldown > 0) {
+      this.damageCooldown--
+      this.modifiers.invincible = this.damageCooldown !== 0
+      this.opacity = this.modifiers.invincible ? 0.5 : 1
+    }
+
+    const { top, right, bottom, left } = context.getBorders()
     this.getBoundByBorders(top, right, bottom, left)
+
     context.drawImage(this.image, this.position.x, this.position.y, {
       width: this.size * 3,
-      height: this.size
+      height: this.size,
+      opacity: this.opacity
     })
   }
 
   takeDamage = (damage = 1, dispatcher: (health: number) => void) => {
+    if (this.modifiers.invincible) return
+    this.damageCooldown = this.damagePeriod
+    this.opacity = 0.5
+    this.modifiers.invincible = true
     this.health -= damage
     dispatcher(this.health)
     if (this.health <= 0) this.kill()
