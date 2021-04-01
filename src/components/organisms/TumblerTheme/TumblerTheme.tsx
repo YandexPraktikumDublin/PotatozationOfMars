@@ -6,12 +6,6 @@ type TTumblerThemeProps = {}
 
 const darkThemeClass = 'dark'
 
-let isDefaultLightTheme = false
-
-if (!isServer()) {
-  isDefaultLightTheme = window.localStorage.isLightTheme === 'true'
-}
-
 const defaultImageStyle = {
   display: 'none',
   top: 'calc(50% - 0.75rem)',
@@ -19,7 +13,9 @@ const defaultImageStyle = {
 }
 
 const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
-  const [isLightTheme, setIsLightTheme] = useState<boolean>(isDefaultLightTheme)
+  const [isLightTheme, setIsLightTheme] = useState<boolean>(() =>
+    !isServer() ? window.localStorage.isLightTheme === 'true' : false
+  )
   const [style, setStyle] = useState(defaultImageStyle)
 
   const toggleTheme = () => {
