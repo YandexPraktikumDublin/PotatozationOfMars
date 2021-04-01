@@ -26,5 +26,4 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 
 ## Запуск в Docker
 
-- `docker-compose up --build app` - первый запуск
-- `docker-compose up app` - последующие запуски
+- `docker-compose up app` - запуск
