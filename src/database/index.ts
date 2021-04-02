@@ -6,7 +6,8 @@ const sequelizeOptions: SequelizeOptions = {
   username: process.env.POSTGRES_USER ?? 'postgres',
   password: process.env.POSTGRES_PASSWORD ?? 'password',
   database: process.env.POSTGRES_DB ?? 'potatozation-of-mars',
-  dialect: 'postgres'
+  dialect: 'postgres',
+  repositoryMode: true
 }
 
 const sequelize = new Sequelize(sequelizeOptions)
