@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 })
 
 db.sequelize
-  .authenticate()
+  .sync()
   .then(() => {
     console.log('Successful connection to the database!')
   })
