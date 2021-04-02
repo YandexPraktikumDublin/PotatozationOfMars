@@ -2,7 +2,7 @@
 
 exports[`<GameHud /> should renders correct <GameHud /> 1`] = `
 <div
-  className="flex ml-4"
+  className="flex"
 >
   <img
     alt=""

@@ -34,7 +34,7 @@ const GameWindow: FC<TGameWindowProps> = memo(() => {
     <div className="relative flex justify-center items-center" ref={windowRef}>
       <GameCanvas forwardRef={canvasRef} backgroundRef={backgroundRef} />
       <div
-        className="absolute flex top-3 right-3 z-20"
+        className="absolute flex space-x-6 top-3 right-3 z-20"
         style={{
           pointerEvents: 'none'
         }}
