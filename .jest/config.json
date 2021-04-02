@@ -18,7 +18,7 @@
     "@game/controllers": ["<rootDir>/game/controllers/index.ts"],
     "@hooks": ["<rootDir>/hooks/index.ts"],
     "@types": ["<rootDir>/types/index.ts"],
-    "@models": ["<rootDir>/models/index.ts"],
+    "@database": ["<rootDir>/database/index.ts"],
     "@store/([^\\.]*)$": ["<rootDir>/store/$1"],
     "@utils/([^\\.]*)$": ["<rootDir>/utils/$1"],
     "@routes": ["<rootDir>/routes.ts"]

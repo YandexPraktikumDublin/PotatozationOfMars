@@ -33,7 +33,7 @@
       "@game/controllers": ["./src/game/controllers/index.ts"],
       "@hooks": ["./src/hooks/index.ts"],
       "@types": ["./src/types/index.ts"],
-      "@models": ["./src/models/index.ts"],
+      "@database": ["./src/database/index.ts"],
       "@store/*": ["./src/store/*"],
       "@utils/*": ["./src/utils/*"],
       "@routes": ["./src/routes.ts"]
