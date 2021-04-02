@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 })
 
 db.sequelize
-  .sync()
+  .sync({ force: true })
   .then(() => {
     console.log('Successful connection to the database!')
   })
