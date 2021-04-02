@@ -1,52 +1,42 @@
-import { explosion, moon } from '@images'
+import { explosion, sneakHead } from '@images'
 import { ContextController, GameClock } from '@game/controllers'
-import { Entity } from '@game/entities'
+import { Entity, AsteroidSnakeTail } from '@game/entities'
 import { getDistance } from '@game/utils'
-import AsteroidSnakeTail from '@game/entities/asteroidSnakeTail'
 
 class AsteroidSnake extends Entity {
   angle: number
-  goToRandomPositionRight: () => void
   goToRandomPositionLeft: () => void
   phase: 'idle' | 'attack'
   phasePeriod: number
   phaseCooldown: number
   damagePeriod: number
   damageCooldown: number
+  homingIntensity: number
   tail: Array<AsteroidSnakeTail>
 
   constructor(killCallback = () => {}, velocity = 10, size = 100) {
-    super(killCallback, velocity, size, moon, 500)
+    super(killCallback, velocity, size, sneakHead, 500)
     this.angle = 0
     this.reward.score = 500
-    this.goToRandomPositionRight = () => {}
     this.goToRandomPositionLeft = () => {}
     this.phase = 'idle'
     this.phasePeriod = 500
     this.phaseCooldown = this.phasePeriod
     this.damagePeriod = 60
     this.damageCooldown = this.damagePeriod
+    this.homingIntensity = 5
     this.tail = []
   }
 
   init = (clock: GameClock, context: ContextController) => {
-    const { width, height } = context.getSize()
+    const { height } = context.getSize()
     const { ox, oy } = context.center
     this.isAlive = true
-    this.position = {
-      x: width + Math.random() * width - ox,
-      y: Math.random() * height - oy
-    }
-    this.goToRandomPositionRight = () => {
-      this.moveTo(
-        Math.random() * (width / 2) + width / 2 - ox,
-        Math.random() * height - oy
-      )
-    }
+    this.initPosition(context)
+    this.goToRandomPositionRight(context)
     this.goToRandomPositionLeft = () => {
       this.moveTo(-ox, Math.random() * height - oy)
     }
-    this.goToRandomPositionRight()
     this.deathAnimation = this.initDeathAnimation(clock, explosion)
     this.initTail(clock, context)
     this.render(clock, this.move)
@@ -70,30 +60,30 @@ class AsteroidSnake extends Entity {
     } else if (this.phase === 'idle') {
       this.goToRandomPositionLeft()
       this.velocity.magnitude = 15
+      this.homingIntensity = 10
       this.phase = 'attack'
     }
   }
 
-  private moveTo = (x: number, y: number) => {
-    this.destination = { x, y }
-  }
-
   protected move = (context: ContextController) => {
     this.timers()
-    this.velocity.deflectTo(this.destination, this.position, 1)
+    this.velocity.deflectTo(
+      this.destination,
+      this.position,
+      this.homingIntensity
+    )
     this.position = this.velocity.applyTo(this.position)
     this.angle = this.velocity.getAngle() - 1
     const distance = getDistance(this.destination, this.position)
     if (distance < this.size) {
-      this.goToRandomPositionRight()
+      this.goToRandomPositionRight(context)
       if (this.phase === 'attack') {
         this.velocity.magnitude = 10
+        this.homingIntensity = 5
         this.phaseCooldown = this.phasePeriod
         this.phase = 'idle'
       }
     }
-    const { top, right, bottom, left } = context.getBorders()
-    this.getBoundByBorders(top, right * 2, bottom, left)
     context.drawImage(this.image, this.position.x, this.position.y, {
       width: this.size,
       angle: this.angle

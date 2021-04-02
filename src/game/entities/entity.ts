@@ -1,6 +1,6 @@
 import { TPosition } from '@game/@types'
 import { ContextController, GameClock } from '@game/controllers'
-import { Vector } from '@game/entities'
+import { Projectile, Vector } from '@game/entities'
 import { explosion } from '@images'
 
 class Entity {
@@ -12,7 +12,13 @@ class Entity {
   position: TPosition
   size: number
   velocity: Vector
+  projectileVelocity: number
   damage: number
+  firePeriod: number
+  fireCooldown: number
+  fireQuantity: number
+  protected projectiles: Array<Projectile>
+  protected fire: (context: ContextController) => void
   deathAnimation: () => void
   killCallback: () => void
   modifiers: {
@@ -22,7 +28,6 @@ class Entity {
 
   reward: {
     score: number
-    upgrade?: string
   }
 
   constructor(
@@ -39,10 +44,16 @@ class Entity {
     this.destination = this.position
     this.size = size
     this.damage = 1
+    this.firePeriod = 50
+    this.fireCooldown = this.firePeriod
+    this.fireQuantity = 1
+    this.projectileVelocity = 10
     this.velocity = new Vector(velocity)
+    this.fire = () => {}
     this.deathAnimation = () => {}
     this.killCallback = killCallback
     this.image.src = image
+    this.projectiles = []
     this.modifiers = {}
     this.reward = {
       score: 0
@@ -55,6 +66,58 @@ class Entity {
     this.destination = { x: 0, y: 0 }
     this.deathAnimation = this.initDeathAnimation(clock)
     this.render(clock, this.move)
+  }
+
+  protected initPosition = (context: ContextController) => {
+    const { width, height } = context.getSize()
+    const { ox, oy } = context.center
+    this.position = {
+      x: width + Math.random() * width - ox,
+      y: Math.random() * height - oy
+    }
+  }
+
+  protected initFire = (
+    clock: GameClock,
+    src: string,
+    options?: {
+      player?: boolean
+      spread?: number
+      positionOffset?: TPosition
+    }
+  ) => {
+    const { player, spread, positionOffset } = options ?? {}
+    return (context: ContextController) => {
+      this.fireCooldown--
+      if (this.fireCooldown <= 0) {
+        this.fireCooldown = this.firePeriod
+        for (let i = 0; i < this.fireQuantity; i++) {
+          if (this.projectiles.length >= 200) {
+            this.projectiles[0].deathAnimation = () => {}
+            this.projectiles[0].kill()
+            this.projectiles.shift()
+          }
+          const projectile = new Projectile(
+            this.projectileVelocity,
+            10,
+            src,
+            this.damage
+          )
+          this.projectiles.push(projectile)
+          const projectileSpread = spread ?? 0.5
+          const angle =
+            ((i - (this.fireQuantity - 1) / 2) * projectileSpread) /
+            this.fireQuantity
+          const position = positionOffset
+            ? {
+                x: this.position.x + positionOffset.x,
+                y: this.position.y + positionOffset.y
+              }
+            : this.position
+          projectile.init(clock, context, position, player ? angle : angle - 1)
+        }
+      }
+    }
   }
 
   protected initDeathAnimation = (clock: GameClock, src = explosion) => {
@@ -76,6 +139,26 @@ class Entity {
         })
       })
     }
+  }
+
+  goToRandomPositionRight = (context: ContextController) => {
+    const { width, height } = context.getSize()
+    const { ox, oy } = context.center
+    this.moveTo(
+      Math.random() * (width / 2) + width / 2 - ox,
+      Math.random() * height - oy
+    )
+  }
+
+  protected moveTo = (x: number, y: number) => {
+    this.destination = { x, y }
+  }
+
+  protected isAtDestination = () => {
+    return (
+      this.destination.x === this.position.x &&
+      this.destination.y === this.position.y
+    )
   }
 
   protected move = (context: ContextController) => {
@@ -127,6 +210,7 @@ class Entity {
   }
 
   public kill = (dispatcher: (score: number) => void = () => {}) => {
+    this.projectiles.forEach((projectile) => projectile.kill())
     this.isAlive = false
     this.clockEvent()
     this.deathAnimation()

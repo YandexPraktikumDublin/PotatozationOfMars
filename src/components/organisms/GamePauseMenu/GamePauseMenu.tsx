@@ -33,6 +33,7 @@ const GamePauseMenu: FC<TGamePauseMenuProps> = memo(
     }
 
     const returnToMainPage = useCallback(() => {
+      toggleModal()
       history.push(PATHS.BASE)
     }, [history])
 

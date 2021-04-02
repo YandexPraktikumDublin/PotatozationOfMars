@@ -34,14 +34,28 @@ class Vector {
   deflectTo = (
     destination: TPosition | { x: null; y: null },
     position: TPosition = { x: 0, y: 0 },
-    intensity = 5
+    intensity: number = 1
   ) => {
     const { x, y } = destination
     if (x === null || y === null) return
     const [ex, ey] = [position.x, position.y]
     const [dx, dy] = [x - ex, y - ey]
-    this.add(this.correct({ x: dx, y: dy }, intensity))
-    this.correct()
+    const targetAngle = this.getAngle({ x: dx, y: dy })
+    const angle = this.getAngle()
+    const step = Math.min(
+      intensity / 200,
+      Math.abs(targetAngle - angle),
+      Math.abs(angle - targetAngle)
+    )
+    this.defineByAngle(
+      Math.abs(targetAngle - angle) < 1
+        ? targetAngle < angle
+          ? angle - step
+          : angle + step
+        : targetAngle > angle
+        ? angle - step
+        : angle + step
+    )
   }
 
   add = (vector: TPosition) => {
@@ -54,8 +68,12 @@ class Vector {
     this.y = this.magnitude * Math.sin(a * Math.PI)
   }
 
-  getAngle = () => {
-    return Math.atan2(this.y, this.x) / Math.PI
+  getAngle = (vector: TPosition = this.getCoords()) => {
+    return Math.atan2(vector.y, vector.x) / Math.PI
+  }
+
+  getCoords = () => {
+    return { x: this.x, y: this.y }
   }
 
   defineByDirection = (

@@ -1,10 +1,10 @@
-import { moon } from '@images'
+import { crystal10 } from '@images'
 import { ContextController, GameClock } from '@game/controllers'
 import { Entity } from '@game/entities'
 
 class Reward extends Entity {
   constructor(killCallback = () => {}, velocity = 2, size = 30) {
-    super(killCallback, velocity, size, moon, 1)
+    super(killCallback, velocity, size, crystal10, 1)
     this.velocity.magnitude = velocity * ((size * 2) / this.size)
     this.damage = 0
   }
@@ -17,10 +17,6 @@ class Reward extends Entity {
     const y = Math.random() * height - oy
     this.moveTo(x - this.size, y - this.size)
     this.render(clock, this.move)
-  }
-
-  private moveTo = (x: number, y: number) => {
-    this.destination = { x, y }
   }
 
   protected move = (context: ContextController) => {

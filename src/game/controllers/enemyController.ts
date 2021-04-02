@@ -39,7 +39,6 @@ class EnemyController {
           createEntity(i, callback)
         }
         this.current--
-        console.log(this.current)
       }
       createEntity(i, callback)
     }

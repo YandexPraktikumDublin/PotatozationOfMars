@@ -5,40 +5,32 @@ import {
   InputsController
 } from '@game/controllers'
 import { TPosition } from '@game/@types'
-import { Projectile, Entity } from '@game/entities'
+import { Entity } from '@game/entities'
 import { KEYS } from '@game/config'
 
 class Player extends Entity {
   opacity: number
   damagePeriod: number
   damageCooldown: number
-  firePeriod: number
-  fireCooldown: number
-  fireQuantity: number
-  projectiles: Array<Projectile>
   homingIntensity?: number
 
   constructor(velocity = 10, size = 50) {
     super(() => {}, velocity, size, teslaWithAGun, 3)
     this.opacity = 1
     this.health = 3
-    this.firePeriod = 50
-    this.fireCooldown = this.firePeriod
-    this.fireQuantity = 1
     this.damage = 10
+    this.projectileVelocity = 30
     this.damagePeriod = 60
     this.damageCooldown = this.damagePeriod
-    this.projectiles = []
   }
 
   init = (clock: GameClock) => {
-    const fire = this.initFire(clock)
-    const callBack = (context: ContextController) => {
-      fire(context)
-      this.move(context)
-    }
+    this.fire = this.initFire(clock, laser, {
+      player: true,
+      positionOffset: { x: 60, y: -20 }
+    })
     this.deathAnimation = this.initDeathAnimation(clock)
-    this.render(clock, callBack)
+    this.render(clock, this.move)
   }
 
   initDeathAnimation = (clock: GameClock) => {
@@ -49,28 +41,7 @@ class Player extends Entity {
     }
   }
 
-  private initFire = (clock: GameClock) => {
-    return (context: ContextController) => {
-      this.fireCooldown--
-      if (this.fireCooldown <= 0) {
-        this.fireCooldown = this.firePeriod
-        for (let i = 0; i < this.fireQuantity; i++) {
-          if (this.projectiles.length >= 200) {
-            this.projectiles[0].deathAnimation = () => {}
-            this.projectiles[0].kill()
-            this.projectiles.shift()
-          }
-          const projectile = new Projectile(30, 10, laser, 10)
-          this.projectiles.push(projectile)
-          const angle =
-            (i - (this.fireQuantity - 1) / 2) / (6 * this.fireQuantity)
-          projectile.init(clock, context, this.position, angle)
-        }
-      }
-    }
-  }
-
-  private moveTo = (destination: TPosition, controller: unknown) => {
+  protected followPointer = (destination: TPosition, controller: unknown) => {
     const { coefficient, center } = controller as ContextController
     const { x, y } = destination as TPosition
     const { cx, cy } = coefficient
@@ -82,7 +53,11 @@ class Player extends Entity {
     controlSurface: HTMLElement,
     context: ContextController
   ) => {
-    return InputsController.onMouseDrag(controlSurface, this.moveTo, context)
+    return InputsController.onMouseDrag(
+      controlSurface,
+      this.followPointer,
+      context
+    )
   }
 
   public controlWithKeyboard = () => {
@@ -170,15 +145,25 @@ class Player extends Entity {
     }
   }
 
-  protected move = (context: ContextController) => {
-    this.velocity.defineByDirection(this.destination, this.position)
-    this.position = this.velocity.applyTo(this.position)
-
+  damageTimer = () => {
     if (this.damageCooldown > 0) {
       this.damageCooldown--
       this.modifiers.invincible = this.damageCooldown !== 0
       this.opacity = this.modifiers.invincible ? 0.5 : 1
     }
+  }
+
+  getProjectiles = () => {
+    return this.projectiles
+  }
+
+  protected move = (context: ContextController) => {
+    this.velocity.defineByDirection(this.destination, this.position)
+    this.position = this.velocity.applyTo(this.position)
+
+    this.damageTimer()
+
+    this.fire(context)
 
     const { top, right, bottom, left } = context.getBorders()
     this.getBoundByBorders(top, right, bottom, left)

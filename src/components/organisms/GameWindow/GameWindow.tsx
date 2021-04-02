@@ -2,7 +2,7 @@ import React, { FC, memo, useCallback } from 'react'
 import { GameCanvas, NavigationButton } from '@components/molecules'
 import useRenderCanvas from '@game/useRenderCanvas'
 import useFullScreen from '@game/useFullScreen'
-import { moon, pause, potato } from '@images'
+import { diamond, pause, potato } from '@images'
 import { GameHud, GamePauseMenuDisplay } from '@components/organisms'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -40,7 +40,7 @@ const GameWindow: FC<TGameWindowProps> = memo(() => {
         }}
       >
         <GameHud title="health" value={health} imageSrc={potato} />
-        <GameHud title="money" value={score} imageSrc={moon} />
+        <GameHud title="money" value={score} imageSrc={diamond} />
       </div>
       <NavigationButton
         className="z-20 absolute top-3 left-3"

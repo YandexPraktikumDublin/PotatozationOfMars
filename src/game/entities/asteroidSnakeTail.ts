@@ -7,6 +7,7 @@ class AsteroidSnakeTail extends Entity {
   angle: number
   damagePeriod: number
   damageCooldown: number
+  homingIntensity: number
   divertDamage: (damage: number, dispatcher: (score: number) => void) => void
   head: AsteroidSnake | AsteroidSnakeTail | null
 
@@ -15,6 +16,7 @@ class AsteroidSnakeTail extends Entity {
     this.angle = 0
     this.damagePeriod = 60
     this.damageCooldown = this.damagePeriod
+    this.homingIntensity = 0
     this.divertDamage = () => {}
     this.head = null
   }
@@ -38,10 +40,18 @@ class AsteroidSnakeTail extends Entity {
   protected move = (context: ContextController) => {
     if (this.head) {
       const distance = getDistance(this.head.position, this.position)
-      if (distance > this.size * 0.8) {
-        this.velocity.magnitude =
-          distance < this.size ? this.head.velocity.magnitude : distance
-        this.velocity.defineByDirection(this.head.position, this.position)
+      if (distance > this.size * 0.7) {
+        this.velocity.magnitude = this.head.velocity.magnitude
+        this.homingIntensity = this.head.homingIntensity
+        if (distance > this.size * 0.9) {
+          this.velocity.defineByDirection(this.head.position, this.position)
+          this.velocity.applyTo(this.position)
+        }
+        this.velocity.deflectTo(
+          this.head.position,
+          this.position,
+          this.homingIntensity
+        )
         this.position = this.velocity.applyTo(this.position)
         this.angle = this.velocity.getAngle() - 1
       }

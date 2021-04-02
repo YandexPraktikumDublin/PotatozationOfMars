@@ -3,7 +3,13 @@ import {
   GameClock,
   EnemyController
 } from '@game/controllers'
-import { AsteroidSnake, EnemyAsteroid, Entity, Player } from '@game/entities'
+import {
+  Alien,
+  AsteroidSnake,
+  EnemyAsteroid,
+  Entity,
+  Player
+} from '@game/entities'
 import TPosition from '@game/@types/position'
 import { starsBack, starsFront, starsMiddle } from '@images'
 import { TDispatchers, TLevel } from '@game/@types'
@@ -40,8 +46,14 @@ class GameplayController {
     this.levels = [
       {
         enemyType: EnemyAsteroid,
-        quantity: 20,
-        simultaneously: 10,
+        quantity: 40,
+        simultaneously: 5,
+        bossType: AsteroidSnake
+      },
+      {
+        enemyType: Alien,
+        quantity: 5,
+        simultaneously: 5,
         bossType: AsteroidSnake,
         scalable: true
       }
@@ -95,22 +107,27 @@ class GameplayController {
   private initBoss = (Boss: typeof Entity) => {
     this.boss = new Boss()
     this.boss.init(this.clock, this.context)
+    const initialCount = 100
+    let count = initialCount
     const collisionHandler = this.clock.startEvent(() => {
       this.isCollidedPlayer(this.boss.getProjectiles())
       this.isHitEnemy(this.boss.getEntities())
       if (!this.boss.isAlive) {
-        this.currentLevel++
-        if (this.player.isAlive) {
-          this.player.health++
-          this.dispatchers.updateHealth(this.player.health)
+        if (count === initialCount) this.initReward(this.boss.position)
+        count--
+        if (count <= 0) {
+          this.currentLevel++
+          if (this.player.isAlive) {
+            this.player.health++
+            this.dispatchers.updateHealth(this.player.health)
+          }
+          const level =
+            this.levels.length > this.currentLevel
+              ? this.levels[this.currentLevel]
+              : this.levels[this.levels.length - 1]
+          this.initLevel(level)
+          collisionHandler()
         }
-        this.initReward(this.boss.position)
-        const level =
-          this.levels.length > this.currentLevel
-            ? this.levels[this.currentLevel]
-            : this.levels[this.levels.length - 1]
-        this.initLevel(level)
-        collisionHandler()
       }
     })
   }
@@ -136,7 +153,7 @@ class GameplayController {
   }
 
   private isHitEnemy = (enemies: Array<Entity>) => {
-    const projectiles = this.player.projectiles
+    const projectiles = this.player.getProjectiles()
     const damage = this.player.damage
     projectiles.forEach((projectile) => {
       if (!projectile.isAlive) return
@@ -219,6 +236,10 @@ class GameplayController {
       this.player.modifiers.homingProjectiles &&
       this.player.homingIntensity
     ) {
+      if (this.player.homingIntensity > 10) {
+        this.getRandomReward()
+        return
+      }
       this.player.homingIntensity++
       return
     }
