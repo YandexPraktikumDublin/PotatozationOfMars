@@ -1,24 +1,12 @@
-import {
-  Model,
-  Table,
-  Column,
-  DataType,
-  PrimaryKey,
-  HasOne
-} from 'sequelize-typescript'
+import { Model, Table, Column, DataType, HasOne } from 'sequelize-typescript'
 import { Role } from '@models'
 
-interface IUser {
-  id: string
+interface IUser extends Model {
   login: string
 }
 
 @Table
 export class User extends Model<IUser> {
-  @PrimaryKey
-  @Column(DataType.UUID)
-  id!: string
-
   @Column(DataType.STRING)
   login!: string
 
