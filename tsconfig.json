@@ -36,7 +36,8 @@
       "@database": ["./src/database/index.ts"],
       "@store/*": ["./src/store/*"],
       "@utils/*": ["./src/utils/*"],
-      "@routes": ["./src/routes.ts"]
+      "@routes": ["./src/routes.ts"],
+      "@models": ["./src/database/models/index.ts"]
     },
     "typeRoots": ["node_modules/@types"]
   },

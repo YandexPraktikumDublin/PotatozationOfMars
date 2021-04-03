@@ -1,4 +1,5 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript'
+import { User, Role } from '@models'
 
 const sequelizeOptions: SequelizeOptions = {
   host: 'postgres',
@@ -7,7 +8,8 @@ const sequelizeOptions: SequelizeOptions = {
   password: process.env.POSTGRES_PASSWORD ?? 'password',
   database: process.env.POSTGRES_DB ?? 'potatozation-of-mars',
   dialect: 'postgres',
-  repositoryMode: true
+  repositoryMode: true,
+  models: [User, Role],
 }
 
 const sequelize = new Sequelize(sequelizeOptions)
