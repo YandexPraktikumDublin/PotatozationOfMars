@@ -22,7 +22,8 @@
     "@store/([^\\.]*)$": ["<rootDir>/store/$1"],
     "@utils/([^\\.]*)$": ["<rootDir>/utils/$1"],
     "@routes": ["<rootDir>/routes.ts"],
-    "@models": ["<rootDir>/database/models/index.ts"]
+    "@models": ["<rootDir>/database/models/index.ts"],
+    "@factories": ["<rootDir>/database/factories/index.ts"]
   },
   "setupFilesAfterEnv": ["../.jest/setupTests.js"],
   "transform": {

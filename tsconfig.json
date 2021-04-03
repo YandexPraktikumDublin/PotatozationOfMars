@@ -37,7 +37,8 @@
       "@store/*": ["./src/store/*"],
       "@utils/*": ["./src/utils/*"],
       "@routes": ["./src/routes.ts"],
-      "@models": ["./src/database/models/index.ts"]
+      "@models": ["./src/database/models/index.ts"],
+      "@factories": ["./src/database/factories/index.ts"]
     },
     "typeRoots": ["node_modules/@types"]
   },

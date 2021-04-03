@@ -1,14 +1,20 @@
-import { Model, Table, Column, HasOne } from 'sequelize-typescript';
-import { Role, roleEnum } from '../role/Role'
+import { Model, Table, Column, DataType, PrimaryKey, HasOne } from 'sequelize-typescript'
+import { Role } from '@models'
 
 interface IUser {
-  id: number;
-  login: string;
+  id: string
+  login: string
 }
 
 @Table
 export class User extends Model<IUser> {
-  id!: number;
-  @Column login!: string;
-  @HasOne(() => Role) role!: roleEnum;
+  @PrimaryKey
+  @Column(DataType.UUID)
+  id!: string
+
+  @Column(DataType.STRING)
+  login!: string
+
+  @HasOne(() => Role)
+  role!: Role;
 }

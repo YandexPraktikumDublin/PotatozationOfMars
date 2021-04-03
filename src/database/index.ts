@@ -9,7 +9,7 @@ const sequelizeOptions: SequelizeOptions = {
   database: process.env.POSTGRES_DB ?? 'potatozation-of-mars',
   dialect: 'postgres',
   repositoryMode: true,
-  models: [User, Role],
+  models: [User, Role]
 }
 
 const sequelize = new Sequelize(sequelizeOptions)
