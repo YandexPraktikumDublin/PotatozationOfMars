@@ -7,9 +7,9 @@ import cookiesMiddleware from 'universal-cookie-express'
 import serverRenderMiddleware from './server-render-middleware'
 import db from '@database'
 import { User } from '@models'
-import { userRouterFactory } from '@factories';
+import { userRouterFactory } from '@factories'
 
-const userRepository = db.sequelize.getRepository(User);
+const userRepository = db.sequelize.getRepository(User)
 
 const app = express()
 
@@ -22,7 +22,7 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use(userRouterFactory(userRepository));
+app.use(userRouterFactory(userRepository))
 
 db.sequelize.sync({ force: true }).then(() => {
   console.log('Successful connection to the database!')

@@ -1,4 +1,11 @@
-import { Model, Table, Column, DataType, PrimaryKey, HasOne } from 'sequelize-typescript'
+import {
+  Model,
+  Table,
+  Column,
+  DataType,
+  PrimaryKey,
+  HasOne
+} from 'sequelize-typescript'
 import { Role } from '@models'
 
 interface IUser {
@@ -16,5 +23,5 @@ export class User extends Model<IUser> {
   login!: string
 
   @HasOne(() => Role)
-  role!: Role;
+  role!: Role
 }

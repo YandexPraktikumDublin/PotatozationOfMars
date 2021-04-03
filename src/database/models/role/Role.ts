@@ -1,4 +1,12 @@
-import { Model, Table, Column, DataType, PrimaryKey, ForeignKey, BelongsTo } from 'sequelize-typescript'
+import {
+  Model,
+  Table,
+  Column,
+  DataType,
+  PrimaryKey,
+  ForeignKey,
+  BelongsTo
+} from 'sequelize-typescript'
 import { User } from '@models'
 
 export enum roleEnum {
@@ -19,8 +27,8 @@ export class Role extends Model<IRole> {
 
   @ForeignKey(() => User)
   @Column(DataType.STRING)
-  roles!: roleEnum;
+  roles!: roleEnum
 
   @BelongsTo(() => User)
-  user!: User;
+  user!: User
 }
