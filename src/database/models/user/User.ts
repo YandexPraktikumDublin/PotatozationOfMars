@@ -1,4 +1,6 @@
-import { Model, Table, Column, DataType } from 'sequelize-typescript'
+import { Model, Table, Column, DataType, HasMany } from 'sequelize-typescript'
+
+import { Topic, Comment } from '@models'
 
 enum roleEnum {
   regular = 'regular',
@@ -8,14 +10,11 @@ enum roleEnum {
 interface IUser extends Model {
   login: string
   name: string
-  roles: roleEnum
+  role: roleEnum
 }
 
 @Table
 export class User extends Model<IUser> {
-  @Column(DataType.INTEGER)
-  userId!: number
-
   @Column(DataType.STRING)
   login!: string
 
@@ -23,5 +22,11 @@ export class User extends Model<IUser> {
   name!: string
 
   @Column(DataType.STRING)
-  roles!: roleEnum
+  role!: roleEnum
+
+  @HasMany(() => Topic)
+  topics!: Topic[]
+
+  @HasMany(() => Comment)
+  comments!: Comment[]
 }

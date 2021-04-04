@@ -1,19 +1,34 @@
-import { Model, Table, Column, DataType } from 'sequelize-typescript'
+import {
+  Model,
+  Table,
+  Column,
+  DataType,
+  BelongsTo,
+  ForeignKey
+} from 'sequelize-typescript'
+
+import { User, Topic } from '@models'
 
 interface IComment extends Model {
-  authorName: string
   text: string
-  reply: number
 }
 
 @Table
 export class Comment extends Model<IComment> {
-  @Column(DataType.INTEGER)
-  authorName!: number
-
   @Column(DataType.STRING)
   text!: string
 
-  @Column(DataType.NUMBER)
-  reply!: number
+  @ForeignKey(() => User)
+  @Column(DataType.INTEGER)
+  userId!: number
+
+  @BelongsTo(() => User)
+  user!: User
+
+  @ForeignKey(() => Topic)
+  @Column(DataType.INTEGER)
+  topicId!: number
+
+  @BelongsTo(() => Topic)
+  topic!: Topic
 }
