@@ -1,6 +1,6 @@
 import { Model, Table, Column, DataType, HasMany } from 'sequelize-typescript'
 
-import { Topic, Comment } from '@models'
+import { Topic, Comment, Reaction } from '@models'
 
 enum roleEnum {
   regular = 'regular',
@@ -29,4 +29,7 @@ export class User extends Model<IUser> {
 
   @HasMany(() => Comment)
   comments!: Comment[]
+
+  @HasMany(() => Reaction)
+  reactions!: Reaction[]
 }
