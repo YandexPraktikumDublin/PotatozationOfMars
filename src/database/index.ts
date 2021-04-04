@@ -1,5 +1,5 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript'
-import { User, Role } from '@models'
+import { User } from '@models'
 
 const sequelizeOptions: SequelizeOptions = {
   host: 'postgres',
@@ -9,7 +9,7 @@ const sequelizeOptions: SequelizeOptions = {
   database: process.env.POSTGRES_DB ?? 'potatozation-of-mars',
   dialect: 'postgres',
   repositoryMode: true,
-  models: [User, Role]
+  models: [User]
 }
 
 const sequelize = new Sequelize(sequelizeOptions)
