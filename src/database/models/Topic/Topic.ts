@@ -5,15 +5,16 @@ import {
   DataType,
   BelongsTo,
   ForeignKey,
-  AllowNull
+  AllowNull,
+  HasMany
 } from 'sequelize-typescript'
-import { User } from '@models'
+import { User, Comment } from '@models'
 
 export interface ITopic {
   id?: number
   subject: string
   content: string
-  useId: number
+  userId: number
 }
 
 @Table
@@ -33,4 +34,7 @@ export class Topic extends Model<ITopic> {
 
   @BelongsTo(() => User)
   user!: User
+
+  @HasMany(() => Comment)
+  comments!: Comment[]
 }

@@ -7,10 +7,12 @@ import 'babel-polyfill'
 import cookiesMiddleware from 'universal-cookie-express'
 import serverRenderMiddleware from './server-render-middleware'
 import db from '@database'
-import { User } from '@models'
-import { userRouterFactory } from '@factories'
-
-const userRepository = db.sequelize.getRepository(User)
+import { User, Topic, Comment, Reaction } from '@models'
+import {
+  userRouterFactory,
+  topicRouterFactory,
+  commentRouterFactory
+} from '@factories'
 
 const app = express()
 
@@ -27,7 +29,14 @@ app.use((req, res, next) => {
   next()
 })
 
+const userRepository = db.sequelize.getRepository(User)
+const topicRepository = db.sequelize.getRepository(Topic)
+const commentRepository = db.sequelize.getRepository(Comment)
+const reactionRepository = db.sequelize.getRepository(Reaction)
+
 app.use(userRouterFactory(userRepository))
+app.use(topicRouterFactory(topicRepository, commentRepository))
+app.use(commentRouterFactory(commentRepository, reactionRepository))
 
 db.sequelize.sync({ force: true }).then(() => {
   console.log('Successful connection to the database!')

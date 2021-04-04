@@ -11,11 +11,15 @@ import {
   Default
 } from 'sequelize-typescript'
 
-import { User, Topic, CommentAncestor } from '@models'
+import { User, Topic, CommentAncestor, Reaction } from '@models'
 
 export interface IComment {
   id?: number
   content: string
+  userId: number
+  topicId: number
+  parentId?: number
+  hierarchyLevel?: number
 }
 
 @Table
@@ -41,7 +45,6 @@ export class Comment extends Model<IComment> {
   topic!: Topic
 
   @ForeignKey(() => Comment)
-  @AllowNull(false)
   @Column(DataType.INTEGER)
   parentId!: number
 
@@ -61,4 +64,7 @@ export class Comment extends Model<IComment> {
 
   @BelongsToMany(() => Comment, () => CommentAncestor, 'commentId')
   ancestors!: Comment[]
+
+  @HasMany(() => Reaction)
+  reactions!: Reaction[]
 }
