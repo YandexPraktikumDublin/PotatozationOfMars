@@ -11,6 +11,7 @@ import {
 import { User, Comment } from '@models'
 
 export interface IReaction {
+  id?: number
   content: string
 }
 

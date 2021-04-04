@@ -1,6 +1,7 @@
 import httpContext from 'express-http-context'
 import path from 'path'
 import express from 'express'
+import bodyParser from 'body-parser'
 import compression from 'compression'
 import 'babel-polyfill'
 import cookiesMiddleware from 'universal-cookie-express'
@@ -12,6 +13,10 @@ import { userRouterFactory } from '@factories'
 const userRepository = db.sequelize.getRepository(User)
 
 const app = express()
+
+app.use(bodyParser.urlencoded({ extended: false }))
+
+app.use(bodyParser.json())
 
 app.use(cookiesMiddleware())
 

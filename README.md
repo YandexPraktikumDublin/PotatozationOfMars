@@ -27,3 +27,10 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 ## Запуск в Docker
 
 - `docker-compose up web` - запуск
+
+## Внутреннее API
+
+- `GET /api/v1/users` - получить всех пользователей
+- `GET /api/v1/users/:id` - получить пользователя по id.
+- `POST /api/v1/users` - создать нового пользователя.
+- `PATCH /api/v1/users/:id` - обновить пользователя.

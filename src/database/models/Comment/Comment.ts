@@ -14,6 +14,7 @@ import {
 import { User, Topic, CommentAncestor } from '@models'
 
 export interface IComment {
+  id?: number
   content: string
 }
 

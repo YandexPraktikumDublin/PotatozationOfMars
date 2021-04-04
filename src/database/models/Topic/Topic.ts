@@ -10,6 +10,7 @@ import {
 import { User } from '@models'
 
 export interface ITopic {
+  id?: number
   subject: string
   content: string
   useId: number

@@ -12,6 +12,8 @@ export const PATHS = {
 export const SERVER_URL = 'https://ya-praktikum.tech'
 export const BASE_API_URL = `${SERVER_URL}/api/v2`
 
+export const INNER_API_V1_URL = '/api/v1'
+
 export const YANDEX_OAUTH_REDIRECT_URL = 'https://oauth.yandex.ru/authorize'
 
 export const DEFAULT_ERROR_MESSAGE = 'something went wrong'
