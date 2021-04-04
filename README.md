@@ -30,7 +30,50 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 
 ## Внутреннее API
 
-- `GET /api/v1/users` - получить всех пользователей
+# Users
+
+- `GET /api/v1/users` - получить всех пользователей.
 - `GET /api/v1/users/:id` - получить пользователя по id.
 - `POST /api/v1/users` - создать нового пользователя.
 - `PATCH /api/v1/users/:id` - обновить пользователя.
+
+# Topics
+
+- `GET /api/v1/topics` - получить все топики.
+- `GET /api/v1/topics/:id` - получить топик по id.
+- `POST /api/v1/topics` - создать новый топик.
+```
+  {
+      subject: string
+      content: string
+      userId: number
+  }
+```
+
+# Comments
+
+- `GET /api/v1/comments` - получить все комментарии.
+- `GET /api/v1/comments/:id` - получить комментарии по id.
+- `POST /api/v1/comments` - создать новый комментарий.
+```
+  {
+    content: string
+    userId: number
+    topicId: number
+    parentId?: number | null
+    hierarchyLevel?: number
+  }
+```
+
+# Reactions
+
+- `GET /api/v1/reactions` - получить все реакции.
+- `GET /api/v1/reactions/:id` - получить реакции по id.
+- `POST /api/v1/reactions` - создать новую реакции.
+```
+  {
+    content: string
+    userId: number
+    commentId: number
+  }
+```
