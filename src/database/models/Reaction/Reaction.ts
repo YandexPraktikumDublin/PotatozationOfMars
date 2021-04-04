@@ -10,7 +10,7 @@ import {
 
 import { User, Comment } from '@models'
 
-export interface IReaction extends Model {
+export interface IReaction {
   content: string
 }
 

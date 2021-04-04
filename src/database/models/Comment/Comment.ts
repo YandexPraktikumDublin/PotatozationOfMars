@@ -13,7 +13,7 @@ import {
 
 import { User, Topic, CommentAncestor } from '@models'
 
-export interface IComment extends Model {
+export interface IComment {
   content: string
 }
 

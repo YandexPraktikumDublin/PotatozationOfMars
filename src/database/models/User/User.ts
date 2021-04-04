@@ -16,10 +16,10 @@ export enum roleEnum {
   admin = 'admin'
 }
 
-export interface IUser extends Model {
+export interface IUser {
   login: string
   name: string
-  role: roleEnum
+  role?: roleEnum
 }
 
 @Table

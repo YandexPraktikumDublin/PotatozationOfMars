@@ -9,7 +9,7 @@ import {
 
 import { Comment } from '@models'
 
-export interface ICommentAncestor extends Model {
+export interface ICommentAncestor {
   commentId: number
   ancestorId: number
 }

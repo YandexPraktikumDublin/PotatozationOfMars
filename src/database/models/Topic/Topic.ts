@@ -9,7 +9,7 @@ import {
 } from 'sequelize-typescript'
 import { User } from '@models'
 
-export interface ITopic extends Model {
+export interface ITopic {
   subject: string
   content: string
   useId: number
