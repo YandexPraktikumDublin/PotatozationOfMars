@@ -5,21 +5,14 @@ import { INNER_API_V1_URL } from '@config'
 
 export const userRouterFactory = (userRepository: Repository<User>) =>
   Router()
-    .get(`${INNER_API_V1_URL}/users`, (req, res, next) =>
+    .get(`${INNER_API_V1_URL}/current-user`, (req, res, next) =>
       userRepository
-        .findAll()
-        .then((users) => (users ? res.json(users) : next({ statusCode: 404 })))
-        .catch(next)
-    )
-
-    .get(`${INNER_API_V1_URL}/users/:id`, (req, res, next) =>
-      userRepository
-        .findByPk(req.params.id)
+        .findByPk(1) // TODO: брать id из контекста для текущего пользователя
         .then((user) => (user ? res.json(user) : next({ statusCode: 404 })))
         .catch(next)
     )
 
-    .post(`${INNER_API_V1_URL}/users`, (req, res, next) =>
+    .post(`${INNER_API_V1_URL}/current-user`, (req, res, next) =>
       userRepository
         .create(req.body, {
           fields: ['login', 'name']
@@ -28,10 +21,10 @@ export const userRouterFactory = (userRepository: Repository<User>) =>
         .catch(next)
     )
 
-    .patch(`${INNER_API_V1_URL}/users/:id`, (req, res, next) =>
+    .patch(`${INNER_API_V1_URL}/current-user`, (req, res, next) =>
       userRepository
         .update(req.body, {
-          where: { id: parseInt(req.params.id) },
+          where: { id: 1 }, // TODO: брать id из контекста для текущего пользователя
           fields: ['login', 'name'],
           returning: true
         })

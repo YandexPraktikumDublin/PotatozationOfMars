@@ -30,12 +30,23 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 
 ## Внутреннее API
 
-# Users
+# User
 
-- `GET /api/v1/users` - получить всех пользователей.
-- `GET /api/v1/users/:id` - получить пользователя по id.
-- `POST /api/v1/users` - создать нового пользователя.
-- `PATCH /api/v1/users/:id` - обновить пользователя.
+- `GET /api/v1/current-user` - получить текущего пользователя.
+- `POST /api/v1/current-user` - создать текущего пользователя.
+```
+  {
+    login: string
+    name: string
+  }
+```
+- `PATCH /api/v1/current-user` - обновить текущего пользователя.
+```
+  {
+    login: string
+    name: string
+  }
+```
 
 # Topics
 
@@ -46,7 +57,6 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
   {
       subject: string
       content: string
-      userId: number
   }
 ```
 
@@ -58,10 +68,8 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 ```
   {
     content: string
-    userId: number
     topicId: number
     parentId?: number | null
-    hierarchyLevel?: number
   }
 ```
 
@@ -73,7 +81,6 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 ```
   {
     content: string
-    userId: number
     commentId: number
   }
 ```

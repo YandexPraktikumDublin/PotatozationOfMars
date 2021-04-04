@@ -35,10 +35,13 @@ const topicRepository = db.sequelize.getRepository(Topic)
 const commentRepository = db.sequelize.getRepository(Comment)
 const reactionRepository = db.sequelize.getRepository(Reaction)
 
+// TODO: закрыть все запросы для не авторизированный пользователей
 app.use(userRouterFactory(userRepository))
-app.use(topicRouterFactory(topicRepository, commentRepository))
-app.use(commentRouterFactory(commentRepository, reactionRepository))
-app.use(reactionRouterFactory(reactionRepository))
+app.use(topicRouterFactory(topicRepository, userRepository, commentRepository))
+app.use(
+  commentRouterFactory(commentRepository, userRepository, reactionRepository)
+)
+app.use(reactionRouterFactory(reactionRepository, userRepository))
 
 db.sequelize.sync({ force: true }).then(() => {
   console.log('Successful connection to the database!')
