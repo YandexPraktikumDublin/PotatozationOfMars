@@ -1,45 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<GameWindow /> should renders correct <GameWindow /> 1`] = `
-<div
-  className="relative flex justify-center items-center"
+<ContextProvider
+  value={
+    Object {
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Subscription {
+        "handleChangeWrapper": [Function],
+        "listeners": Object {
+          "notify": [Function],
+        },
+        "onStateChange": [Function],
+        "parentSub": undefined,
+        "store": Object {
+          "clearActions": [Function],
+          "dispatch": [Function],
+          "getActions": [Function],
+          "getState": [Function],
+          "replaceReducer": [Function],
+          "subscribe": [Function],
+        },
+        "unsubscribe": null,
+      },
+    }
+  }
 >
-  <GameCanvas
-    forwardRef={
-      Object {
-        "current": null,
-      }
-    }
-  />
-  <NavigationButton
-    className="absolute top-3 left-3"
-    imageSrc={[Function]}
-    onClick={[Function]}
-    title="Pause"
-  />
-  <GamePauseMenuDisplay
-    isGamePaused={false}
-    settings={
-      Object {
-        "addProjectile": [Function],
-        "controlWithMouse": false,
-        "decreaseFireRate": [Function],
-        "increaseFireRate": [Function],
-        "removeProjectile": [Function],
-        "toggleControlInput": [Function],
-      }
-    }
-    toggleModal={[Function]}
-  />
-  <NavigationButton
-    className="absolute top-3 right-3"
-    imageSrc={
-      <svg
-        data-file-name="SvgFullscreenOn"
-      />
-    }
-    onClick={[Function]}
-    title="Full screen"
-  />
-</div>
+  <GameWindow />
+</ContextProvider>
 `;
