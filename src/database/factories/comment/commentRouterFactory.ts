@@ -31,10 +31,18 @@ export const commentRouterFactory = (
 
     .post(`${INNER_API_V1_URL}/comments`, (req, res, next) =>
       commentRepository
-        .create(req.body, {
-          // TODO: брать userId не из запроса, а из контекста для текущего пользователя; настроить автоматическое определение параметра hierarchyLevel
-          fields: ['content', 'userId', 'topicId', 'parentId', 'hierarchyLevel']
-        })
+        .create(
+          { ...req.body, userId: 1, hierarchyLevel: 0 }, // TODO: брать userId не из запроса, а из контекста для текущего пользователя; настроить автоматическое определение параметра hierarchyLevel
+          {
+            fields: [
+              'content',
+              'userId',
+              'topicId',
+              'parentId',
+              'hierarchyLevel'
+            ]
+          }
+        )
         .then((comment) => res.json(comment))
         .catch(next)
     )

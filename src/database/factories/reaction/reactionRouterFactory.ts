@@ -28,10 +28,12 @@ export const reactionRouterFactory = (
 
     .post(`${INNER_API_V1_URL}/reactions`, (req, res, next) =>
       reactionRepository
-        .create(req.body, {
-          // TODO: брать userId не из запроса, а из контекста для текущего пользователя
-          fields: ['content', 'userId', 'commentId']
-        })
+        .create(
+          { ...req.body, userId: 1 }, // TODO: брать userId не из запроса, а из контекста для текущего пользователя
+          {
+            fields: ['content', 'userId', 'commentId']
+          }
+        )
         .then((reaction) => res.json(reaction))
         .catch(next)
     )

@@ -29,10 +29,12 @@ export const topicRouterFactory = (
 
     .post(`${INNER_API_V1_URL}/topics`, (req, res, next) =>
       topicRepository
-        .create(req.body, {
-          // TODO: брать userId не из запроса, а из контекста для текущего пользователя
-          fields: ['subject', 'content', 'userId']
-        })
+        .create(
+          { ...req.body, userId: 1 }, // TODO: брать userId не из запроса, а из контекста для текущего пользователя
+          {
+            fields: ['subject', 'content', 'userId']
+          }
+        )
         .then((topic) => res.json(topic))
         .catch(next)
     )
