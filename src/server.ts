@@ -11,7 +11,8 @@ import { User, Topic, Comment, Reaction } from '@models'
 import {
   userRouterFactory,
   topicRouterFactory,
-  commentRouterFactory
+  commentRouterFactory,
+  reactionRouterFactory
 } from '@factories'
 
 const app = express()
@@ -37,6 +38,7 @@ const reactionRepository = db.sequelize.getRepository(Reaction)
 app.use(userRouterFactory(userRepository))
 app.use(topicRouterFactory(topicRepository, commentRepository))
 app.use(commentRouterFactory(commentRepository, reactionRepository))
+app.use(reactionRouterFactory(reactionRepository))
 
 db.sequelize.sync({ force: true }).then(() => {
   console.log('Successful connection to the database!')

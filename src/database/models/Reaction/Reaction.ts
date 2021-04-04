@@ -13,6 +13,8 @@ import { User, Comment } from '@models'
 export interface IReaction {
   id?: number
   content: string
+  userId: number
+  commentId: number
 }
 
 @Table
