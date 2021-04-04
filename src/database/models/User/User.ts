@@ -1,13 +1,22 @@
-import { Model, Table, Column, DataType, HasMany } from 'sequelize-typescript'
+import {
+  Model,
+  Table,
+  Column,
+  AllowNull,
+  Unique,
+  DataType,
+  HasMany,
+  Default
+} from 'sequelize-typescript'
 
 import { Topic, Comment, Reaction } from '@models'
 
-enum roleEnum {
+export enum roleEnum {
   regular = 'regular',
   admin = 'admin'
 }
 
-interface IUser extends Model {
+export interface IUser extends Model {
   login: string
   name: string
   role: roleEnum
@@ -15,12 +24,17 @@ interface IUser extends Model {
 
 @Table
 export class User extends Model<IUser> {
+  @AllowNull(false)
+  @Unique
   @Column(DataType.STRING)
   login!: string
 
+  @AllowNull(false)
   @Column(DataType.STRING)
   name!: string
 
+  @AllowNull(false)
+  @Default(roleEnum.regular)
   @Column(DataType.STRING)
   role!: roleEnum
 

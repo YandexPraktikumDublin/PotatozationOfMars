@@ -4,25 +4,29 @@ import {
   Column,
   DataType,
   BelongsTo,
-  ForeignKey
+  ForeignKey,
+  AllowNull
 } from 'sequelize-typescript'
 import { User } from '@models'
 
-interface ITopic extends Model {
-  theme: string
-  text: string
+export interface ITopic extends Model {
+  subject: string
+  content: string
   useId: number
 }
 
 @Table
 export class Topic extends Model<ITopic> {
+  @AllowNull(false)
   @Column(DataType.STRING)
-  theme!: string
+  subject!: string
 
+  @AllowNull(false)
   @Column(DataType.STRING)
-  text!: string
+  content!: string
 
   @ForeignKey(() => User)
+  @AllowNull(false)
   @Column(DataType.INTEGER)
   userId!: number
 

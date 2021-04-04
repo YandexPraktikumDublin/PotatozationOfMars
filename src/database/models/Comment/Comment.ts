@@ -6,21 +6,25 @@ import {
   BelongsTo,
   ForeignKey,
   HasMany,
-  BelongsToMany
+  BelongsToMany,
+  AllowNull,
+  Default
 } from 'sequelize-typescript'
 
 import { User, Topic, CommentAncestor } from '@models'
 
-interface IComment extends Model {
-  text: string
+export interface IComment extends Model {
+  content: string
 }
 
 @Table
 export class Comment extends Model<IComment> {
+  @AllowNull(false)
   @Column(DataType.STRING)
-  text!: string
+  content!: string
 
   @ForeignKey(() => User)
+  @AllowNull(false)
   @Column(DataType.INTEGER)
   userId!: number
 
@@ -28,6 +32,7 @@ export class Comment extends Model<IComment> {
   user!: User
 
   @ForeignKey(() => Topic)
+  @AllowNull(false)
   @Column(DataType.INTEGER)
   topicId!: number
 
@@ -35,9 +40,12 @@ export class Comment extends Model<IComment> {
   topic!: Topic
 
   @ForeignKey(() => Comment)
+  @AllowNull(false)
   @Column(DataType.INTEGER)
   parentId!: number
 
+  @AllowNull(false)
+  @Default(0)
   @Column(DataType.INTEGER)
   hierarchyLevel!: number
 
