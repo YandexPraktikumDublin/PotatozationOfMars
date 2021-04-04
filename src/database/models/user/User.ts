@@ -2,7 +2,7 @@ import { Model, Table, Column, DataType } from 'sequelize-typescript'
 
 enum roleEnum {
   regular = 'regular',
-  admin = 'admin',
+  admin = 'admin'
 }
 
 interface IUser extends Model {
@@ -18,7 +18,7 @@ export class User extends Model<IUser> {
 
   @Column(DataType.STRING)
   login!: string
-  
+
   @Column(DataType.STRING)
   name!: string
 
