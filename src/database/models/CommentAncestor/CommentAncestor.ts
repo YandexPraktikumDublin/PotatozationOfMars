@@ -1,4 +1,13 @@
-import { Model, Table, Column, DataType, AllowNull } from 'sequelize-typescript'
+import {
+  Model,
+  Table,
+  Column,
+  DataType,
+  AllowNull,
+  ForeignKey
+} from 'sequelize-typescript'
+
+import { Comment } from '@models'
 
 export interface ICommentAncestor extends Model {
   commentId: number
@@ -7,10 +16,12 @@ export interface ICommentAncestor extends Model {
 
 @Table
 export class CommentAncestor extends Model<ICommentAncestor> {
+  @ForeignKey(() => Comment)
   @AllowNull(false)
   @Column(DataType.INTEGER)
   commentId!: number
 
+  @ForeignKey(() => Comment)
   @AllowNull(false)
   @Column(DataType.INTEGER)
   ancestorId!: number
