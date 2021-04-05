@@ -19,7 +19,7 @@ export default function withAuth<T>(Component: React.FC<T>) {
     const pendingUser = useSelector(getUserPendingSelector)
     const errorUser = useSelector(getUserErrorSelector)
 
-    const code = /code=([^&]+)/.exec(location.search)?.[1]
+    const code = new URLSearchParams(location.search)?.get('code')
 
     const isAuthOrSignup =
       location.pathname === PATHS.AUTH || location.pathname === PATHS.SIGNUP
