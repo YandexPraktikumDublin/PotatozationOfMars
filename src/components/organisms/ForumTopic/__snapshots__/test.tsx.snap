@@ -18,12 +18,7 @@ exports[`<ForumTopic /> should renders correct <ForumTopic /> 1`] = `
           meta={
             Array [
               Object {
-                "content": "The main character is a
-businessman Elon Musk, who is flying to Mars for the purpose
-of colonization, the cargo of his spaceship is potatoes, the
-cultivation of which he wants to establish in a future colony.
-After losing all his cargo, he returns to Earth to try again
-and the game starts again.",
+                "content": "The main character is a businessman Elon Musk, who is flying to Mars for the purpose of colonization, the cargo of his spaceship is potatoes, the cultivation of which he wants to establish in a future colony. After losing all his cargo, he returns to Earth to try again and the game starts again.",
                 "name": "description",
               },
             ]
@@ -37,12 +32,7 @@ and the game starts again.",
             meta={
               Array [
                 Object {
-                  "content": "The main character is a
-businessman Elon Musk, who is flying to Mars for the purpose
-of colonization, the cargo of his spaceship is potatoes, the
-cultivation of which he wants to establish in a future colony.
-After losing all his cargo, he returns to Earth to try again
-and the game starts again.",
+                  "content": "The main character is a businessman Elon Musk, who is flying to Mars for the purpose of colonization, the cargo of his spaceship is potatoes, the cultivation of which he wants to establish in a future colony. After losing all his cargo, he returns to Earth to try again and the game starts again.",
                   "name": "description",
                 },
               ]
