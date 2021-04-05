@@ -11,7 +11,7 @@ export const topicRouterFactory = (
   Router()
     .get(`${INNER_API_V1_URL}/topics`, (req, res, next) =>
       topicRepository
-        .findAll({ include: [userRepository, commentRepository] })
+        .findAll({ include: [userRepository] })
         .then((topics) =>
           topics ? res.json(topics) : next({ statusCode: 404 })
         )
