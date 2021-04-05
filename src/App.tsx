@@ -1,22 +1,8 @@
-import React, { StrictMode } from 'react'
-import { Router, Switch, Route } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import { PATHS } from '@config'
+import React from 'react'
+import { Switch, Route } from 'react-router-dom'
 import ErrorBoundary from './ErrorBoundary'
-import history from './history'
-import store from './store'
-import {
-  Start,
-  Auth,
-  Error404,
-  Forum,
-  ForumTopic,
-  Game,
-  Leaderboard,
-  Profile,
-  SignUp
-} from '@pages'
 import { background } from '@images'
+import routes from '@routes'
 
 import './styles/globals.css'
 
@@ -29,25 +15,16 @@ const App: React.FC = () => (
   >
     <div className="hidden absolute inset-0 bg-black opacity-50 dark:block" />
 
-    <StrictMode>
-      <ErrorBoundary>
-        <Provider store={store}>
-          <Router history={history}>
-            <Switch>
-              <Route exact path={PATHS.BASE} component={Start} />
-              <Route path={PATHS.AUTH} component={Auth} />
-              <Route path={PATHS.SIGNUP} component={SignUp} />
-              <Route path={PATHS.FORUM_TOPIC} component={ForumTopic} />
-              <Route path={PATHS.FORUM} component={Forum} />
-              <Route path={PATHS.GAME} component={Game} />
-              <Route path={PATHS.LEADERBOARD} component={Leaderboard} />
-              <Route path={PATHS.PROFILE} component={Profile} />
-              <Route path="*" component={Error404} />
-            </Switch>
-          </Router>
-        </Provider>
-      </ErrorBoundary>
-    </StrictMode>
+    <ErrorBoundary>
+      <Switch>
+        {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          routes.map(({ fetchData, ...routeProps }) => (
+            <Route key={routeProps.path} {...routeProps} />
+          ))
+        }
+      </Switch>
+    </ErrorBoundary>
   </div>
 )
 

@@ -17,8 +17,9 @@ https://potatozationofmars.herokuapp.com/
 https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0%3A1
 
 ## Сборка и тесты
-- `npm run build` - собрать проект в папку `build`
-- `npm run start` - запустить сервер по адресу `localhost:3000`
+- `npm run make-aliases` - создать алиас по адресу `https://potatozation-of-mars.localhost.ya-praktikum.tech:3000`
+- `npm run build` - собрать проект в папку `dist`
+- `npm run start` - запустить сервер по адресам `https://potatozation-of-mars.localhost.ya-praktikum.tech:3000` `https://localhost:3000`
 - `npm run lint` - валидация файлов
 - `npm run test` - запуск тестов
 - `npm run generate` - генерация компонентов

@@ -1,22 +1,20 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects'
-import { axiosInstance } from '@api'
-import history from '@history'
+import { getAxiosInstance } from '@api'
 import { PATHS } from '@config'
+import { hardRedirectTo } from '@utils/misc'
 import { authFailure, authSuccess } from './actions'
 import { AUTH_REQUEST } from './actionTypes'
 import { IAuthRequestPayload } from '@store/auth/types'
 
 const signin = (data: IAuthRequestPayload) =>
-  axiosInstance.post('auth/signin', data)
-
-const redirectTo = (location: string) => history.push(location)
+  getAxiosInstance().post('auth/signin', data)
 
 function* authSaga(data: Record<string, any>) {
   try {
     const response = yield call(signin, data.payload)
 
     yield put(authSuccess(response.data))
-    yield call(redirectTo, PATHS.BASE)
+    yield call(hardRedirectTo, PATHS.BASE)
   } catch (error) {
     yield put(
       authFailure({

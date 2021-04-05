@@ -44,7 +44,7 @@ const Forum: FC<TForumProps> = memo(() => {
             key={topic.id}
             name={topic.title}
             value={topic.numberOfMessages}
-            onClick={() => history.push(`${PATHS.FORUM}topics/${topic.id}`)}
+            onClick={() => history.push(`${PATHS.FORUM}/topics/${topic.id}`)}
           />
         ))}
       </List>

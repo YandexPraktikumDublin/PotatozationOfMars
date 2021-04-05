@@ -1,11 +1,11 @@
 import { createSelector } from 'reselect'
-import { AppState } from '@store/rootReducer'
+import { IAppState } from '@types'
 
-const getPending = (state: AppState) => state.signup.pending
+const getPending = (state: IAppState) => state.signup.pending
 
-const getUserId = (state: AppState) => state.signup.userId
+const getUserId = (state: IAppState) => state.signup.userId
 
-const getError = (state: AppState) => state.signup.error
+const getError = (state: IAppState) => state.signup.error
 
 export const getSignupPendingSelector = createSelector(
   getPending,

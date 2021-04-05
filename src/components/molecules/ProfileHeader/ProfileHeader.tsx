@@ -28,7 +28,7 @@ const ProfileHeader: FC<TProfileHeaderProps> = memo(
             width="80"
             height="80"
             src={user?.avatar}
-            className="w-20 h-20"
+            className="w-20 h-20 object-cover"
             alt=""
           />
 

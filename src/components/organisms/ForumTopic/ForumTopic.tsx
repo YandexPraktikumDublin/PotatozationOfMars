@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react'
 import { useHistory } from 'react-router-dom'
-import { BackButton } from '@components/atoms'
+import { PageMeta, BackButton } from '@components/atoms'
 import { FormTopicMessage, List } from '@components/molecules'
 import { Title, TopicMessageForm } from '@components/organisms'
 import { PATHS } from '@config'
@@ -27,6 +27,7 @@ const ForumTopic: FC<TForumTopicProps> = memo(() => {
 
   return (
     <div className="relative">
+      <PageMeta title="New Games" />
       <Title>New Games</Title>
 
       <BackButton

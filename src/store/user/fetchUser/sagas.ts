@@ -1,9 +1,9 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects'
-import { axiosInstance } from '@api'
+import { getAxiosInstance } from '@api'
 import { fetchUserFailure, fetchUserSuccess } from './actions'
 import { FETCH_USER_REQUEST } from './actionTypes'
 
-const getUser = () => axiosInstance.get('auth/user')
+const getUser = () => getAxiosInstance().get('auth/user')
 
 function* fetchUserSaga() {
   try {
