@@ -21,9 +21,20 @@ const sequelizeOptions: SequelizeOptions = {
 
 const sequelize = new Sequelize(sequelizeOptions)
 
+const userRepository = sequelize.getRepository(User)
+const authTokenRepository = sequelize.getRepository(AuthToken)
+const topicRepository = sequelize.getRepository(Topic)
+const commentRepository = sequelize.getRepository(Comment)
+const reactionRepository = sequelize.getRepository(Reaction)
+
 const db = {
   Sequelize,
-  sequelize
+  sequelize,
+  userRepository,
+  authTokenRepository,
+  topicRepository,
+  commentRepository,
+  reactionRepository
 }
 
 export default db

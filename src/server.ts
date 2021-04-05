@@ -5,9 +5,9 @@ import bodyParser from 'body-parser'
 import compression from 'compression'
 import 'babel-polyfill'
 import cookiesMiddleware from 'universal-cookie-express'
-import serverRenderMiddleware from './server-render-middleware'
+import serverRenderMiddleware from './middlewares/server-render-middleware'
+import authMiddleware from './middlewares/auth-middleware'
 import db from '@database'
-import { User, Topic, Comment, Reaction } from '@models'
 import {
   userRouterFactory,
   topicRouterFactory,
@@ -30,22 +30,30 @@ app.use((req, res, next) => {
   next()
 })
 
-const userRepository = db.sequelize.getRepository(User)
-const topicRepository = db.sequelize.getRepository(Topic)
-const commentRepository = db.sequelize.getRepository(Comment)
-const reactionRepository = db.sequelize.getRepository(Reaction)
+app.use(userRouterFactory(db.userRepository))
 
-// TODO: закрыть все запросы для не авторизированный пользователей
-app.use(userRouterFactory(userRepository))
-app.use(topicRouterFactory(topicRepository, userRepository, commentRepository))
 app.use(
-  commentRouterFactory(commentRepository, userRepository, reactionRepository)
+  topicRouterFactory(
+    db.topicRepository,
+    db.userRepository,
+    db.commentRepository
+  )
 )
-app.use(reactionRouterFactory(reactionRepository, userRepository))
+app.use(
+  commentRouterFactory(
+    db.commentRepository,
+    db.userRepository,
+    db.reactionRepository
+  )
+)
+
+app.use(reactionRouterFactory(db.reactionRepository, db.userRepository))
 
 db.sequelize.sync({ force: true }).then(() => {
   console.log('Successful connection to the database!')
 })
+
+app.use(authMiddleware)
 
 app.use(compression()).use(express.static(path.resolve(__dirname, '../dist')))
 

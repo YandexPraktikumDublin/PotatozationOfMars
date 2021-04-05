@@ -30,7 +30,7 @@ export class AuthToken extends Model<IAuthToken> {
   @BelongsTo(() => User)
   user!: User
 
-  generate = async function (userId: number) {
+  static generate = async (userId: number) => {
     if (!userId) {
       throw new Error('AuthToken requires a user ID')
     }

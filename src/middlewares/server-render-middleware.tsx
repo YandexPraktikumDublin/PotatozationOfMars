@@ -8,7 +8,7 @@ import { StaticRouter, matchPath } from 'react-router-dom'
 import { StaticRouterContext } from 'react-router'
 import { Request, Response } from 'express'
 import routes from '@routes'
-import App from './App'
+import App from '../App'
 
 const IS_DEV = process.env.NODE_ENV !== 'production'
 

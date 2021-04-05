@@ -50,4 +50,16 @@ export class User extends Model<IUser> {
 
   @HasMany(() => Reaction)
   reactions!: Reaction[]
+
+  authorize = async () => {
+    const user = this
+    const authToken = await AuthToken.generate(user.id)
+    await user.$add('AuthToken', authToken)
+
+    return { user, authToken }
+  }
+
+  logout = async (token: string) => {
+    await AuthToken.destroy({ where: { token } })
+  }
 }
