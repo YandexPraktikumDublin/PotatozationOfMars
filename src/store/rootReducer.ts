@@ -5,6 +5,7 @@ import signupReducer from '@store/signup/reducer'
 import authReducer from '@store/auth/reducer'
 import logoutReducer from '@store/logout/reducer'
 import leaderboardReducer from '@store/leaderboard/reducer'
+import gameReducer from '@store/game/reducer'
 import { History } from 'history'
 import { IAppState } from '@types'
 
@@ -15,6 +16,7 @@ const createRootReducer = (history: History) =>
     auth: authReducer,
     logout: logoutReducer,
     leaderboard: leaderboardReducer,
+    game: gameReducer,
     router: connectRouter(history)
   })
 

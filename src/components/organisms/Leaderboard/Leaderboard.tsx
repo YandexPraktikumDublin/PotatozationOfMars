@@ -27,7 +27,7 @@ const Leaderboard: FC<TLeaderboardProps> = memo(() => {
         {leaderboard?.map((leader: ILeader, index) => (
           <NameValueListItem
             key={leader?.data?.potatozationOfMarsUserId}
-            name={`${++index}. ${leader?.data?.potatozationOfMarsUserLogin}`}
+            name={`${index + 1}. ${leader?.data?.potatozationOfMarsUserLogin}`}
             value={leader?.data?.potatozationOfMarsScores}
           />
         ))}

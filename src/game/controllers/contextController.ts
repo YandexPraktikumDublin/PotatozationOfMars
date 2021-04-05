@@ -1,11 +1,13 @@
 class ContextController {
   instance: CanvasRenderingContext2D
+  canvas: HTMLCanvasElement
   coefficient: { cx: number; cy: number }
   center: { ox: number; oy: number }
-  constructor(context: CanvasRenderingContext2D, width = 2000, height = 1000) {
-    this.instance = context
-    this.instance.canvas.width = width
-    this.instance.canvas.height = height
+  constructor(canvas: HTMLCanvasElement, width = 2000, height = 1000) {
+    this.instance = canvas.getContext('2d') as CanvasRenderingContext2D
+    this.canvas = canvas
+    this.canvas.width = width
+    this.canvas.height = height
     this.center = { ox: width / 2, oy: height / 2 }
     this.coefficient = { cx: 1, cy: 1 }
   }
@@ -34,6 +36,22 @@ class ContextController {
     }
   }
 
+  drawText = (text: string, x = 0, y = 0) => {
+    const context = this.instance
+    context.save()
+
+    const { ox, oy } = this.center
+    context.translate(Math.round(x + ox), Math.round(y + oy))
+
+    context.font = '120px serif'
+    context.fillStyle = 'white'
+    context.textAlign = 'center'
+
+    context.fillText(text, 0, 0)
+
+    context.restore()
+  }
+
   drawImage = (
     image: HTMLImageElement,
     x: number,
@@ -44,31 +62,51 @@ class ContextController {
       angle?: number
       pivotX?: number
       pivotY?: number
+      opacity?: number
     }
   ) => {
     const context = this.instance
-
-    context.save()
 
     const imageWidth = options.width ?? image.width
     const imageHeight = options.height ?? options.width ?? image.height
     const pivotX = options.pivotX ?? 0.5
     const pivotY = options.pivotY ?? 0.5
     const angle = options.angle ?? 0
+    const opacity = options.opacity ?? 1
     const { ox, oy } = this.center
     const offsetX = pivotX * imageWidth
     const offsetY = pivotY * imageHeight
-    context.translate(x + ox, y + oy)
-    context.rotate(angle * Math.PI)
-    context.translate(-offsetX, -offsetY)
 
-    context.drawImage(image, 0, 0, imageWidth, imageHeight)
+    context.save()
+
+    context.translate(Math.round(x + ox), Math.round(y + oy))
+    context.rotate(angle * Math.PI)
+    context.translate(Math.round(-offsetX), Math.round(-offsetY))
+    context.globalAlpha = opacity
+
+    context.drawImage(
+      image,
+      0,
+      0,
+      Math.round(imageWidth),
+      Math.round(imageHeight)
+    )
+
     context.restore()
   }
 
-  clearFrame = () => {
-    this.instance.fillStyle = '#000000'
+  fillFrame = (color: string) => {
+    this.instance.fillStyle = color
     this.instance.fillRect(
+      0,
+      0,
+      this.instance.canvas.width,
+      this.instance.canvas.height
+    )
+  }
+
+  clearFrame = () => {
+    this.instance.clearRect(
       0,
       0,
       this.instance.canvas.width,
