@@ -1,4 +1,5 @@
 export * from './User/User'
+export * from './AuthToken/AuthToken'
 export * from './Topic/Topic'
 export * from './Comment/Comment'
 export * from './CommentAncestor/CommentAncestor'

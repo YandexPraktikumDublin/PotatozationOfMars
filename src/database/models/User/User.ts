@@ -9,7 +9,7 @@ import {
   Default
 } from 'sequelize-typescript'
 
-import { Topic, Comment, Reaction } from '@models'
+import { AuthToken, Topic, Comment, Reaction } from '@models'
 
 export enum roleEnum {
   regular = 'regular',
@@ -38,6 +38,9 @@ export class User extends Model<IUser> {
   @Default(roleEnum.regular)
   @Column(DataType.STRING)
   role!: roleEnum
+
+  @HasMany(() => AuthToken)
+  authTokens!: AuthToken[]
 
   @HasMany(() => Topic)
   topics!: Topic[]
