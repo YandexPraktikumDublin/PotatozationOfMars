@@ -2,8 +2,19 @@
 
 exports[`<GamePauseMenuDisplay /> should renders correct <GamePauseMenuDisplay /> 1`] = `
 <Fragment>
-  <GamePauseMenuModal
-    toggleModal={[MockFunction]}
-  />
+  <div
+    className="z-50 fixed inset-0 overflow-y-auto"
+  >
+    <div
+      className="fixed inset-0 bg-black opacity-80"
+    />
+    <div
+      className="relative w-full h-full flex justify-center items-center px-3"
+    >
+      <GamePauseMenuModal
+        toggleModal={[MockFunction]}
+      />
+    </div>
+  </div>
 </Fragment>
 `;

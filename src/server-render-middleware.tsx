@@ -13,8 +13,8 @@ import App from './App'
 const IS_DEV = process.env.NODE_ENV !== 'production'
 
 function getHtml(reactHtml: string, reduxState = {}, helmet: HelmetData) {
-  const cssUrl = IS_DEV ? 'https://localhost:8080/main.css' : '/main.css'
-  const jsUrl = IS_DEV ? 'https://localhost:8080/main.js' : '/main.js'
+  const cssUrl = IS_DEV ? 'https://0.0.0.0:8080/main.css' : '/main.css'
+  const jsUrl = IS_DEV ? 'https://0.0.0.0:8080/main.js' : '/main.js'
 
   return `
     <!doctype html>

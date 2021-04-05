@@ -1,14 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<GamePauseMenuModal /> should renders correct <GamePauseMenuModal /> 1`] = `
-<Modal
-  toggleModal={[MockFunction]}
+<div
+  className="flex flex-col w-full max-w-md relative text-center border border-primary rounded-3xl p-6 bg-white dark:text-white dark:border-white dark:bg-primary"
 >
-  <Title>
-    Pause
-  </Title>
-  <GamePauseMenu
-    toggleModal={[MockFunction]}
+  <div
+    className="relative w-full h-full flex flex-col justify-center items-center px-3"
+  >
+    <Title>
+      Pause
+    </Title>
+    <GamePauseMenu
+      toggleModal={[MockFunction]}
+    />
+  </div>
+  <CloseButton
+    className="absolute top-4 right-4"
+    onClick={[MockFunction]}
   />
-</Modal>
+</div>
 `;

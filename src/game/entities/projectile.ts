@@ -4,8 +4,15 @@ import { laser } from '@images'
 import TPosition from '@game/@types/position'
 
 class Projectile extends Entity {
-  constructor(killCallback = () => {}, velocity = 20, size = 10) {
-    super(killCallback, velocity, size)
+  constructor(
+    velocity = 20,
+    size = 10,
+    image = laser,
+    damage = 1,
+    killCallback = () => {}
+  ) {
+    super(killCallback, velocity, size, image)
+    this.damage = damage
   }
 
   public init = (
@@ -18,7 +25,8 @@ class Projectile extends Entity {
     this.isAlive = true
     this.position = position || { x: ox, y: oy }
     this.velocity.defineByAngle(angle)
-    this.render(clock)
+    this.deathAnimation = this.initDeathAnimation(clock)
+    this.render(clock, this.move)
   }
 
   protected move = (context: ContextController) => {
@@ -33,13 +41,6 @@ class Projectile extends Entity {
     context.drawImage(this.image, this.position.x, this.position.y, {
       width: this.size
     })
-  }
-
-  public render = (clock: GameClock) => {
-    this.image.onload = () => {
-      this.clockEvent = clock.startEvent(this.move)
-    }
-    this.image.src = laser
   }
 }
 

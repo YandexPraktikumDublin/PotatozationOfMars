@@ -1,13 +1,9 @@
 FROM node:14.15.4-alpine
 
-WORKDIR /
-
+WORKDIR /app
 COPY . .
-COPY package.json ./
+RUN yarn install
 
-RUN yarn install --frozen-lockfile
-RUN yarn build && yarn --production
+EXPOSE 5000
 
-EXPOSE 80
-
-CMD node ./server.js
+CMD yarn run start

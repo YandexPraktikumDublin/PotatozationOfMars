@@ -5,42 +5,57 @@ import ContextController from '@game/controllers/contextController'
 class EnemyController {
   entities: Array<Entity>
   EnemyType: typeof Entity
+  current: number
   quantity: number
-  constructor(EnemyType: typeof Entity) {
+  simultaneously: number
+  difficulty: number
+  constructor(
+    EnemyType: typeof Entity,
+    simultaneously: number = 1,
+    difficulty: number = 1,
+    quantity: number = 0
+  ) {
     this.EnemyType = EnemyType
     this.entities = []
-    this.quantity = 0
+    this.simultaneously = simultaneously
+    this.difficulty = difficulty
+    this.quantity = quantity === 0 ? simultaneously * difficulty : quantity
+    this.current = this.quantity
   }
 
-  init = (
-    clock: GameClock,
-    context: ContextController,
-    quantity: number = 1,
-    simultaneously: number = 1,
-    velocity: number = 1
-  ) => {
-    this.quantity = quantity
-    console.log(quantity, simultaneously)
+  init = (clock: GameClock, context: ContextController) => {
+    this.current = this.quantity
 
-    for (let i = 0; i < simultaneously; i++) {
-      const callback = () => {
-        this.quantity--
-        if (this.quantity > simultaneously) {
-          this.entities[i] = new this.EnemyType(callback, velocity)
-          this.entities[i].init(clock, context)
-        }
-      }
-      this.entities[i] = new this.EnemyType(callback, velocity)
+    const createEntity = (i: number, callback: () => void) => {
+      this.entities[i] = new this.EnemyType(callback)
       this.entities[i].init(clock, context)
+      this.entities[i].health *= this.difficulty
+    }
+
+    for (let i = 0; i < this.simultaneously; i++) {
+      const callback = () => {
+        if (this.entities[i].isAlive) return
+        if (this.current > this.simultaneously) {
+          createEntity(i, callback)
+        }
+        this.current--
+      }
+      createEntity(i, callback)
     }
   }
 
+  getEntities = () => {
+    return this.entities.reduceRight(
+      (acc: Array<Entity>, val) => [...acc, ...val.getEntities()],
+      []
+    )
+  }
+
   getProjectiles = () => {
-    const projectiles: Array<Entity> = []
-    this.entities.forEach((entity) => {
-      projectiles.push(...entity.getProjectile())
-    })
-    return projectiles
+    return this.entities.reduceRight(
+      (acc: Array<Entity>, val) => [...acc, ...val.getProjectiles()],
+      []
+    )
   }
 
   kill = () => {

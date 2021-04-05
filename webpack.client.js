@@ -17,6 +17,7 @@ module.exports = {
     historyApiFallback: true,
     hot: true,
     port: 8080,
+    host: '0.0.0.0',
     liveReload: false,
     https: {
       key: readFileSync(path.resolve('network/config/key.pem'), 'utf8'),
@@ -81,7 +82,7 @@ module.exports = {
     ]
   },
   output: {
-    publicPath: 'https://localhost:8080/',
+    publicPath: 'https://0.0.0.0:8080/',
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js'
   },
