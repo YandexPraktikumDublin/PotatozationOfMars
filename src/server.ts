@@ -15,6 +15,10 @@ import {
   reactionRouterFactory
 } from '@factories'
 
+db.sequelize.sync({ force: true }).then(() => {
+  console.log('Successful connection to the database!')
+})
+
 const app = express()
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -30,7 +34,9 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use(userRouterFactory(db.userRepository))
+app.use(authMiddleware)
+
+app.use(userRouterFactory(db.userRepository, db.authTokenRepository))
 
 app.use(
   topicRouterFactory(
@@ -48,12 +54,6 @@ app.use(
 )
 
 app.use(reactionRouterFactory(db.reactionRepository, db.userRepository))
-
-db.sequelize.sync({ force: true }).then(() => {
-  console.log('Successful connection to the database!')
-})
-
-app.use(authMiddleware)
 
 app.use(compression()).use(express.static(path.resolve(__dirname, '../dist')))
 

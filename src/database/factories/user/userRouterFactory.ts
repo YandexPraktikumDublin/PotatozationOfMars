@@ -1,11 +1,15 @@
 import { Router } from 'express'
 import { Repository } from 'sequelize-typescript'
 import bcrypt from 'bcrypt'
+import { uid } from 'rand-token'
 
-import { User } from '@models'
+import { AuthToken, roleEnum, User } from '@models'
 import { INNER_API_V1_URL, DEFAULT_ERROR_MESSAGE } from '@config'
 
-export const userRouterFactory = (userRepository: Repository<User>) =>
+export const userRouterFactory = (
+  userRepository: Repository<User>,
+  authTokenRepository: Repository<AuthToken>
+) =>
   Router()
     .get(`${INNER_API_V1_URL}/current-user`, (req, res) =>
       req.user
@@ -65,15 +69,21 @@ export const userRouterFactory = (userRepository: Repository<User>) =>
         const passwordHash = bcrypt.hashSync(req.body.password, 10)
 
         const user = await userRepository.create(
-          { login: req.body.login, name: req.body.name, passwordHash },
+          {
+            login: req.body.login,
+            passwordHash,
+            name: req.body.name,
+            role: roleEnum.regular
+          },
           {
             fields: ['login', 'name', 'passwordHash'],
             validate: true
           }
         )
 
-        const { authToken } = await user.authorize()
-        res.cookie('token', authToken)
+        const token = uid(32)
+        await authTokenRepository.create({ token, userId: user.id })
+        res.cookie('token', token)
 
         return res.status(201).json(user)
       } catch (error) {
@@ -85,13 +95,29 @@ export const userRouterFactory = (userRepository: Repository<User>) =>
 
     .post(`${INNER_API_V1_URL}/login`, async (req, res) => {
       try {
-        const { user, authToken } = await User.authenticate(
-          req.body.login,
-          req.body.password
-        )
-        res.cookie('token', authToken)
+        if (req.user) {
+          return res.json(req.user)
+        }
 
-        return res.json(user)
+        const user = await userRepository.findOne({
+          where: { login: req.body.login }
+        })
+
+        if (
+          user &&
+          bcrypt.compareSync(
+            req.body.password,
+            user.getDataValue('passwordHash')
+          )
+        ) {
+          const token = uid(32)
+          await authTokenRepository.create({ token, userId: user.id })
+          res.cookie('token', token)
+
+          return res.json(user)
+        }
+
+        res.status(400).json({ errors: ['Invalid parameters'] })
       } catch (error) {
         res
           .status(500)
@@ -105,13 +131,11 @@ export const userRouterFactory = (userRepository: Repository<User>) =>
           return res.status(401).json({ errors: ['Not Authorized'] })
         }
 
-        const user = await userRepository.findByPk(req.user.id)
+        await authTokenRepository.destroy({
+          where: { token: req.universalCookies.cookies.token }
+        })
 
-        if (user) {
-          await user.logout(req.universalCookies.cookies.auth_token)
-
-          return res.status(204)
-        }
+        return res.status(204).json()
       } catch (error) {
         res
           .status(500)

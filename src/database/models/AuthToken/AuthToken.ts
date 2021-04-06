@@ -5,9 +5,9 @@ import {
   DataType,
   AllowNull,
   BelongsTo,
-  ForeignKey
+  ForeignKey,
+  Index
 } from 'sequelize-typescript'
-import { uid } from 'rand-token'
 
 import { User } from '@models'
 
@@ -18,6 +18,7 @@ export interface IAuthToken {
 
 @Table
 export class AuthToken extends Model<IAuthToken> {
+  @Index
   @AllowNull(false)
   @Column(DataType.STRING)
   token!: string
@@ -29,10 +30,4 @@ export class AuthToken extends Model<IAuthToken> {
 
   @BelongsTo(() => User)
   user!: User
-
-  static generate = async (userId: number) => {
-    const token = uid(32)
-
-    return AuthToken.create({ token, userId })
-  }
 }

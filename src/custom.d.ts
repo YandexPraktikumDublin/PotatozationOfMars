@@ -1,5 +1,3 @@
-import { IUser } from '@models'
-
 declare module '*.svg' {
   const content: any
   export default content
@@ -15,13 +13,11 @@ declare module '*.png' {
   export default content
 }
 
-declare global {
-  namespace Express {
-    interface Request {
-      user: IUser
-      universalCookies: {
-        cookies: Record<string, any>
-      }
+declare namespace Express {
+  export interface Request {
+    user: any
+    universalCookies: {
+      cookies: Record<string, any>
     }
   }
 }

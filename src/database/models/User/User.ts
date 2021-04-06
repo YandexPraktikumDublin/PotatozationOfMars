@@ -8,7 +8,6 @@ import {
   HasMany,
   Default
 } from 'sequelize-typescript'
-import bcrypt from 'bcrypt'
 
 import { AuthToken, Topic, Comment, Reaction } from '@models'
 
@@ -56,26 +55,4 @@ export class User extends Model<IUser> {
 
   @HasMany(() => Reaction)
   reactions!: Reaction[]
-
-  static authenticate = async (login: string, password: string) => {
-    const user = await User.findOne({ where: { login } })
-
-    if (user && bcrypt.compareSync(password, user.passwordHash)) {
-      return user.authorize()
-    }
-
-    throw new Error('invalid login or password')
-  }
-
-  authorize = async () => {
-    const user = this
-    const authToken = await AuthToken.generate(user.id)
-    await user.$add('AuthToken', authToken)
-
-    return { user, authToken }
-  }
-
-  logout = async (token: string) => {
-    await AuthToken.destroy({ where: { token } })
-  }
 }

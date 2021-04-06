@@ -41,7 +41,7 @@ export const commentRouterFactory = (
           return res.status(404).json({ errors: ['Not Found'] })
         }
 
-        return comment
+        return res.json(comment)
       } catch (error) {
         res
           .status(500)

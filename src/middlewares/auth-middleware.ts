@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
 
-import { User } from '@models'
 import db from '@database'
 
 export default async function (
@@ -13,11 +12,11 @@ export default async function (
   if (token) {
     const authToken = await db.authTokenRepository.findOne({
       where: { token },
-      include: User
+      include: db.userRepository
     })
 
     if (authToken) {
-      req.user = authToken.user
+      req.user = await authToken?.$get('user')
     }
   }
 
