@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { Repository } from 'sequelize-typescript'
 import { Comment, User, Reaction } from '@models'
-import { INNER_API_V1_URL } from '@config'
+import { DEFAULT_ERROR_MESSAGE, INNER_API_V1_URL } from '@config'
 
 export const commentRouterFactory = (
   commentRepository: Repository<Comment>,
@@ -9,30 +9,54 @@ export const commentRouterFactory = (
   reactionRepository: Repository<Reaction>
 ) =>
   Router()
-    .get(`${INNER_API_V1_URL}/comments`, (req, res, next) =>
-      commentRepository
-        .findAll({ include: [userRepository, reactionRepository] })
-        .then((comments) =>
-          comments ? res.json(comments) : next({ statusCode: 404 })
-        )
-        .catch(next)
-    )
+    .get(`${INNER_API_V1_URL}/comments`, async (req, res) => {
+      try {
+        if (!req.user) {
+          return res.status(401).json({ errors: ['Not Authorized'] })
+        }
 
-    .get(`${INNER_API_V1_URL}/comments/:id`, (req, res, next) =>
-      commentRepository
-        .findByPk(req.params.id, {
+        const comments = await commentRepository.findAll({
           include: [userRepository, reactionRepository]
         })
-        .then((comment) =>
-          comment ? res.json(comment) : next({ statusCode: 404 })
-        )
-        .catch(next)
-    )
 
-    .post(`${INNER_API_V1_URL}/comments`, (req, res, next) =>
-      commentRepository
-        .create(
-          { ...req.body, userId: 1, hierarchyLevel: 0 }, // TODO: брать userId не из запроса, а из контекста для текущего пользователя; настроить автоматическое определение параметра hierarchyLevel
+        return res.json(comments)
+      } catch (error) {
+        res
+          .status(500)
+          .json({ errors: [error.message ?? DEFAULT_ERROR_MESSAGE] })
+      }
+    })
+
+    .get(`${INNER_API_V1_URL}/comments/:id`, async (req, res) => {
+      try {
+        if (!req.user) {
+          return res.status(401).json({ errors: ['Not Authorized'] })
+        }
+
+        const comment = await commentRepository.findByPk(req.params.id, {
+          include: [userRepository, reactionRepository]
+        })
+
+        if (!comment) {
+          return res.status(404).json({ errors: ['Not Found'] })
+        }
+
+        return comment
+      } catch (error) {
+        res
+          .status(500)
+          .json({ errors: [error.message ?? DEFAULT_ERROR_MESSAGE] })
+      }
+    })
+
+    .post(`${INNER_API_V1_URL}/comments`, async (req, res) => {
+      try {
+        if (!req.user) {
+          return res.status(401).json({ errors: ['Not Authorized'] })
+        }
+
+        const comment = await commentRepository.create(
+          { ...req.body, userId: req.user.id },
           {
             fields: [
               'content',
@@ -40,9 +64,15 @@ export const commentRouterFactory = (
               'topicId',
               'parentId',
               'hierarchyLevel'
-            ]
+            ],
+            validate: true
           }
         )
-        .then((comment) => res.json(comment))
-        .catch(next)
-    )
+
+        return res.status(201).json(comment)
+      } catch (error) {
+        res
+          .status(500)
+          .json({ errors: [error.message ?? DEFAULT_ERROR_MESSAGE] })
+      }
+    })

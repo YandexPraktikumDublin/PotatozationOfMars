@@ -26,7 +26,7 @@ app.use(cookiesMiddleware())
 app.use(httpContext.middleware)
 
 app.use((req, res, next) => {
-  httpContext.set('cookies', (req as any).universalCookies.cookies)
+  httpContext.set('cookies', req.universalCookies.cookies)
   next()
 })
 

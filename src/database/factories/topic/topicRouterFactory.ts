@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { Repository } from 'sequelize-typescript'
 import { Topic, Comment, User } from '@models'
-import { INNER_API_V1_URL } from '@config'
+import { DEFAULT_ERROR_MESSAGE, INNER_API_V1_URL } from '@config'
 
 export const topicRouterFactory = (
   topicRepository: Repository<Topic>,
@@ -9,32 +9,64 @@ export const topicRouterFactory = (
   commentRepository: Repository<Comment>
 ) =>
   Router()
-    .get(`${INNER_API_V1_URL}/topics`, (req, res, next) =>
-      topicRepository
-        .findAll({ include: [userRepository] })
-        .then((topics) =>
-          topics ? res.json(topics) : next({ statusCode: 404 })
-        )
-        .catch(next)
-    )
+    .get(`${INNER_API_V1_URL}/topics`, async (req, res) => {
+      try {
+        if (!req.user) {
+          return res.status(401).json({ errors: ['Not Authorized'] })
+        }
 
-    .get(`${INNER_API_V1_URL}/topics/:id`, (req, res, next) =>
-      topicRepository
-        .findByPk(req.params.id, {
+        const topics = await topicRepository.findAll({
+          include: [userRepository]
+        })
+
+        return res.json(topics)
+      } catch (error) {
+        res
+          .status(500)
+          .json({ errors: [error.message ?? DEFAULT_ERROR_MESSAGE] })
+      }
+    })
+
+    .get(`${INNER_API_V1_URL}/topics/:id`, async (req, res) => {
+      try {
+        if (!req.user) {
+          return res.status(401).json({ errors: ['Not Authorized'] })
+        }
+
+        const topic = await topicRepository.findByPk(req.params.id, {
           include: [userRepository, commentRepository]
         })
-        .then((topic) => (topic ? res.json(topic) : next({ statusCode: 404 })))
-        .catch(next)
-    )
 
-    .post(`${INNER_API_V1_URL}/topics`, (req, res, next) =>
-      topicRepository
-        .create(
-          { ...req.body, userId: 1 }, // TODO: брать userId не из запроса, а из контекста для текущего пользователя
+        if (!topic) {
+          return res.status(404).json({ errors: ['Not Found'] })
+        }
+
+        return res.json(topic)
+      } catch (error) {
+        res
+          .status(500)
+          .json({ errors: [error.message ?? DEFAULT_ERROR_MESSAGE] })
+      }
+    })
+
+    .post(`${INNER_API_V1_URL}/topics`, async (req, res) => {
+      try {
+        if (!req.user) {
+          return res.status(401).json({ errors: ['Not Authorized'] })
+        }
+
+        const topic = await topicRepository.create(
+          { ...req.body, userId: req.user.id },
           {
-            fields: ['subject', 'content', 'userId']
+            fields: ['subject', 'content', 'userId'],
+            validate: true
           }
         )
-        .then((topic) => res.json(topic))
-        .catch(next)
-    )
+
+        return res.status(201).json(topic)
+      } catch (error) {
+        res
+          .status(500)
+          .json({ errors: [error.message ?? DEFAULT_ERROR_MESSAGE] })
+      }
+    })

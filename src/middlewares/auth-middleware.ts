@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
+
 import { User } from '@models'
 import db from '@database'
 
@@ -7,7 +8,7 @@ export default async function (
   res: Response,
   next: NextFunction
 ) {
-  const token = req.cookies.auth_token || req.headers.authorization
+  const token = req.universalCookies.cookies.token || req.headers.authorization
 
   if (token) {
     const authToken = await db.authTokenRepository.findOne({
@@ -16,7 +17,7 @@ export default async function (
     })
 
     if (authToken) {
-      ;(req as any).user = authToken.user
+      req.user = authToken.user
     }
   }
 

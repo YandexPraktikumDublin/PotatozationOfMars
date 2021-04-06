@@ -1,39 +1,71 @@
 import { Router } from 'express'
 import { Repository } from 'sequelize-typescript'
 import { Reaction, User } from '@models'
-import { INNER_API_V1_URL } from '@config'
+import { DEFAULT_ERROR_MESSAGE, INNER_API_V1_URL } from '@config'
 
 export const reactionRouterFactory = (
   reactionRepository: Repository<Reaction>,
   userRepository: Repository<User>
 ) =>
   Router()
-    .get(`${INNER_API_V1_URL}/reactions`, (req, res, next) =>
-      reactionRepository
-        .findAll({ include: userRepository })
-        .then((reactions) =>
-          reactions ? res.json(reactions) : next({ statusCode: 404 })
-        )
-        .catch(next)
-    )
+    .get(`${INNER_API_V1_URL}/reactions`, async (req, res) => {
+      try {
+        if (!req.user) {
+          return res.status(401).json({ errors: ['Not Authorized'] })
+        }
 
-    .get(`${INNER_API_V1_URL}/reactions/:id`, (req, res, next) =>
-      reactionRepository
-        .findByPk(req.params.id, { include: userRepository })
-        .then((reaction) =>
-          reaction ? res.json(reaction) : next({ statusCode: 404 })
-        )
-        .catch(next)
-    )
+        const reactions = await reactionRepository.findAll({
+          include: userRepository
+        })
 
-    .post(`${INNER_API_V1_URL}/reactions`, (req, res, next) =>
-      reactionRepository
-        .create(
-          { ...req.body, userId: 1 }, // TODO: брать userId не из запроса, а из контекста для текущего пользователя
+        return res.json(reactions)
+      } catch (error) {
+        res
+          .status(500)
+          .json({ errors: [error.message ?? DEFAULT_ERROR_MESSAGE] })
+      }
+    })
+
+    .get(`${INNER_API_V1_URL}/reactions/:id`, async (req, res) => {
+      try {
+        if (!req.user) {
+          return res.status(401).json({ errors: ['Not Authorized'] })
+        }
+
+        const reaction = await reactionRepository.findByPk(req.params.id, {
+          include: userRepository
+        })
+
+        if (!reaction) {
+          res.status(404).json({ errors: ['Not Found'] })
+        }
+
+        return res.json(reaction)
+      } catch (error) {
+        res
+          .status(500)
+          .json({ errors: [error.message ?? DEFAULT_ERROR_MESSAGE] })
+      }
+    })
+
+    .post(`${INNER_API_V1_URL}/reactions`, async (req, res) => {
+      try {
+        if (!req.user) {
+          return res.status(401).json({ errors: ['Not Authorized'] })
+        }
+
+        const reaction = await reactionRepository.create(
+          { ...req.body, userId: req.user.id },
           {
-            fields: ['content', 'userId', 'commentId']
+            fields: ['content', 'userId', 'commentId'],
+            validate: true
           }
         )
-        .then((reaction) => res.json(reaction))
-        .catch(next)
-    )
+
+        return res.status(201).json(reaction)
+      } catch (error) {
+        res
+          .status(500)
+          .json({ errors: [error.message ?? DEFAULT_ERROR_MESSAGE] })
+      }
+    })

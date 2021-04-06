@@ -31,10 +31,6 @@ export class AuthToken extends Model<IAuthToken> {
   user!: User
 
   static generate = async (userId: number) => {
-    if (!userId) {
-      throw new Error('AuthToken requires a user ID')
-    }
-
     const token = uid(32)
 
     return AuthToken.create({ token, userId })

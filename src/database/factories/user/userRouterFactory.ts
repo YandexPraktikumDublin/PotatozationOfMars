@@ -1,35 +1,120 @@
 import { Router } from 'express'
 import { Repository } from 'sequelize-typescript'
+import bcrypt from 'bcrypt'
+
 import { User } from '@models'
-import { INNER_API_V1_URL } from '@config'
+import { INNER_API_V1_URL, DEFAULT_ERROR_MESSAGE } from '@config'
 
 export const userRouterFactory = (userRepository: Repository<User>) =>
   Router()
-    .get(`${INNER_API_V1_URL}/current-user`, (req, res, next) =>
-      userRepository
-        .findByPk(1) // TODO: брать id из контекста для текущего пользователя
-        .then((user) => (user ? res.json(user) : next({ statusCode: 404 })))
-        .catch(next)
+    .get(`${INNER_API_V1_URL}/current-user`, (req, res) =>
+      req.user
+        ? res.send(req.user)
+        : res.status(401).json({ errors: ['Not Authorized'] })
     )
 
-    .post(`${INNER_API_V1_URL}/current-user`, (req, res, next) =>
-      userRepository
-        .create(req.body, {
-          fields: ['login', 'name']
-        })
-        .then((user) => res.json(user))
-        .catch(next)
-    )
+    .patch(`${INNER_API_V1_URL}/current-user`, async (req, res) => {
+      try {
+        if (!req.user) {
+          return res.status(401).json({ errors: ['Not Authorized'] })
+        }
 
-    .patch(`${INNER_API_V1_URL}/current-user`, (req, res, next) =>
-      userRepository
-        .update(req.body, {
-          where: { id: 1 }, // TODO: брать id из контекста для текущего пользователя
+        const result = await userRepository.update(req.body, {
+          where: { id: req.user.id },
           fields: ['login', 'name'],
+          validate: true,
           returning: true
         })
-        .then((result) =>
-          result[0] > 0 ? res.json(result[1][0]) : next({ statusCode: 404 })
+
+        return res.json(result[1][0])
+      } catch (error) {
+        res
+          .status(500)
+          .json({ errors: [error.message ?? DEFAULT_ERROR_MESSAGE] })
+      }
+    })
+
+    .patch(`${INNER_API_V1_URL}/current-user/password`, async (req, res) => {
+      try {
+        if (!req.user) {
+          return res.status(401).json({ errors: ['Not Authorized'] })
+        }
+
+        const passwordHash = bcrypt.hashSync(req.body.password, 10)
+
+        const result = await userRepository.update(
+          { passwordHash },
+          {
+            where: { id: req.user.id },
+            fields: ['passwordHash'],
+            validate: true,
+            returning: true
+          }
         )
-        .catch(next)
-    )
+
+        return res.json(result[1][0])
+      } catch (error) {
+        res
+          .status(500)
+          .json({ errors: [error.message ?? DEFAULT_ERROR_MESSAGE] })
+      }
+    })
+
+    .post(`${INNER_API_V1_URL}/signin`, async (req, res) => {
+      try {
+        const passwordHash = bcrypt.hashSync(req.body.password, 10)
+
+        const user = await userRepository.create(
+          { login: req.body.login, name: req.body.name, passwordHash },
+          {
+            fields: ['login', 'name', 'passwordHash'],
+            validate: true
+          }
+        )
+
+        const { authToken } = await user.authorize()
+        res.cookie('token', authToken)
+
+        return res.status(201).json(user)
+      } catch (error) {
+        res
+          .status(500)
+          .json({ errors: [error.message ?? DEFAULT_ERROR_MESSAGE] })
+      }
+    })
+
+    .post(`${INNER_API_V1_URL}/login`, async (req, res) => {
+      try {
+        const { user, authToken } = await User.authenticate(
+          req.body.login,
+          req.body.password
+        )
+        res.cookie('token', authToken)
+
+        return res.json(user)
+      } catch (error) {
+        res
+          .status(500)
+          .json({ errors: [error.message ?? DEFAULT_ERROR_MESSAGE] })
+      }
+    })
+
+    .get(`${INNER_API_V1_URL}/signout`, async (req, res) => {
+      try {
+        if (!req.user) {
+          return res.status(401).json({ errors: ['Not Authorized'] })
+        }
+
+        const user = await userRepository.findByPk(req.user.id)
+
+        if (user) {
+          await user.logout(req.universalCookies.cookies.auth_token)
+
+          return res.status(204)
+        }
+      } catch (error) {
+        res
+          .status(500)
+          .json({ errors: [error.message ?? DEFAULT_ERROR_MESSAGE] })
+      }
+    })

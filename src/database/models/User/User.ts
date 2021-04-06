@@ -8,6 +8,7 @@ import {
   HasMany,
   Default
 } from 'sequelize-typescript'
+import bcrypt from 'bcrypt'
 
 import { AuthToken, Topic, Comment, Reaction } from '@models'
 
@@ -20,6 +21,7 @@ export interface IUser {
   id?: number
   login: string
   name: string
+  passwordHash: string
   role?: roleEnum
 }
 
@@ -33,6 +35,10 @@ export class User extends Model<IUser> {
   @AllowNull(false)
   @Column(DataType.STRING)
   name!: string
+
+  @AllowNull(false)
+  @Column(DataType.STRING)
+  passwordHash!: string
 
   @AllowNull(false)
   @Default(roleEnum.regular)
@@ -50,6 +56,16 @@ export class User extends Model<IUser> {
 
   @HasMany(() => Reaction)
   reactions!: Reaction[]
+
+  static authenticate = async (login: string, password: string) => {
+    const user = await User.findOne({ where: { login } })
+
+    if (user && bcrypt.compareSync(password, user.passwordHash)) {
+      return user.authorize()
+    }
+
+    throw new Error('invalid login or password')
+  }
 
   authorize = async () => {
     const user = this
