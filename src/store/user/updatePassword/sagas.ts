@@ -9,7 +9,7 @@ const updatePassword = (data: IUpdatePasswordRequestPayload) =>
   getAxiosInstance().put('user/password', data)
 
 const innerUpdatePassword = (data: IUpdatePasswordRequestPayload) =>
-  getAxiosInstance(INNER_API_V1_URL).put('current-user/password', data)
+  getAxiosInstance(INNER_API_V1_URL).put('user/password', data)
 
 function* updatePasswordSaga(data: Record<string, any>) {
   try {

@@ -11,13 +11,13 @@ export const userRouterFactory = (
   authTokenRepository: Repository<AuthToken>
 ) =>
   Router()
-    .get(`${INNER_API_V1_URL}/current-user`, (req, res) =>
+    .get(`${INNER_API_V1_URL}/user`, (req, res) =>
       req.user
         ? res.send(req.user)
         : res.status(401).json({ errors: ['Not Authorized'] })
     )
 
-    .put(`${INNER_API_V1_URL}/current-user`, async (req, res) => {
+    .put(`${INNER_API_V1_URL}/user`, async (req, res) => {
       try {
         if (!req.user) {
           return res.status(401).json({ errors: ['Not Authorized'] })
@@ -38,7 +38,7 @@ export const userRouterFactory = (
       }
     })
 
-    .put(`${INNER_API_V1_URL}/current-user/password`, async (req, res) => {
+    .put(`${INNER_API_V1_URL}/user/password`, async (req, res) => {
       try {
         if (!req.user) {
           return res.status(401).json({ errors: ['Not Authorized'] })

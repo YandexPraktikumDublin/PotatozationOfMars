@@ -32,7 +32,7 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 
 # User
 
-- `GET /api/v1/current-user` - получить текущего пользователя.
+- `GET /api/v1/user` - получить текущего пользователя.
 - `POST /api/v1/signup` - регистрация.
 ```
   {
@@ -57,7 +57,7 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
   }
 ```
 
-- `PUT /api/v1/current-user/password` - обновить пароль текущего пользователя.
+- `PUT /api/v1/user/password` - обновить пароль текущего пользователя.
 ```
   {
     password: string
