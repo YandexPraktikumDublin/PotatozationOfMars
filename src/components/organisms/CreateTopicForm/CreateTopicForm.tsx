@@ -2,7 +2,7 @@ import React, { FC, memo, useState } from 'react'
 import * as Yup from 'yup'
 import { FormikValues } from 'formik'
 import { DEFAULT_ERROR_MESSAGE } from '@config'
-import { BaseForm, BaseInput } from '@components/organisms'
+import { BaseForm, BaseInput, BaseTextarea } from '@components/organisms'
 
 type TCreateTopicFormProps = {}
 
@@ -37,7 +37,8 @@ const CreateTopicForm: FC<TCreateTopicFormProps> = memo(() => {
       buttonText="Create"
       formError={formError}
     >
-      <BaseInput type="text" name="title" placeholder="Title" />
+      <BaseInput type="text" name="subject" placeholder="Subject" />
+      <BaseTextarea name="content" placeholder="Content" />
     </BaseForm>
   )
 })

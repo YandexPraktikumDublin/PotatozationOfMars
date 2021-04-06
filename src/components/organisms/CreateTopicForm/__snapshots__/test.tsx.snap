@@ -92,9 +92,13 @@ exports[`<CreateTopicForm /> should renders correct <CreateTopicForm /> 1`] = `
   }
 >
   <BaseInput
-    name="title"
-    placeholder="Title"
+    name="subject"
+    placeholder="Subject"
     type="text"
+  />
+  <BaseTextarea
+    name="content"
+    placeholder="Content"
   />
 </BaseForm>
 `;
