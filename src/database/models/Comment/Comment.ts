@@ -11,15 +11,32 @@ import {
   Default
 } from 'sequelize-typescript'
 
-import { User, Topic, CommentAncestor, Reaction } from '@models'
+import {
+  User,
+  Topic,
+  CommentAncestor,
+  Reaction,
+  IUser,
+  ITopic,
+  IReaction
+} from '@models'
 
 export interface IComment {
   id?: number
   content: string
   userId: number
+  user: Omit<IUser, 'passwordHash'>
   topicId: number
+  topic?: ITopic
   parentId?: number
   hierarchyLevel?: number
+  parent?: IComment
+  children?: IComment[]
+  descendents?: IComment[]
+  ancestors?: IComment[]
+  reactions?: IReaction[]
+  createdAt?: string
+  updatedAt?: string
 }
 
 @Table

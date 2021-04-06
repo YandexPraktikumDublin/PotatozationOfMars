@@ -70,41 +70,1384 @@ exports[`<ForumTopic /> should renders correct <ForumTopic /> 1`] = `
         </svg>
       </button>
     </BackButton>
-    <List
+    <FormTopicMessage
+      topic={
+        Object {
+          "comments": Array [
+            Object {
+              "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+              "createdAt": "01.12.20",
+              "id": 1,
+              "reactions": Array [
+                Object {
+                  "commentId": 1,
+                  "content": "😂",
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "updatedAt": "01.12.20",
+                  "user": Object {
+                    "createdAt": "01.12.20",
+                    "id": 1,
+                    "login": "IvanIvanov",
+                    "name": "Ivan Ivanov",
+                    "updatedAt": "01.12.20",
+                  },
+                  "userId": 1,
+                },
+                Object {
+                  "commentId": 1,
+                  "content": "😅",
+                  "createdAt": "01.12.20",
+                  "id": 2,
+                  "updatedAt": "01.12.20",
+                  "user": Object {
+                    "createdAt": "01.12.20",
+                    "id": 1,
+                    "login": "IvanIvanov",
+                    "name": "Ivan Ivanov",
+                    "updatedAt": "01.12.20",
+                  },
+                  "userId": 1,
+                },
+                Object {
+                  "commentId": 1,
+                  "content": "😂",
+                  "createdAt": "01.12.20",
+                  "id": 3,
+                  "updatedAt": "01.12.20",
+                  "user": Object {
+                    "createdAt": "01.12.20",
+                    "id": 2,
+                    "login": "PetrPetrov",
+                    "name": "Petr Petrov",
+                    "updatedAt": "01.12.20",
+                  },
+                  "userId": 2,
+                },
+              ],
+              "topicId": 1,
+              "updatedAt": "01.12.20",
+              "user": Object {
+                "createdAt": "01.12.20",
+                "id": 1,
+                "login": "IvanIvanov",
+                "name": "Ivan Ivanov",
+                "updatedAt": "01.12.20",
+              },
+              "userId": 1,
+            },
+            Object {
+              "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+              "createdAt": "01.12.20",
+              "id": 2,
+              "reactions": Array [
+                Object {
+                  "commentId": 2,
+                  "content": "😂",
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "updatedAt": "01.12.20",
+                  "user": Object {
+                    "createdAt": "01.12.20",
+                    "id": 1,
+                    "login": "IvanIvanov",
+                    "name": "Ivan Ivanov",
+                    "updatedAt": "01.12.20",
+                  },
+                  "userId": 1,
+                },
+              ],
+              "topicId": 1,
+              "updatedAt": "01.12.20",
+              "user": Object {
+                "createdAt": "01.12.20",
+                "id": 1,
+                "login": "IvanIvanov",
+                "name": "Ivan Ivanov",
+                "updatedAt": "01.12.20",
+              },
+              "userId": 1,
+            },
+          ],
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          "createdAt": "01.12.20",
+          "id": 1,
+          "subject": "New Games",
+          "updatedAt": "01.12.20",
+          "user": Object {
+            "createdAt": "01.12.20",
+            "id": 1,
+            "login": "IvanIvanov",
+            "name": "Ivan Ivanov",
+            "updatedAt": "01.12.20",
+          },
+          "userId": 1,
+        }
+      }
+    >
+      <div
+        className="text-left border border-primary rounded-2xl p-4 mb-10 dark:border-white"
+      >
+        <div
+          className="mb-4"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </div>
+        <div
+          className="text-xs"
+        >
+          Ivan Ivanov
+           
+          01.12.20
+        </div>
+      </div>
+    </FormTopicMessage>
+    <div
       className="mb-4"
     >
-      <ul
-        className="mb-4"
+      <ForumTopicComment
+        comment={
+          Object {
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "createdAt": "01.12.20",
+            "id": 1,
+            "reactions": Array [
+              Object {
+                "commentId": 1,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 1,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+              Object {
+                "commentId": 1,
+                "content": "😅",
+                "createdAt": "01.12.20",
+                "id": 2,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+              Object {
+                "commentId": 1,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 3,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 2,
+                  "login": "PetrPetrov",
+                  "name": "Petr Petrov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 2,
+              },
+            ],
+            "topicId": 1,
+            "updatedAt": "01.12.20",
+            "user": Object {
+              "createdAt": "01.12.20",
+              "id": 1,
+              "login": "IvanIvanov",
+              "name": "Ivan Ivanov",
+              "updatedAt": "01.12.20",
+            },
+            "userId": 1,
+          }
+        }
+        key="1"
       >
-        <FormTopicMessage
-          body="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-           dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-           ea commodo consequat."
-          date="01.12.20"
-          key="1"
-          userName="Ivan Ivanov"
+        <div
+          className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
         >
           <div
-            className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
+            className="mb-4"
           >
-            <div
-              className="mb-4"
-            >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-           dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-           ea commodo consequat.
-            </div>
-            <div
-              className="text-xs"
-            >
-              Ivan Ivanov
-               
-              01.12.20
-            </div>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </div>
-        </FormTopicMessage>
-      </ul>
-    </List>
+          <div
+            className="text-xs"
+          >
+            Ivan Ivanov
+             
+            01.12.20
+          </div>
+        </div>
+      </ForumTopicComment>
+      <ForumTopicComment
+        comment={
+          Object {
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "createdAt": "01.12.20",
+            "id": 2,
+            "reactions": Array [
+              Object {
+                "commentId": 2,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 1,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+            ],
+            "topicId": 1,
+            "updatedAt": "01.12.20",
+            "user": Object {
+              "createdAt": "01.12.20",
+              "id": 1,
+              "login": "IvanIvanov",
+              "name": "Ivan Ivanov",
+              "updatedAt": "01.12.20",
+            },
+            "userId": 1,
+          }
+        }
+        key="2"
+      >
+        <div
+          className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
+        >
+          <div
+            className="mb-4"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
+          <div
+            className="text-xs"
+          >
+            Ivan Ivanov
+             
+            01.12.20
+          </div>
+        </div>
+      </ForumTopicComment>
+      <ForumTopicComment
+        comment={
+          Object {
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "createdAt": "01.12.20",
+            "id": 1,
+            "reactions": Array [
+              Object {
+                "commentId": 1,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 1,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+              Object {
+                "commentId": 1,
+                "content": "😅",
+                "createdAt": "01.12.20",
+                "id": 2,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+              Object {
+                "commentId": 1,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 3,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 2,
+                  "login": "PetrPetrov",
+                  "name": "Petr Petrov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 2,
+              },
+            ],
+            "topicId": 1,
+            "updatedAt": "01.12.20",
+            "user": Object {
+              "createdAt": "01.12.20",
+              "id": 1,
+              "login": "IvanIvanov",
+              "name": "Ivan Ivanov",
+              "updatedAt": "01.12.20",
+            },
+            "userId": 1,
+          }
+        }
+        key="1"
+      >
+        <div
+          className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
+        >
+          <div
+            className="mb-4"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
+          <div
+            className="text-xs"
+          >
+            Ivan Ivanov
+             
+            01.12.20
+          </div>
+        </div>
+      </ForumTopicComment>
+      <ForumTopicComment
+        comment={
+          Object {
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "createdAt": "01.12.20",
+            "id": 2,
+            "reactions": Array [
+              Object {
+                "commentId": 2,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 1,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+            ],
+            "topicId": 1,
+            "updatedAt": "01.12.20",
+            "user": Object {
+              "createdAt": "01.12.20",
+              "id": 1,
+              "login": "IvanIvanov",
+              "name": "Ivan Ivanov",
+              "updatedAt": "01.12.20",
+            },
+            "userId": 1,
+          }
+        }
+        key="2"
+      >
+        <div
+          className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
+        >
+          <div
+            className="mb-4"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
+          <div
+            className="text-xs"
+          >
+            Ivan Ivanov
+             
+            01.12.20
+          </div>
+        </div>
+      </ForumTopicComment>
+      <ForumTopicComment
+        comment={
+          Object {
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "createdAt": "01.12.20",
+            "id": 1,
+            "reactions": Array [
+              Object {
+                "commentId": 1,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 1,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+              Object {
+                "commentId": 1,
+                "content": "😅",
+                "createdAt": "01.12.20",
+                "id": 2,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+              Object {
+                "commentId": 1,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 3,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 2,
+                  "login": "PetrPetrov",
+                  "name": "Petr Petrov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 2,
+              },
+            ],
+            "topicId": 1,
+            "updatedAt": "01.12.20",
+            "user": Object {
+              "createdAt": "01.12.20",
+              "id": 1,
+              "login": "IvanIvanov",
+              "name": "Ivan Ivanov",
+              "updatedAt": "01.12.20",
+            },
+            "userId": 1,
+          }
+        }
+        key="1"
+      >
+        <div
+          className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
+        >
+          <div
+            className="mb-4"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
+          <div
+            className="text-xs"
+          >
+            Ivan Ivanov
+             
+            01.12.20
+          </div>
+        </div>
+      </ForumTopicComment>
+      <ForumTopicComment
+        comment={
+          Object {
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "createdAt": "01.12.20",
+            "id": 2,
+            "reactions": Array [
+              Object {
+                "commentId": 2,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 1,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+            ],
+            "topicId": 1,
+            "updatedAt": "01.12.20",
+            "user": Object {
+              "createdAt": "01.12.20",
+              "id": 1,
+              "login": "IvanIvanov",
+              "name": "Ivan Ivanov",
+              "updatedAt": "01.12.20",
+            },
+            "userId": 1,
+          }
+        }
+        key="2"
+      >
+        <div
+          className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
+        >
+          <div
+            className="mb-4"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
+          <div
+            className="text-xs"
+          >
+            Ivan Ivanov
+             
+            01.12.20
+          </div>
+        </div>
+      </ForumTopicComment>
+      <ForumTopicComment
+        comment={
+          Object {
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "createdAt": "01.12.20",
+            "id": 1,
+            "reactions": Array [
+              Object {
+                "commentId": 1,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 1,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+              Object {
+                "commentId": 1,
+                "content": "😅",
+                "createdAt": "01.12.20",
+                "id": 2,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+              Object {
+                "commentId": 1,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 3,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 2,
+                  "login": "PetrPetrov",
+                  "name": "Petr Petrov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 2,
+              },
+            ],
+            "topicId": 1,
+            "updatedAt": "01.12.20",
+            "user": Object {
+              "createdAt": "01.12.20",
+              "id": 1,
+              "login": "IvanIvanov",
+              "name": "Ivan Ivanov",
+              "updatedAt": "01.12.20",
+            },
+            "userId": 1,
+          }
+        }
+        key="1"
+      >
+        <div
+          className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
+        >
+          <div
+            className="mb-4"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
+          <div
+            className="text-xs"
+          >
+            Ivan Ivanov
+             
+            01.12.20
+          </div>
+        </div>
+      </ForumTopicComment>
+      <ForumTopicComment
+        comment={
+          Object {
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "createdAt": "01.12.20",
+            "id": 2,
+            "reactions": Array [
+              Object {
+                "commentId": 2,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 1,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+            ],
+            "topicId": 1,
+            "updatedAt": "01.12.20",
+            "user": Object {
+              "createdAt": "01.12.20",
+              "id": 1,
+              "login": "IvanIvanov",
+              "name": "Ivan Ivanov",
+              "updatedAt": "01.12.20",
+            },
+            "userId": 1,
+          }
+        }
+        key="2"
+      >
+        <div
+          className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
+        >
+          <div
+            className="mb-4"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
+          <div
+            className="text-xs"
+          >
+            Ivan Ivanov
+             
+            01.12.20
+          </div>
+        </div>
+      </ForumTopicComment>
+      <ForumTopicComment
+        comment={
+          Object {
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "createdAt": "01.12.20",
+            "id": 1,
+            "reactions": Array [
+              Object {
+                "commentId": 1,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 1,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+              Object {
+                "commentId": 1,
+                "content": "😅",
+                "createdAt": "01.12.20",
+                "id": 2,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+              Object {
+                "commentId": 1,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 3,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 2,
+                  "login": "PetrPetrov",
+                  "name": "Petr Petrov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 2,
+              },
+            ],
+            "topicId": 1,
+            "updatedAt": "01.12.20",
+            "user": Object {
+              "createdAt": "01.12.20",
+              "id": 1,
+              "login": "IvanIvanov",
+              "name": "Ivan Ivanov",
+              "updatedAt": "01.12.20",
+            },
+            "userId": 1,
+          }
+        }
+        key="1"
+      >
+        <div
+          className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
+        >
+          <div
+            className="mb-4"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
+          <div
+            className="text-xs"
+          >
+            Ivan Ivanov
+             
+            01.12.20
+          </div>
+        </div>
+      </ForumTopicComment>
+      <ForumTopicComment
+        comment={
+          Object {
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "createdAt": "01.12.20",
+            "id": 2,
+            "reactions": Array [
+              Object {
+                "commentId": 2,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 1,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+            ],
+            "topicId": 1,
+            "updatedAt": "01.12.20",
+            "user": Object {
+              "createdAt": "01.12.20",
+              "id": 1,
+              "login": "IvanIvanov",
+              "name": "Ivan Ivanov",
+              "updatedAt": "01.12.20",
+            },
+            "userId": 1,
+          }
+        }
+        key="2"
+      >
+        <div
+          className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
+        >
+          <div
+            className="mb-4"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
+          <div
+            className="text-xs"
+          >
+            Ivan Ivanov
+             
+            01.12.20
+          </div>
+        </div>
+      </ForumTopicComment>
+      <ForumTopicComment
+        comment={
+          Object {
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "createdAt": "01.12.20",
+            "id": 1,
+            "reactions": Array [
+              Object {
+                "commentId": 1,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 1,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+              Object {
+                "commentId": 1,
+                "content": "😅",
+                "createdAt": "01.12.20",
+                "id": 2,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+              Object {
+                "commentId": 1,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 3,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 2,
+                  "login": "PetrPetrov",
+                  "name": "Petr Petrov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 2,
+              },
+            ],
+            "topicId": 1,
+            "updatedAt": "01.12.20",
+            "user": Object {
+              "createdAt": "01.12.20",
+              "id": 1,
+              "login": "IvanIvanov",
+              "name": "Ivan Ivanov",
+              "updatedAt": "01.12.20",
+            },
+            "userId": 1,
+          }
+        }
+        key="1"
+      >
+        <div
+          className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
+        >
+          <div
+            className="mb-4"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
+          <div
+            className="text-xs"
+          >
+            Ivan Ivanov
+             
+            01.12.20
+          </div>
+        </div>
+      </ForumTopicComment>
+      <ForumTopicComment
+        comment={
+          Object {
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "createdAt": "01.12.20",
+            "id": 2,
+            "reactions": Array [
+              Object {
+                "commentId": 2,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 1,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+            ],
+            "topicId": 1,
+            "updatedAt": "01.12.20",
+            "user": Object {
+              "createdAt": "01.12.20",
+              "id": 1,
+              "login": "IvanIvanov",
+              "name": "Ivan Ivanov",
+              "updatedAt": "01.12.20",
+            },
+            "userId": 1,
+          }
+        }
+        key="2"
+      >
+        <div
+          className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
+        >
+          <div
+            className="mb-4"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
+          <div
+            className="text-xs"
+          >
+            Ivan Ivanov
+             
+            01.12.20
+          </div>
+        </div>
+      </ForumTopicComment>
+      <ForumTopicComment
+        comment={
+          Object {
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "createdAt": "01.12.20",
+            "id": 1,
+            "reactions": Array [
+              Object {
+                "commentId": 1,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 1,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+              Object {
+                "commentId": 1,
+                "content": "😅",
+                "createdAt": "01.12.20",
+                "id": 2,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+              Object {
+                "commentId": 1,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 3,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 2,
+                  "login": "PetrPetrov",
+                  "name": "Petr Petrov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 2,
+              },
+            ],
+            "topicId": 1,
+            "updatedAt": "01.12.20",
+            "user": Object {
+              "createdAt": "01.12.20",
+              "id": 1,
+              "login": "IvanIvanov",
+              "name": "Ivan Ivanov",
+              "updatedAt": "01.12.20",
+            },
+            "userId": 1,
+          }
+        }
+        key="1"
+      >
+        <div
+          className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
+        >
+          <div
+            className="mb-4"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
+          <div
+            className="text-xs"
+          >
+            Ivan Ivanov
+             
+            01.12.20
+          </div>
+        </div>
+      </ForumTopicComment>
+      <ForumTopicComment
+        comment={
+          Object {
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "createdAt": "01.12.20",
+            "id": 2,
+            "reactions": Array [
+              Object {
+                "commentId": 2,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 1,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+            ],
+            "topicId": 1,
+            "updatedAt": "01.12.20",
+            "user": Object {
+              "createdAt": "01.12.20",
+              "id": 1,
+              "login": "IvanIvanov",
+              "name": "Ivan Ivanov",
+              "updatedAt": "01.12.20",
+            },
+            "userId": 1,
+          }
+        }
+        key="2"
+      >
+        <div
+          className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
+        >
+          <div
+            className="mb-4"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
+          <div
+            className="text-xs"
+          >
+            Ivan Ivanov
+             
+            01.12.20
+          </div>
+        </div>
+      </ForumTopicComment>
+      <ForumTopicComment
+        comment={
+          Object {
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "createdAt": "01.12.20",
+            "id": 1,
+            "reactions": Array [
+              Object {
+                "commentId": 1,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 1,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+              Object {
+                "commentId": 1,
+                "content": "😅",
+                "createdAt": "01.12.20",
+                "id": 2,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+              Object {
+                "commentId": 1,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 3,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 2,
+                  "login": "PetrPetrov",
+                  "name": "Petr Petrov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 2,
+              },
+            ],
+            "topicId": 1,
+            "updatedAt": "01.12.20",
+            "user": Object {
+              "createdAt": "01.12.20",
+              "id": 1,
+              "login": "IvanIvanov",
+              "name": "Ivan Ivanov",
+              "updatedAt": "01.12.20",
+            },
+            "userId": 1,
+          }
+        }
+        key="1"
+      >
+        <div
+          className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
+        >
+          <div
+            className="mb-4"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
+          <div
+            className="text-xs"
+          >
+            Ivan Ivanov
+             
+            01.12.20
+          </div>
+        </div>
+      </ForumTopicComment>
+      <ForumTopicComment
+        comment={
+          Object {
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "createdAt": "01.12.20",
+            "id": 2,
+            "reactions": Array [
+              Object {
+                "commentId": 2,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 1,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+            ],
+            "topicId": 1,
+            "updatedAt": "01.12.20",
+            "user": Object {
+              "createdAt": "01.12.20",
+              "id": 1,
+              "login": "IvanIvanov",
+              "name": "Ivan Ivanov",
+              "updatedAt": "01.12.20",
+            },
+            "userId": 1,
+          }
+        }
+        key="2"
+      >
+        <div
+          className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
+        >
+          <div
+            className="mb-4"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
+          <div
+            className="text-xs"
+          >
+            Ivan Ivanov
+             
+            01.12.20
+          </div>
+        </div>
+      </ForumTopicComment>
+      <ForumTopicComment
+        comment={
+          Object {
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "createdAt": "01.12.20",
+            "id": 1,
+            "reactions": Array [
+              Object {
+                "commentId": 1,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 1,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+              Object {
+                "commentId": 1,
+                "content": "😅",
+                "createdAt": "01.12.20",
+                "id": 2,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+              Object {
+                "commentId": 1,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 3,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 2,
+                  "login": "PetrPetrov",
+                  "name": "Petr Petrov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 2,
+              },
+            ],
+            "topicId": 1,
+            "updatedAt": "01.12.20",
+            "user": Object {
+              "createdAt": "01.12.20",
+              "id": 1,
+              "login": "IvanIvanov",
+              "name": "Ivan Ivanov",
+              "updatedAt": "01.12.20",
+            },
+            "userId": 1,
+          }
+        }
+        key="1"
+      >
+        <div
+          className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
+        >
+          <div
+            className="mb-4"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
+          <div
+            className="text-xs"
+          >
+            Ivan Ivanov
+             
+            01.12.20
+          </div>
+        </div>
+      </ForumTopicComment>
+      <ForumTopicComment
+        comment={
+          Object {
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "createdAt": "01.12.20",
+            "id": 2,
+            "reactions": Array [
+              Object {
+                "commentId": 2,
+                "content": "😂",
+                "createdAt": "01.12.20",
+                "id": 1,
+                "updatedAt": "01.12.20",
+                "user": Object {
+                  "createdAt": "01.12.20",
+                  "id": 1,
+                  "login": "IvanIvanov",
+                  "name": "Ivan Ivanov",
+                  "updatedAt": "01.12.20",
+                },
+                "userId": 1,
+              },
+            ],
+            "topicId": 1,
+            "updatedAt": "01.12.20",
+            "user": Object {
+              "createdAt": "01.12.20",
+              "id": 1,
+              "login": "IvanIvanov",
+              "name": "Ivan Ivanov",
+              "updatedAt": "01.12.20",
+            },
+            "userId": 1,
+          }
+        }
+        key="2"
+      >
+        <div
+          className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
+        >
+          <div
+            className="mb-4"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
+          <div
+            className="text-xs"
+          >
+            Ivan Ivanov
+             
+            01.12.20
+          </div>
+        </div>
+      </ForumTopicComment>
+    </div>
     <TopicMessageForm>
       <BaseForm
         buttonText="Send"

@@ -8,13 +8,17 @@ import {
   AllowNull
 } from 'sequelize-typescript'
 
-import { User, Comment } from '@models'
+import { User, Comment, IUser, IComment } from '@models'
 
 export interface IReaction {
   id?: number
   content: string
   userId: number
+  user?: Omit<IUser, 'passwordHash'>
   commentId: number
+  comment?: IComment
+  createdAt?: string
+  updatedAt?: string
 }
 
 @Table

@@ -10,8 +10,11 @@ import {
 import { Comment } from '@models'
 
 export interface ICommentAncestor {
+  id: number
   commentId: number
   ancestorId: number
+  createdAt?: string
+  updatedAt?: string
 }
 
 @Table

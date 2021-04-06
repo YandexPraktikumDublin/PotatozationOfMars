@@ -5,18 +5,29 @@ import toJSON from 'enzyme-to-json'
 import { FormTopicMessage } from '.'
 
 describe('<FormTopicMessage />', () => {
-  const body = 'Test body'
-  const userName = 'Ivan Ivanov'
-  const date = '12.02.20'
+  const topic = {
+    id: 1,
+    subject: 'New Games',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    userId: 1,
+    user: {
+      id: 1,
+      login: 'IvanIvanov',
+      name: 'Ivan Ivanov',
+      createdAt: '01.12.20',
+      updatedAt: '01.12.20'
+    },
+    createdAt: '01.12.20',
+    updatedAt: '01.12.20',
+    comments: []
+  }
 
   it('should renders correct <FormTopicMessage />', () => {
-    const wrapper = shallow(
-      <FormTopicMessage body={body} userName={userName} date={date} />
-    )
+    const wrapper = shallow(<FormTopicMessage topic={topic} />)
 
-    expect(wrapper.contains(body)).toBeTruthy()
-    expect(wrapper.contains(userName)).toBeTruthy()
-    expect(wrapper.contains(date)).toBeTruthy()
+    expect(wrapper.contains(topic.content)).toBeTruthy()
+    expect(wrapper.contains(topic.user.name)).toBeTruthy()
+    expect(wrapper.contains(topic.updatedAt)).toBeTruthy()
 
     expect(toJSON(wrapper)).toMatchSnapshot()
   })

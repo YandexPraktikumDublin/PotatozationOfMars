@@ -10,11 +10,14 @@ import {
   Unique
 } from 'sequelize-typescript'
 
-import { User } from '@models'
+import { IUser, User } from '@models'
 
 export interface IAuthToken {
   token: string
   userId: number
+  user?: Omit<IUser, 'passwordHash'>
+  createdAt?: string
+  updatedAt?: string
 }
 
 @Table

@@ -8,13 +8,16 @@ import {
   AllowNull,
   HasMany
 } from 'sequelize-typescript'
-import { User, Comment } from '@models'
+import { User, Comment, IUser } from '@models'
 
 export interface ITopic {
   id?: number
   subject: string
   content: string
   userId: number
+  user?: Omit<IUser, 'passwordHash'>
+  createdAt?: string
+  updatedAt?: string
 }
 
 @Table

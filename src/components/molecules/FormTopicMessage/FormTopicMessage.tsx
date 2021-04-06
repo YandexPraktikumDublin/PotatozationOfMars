@@ -1,23 +1,22 @@
 import React, { FC, memo } from 'react'
 import classNames from 'classnames'
+import { ITopic } from '@models'
 
 type TFormTopicMessageProps = {
-  body: string
-  userName: string
-  date: string
+  topic: ITopic
 }
 
 const FormTopicMessage: FC<TFormTopicMessageProps> = memo(
-  ({ body, userName, date }: TFormTopicMessageProps) => (
+  ({ topic }: TFormTopicMessageProps) => (
     <div
       className={classNames(
-        'text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0',
+        'text-left border border-primary rounded-2xl p-4 mb-10',
         'dark:border-white'
       )}
     >
-      <div className="mb-4">{body}</div>
+      <div className="mb-4">{topic.content}</div>
       <div className="text-xs">
-        {userName} {date}
+        {topic?.user?.name} {topic.createdAt}
       </div>
     </div>
   )

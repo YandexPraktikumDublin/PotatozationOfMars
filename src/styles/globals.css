@@ -8,4 +8,17 @@
 
     @apply text-primary;
   }
+
+  *::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  *::-webkit-scrollbar-track {
+    box-shadow: inset 0 2px 4px rgba(85, 85, 85, 0.25);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #cdc9c3;
+    outline: 1px solid #cdc9c3;
+  }
 }

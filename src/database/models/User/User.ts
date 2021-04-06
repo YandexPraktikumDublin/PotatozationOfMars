@@ -9,7 +9,16 @@ import {
   Default
 } from 'sequelize-typescript'
 
-import { AuthToken, Topic, Comment, Reaction } from '@models'
+import {
+  AuthToken,
+  Topic,
+  Comment,
+  Reaction,
+  IAuthToken,
+  ITopic,
+  IComment,
+  IReaction
+} from '@models'
 
 export enum roleEnum {
   regular = 'regular',
@@ -22,6 +31,12 @@ export interface IUser {
   name: string
   passwordHash: string
   role?: roleEnum
+  authTokens?: IAuthToken[]
+  topics?: ITopic[]
+  comments?: IComment[]
+  reactions?: IReaction[]
+  createdAt?: string
+  updatedAt?: string
 }
 
 @Table

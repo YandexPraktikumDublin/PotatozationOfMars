@@ -5,7 +5,7 @@ type TForumTopicTemplateProps = {}
 
 const ForumTopicTemplate: FC<TForumTopicTemplateProps> = memo(() => (
   <div className="w-full max-w-2xl">
-    <Window>
+    <Window isFullHeight>
       <ForumTopic />
     </Window>
   </div>
