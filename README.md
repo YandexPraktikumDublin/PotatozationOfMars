@@ -26,11 +26,12 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 
 ## Запуск в Docker
 
-- `docker-compose up web` - запуск
+- `docker-compose up web` - запуск.
+- `docker-compose up --build web` - запуск с пересборкой.
 
 ## Внутреннее API
 
-# User
+### User
 
 - `GET /api/v1/user` - получить текущего пользователя.
 - `POST /api/v1/signup` - регистрация.
@@ -65,7 +66,7 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
   }
 ```
 
-# Topics
+### Topics
 
 - `GET /api/v1/topics` - получить все топики.
 - `GET /api/v1/topics/:id` - получить топик по id.
@@ -77,7 +78,7 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
   }
 ```
 
-# Comments
+### Comments
 
 - `GET /api/v1/comments` - получить все комментарии.
 - `GET /api/v1/comments/:id` - получить комментарии по id.
@@ -91,7 +92,7 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
   }
 ```
 
-# Reactions
+### Reactions
 
 - `GET /api/v1/reactions` - получить все реакции.
 - `GET /api/v1/reactions/:id` - получить реакции по id.
