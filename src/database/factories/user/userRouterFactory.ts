@@ -44,7 +44,12 @@ export const userRouterFactory = (
           return res.status(401).json({ errors: ['Not Authorized'] })
         }
 
-        if (!bcrypt.compareSync(req.body.oldPassword, req.user.passwordHash)) {
+        if (
+          !bcrypt.compareSync(
+            req.body.oldPassword,
+            req.user.getDataValue('passwordHash')
+          )
+        ) {
           return res
             .status(400)
             .json({ errors: ['Old password is not correct'] })
