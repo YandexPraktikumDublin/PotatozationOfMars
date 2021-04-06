@@ -135,6 +135,8 @@ export const userRouterFactory = (
           where: { token: req.universalCookies.cookies.token }
         })
 
+        res.clearCookie('token')
+
         return res.status(204).json()
       } catch (error) {
         res
