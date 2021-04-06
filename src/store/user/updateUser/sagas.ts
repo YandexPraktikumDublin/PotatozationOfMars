@@ -3,15 +3,20 @@ import { getAxiosInstance } from '@api'
 import { updateUserSuccess, updateUserFailure } from './actions'
 import { UPDATE_USER_REQUEST } from './actionTypes'
 import { IUpdateUserRequestPayload } from './types'
+import { INNER_API_V1_URL } from '@config'
 
 const changeUserData = (data: IUpdateUserRequestPayload) =>
   getAxiosInstance().put('user/profile', data)
+
+const innerChangeUserData = (data: IUpdateUserRequestPayload) =>
+  getAxiosInstance(INNER_API_V1_URL).put('current-user', data)
 
 function* updateUserSaga(data: Record<string, any>) {
   try {
     const response = yield call(changeUserData, data.payload)
 
     yield put(updateUserSuccess({ user: response.data }))
+    yield call(innerChangeUserData, data.payload)
   } catch (error) {
     yield put(
       updateUserFailure({

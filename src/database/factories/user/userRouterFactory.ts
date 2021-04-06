@@ -17,7 +17,7 @@ export const userRouterFactory = (
         : res.status(401).json({ errors: ['Not Authorized'] })
     )
 
-    .patch(`${INNER_API_V1_URL}/current-user`, async (req, res) => {
+    .put(`${INNER_API_V1_URL}/current-user`, async (req, res) => {
       try {
         if (!req.user) {
           return res.status(401).json({ errors: ['Not Authorized'] })
@@ -38,13 +38,19 @@ export const userRouterFactory = (
       }
     })
 
-    .patch(`${INNER_API_V1_URL}/current-user/password`, async (req, res) => {
+    .put(`${INNER_API_V1_URL}/current-user/password`, async (req, res) => {
       try {
         if (!req.user) {
           return res.status(401).json({ errors: ['Not Authorized'] })
         }
 
-        const passwordHash = bcrypt.hashSync(req.body.password, 10)
+        if (!bcrypt.compareSync(req.body.oldPassword, req.user.passwordHash)) {
+          return res
+            .status(400)
+            .json({ errors: ['Old password is not correct'] })
+        }
+
+        const passwordHash = bcrypt.hashSync(req.body.newPassword, 10)
 
         const result = await userRepository.update(
           { passwordHash },
