@@ -6,7 +6,8 @@ import {
   AllowNull,
   BelongsTo,
   ForeignKey,
-  Index
+  Index,
+  Unique
 } from 'sequelize-typescript'
 
 import { User } from '@models'
@@ -20,6 +21,7 @@ export interface IAuthToken {
 export class AuthToken extends Model<IAuthToken> {
   @Index
   @AllowNull(false)
+  @Unique
   @Column(DataType.STRING)
   token!: string
 
