@@ -16,6 +16,11 @@ export interface IUpdateUserRequestPayload {
   phone?: string
 }
 
+export interface IInnerUpdateUserRequestPayload {
+  login?: string
+  name?: string
+}
+
 export interface IUpdateUserSuccessPayload {
   user: IServerUser
 }

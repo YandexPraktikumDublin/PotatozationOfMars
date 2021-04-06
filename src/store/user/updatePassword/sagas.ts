@@ -2,13 +2,16 @@ import { all, call, put, takeLatest } from 'redux-saga/effects'
 import { getAxiosInstance } from '@api'
 import { updatePasswordSuccess, updatePasswordFailure } from './actions'
 import { UPDATE_PASSWORD_REQUEST } from './actionTypes'
-import { IUpdatePasswordRequestPayload } from './types'
+import {
+  IUpdatePasswordRequestPayload,
+  IInnerUpdatePasswordRequestPayload
+} from './types'
 import { INNER_API_V1_URL } from '@config'
 
 const updatePassword = (data: IUpdatePasswordRequestPayload) =>
   getAxiosInstance().put('user/password', data)
 
-const innerUpdatePassword = (data: IUpdatePasswordRequestPayload) =>
+const innerUpdatePassword = (data: IInnerUpdatePasswordRequestPayload) =>
   getAxiosInstance(INNER_API_V1_URL).put('user/password', data)
 
 function* updatePasswordSaga(data: Record<string, any>) {

@@ -11,6 +11,11 @@ export interface IAuthRequestPayload {
   password: string
 }
 
+export interface IInnerAuthRequestPayload {
+  login: string
+  password: string
+}
+
 export interface IAuthSuccessPayload {
   id: number
 }

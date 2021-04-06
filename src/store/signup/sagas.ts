@@ -4,12 +4,12 @@ import { INNER_API_V1_URL, PATHS } from '@config'
 import { hardRedirectTo } from '@utils/misc'
 import { signupFailure, signupSuccess } from './actions'
 import { SIGNUP_REQUEST } from './actionTypes'
-import { ISignupRequestPayload } from './types'
+import { ISignupRequestPayload, IInnerSignupRequestPayload } from './types'
 
 const signup = (data: ISignupRequestPayload) =>
   getAxiosInstance().post('auth/signup', data)
 
-const innerSignup = (data: Record<string, any>) =>
+const innerSignup = (data: IInnerSignupRequestPayload) =>
   getAxiosInstance(INNER_API_V1_URL).post('signup', data)
 
 function* signupSaga(data: Record<string, any>) {
@@ -19,7 +19,8 @@ function* signupSaga(data: Record<string, any>) {
     yield put(signupSuccess(response.data))
     yield call(innerSignup, {
       login: data.payload.login,
-      name: `${data.payload.first_name} ${data.payload.second_name}`
+      name: `${data.payload.first_name} ${data.payload.second_name}`,
+      password: data.payload.password
     })
     yield call(hardRedirectTo, PATHS.BASE)
   } catch (error) {

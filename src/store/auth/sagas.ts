@@ -4,12 +4,15 @@ import { INNER_API_V1_URL, PATHS } from '@config'
 import { hardRedirectTo } from '@utils/misc'
 import { authFailure, authSuccess } from './actions'
 import { AUTH_REQUEST } from './actionTypes'
-import { IAuthRequestPayload } from '@store/auth/types'
+import {
+  IAuthRequestPayload,
+  IInnerAuthRequestPayload
+} from '@store/auth/types'
 
 const signin = (data: IAuthRequestPayload) =>
   getAxiosInstance().post('auth/signin', data)
 
-const innerSignin = (data: IAuthRequestPayload) =>
+const innerSignin = (data: IInnerAuthRequestPayload) =>
   getAxiosInstance(INNER_API_V1_URL).post('signin', data)
 
 function* authSaga(data: Record<string, any>) {

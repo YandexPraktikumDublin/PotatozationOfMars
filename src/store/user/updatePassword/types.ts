@@ -10,6 +10,11 @@ export interface IUpdatePasswordRequestPayload {
   newPassword: string
 }
 
+export interface IInnerUpdatePasswordRequestPayload {
+  oldPassword: string
+  newPassword: string
+}
+
 export interface IUpdatePasswordSuccessPayload {
   user: IServerUser
 }
