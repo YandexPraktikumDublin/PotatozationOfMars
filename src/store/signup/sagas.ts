@@ -1,6 +1,6 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects'
 import { getAxiosInstance } from '@api'
-import { PATHS } from '@config'
+import { INNER_API_V1_URL, PATHS } from '@config'
 import { hardRedirectTo } from '@utils/misc'
 import { signupFailure, signupSuccess } from './actions'
 import { SIGNUP_REQUEST } from './actionTypes'
@@ -9,11 +9,15 @@ import { ISignupRequestPayload } from './types'
 const signup = (data: ISignupRequestPayload) =>
   getAxiosInstance().post('auth/signup', data)
 
+const innerSignup = (data: ISignupRequestPayload) =>
+  getAxiosInstance(INNER_API_V1_URL).post('signup', data)
+
 function* signupSaga(data: Record<string, any>) {
   try {
     const response = yield call(signup, data.payload)
 
     yield put(signupSuccess(response.data))
+    yield call(innerSignup, data.payload)
     yield call(hardRedirectTo, PATHS.BASE)
   } catch (error) {
     yield put(

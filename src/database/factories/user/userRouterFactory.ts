@@ -3,7 +3,7 @@ import { Repository } from 'sequelize-typescript'
 import bcrypt from 'bcrypt'
 import { uid } from 'rand-token'
 
-import { AuthToken, roleEnum, User } from '@models'
+import { AuthToken, User } from '@models'
 import { INNER_API_V1_URL, DEFAULT_ERROR_MESSAGE } from '@config'
 
 export const userRouterFactory = (
@@ -64,16 +64,15 @@ export const userRouterFactory = (
       }
     })
 
-    .post(`${INNER_API_V1_URL}/signin`, async (req, res) => {
+    .post(`${INNER_API_V1_URL}/signup`, async (req, res) => {
       try {
         const passwordHash = bcrypt.hashSync(req.body.password, 10)
 
         const user = await userRepository.create(
           {
             login: req.body.login,
-            passwordHash,
-            name: req.body.name,
-            role: roleEnum.regular
+            name: `${req.body.first_name} ${req.body.second_name}`,
+            passwordHash
           },
           {
             fields: ['login', 'name', 'passwordHash'],
@@ -93,7 +92,7 @@ export const userRouterFactory = (
       }
     })
 
-    .post(`${INNER_API_V1_URL}/login`, async (req, res) => {
+    .post(`${INNER_API_V1_URL}/signin`, async (req, res) => {
       try {
         if (req.user) {
           return res.json(req.user)
@@ -125,7 +124,7 @@ export const userRouterFactory = (
       }
     })
 
-    .get(`${INNER_API_V1_URL}/signout`, async (req, res) => {
+    .post(`${INNER_API_V1_URL}/logout`, async (req, res) => {
       try {
         if (!req.user) {
           return res.status(401).json({ errors: ['Not Authorized'] })
