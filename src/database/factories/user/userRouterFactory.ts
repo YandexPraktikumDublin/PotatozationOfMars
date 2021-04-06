@@ -77,7 +77,7 @@ export const userRouterFactory = (
         const user = await userRepository.create(
           {
             login: req.body.login,
-            name: `${req.body.first_name} ${req.body.second_name}`,
+            name: req.body.name,
             passwordHash
           },
           {

@@ -49,7 +49,7 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
   }
 ```
 - `GET /api/v1/logout` - выход.
-- `PUT /api/v1/current-user` - обновить текущего пользователя.
+- `PUT /api/v1/user` - обновить текущего пользователя.
 ```
   {
     login: string
@@ -60,7 +60,8 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 - `PUT /api/v1/user/password` - обновить пароль текущего пользователя.
 ```
   {
-    password: string
+    oldPassword: string
+    newPassword: string
   }
 ```
 

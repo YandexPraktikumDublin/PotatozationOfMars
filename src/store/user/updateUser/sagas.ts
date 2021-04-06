@@ -8,7 +8,7 @@ import { INNER_API_V1_URL } from '@config'
 const changeUserData = (data: IUpdateUserRequestPayload) =>
   getAxiosInstance().put('user/profile', data)
 
-const innerChangeUserData = (data: IUpdateUserRequestPayload) =>
+const innerChangeUserData = (data: Record<string, any>) =>
   getAxiosInstance(INNER_API_V1_URL).put('user', data)
 
 function* updateUserSaga(data: Record<string, any>) {
@@ -16,7 +16,12 @@ function* updateUserSaga(data: Record<string, any>) {
     const response = yield call(changeUserData, data.payload)
 
     yield put(updateUserSuccess({ user: response.data }))
-    yield call(innerChangeUserData, data.payload)
+    yield call(innerChangeUserData, {
+      login: data.payload.login,
+      name:
+        data.payload.display_name ??
+        `${data.payload.first_name} ${data.payload.second_name}`
+    })
   } catch (error) {
     yield put(
       updateUserFailure({

@@ -9,7 +9,7 @@ import { ISignupRequestPayload } from './types'
 const signup = (data: ISignupRequestPayload) =>
   getAxiosInstance().post('auth/signup', data)
 
-const innerSignup = (data: ISignupRequestPayload) =>
+const innerSignup = (data: Record<string, any>) =>
   getAxiosInstance(INNER_API_V1_URL).post('signup', data)
 
 function* signupSaga(data: Record<string, any>) {
@@ -17,7 +17,10 @@ function* signupSaga(data: Record<string, any>) {
     const response = yield call(signup, data.payload)
 
     yield put(signupSuccess(response.data))
-    yield call(innerSignup, data.payload)
+    yield call(innerSignup, {
+      login: data.payload.login,
+      name: `${data.payload.first_name} ${data.payload.second_name}`
+    })
     yield call(hardRedirectTo, PATHS.BASE)
   } catch (error) {
     yield put(
