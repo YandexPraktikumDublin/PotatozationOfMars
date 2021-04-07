@@ -109,7 +109,7 @@ export const userRouterFactory = (
           return res.json(req.user)
         }
 
-        const user = await userRepository.findOne({
+        const user = await userRepository.scope('withSensitiveData').findOne({
           where: { login: req.body.login }
         })
 

@@ -15,7 +15,7 @@ export const reactionRouterFactory = (
         }
 
         const reactions = await reactionRepository.findAll({
-          include: userRepository.scope('withoutSensitiveData')
+          include: userRepository
         })
 
         return res.json(reactions)
@@ -33,7 +33,7 @@ export const reactionRouterFactory = (
         }
 
         const reaction = await reactionRepository.findByPk(req.params.id, {
-          include: userRepository.scope('withoutSensitiveData')
+          include: userRepository
         })
 
         if (!reaction) {

@@ -1,4 +1,5 @@
 import {
+  DefaultScope,
   Scopes,
   Model,
   Table,
@@ -40,10 +41,15 @@ export interface IUser {
   updatedAt?: string
 }
 
+@DefaultScope(() => ({
+  attributes: {
+    exclude: ['passwordHash', 'role', 'createdAt', 'updatedAt']
+  }
+}))
 @Scopes(() => ({
-  withoutSensitiveData: {
+  withSensitiveData: {
     attributes: {
-      exclude: ['passwordHash', 'role', 'createdAt', 'updatedAt']
+      include: ['passwordHash', 'role', 'createdAt', 'updatedAt']
     }
   }
 }))

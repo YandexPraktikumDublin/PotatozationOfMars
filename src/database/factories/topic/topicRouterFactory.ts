@@ -17,7 +17,7 @@ export const topicRouterFactory = (
         }
 
         const topics = await topicRepository.findAll({
-          include: [userRepository.scope('withoutSensitiveData')]
+          include: [userRepository]
         })
 
         return res.json(topics)
@@ -36,14 +36,14 @@ export const topicRouterFactory = (
 
         const topic = await topicRepository.findByPk(req.params.id, {
           include: [
-            userRepository.scope('withoutSensitiveData'),
+            userRepository,
             {
               model: commentRepository,
               include: [
-                userRepository.scope('withoutSensitiveData'),
+                userRepository,
                 {
                   model: reactionRepository,
-                  include: [userRepository.scope('withoutSensitiveData')]
+                  include: [userRepository]
                 }
               ]
             }

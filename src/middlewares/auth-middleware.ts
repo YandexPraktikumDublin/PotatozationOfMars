@@ -12,7 +12,7 @@ export default async function (
   if (token) {
     const authToken = await db.authTokenRepository.findOne({
       where: { token },
-      include: db.userRepository
+      include: [db.userRepository.scope('withSensitiveData')]
     })
 
     if (authToken) {
