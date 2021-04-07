@@ -1,4 +1,5 @@
 import {
+  Scopes,
   Model,
   Table,
   Column,
@@ -29,7 +30,7 @@ export interface IUser {
   id?: number
   login: string
   name: string
-  passwordHash: string
+  passwordHash?: string
   role?: roleEnum
   authTokens?: IAuthToken[]
   topics?: ITopic[]
@@ -39,6 +40,13 @@ export interface IUser {
   updatedAt?: string
 }
 
+@Scopes(() => ({
+  withoutSensitiveData: {
+    attributes: {
+      exclude: ['passwordHash', 'role', 'createdAt', 'updatedAt']
+    }
+  }
+}))
 @Table
 export class User extends Model<IUser> {
   @AllowNull(false)

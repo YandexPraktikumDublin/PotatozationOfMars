@@ -16,7 +16,10 @@ export const commentRouterFactory = (
         }
 
         const comments = await commentRepository.findAll({
-          include: [userRepository, reactionRepository]
+          include: [
+            userRepository.scope('withoutSensitiveData'),
+            reactionRepository
+          ]
         })
 
         return res.json(comments)
@@ -34,7 +37,10 @@ export const commentRouterFactory = (
         }
 
         const comment = await commentRepository.findByPk(req.params.id, {
-          include: [userRepository, reactionRepository]
+          include: [
+            userRepository.scope('withoutSensitiveData'),
+            reactionRepository
+          ]
         })
 
         if (!comment) {

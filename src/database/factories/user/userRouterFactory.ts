@@ -117,7 +117,7 @@ export const userRouterFactory = (
           user &&
           bcrypt.compareSync(
             req.body.password,
-            user.getDataValue('passwordHash')
+            user.getDataValue('passwordHash') ?? ''
           )
         ) {
           const token = uid(32)
