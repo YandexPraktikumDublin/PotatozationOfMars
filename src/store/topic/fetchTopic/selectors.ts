@@ -3,15 +3,15 @@ import { IAppState } from '@types'
 
 const getPending = (state: IAppState) => state.topic.pending
 
-const getUser = (state: IAppState) => state.topic.topic
+const getTopic = (state: IAppState) => state.topic.topic
 
 const getError = (state: IAppState) => state.topic.error
 
-export const getUserPendingSelector = createSelector(
+export const getTopicPendingSelector = createSelector(
   getPending,
   (pending) => pending
 )
 
-export const getUserSelector = createSelector(getUser, (topic) => topic)
+export const getTopicSelector = createSelector(getTopic, (topic) => topic)
 
-export const getUserErrorSelector = createSelector(getError, (error) => error)
+export const getTopicErrorSelector = createSelector(getError, (error) => error)

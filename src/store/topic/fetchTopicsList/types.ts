@@ -1,38 +1,38 @@
 import {
-  TOPICS_LIST_REQUEST,
-  TOPICS_LIST_SUCCESS,
-  TOPICS_LIST_FAILURE
+  FETCH_TOPICS_LIST_REQUEST,
+  FETCH_TOPICS_LIST_SUCCESS,
+  FETCH_TOPICS_LIST_FAILURE
 } from './actionTypes'
 
 export interface ITopicsListState {
   pending: boolean
   error: string
-  topics: []
+  topics: any[]
 }
 
-export interface ITopicsListSuccessPayload {
-  topics: []
+export interface IFetchTopicsListSuccessPayload {
+  topics: any[]
 }
 
-export interface ITopicsListFailurePayload {
+export interface IFetchTopicsListFailurePayload {
   error: string
 }
 
-export type TTopicsListRequest = {
-  type: typeof TOPICS_LIST_REQUEST
+export type TFetchTopicsListRequest = {
+  type: typeof FETCH_TOPICS_LIST_REQUEST
 }
 
-export type TTopicsListSuccess = {
-  type: typeof TOPICS_LIST_SUCCESS
-  payload: ITopicsListSuccessPayload
+export type TFetchTopicsListSuccess = {
+  type: typeof FETCH_TOPICS_LIST_SUCCESS
+  payload: IFetchTopicsListSuccessPayload
 }
 
-export type TTopicsListFailure = {
-  type: typeof TOPICS_LIST_FAILURE
-  payload: ITopicsListFailurePayload
+export type TFetchTopicsListFailure = {
+  type: typeof FETCH_TOPICS_LIST_FAILURE
+  payload: IFetchTopicsListFailurePayload
 }
 
-export type TTopicsListActions =
-  | TTopicsListRequest
-  | TTopicsListSuccess
-  | TTopicsListFailure
+export type TFetchTopicsListActions =
+  | TFetchTopicsListRequest
+  | TFetchTopicsListSuccess
+  | TFetchTopicsListFailure

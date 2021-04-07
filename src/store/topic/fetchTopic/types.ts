@@ -8,10 +8,7 @@ import { ITopic } from '@models'
 export interface ITopicState {
   pending: boolean
   error: string
-  topic: {
-    subject: string
-    content: string
-  }
+  topic: ITopic
 }
 
 export interface IFetchTopicRequestPayload {
