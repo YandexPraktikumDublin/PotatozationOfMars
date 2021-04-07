@@ -6,10 +6,12 @@ import routes from '@routes'
 
 import './styles/globals.css'
 
+const wrapperStyle = { backgroundImage: `url(${background})` }
+
 const App: React.FC = () => (
   <div
     className="relative bg-cover bg-center bg-no-repeat"
-    style={{ backgroundImage: `url(${background})` }}
+    style={wrapperStyle}
   >
     <div className="hidden absolute inset-0 bg-black opacity-50 dark:block" />
 

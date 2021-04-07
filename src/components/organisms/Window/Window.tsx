@@ -1,4 +1,4 @@
-import React, { FC, memo, ReactNode } from 'react'
+import React, { FC, memo, ReactNode, useMemo } from 'react'
 import classNames from 'classnames'
 
 type TWindowProps = {
@@ -8,6 +8,11 @@ type TWindowProps = {
 
 const Window: FC<TWindowProps> = memo(
   ({ children, isFullHeight = false }: TWindowProps) => {
+    const wrapperStyle = useMemo(
+      () => ({ maxHeight: isFullHeight ? 'calc(100vh - 7rem)' : 'none' }),
+      [isFullHeight]
+    )
+
     return (
       <div
         className={classNames(
@@ -17,7 +22,7 @@ const Window: FC<TWindowProps> = memo(
             'h-screen overflow-hidden': isFullHeight
           }
         )}
-        style={{ maxHeight: isFullHeight ? 'calc(100vh - 7rem)' : 'none' }}
+        style={wrapperStyle}
       >
         <div className="overflow-y-auto pr-6 h-full">{children}</div>
       </div>
