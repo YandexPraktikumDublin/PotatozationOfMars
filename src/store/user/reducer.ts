@@ -18,10 +18,11 @@ import {
   UPDATE_PASSWORD_SUCCESS,
   UPDATE_PASSWORD_FAILURE
 } from './updatePassword/actionTypes'
-import { TUserActions, IUserState } from './fetchUser/types'
+import { TUserActions } from './fetchUser/types'
 import { TUpdateUserActions } from './updateUser/types'
 import { TUpdateAvatarActions } from './updateAvatar/types'
 import { TUpdatePasswordActions } from './updatePassword/types'
+import { IUserState } from './types'
 import { normalizeUser } from '@utils/user'
 
 type TCommonAction =

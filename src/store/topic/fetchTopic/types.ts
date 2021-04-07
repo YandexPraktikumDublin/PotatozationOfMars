@@ -5,12 +5,6 @@ import {
 } from './actionTypes'
 import { ITopic } from '@models'
 
-export interface ITopicState {
-  pending: boolean
-  topic: ITopic | null
-  error: string | null
-}
-
 export interface IFetchTopicRequestPayload {
   id: number
 }

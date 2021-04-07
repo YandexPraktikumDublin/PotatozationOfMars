@@ -2,8 +2,11 @@ import {
   FETCH_TOPICS_REQUEST,
   FETCH_TOPICS_SUCCESS,
   FETCH_TOPICS_FAILURE
-} from './actionTypes'
-import { TFetchTopicsActions, ITopicsState } from './types'
+} from './fetchTopics/actionTypes'
+import { TFetchTopicsActions } from './fetchTopics/types'
+import { ITopicsState } from './types'
+
+type TCommonAction = TFetchTopicsActions
 
 const initialState: ITopicsState = {
   pending: false,
@@ -11,10 +14,7 @@ const initialState: ITopicsState = {
   error: null
 }
 
-export default (
-  state = initialState,
-  action: TFetchTopicsActions
-): ITopicsState => {
+export default (state = initialState, action: TCommonAction): ITopicsState => {
   switch (action.type) {
     case FETCH_TOPICS_REQUEST:
       return {
