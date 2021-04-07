@@ -16,6 +16,7 @@ import createCommentSaga from '@store/comment/createComment/sagas'
 import fetchCommentsSaga from '@store/comments/fetchComments/sagas'
 import fetchReactionSaga from '@store/reaction/fetchReaction/sagas'
 import createReactionSaga from '@store/reaction/createReaction/sagas'
+import fetchReactionsSaga from '@store/reactions/fetchReactions/sagas'
 
 export default function* rootSaga() {
   yield all([
@@ -35,6 +36,7 @@ export default function* rootSaga() {
     fork(createCommentSaga),
     fork(fetchCommentsSaga),
     fork(fetchReactionSaga),
-    fork(createReactionSaga)
+    fork(createReactionSaga),
+    fork(fetchReactionsSaga)
   ])
 }

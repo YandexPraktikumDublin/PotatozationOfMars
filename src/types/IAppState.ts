@@ -10,6 +10,7 @@ import { ITopicState } from '@store/topic/types'
 import { ICommentState } from '@store/comment/types'
 import { ICommentsState } from '@store/comments/types'
 import { IReactionState } from '@store/reaction/types'
+import { IReactionsState } from '@store/reactions/types'
 
 export interface IAppState {
   auth: IAuthState
@@ -24,4 +25,5 @@ export interface IAppState {
   comment: ICommentState
   comments: ICommentsState
   reaction: IReactionState
+  reactions: IReactionsState
 }
