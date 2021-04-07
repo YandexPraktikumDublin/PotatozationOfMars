@@ -8,6 +8,7 @@ import { IGameState } from '@store/game/types'
 import { ITopicsState } from '@store/topics/types'
 import { ITopicState } from '@store/topic/types'
 import { ICommentState } from '@store/comment/types'
+import { ICommentsState } from '@store/comments/types'
 
 export interface IAppState {
   auth: IAuthState
@@ -20,4 +21,5 @@ export interface IAppState {
   topic: ITopicState
   topics: ITopicsState
   comment: ICommentState
+  comments: ICommentsState
 }

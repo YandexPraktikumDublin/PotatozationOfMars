@@ -13,6 +13,7 @@ import createTopicSaga from '@store/topic/createTopic/sagas'
 import fetchTopicsSaga from '@store/topics/fetchTopics/sagas'
 import fetchCommentSaga from '@store/comment/fetchComment/sagas'
 import createCommentSaga from '@store/comment/createComment/sagas'
+import fetchCommentsSaga from '@store/comments/fetchComments/sagas'
 
 export default function* rootSaga() {
   yield all([
@@ -29,6 +30,7 @@ export default function* rootSaga() {
     fork(createTopicSaga),
     fork(fetchTopicsSaga),
     fork(fetchCommentSaga),
-    fork(createCommentSaga)
+    fork(createCommentSaga),
+    fork(fetchCommentsSaga)
   ])
 }
