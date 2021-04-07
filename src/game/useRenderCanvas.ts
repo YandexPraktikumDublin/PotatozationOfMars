@@ -11,17 +11,21 @@ import {
   updateScore
 } from '@store/game/actions'
 import { isServer } from '@utils/misc'
+import { updateLeaderboardRequest } from '@store/leaderboard/updateLeaderboard/actions'
+import { getUserSelector } from '@store/user/fetchUser/selectors'
 
 const useRenderCanvas = () => {
   const store = useStore()
   const dispatch = useDispatch()
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const backgroundRef = useRef<HTMLCanvasElement>(null)
+  const user = useSelector(getUserSelector)
+
   let controls = isServer()
     ? useSelector(getControlsSelector)
     : window.localStorage.controlWithMouse ?? useSelector(getControlsSelector)
 
-  let { isPaused } = store.getState().game
+  let { isPaused, score } = store.getState().game
 
   const updateHealth = (health: number) => {
     dispatch(updatePlayerHealth({ health }))
@@ -36,6 +40,19 @@ const useRenderCanvas = () => {
     dispatch(resetScore())
   }
 
+  const updateLeaderBoard = (score: number) => {
+    if (!user) return
+    dispatch(
+      updateLeaderboardRequest({
+        data: {
+          potatozationOfMarsScores: score,
+          potatozationOfMarsUserId: user.id,
+          potatozationOfMarsUserLogin: user.login
+        }
+      })
+    )
+  }
+
   useEffect(() => {
     const canvas = canvasRef.current as HTMLCanvasElement
     const backgroundCanvas = backgroundRef.current as HTMLCanvasElement
@@ -43,7 +60,8 @@ const useRenderCanvas = () => {
     const game = new GameplayController(canvas, backgroundCanvas, {
       updateHealth,
       updateGameScore,
-      initNewGame
+      initNewGame,
+      updateLeaderBoard
     })
 
     const toggleModal = () => {
@@ -51,12 +69,17 @@ const useRenderCanvas = () => {
     }
 
     const listener = () => {
-      const newIsPaused = store.getState().game.isPaused
-      const newControls = store.getState().game.controls
-      const newGame = store.getState().game.newGame
+      const {
+        isPaused: newIsPaused,
+        controls: newControls,
+        score: newScore,
+        newGame
+      } = store.getState().game
+
       if (newGame) {
         game.newGame()
       }
+
       if (controls !== newControls) {
         controls = newControls
         if (newControls === controlTypes.mouse) {
@@ -66,6 +89,7 @@ const useRenderCanvas = () => {
           game.controlWithKeyboard()
         }
       }
+
       if (isPaused !== newIsPaused) {
         isPaused = newIsPaused
         if (isPaused) {
@@ -73,6 +97,11 @@ const useRenderCanvas = () => {
         } else {
           game.start()
         }
+      }
+
+      if (score !== newScore) {
+        score = newScore
+        game.score = score
       }
     }
     const unsubscribe = store.subscribe(listener)
