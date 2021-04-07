@@ -10,6 +10,7 @@ import topicReducer from '@store/topic/reducer'
 import topicsReducer from '@store/topics/reducer'
 import commentReducer from '@store/comment/reducer'
 import commentsReducer from '@store/comments/reducer'
+import reactionReducer from '@store/reaction/reducer'
 import { History } from 'history'
 import { IAppState } from '@types'
 
@@ -25,6 +26,7 @@ const createRootReducer = (history: History) =>
     topics: topicsReducer,
     comment: commentReducer,
     comments: commentsReducer,
+    reaction: reactionReducer,
     router: connectRouter(history)
   })
 
