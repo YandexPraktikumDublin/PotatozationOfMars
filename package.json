@@ -11,7 +11,7 @@
     "start:nodemon": "nodemon --exec \"run-s start:build-server start:server\"",
     "start:build-server": "webpack --config webpack.server.js",
     "start:build-client": "webpack serve --config webpack.client.js",
-    "start": "cross-env NODE_ENV=development npm-run-all clear --parallel start:build-client start:nodemon",
+    "start": "cross-env NODE_ENV=development TAILWIND_MODE=build npm-run-all clear --parallel start:nodemon start:build-client",
     "lint": "eslint \"src/**/*.@(tsx|ts|jsx|js)\" --fix && prettier --check \"src/**/*.@(tsx|ts|jsx|js)\" --write",
     "test": "jest --config .jest/config.json --runInBand",
     "generate": "plop"
@@ -132,7 +132,7 @@
     "reselect": "4.0.0",
     "sequelize": "6.6.2",
     "sequelize-typescript": "2.1.0",
-    "tailwindcss": "2.0.2",
+    "tailwindcss": "2.1.1",
     "universal-cookie": "4.0.4",
     "universal-cookie-express": "4.0.3",
     "workbox-background-sync": "6.1.1",

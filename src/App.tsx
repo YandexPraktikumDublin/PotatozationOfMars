@@ -9,9 +9,7 @@ import './styles/globals.css'
 const App: React.FC = () => (
   <div
     className="relative bg-cover bg-center bg-no-repeat"
-    style={{
-      backgroundImage: `url(${background})`
-    }}
+    style={{ backgroundImage: `url(${background})` }}
   >
     <div className="hidden absolute inset-0 bg-black opacity-50 dark:block" />
 

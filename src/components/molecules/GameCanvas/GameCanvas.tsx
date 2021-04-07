@@ -10,21 +10,13 @@ const GameCanvas: FC<TGameCanvasProps> = memo(
     return (
       <>
         <canvas
-          className="z-10 border-2 border-white rounded-2xl h-screen"
-          style={{
-            height: 'calc(100vh - 7rem)',
-            maxHeight: '48vw',
-            maxWidth: '96vw'
-          }}
+          className="z-10 border-2 border-white rounded-2xl h-screen max-h-[48vw] max-w-[96vw]"
+          style={{ height: 'calc(100vh - 7rem)' }}
           ref={forwardRef}
         />
         <canvas
-          className="z-0 absolute border-2 border-white rounded-2xl h-screen"
-          style={{
-            height: 'calc(100vh - 7rem)',
-            maxHeight: '48vw',
-            maxWidth: '96vw'
-          }}
+          className="z-0 absolute border-2 border-white rounded-2xl h-screen max-h-[48vw] max-w-[96vw]"
+          style={{ height: 'calc(100vh - 7rem)' }}
           ref={backgroundRef}
         />
       </>

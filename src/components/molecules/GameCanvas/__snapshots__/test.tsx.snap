@@ -3,22 +3,18 @@
 exports[`<GameCanvas /> should renders correct <GameCanvas /> 1`] = `
 <Fragment>
   <canvas
-    className="z-10 border-2 border-white rounded-2xl h-screen"
+    className="z-10 border-2 border-white rounded-2xl h-screen max-h-[48vw] max-w-[96vw]"
     style={
       Object {
         "height": "calc(100vh - 7rem)",
-        "maxHeight": "48vw",
-        "maxWidth": "96vw",
       }
     }
   />
   <canvas
-    className="z-0 absolute border-2 border-white rounded-2xl h-screen"
+    className="z-0 absolute border-2 border-white rounded-2xl h-screen max-h-[48vw] max-w-[96vw]"
     style={
       Object {
         "height": "calc(100vh - 7rem)",
-        "maxHeight": "48vw",
-        "maxWidth": "96vw",
       }
     }
   />

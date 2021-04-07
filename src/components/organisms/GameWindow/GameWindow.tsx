@@ -33,12 +33,7 @@ const GameWindow: FC<TGameWindowProps> = memo(() => {
   return (
     <div className="relative flex justify-center items-center" ref={windowRef}>
       <GameCanvas forwardRef={canvasRef} backgroundRef={backgroundRef} />
-      <div
-        className="absolute flex space-x-6 top-3 right-3 z-20"
-        style={{
-          pointerEvents: 'none'
-        }}
-      >
+      <div className="absolute flex space-x-6 top-3 right-3 z-20 pointer-events-none">
         <GameHud title="health" value={health} imageSrc={potato} />
         <GameHud title="money" value={score} imageSrc={diamond} />
       </div>

@@ -17,9 +17,7 @@ const Window: FC<TWindowProps> = memo(
             'h-screen overflow-hidden': isFullHeight
           }
         )}
-        style={{
-          maxHeight: isFullHeight ? 'calc(100vh - 7rem)' : 'none'
-        }}
+        style={{ maxHeight: isFullHeight ? 'calc(100vh - 7rem)' : 'none' }}
       >
         <div className="overflow-y-auto pr-6 h-full">{children}</div>
       </div>

@@ -1,6 +1,7 @@
 const { colors } = require('tailwindcss/defaultTheme')
 
 module.exports = {
+  mode: 'jit',
   purge: {
     content: ['./src/**/*.tsx'],
     options: {
