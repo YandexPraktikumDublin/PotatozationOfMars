@@ -11,6 +11,8 @@ import updateLeaderboardSaga from '@store/leaderboard/updateLeaderboard/sagas'
 import fetchTopicSaga from '@store/topic/fetchTopic/sagas'
 import createTopicSaga from '@store/topic/createTopic/sagas'
 import fetchTopicsSaga from '@store/topics/fetchTopics/sagas'
+import fetchCommentSaga from '@store/comment/fetchComment/sagas'
+import createCommentSaga from '@store/comment/createComment/sagas'
 
 export default function* rootSaga() {
   yield all([
@@ -25,6 +27,8 @@ export default function* rootSaga() {
     fork(updateLeaderboardSaga),
     fork(fetchTopicSaga),
     fork(createTopicSaga),
-    fork(fetchTopicsSaga)
+    fork(fetchTopicsSaga),
+    fork(fetchCommentSaga),
+    fork(createCommentSaga)
   ])
 }

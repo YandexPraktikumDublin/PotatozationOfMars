@@ -7,6 +7,7 @@ import { ILeaderboardState } from '@store/leaderboard/fetchLeaderboard/types'
 import { IGameState } from '@store/game/types'
 import { ITopicsState } from '@store/topics/types'
 import { ITopicState } from '@store/topic/types'
+import { ICommentState } from '@store/comment/types'
 
 export interface IAppState {
   auth: IAuthState
@@ -18,4 +19,5 @@ export interface IAppState {
   game: IGameState
   topic: ITopicState
   topics: ITopicsState
+  comment: ICommentState
 }
