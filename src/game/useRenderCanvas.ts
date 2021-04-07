@@ -25,9 +25,7 @@ const useRenderCanvas = () => {
     ? useSelector(getControlsSelector)
     : window.localStorage.controlWithMouse ?? useSelector(getControlsSelector)
 
-  let { isPaused } = store.getState().game
-
-  let { score } = store.getState().game
+  let { isPaused, score } = store.getState().game
 
   const updateHealth = (health: number) => {
     dispatch(updatePlayerHealth({ health }))
@@ -71,10 +69,12 @@ const useRenderCanvas = () => {
     }
 
     const listener = () => {
-      const newIsPaused = store.getState().game.isPaused
-      const newControls = store.getState().game.controls
-      const newGame = store.getState().game.newGame
-      const newScore = store.getState().game.score
+      const {
+        isPaused: newIsPaused,
+        controls: newControls,
+        score: newScore,
+        newGame
+      } = store.getState().game
 
       if (newGame) {
         game.newGame()
