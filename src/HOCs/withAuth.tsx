@@ -27,8 +27,9 @@ export default function withAuth<T>(Component: React.FC<T>) {
     useEffect(() => {
       if (!user) {
         if (code) {
+          const redirectUri = window ? window.location.origin : null
           getAxiosInstance()
-            .post('oauth/yandex', { code })
+            .post('oauth/yandex', { code, redirect_uri: redirectUri })
             .then(() => dispatch(fetchUserRequest()))
             .catch()
         } else {
