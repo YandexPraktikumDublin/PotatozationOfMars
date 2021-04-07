@@ -3,15 +3,16 @@ import { getAxiosInstance } from '@api'
 import { INNER_API_V1_URL } from '@config'
 import { fetchTopicFailure, fetchTopicSuccess } from './actions'
 import { FETCH_TOPIC_REQUEST } from './actionTypes'
+import { IFetchTopicRequestPayload } from '@store/topic/fetchTopic/types'
 
-const getTopic = (id: string) =>
-  getAxiosInstance(INNER_API_V1_URL).get(`/topics/${id}`)
+const getTopic = (data: IFetchTopicRequestPayload) =>
+  getAxiosInstance(INNER_API_V1_URL).get(`/topics/${data.id}`)
 
-function* fetchTopicSaga(data: any) {
+function* fetchTopicSaga(data: Record<string, any>) {
   try {
     const response = yield call(getTopic, data.payload)
 
-    yield put(fetchTopicSuccess(response.data))
+    yield put(fetchTopicSuccess({ topic: response.data }))
   } catch (error) {
     yield put(
       fetchTopicFailure({

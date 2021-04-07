@@ -15,7 +15,7 @@ import {
   reactionRouterFactory
 } from '@factories'
 
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync({ force: false }).then(() => {
   console.log('Successful connection to the database!')
 })
 

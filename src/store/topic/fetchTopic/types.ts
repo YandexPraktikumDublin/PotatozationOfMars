@@ -7,15 +7,17 @@ import { ITopic } from '@models'
 
 export interface ITopicState {
   pending: boolean
-  error: string
-  topic: ITopic
+  topic: ITopic | null
+  error: string | null
 }
 
 export interface IFetchTopicRequestPayload {
   id: number
 }
 
-export interface IFetchTopicSuccessPayload extends ITopic {}
+export interface IFetchTopicSuccessPayload {
+  topic: ITopic
+}
 
 export interface IFetchTopicFailurePayload {
   error: string
