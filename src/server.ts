@@ -42,7 +42,8 @@ app.use(
   topicRouterFactory(
     db.topicRepository,
     db.userRepository,
-    db.commentRepository
+    db.commentRepository,
+    db.reactionRepository
   )
 )
 app.use(
