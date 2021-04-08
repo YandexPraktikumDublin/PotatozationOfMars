@@ -14,7 +14,7 @@ export interface IReaction {
   id?: number
   content: string
   userId: number
-  user?: Omit<IUser, 'passwordHash'>
+  user?: Omit<IUser, 'passwordHash' | 'role' | 'createdAt' | 'updatedAt'>
   commentId: number
   comment?: IComment
   createdAt?: string

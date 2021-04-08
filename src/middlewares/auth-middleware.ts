@@ -12,11 +12,11 @@ export default async function (
   if (token) {
     const authToken = await db.authTokenRepository.findOne({
       where: { token },
-      include: [db.userRepository.scope('withSensitiveData')]
+      include: db.userRepository
     })
 
     if (authToken) {
-      req.user = await authToken?.$get('user')
+      req.user = await authToken?.$get('user', { scope: 'withSensitiveData' })
     }
   }
 

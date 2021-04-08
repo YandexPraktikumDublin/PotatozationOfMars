@@ -10,7 +10,7 @@ import {
 import { Comment } from '@models'
 
 export interface ICommentAncestor {
-  id: number
+  id?: number
   commentId: number
   ancestorId: number
   createdAt?: string

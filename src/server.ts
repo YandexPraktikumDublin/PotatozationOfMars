@@ -12,7 +12,8 @@ import {
   userRouterFactory,
   topicRouterFactory,
   commentRouterFactory,
-  reactionRouterFactory
+  reactionRouterFactory,
+  themeRouterFactory
 } from '@factories'
 
 db.sequelize.sync({ force: false }).then(() => {
@@ -37,7 +38,6 @@ app.use((req, res, next) => {
 app.use(authMiddleware)
 
 app.use(userRouterFactory(db.userRepository, db.authTokenRepository))
-
 app.use(
   topicRouterFactory(
     db.topicRepository,
@@ -53,8 +53,8 @@ app.use(
     db.reactionRepository
   )
 )
-
 app.use(reactionRouterFactory(db.reactionRepository, db.userRepository))
+app.use(themeRouterFactory(db.themeRepository))
 
 app.use(compression()).use(express.static(path.resolve(__dirname, '../dist')))
 

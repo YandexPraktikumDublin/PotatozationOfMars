@@ -1,11 +1,13 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript'
 import {
   User,
+  UserSettings,
   AuthToken,
   Topic,
   Comment,
   CommentAncestor,
-  Reaction
+  Reaction,
+  Theme
 } from '@models'
 
 const sequelizeOptions: SequelizeOptions = {
@@ -16,25 +18,38 @@ const sequelizeOptions: SequelizeOptions = {
   database: process.env.POSTGRES_DB ?? 'potatozation-of-mars',
   dialect: 'postgres',
   repositoryMode: true,
-  models: [User, AuthToken, Topic, Comment, CommentAncestor, Reaction]
+  models: [
+    User,
+    UserSettings,
+    AuthToken,
+    Topic,
+    Comment,
+    CommentAncestor,
+    Reaction,
+    Theme
+  ]
 }
 
 const sequelize = new Sequelize(sequelizeOptions)
 
 const userRepository = sequelize.getRepository(User)
+const userSettingsRepository = sequelize.getRepository(UserSettings)
 const authTokenRepository = sequelize.getRepository(AuthToken)
 const topicRepository = sequelize.getRepository(Topic)
 const commentRepository = sequelize.getRepository(Comment)
 const reactionRepository = sequelize.getRepository(Reaction)
+const themeRepository = sequelize.getRepository(Theme)
 
 const db = {
   Sequelize,
   sequelize,
   userRepository,
+  userSettingsRepository,
   authTokenRepository,
   topicRepository,
   commentRepository,
-  reactionRepository
+  reactionRepository,
+  themeRepository
 }
 
 export default db

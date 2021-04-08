@@ -15,7 +15,7 @@ export interface ITopic {
   subject: string
   content: string
   userId: number
-  user?: Omit<IUser, 'passwordHash'>
+  user?: Omit<IUser, 'passwordHash' | 'role' | 'createdAt' | 'updatedAt'>
   createdAt?: string
   updatedAt?: string
 }

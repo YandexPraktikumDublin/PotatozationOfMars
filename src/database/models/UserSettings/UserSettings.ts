@@ -5,16 +5,15 @@ import {
   DataType,
   AllowNull,
   BelongsTo,
-  ForeignKey,
-  Index,
-  Unique
+  ForeignKey
 } from 'sequelize-typescript'
 
-import { IUser, User } from '@models'
+import { IUser, User, ITheme, Theme } from '@models'
 
-export interface IAuthToken {
+export interface IUserSettings {
   id?: number
-  token: string
+  themeId?: number
+  theme?: ITheme
   userId: number
   user?: Omit<IUser, 'passwordHash' | 'role' | 'createdAt' | 'updatedAt'>
   createdAt?: string
@@ -22,12 +21,14 @@ export interface IAuthToken {
 }
 
 @Table
-export class AuthToken extends Model<IAuthToken> {
-  @Index
+export class UserSettings extends Model<IUserSettings> {
+  @ForeignKey(() => Theme)
   @AllowNull(false)
-  @Unique
-  @Column(DataType.STRING)
-  token!: string
+  @Column(DataType.INTEGER)
+  themeId!: string
+
+  @BelongsTo(() => Theme)
+  theme!: Theme
 
   @ForeignKey(() => User)
   @AllowNull(false)

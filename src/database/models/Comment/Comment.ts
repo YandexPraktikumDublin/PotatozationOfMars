@@ -25,7 +25,7 @@ export interface IComment {
   id?: number
   content: string
   userId: number
-  user: Omit<IUser, 'passwordHash'>
+  user: Omit<IUser, 'passwordHash' | 'role' | 'createdAt' | 'updatedAt'>
   topicId: number
   topic?: ITopic
   parentId?: number
