@@ -1,27 +1,24 @@
-import React, { FC, memo, useState } from 'react'
+import React, { FC, memo, useEffect, useState } from 'react'
 import { ActionsListItem, AddButton } from '@components/atoms'
 import { List } from '@components/molecules'
 import { CreateTopicModal, Title } from '@components/organisms'
 import { useHistory } from 'react-router-dom'
 import { PATHS } from '@config'
+import { useDispatch, useSelector } from 'react-redux'
+import { getTopicsSelector } from '@store/topics/fetchTopics/selectors'
+import { fetchTopicsRequest } from '@store/topics/fetchTopics/actions'
 
 type TForumProps = {}
 
-const forumTopics = [
-  {
-    id: 1,
-    title: 'New Games',
-    numberOfMessages: 10
-  },
-  {
-    id: 2,
-    title: 'Game Designers',
-    numberOfMessages: 23
-  }
-]
-
 const Forum: FC<TForumProps> = memo(() => {
   const history = useHistory()
+  const dispatch = useDispatch()
+
+  const topics = useSelector(getTopicsSelector)
+
+  useEffect(() => {
+    dispatch(fetchTopicsRequest())
+  }, [])
 
   const [
     isShownCreateTopicModal,
@@ -39,11 +36,10 @@ const Forum: FC<TForumProps> = memo(() => {
       <AddButton onClick={toggleModal} className="absolute top-0 right-0" />
 
       <List className="mb-12">
-        {forumTopics.map((topic) => (
+        {topics.map((topic) => (
           <ActionsListItem
             key={topic.id}
-            name={topic.title}
-            value={topic.numberOfMessages}
+            name={topic.subject}
             onClick={() => history.push(`${PATHS.FORUM}/topics/${topic.id}`)}
           />
         ))}
