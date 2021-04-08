@@ -1,40 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<WelcomeMessage /> should renders correct <WelcomeMessage /> 1`] = `
-<WelcomeMessage>
+<div
+  className="fixed bottom-0 max-w-full w-[44rem] h-[30.625rem] right-[3.5625rem]"
+  onTouchStart={[Function]}
+  style={
+    Object {
+      "maxHeight": "calc(100vh - 4.5rem)",
+    }
+  }
+>
   <div
-    className="fixed bottom-0 max-w-full w-[44rem] h-[30.625rem] right-[3.5625rem]"
-    onTouchStart={[Function]}
+    className="flex absolute top-0 z-10 px-14 text-center bg-no-repeat bg-contain w-[25rem] h-[18.75rem] md:left-0 left-[3.5625rem]"
     style={
       Object {
-        "maxHeight": "calc(100vh - 4.5rem)",
+        "backgroundImage": "url()",
       }
     }
   >
     <div
-      className="flex absolute top-0 z-10 px-14 text-center bg-no-repeat bg-contain w-[25rem] h-[18.75rem] md:left-0 left-[3.5625rem]"
-      style={
-        Object {
-          "backgroundImage": "url()",
-        }
-      }
+      className="m-auto font-bold"
     >
-      <div
-        className="m-auto font-bold"
-      >
-        You think I launched Tesla into space as a joke? No way, it\`s a secret potatozation of Mars project. Click any button to help me.
-      </div>
+      You think I launched Tesla into space as a joke? No way, it\`s a secret potatozation of Mars project. Click any button to help me.
     </div>
-    <img
-      alt="Elon Musk"
-      className="absolute bottom-0 z-auto h-full w-auto"
-      src={[Function]}
-      style={
-        Object {
-          "right": "0",
-        }
-      }
-    />
   </div>
-</WelcomeMessage>
+  <img
+    alt="Elon Musk"
+    className="absolute bottom-0 z-auto h-full w-auto"
+    src={[Function]}
+    style={
+      Object {
+        "right": "0",
+      }
+    }
+  />
+</div>
 `;
