@@ -12,6 +12,7 @@ import commentReducer from '@store/comment/reducer'
 import commentsReducer from '@store/comments/reducer'
 import reactionReducer from '@store/reaction/reducer'
 import reactionsReducer from '@store/reactions/reducer'
+import themesReducer from '@store/themes/reducer'
 import { History } from 'history'
 import { IAppState } from '@types'
 
@@ -29,6 +30,7 @@ const createRootReducer = (history: History) =>
     comments: commentsReducer,
     reaction: reactionReducer,
     reactions: reactionsReducer,
+    themes: themesReducer,
     router: connectRouter(history)
   })
 

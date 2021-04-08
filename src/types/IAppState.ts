@@ -11,6 +11,7 @@ import { ICommentState } from '@store/comment/types'
 import { ICommentsState } from '@store/comments/types'
 import { IReactionState } from '@store/reaction/types'
 import { IReactionsState } from '@store/reactions/types'
+import { IThemesState } from '@store/themes/types'
 
 export interface IAppState {
   auth: IAuthState
@@ -26,4 +27,5 @@ export interface IAppState {
   comments: ICommentsState
   reaction: IReactionState
   reactions: IReactionsState
+  themes: IThemesState
 }
