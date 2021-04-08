@@ -11,6 +11,7 @@ services:
       - "8080:8080"
     volumes:
       - .:/app/
+      - /app/node_modules # anonymous volume for node_modules only для починки сборки с bcrypt
     depends_on:
       - postgres
       - pgadmin
