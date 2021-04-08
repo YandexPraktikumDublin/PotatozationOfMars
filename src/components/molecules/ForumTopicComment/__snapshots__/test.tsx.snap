@@ -13,8 +13,8 @@ exports[`<ForumTopicComment /> should renders correct <ForumTopicComment /> 1`] 
     className="text-xs"
   >
     Ivan Ivanov
-     
-    01.12.20
+     at 
+    1/12/2020, 12:00 AM
   </div>
 </div>
 `;

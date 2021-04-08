@@ -3,7 +3,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { PageMeta, BackButton } from '@components/atoms'
 import { FormTopicMessage, ForumTopicComment } from '@components/molecules'
-import { Title, TopicMessageForm } from '@components/organisms'
+import { Title, TopicCommentForm } from '@components/organisms'
 import { getTopicSelector } from '@store/topic/fetchTopic/selectors'
 import { PATHS } from '@config'
 import { fetchTopicRequest } from '@store/topic/fetchTopic/actions'
@@ -12,13 +12,16 @@ type TForumTopicProps = {}
 
 const ForumTopic: FC<TForumTopicProps> = memo(() => {
   const history = useHistory()
-  const { id: topicId } = useParams<{ id: string }>()
+
+  const { id: topicIdString } = useParams<{ id: string }>()
+  const topicId = parseInt(topicIdString)
 
   const dispatch = useDispatch()
+
   const topic = useSelector(getTopicSelector)
 
   useEffect(() => {
-    dispatch(fetchTopicRequest({ id: parseInt(topicId) }))
+    dispatch(fetchTopicRequest({ id: topicId }))
   }, [])
 
   const handleBackButtonClick = () => {
@@ -45,7 +48,7 @@ const ForumTopic: FC<TForumTopicProps> = memo(() => {
         ))}
       </div>
 
-      <TopicMessageForm />
+      <TopicCommentForm topicId={topicId} />
     </div>
   )
 })

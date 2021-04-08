@@ -26,8 +26,9 @@ const BaseForm: FC<TBaseFormProps> = memo(
         enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values, { setSubmitting, resetForm }) => {
           onSubmit(values)
+          resetForm()
           setSubmitting(false)
         }}
       >

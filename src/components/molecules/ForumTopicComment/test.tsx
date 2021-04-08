@@ -3,6 +3,7 @@ import { shallow } from 'enzyme'
 import toJSON from 'enzyme-to-json'
 
 import { ForumTopicComment } from '.'
+import { formatDate } from '@utils/misc'
 
 describe('<ForumTopicComment />', () => {
   const comment = {
@@ -43,7 +44,7 @@ describe('<ForumTopicComment />', () => {
 
     expect(wrapper.contains(comment.content)).toBeTruthy()
     expect(wrapper.contains(comment.user.name)).toBeTruthy()
-    expect(wrapper.contains(comment.updatedAt)).toBeTruthy()
+    expect(wrapper.contains(formatDate(comment.createdAt))).toBeTruthy()
 
     expect(toJSON(wrapper)).toMatchSnapshot()
   })
