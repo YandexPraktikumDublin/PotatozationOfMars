@@ -18,7 +18,12 @@ import {
 } from '@factories'
 
 db.sequelize.sync({ force: false }).then(() => {
-  console.log('Successful connection to the database!')
+  console.info('Successful connection to the database!')
+
+  db.seeder
+    .up()
+    .then((result) => console.info(result))
+    .catch((error) => console.error(error))
 })
 
 const app = express()

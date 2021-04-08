@@ -18,6 +18,9 @@ import fetchReactionSaga from '@store/reaction/fetchReaction/sagas'
 import createReactionSaga from '@store/reaction/createReaction/sagas'
 import fetchReactionsSaga from '@store/reactions/fetchReactions/sagas'
 import fetchThemesSaga from '@store/themes/fetchThemes/sagas'
+import fetchUserSettingsSaga from '@store/userSettings/fetchUserSettings/sagas'
+import createUserSettingsSaga from '@store/userSettings/createUserSettings/sagas'
+import updateUserSettingsSaga from '@store/userSettings/updateUserSettings/sagas'
 
 export default function* rootSaga() {
   yield all([
@@ -39,6 +42,9 @@ export default function* rootSaga() {
     fork(fetchReactionSaga),
     fork(createReactionSaga),
     fork(fetchReactionsSaga),
-    fork(fetchThemesSaga)
+    fork(fetchThemesSaga),
+    fork(fetchUserSettingsSaga),
+    fork(createUserSettingsSaga),
+    fork(updateUserSettingsSaga)
   ])
 }

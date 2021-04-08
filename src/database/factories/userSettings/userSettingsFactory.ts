@@ -53,13 +53,14 @@ export const userSettingsFactory = (
           return res.status(401).json({ errors: ['Not Authorized'] })
         }
 
-        const theme = await userSettingsRepository.update(req.body, {
+        const result = await userSettingsRepository.update(req.body, {
           where: { userId: req.user.id },
           fields: ['themeId', 'isDarkModeEnabled'],
-          validate: true
+          validate: true,
+          returning: true
         })
 
-        return res.json(theme)
+        return res.json(result[1][0])
       } catch (error) {
         res
           .status(500)

@@ -9,6 +9,7 @@ import {
   Reaction,
   Theme
 } from '@models'
+import { Umzug, SequelizeStorage } from 'umzug'
 
 const sequelizeOptions: SequelizeOptions = {
   host: 'postgres',
@@ -32,6 +33,18 @@ const sequelizeOptions: SequelizeOptions = {
 
 const sequelize = new Sequelize(sequelizeOptions)
 
+const seeder = new Umzug({
+  migrations: {
+    glob: ['../seeders/*.js', { cwd: __dirname }]
+  },
+  context: sequelize,
+  storage: new SequelizeStorage({
+    sequelize,
+    modelName: 'seeder_meta'
+  }),
+  logger: console
+})
+
 const userRepository = sequelize.getRepository(User)
 const userSettingsRepository = sequelize.getRepository(UserSettings)
 const authTokenRepository = sequelize.getRepository(AuthToken)
@@ -43,6 +56,7 @@ const themeRepository = sequelize.getRepository(Theme)
 const db = {
   Sequelize,
   sequelize,
+  seeder,
   userRepository,
   userSettingsRepository,
   authTokenRepository,
