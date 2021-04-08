@@ -48,7 +48,7 @@ export const themeRouterFactory = (themeRepository: Repository<Theme>) =>
         }
 
         const theme = await themeRepository.create(req.body, {
-          fields: ['name', 'isEnabled'],
+          fields: ['name', 'preset', 'isEnabled'],
           validate: true
         })
 
@@ -68,7 +68,7 @@ export const themeRouterFactory = (themeRepository: Repository<Theme>) =>
 
         const theme = await themeRepository.update(req.body, {
           where: { id: req.params.id },
-          fields: ['name', 'isEnabled'],
+          fields: ['name', 'preset', 'isEnabled'],
           validate: true
         })
 
