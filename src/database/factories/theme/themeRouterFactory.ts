@@ -42,7 +42,6 @@ export const themeRouterFactory = (themeRepository: Repository<Theme>) =>
     })
 
     .post(`${INNER_API_V1_URL}/themes`, async (req, res) => {
-      console.log('role', req.user.getDataValue('role'))
       try {
         if (!req.user || req.user.getDataValue('role') !== roleEnum.admin) {
           return res.status(401).json({ errors: ['Not Authorized'] })

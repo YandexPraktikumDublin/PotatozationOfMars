@@ -103,3 +103,38 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
     commentId: number
   }
 ```
+
+### Themes
+
+- `GET /api/v1/themes` - получить все темы оформления.
+- `GET /api/v1/themes/:id` - получить тему оформления по id.
+- `POST /api/v1/themes` - создать новую тему оформления (может только пользователь с ролью admin).
+```
+  {
+    name: string
+    isEnabled?: boolean
+  }
+```
+- `PUT /api/v1/themes` - обновить тему оформления (может только пользователь с ролью admin).
+```
+  {
+    name: string
+    isEnabled?: boolean
+  }
+```
+
+### User settings
+
+- `GET /api/v1/user-settings` - получить настройки текущего пользователя.
+- `POST /api/v1/user-settings` - создать настройки текущего пользователя.
+```
+  {
+    themeId: number
+  }
+```
+- `PUT /api/v1/user-settings` - обновить настройки текущего пользователя.
+```
+  {
+    themeId: number
+  }
+```
