@@ -13,6 +13,7 @@ import {
 } from '@pages'
 import { PATHS } from '@config'
 import { fetchLeaderboardRequest } from '@store/leaderboard/fetchLeaderboard/actions'
+import { fetchTopicsRequest } from '@store/topics/fetchTopics/actions'
 
 export default [
   {
@@ -37,6 +38,7 @@ export default [
     exact: true,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
       dispatch(fetchUserRequest())
+      dispatch(fetchTopicsRequest())
     }
   },
   {
