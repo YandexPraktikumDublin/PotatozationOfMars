@@ -1,6 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import toJSON from 'enzyme-to-json'
+import { formatDate } from '@utils/misc'
 
 import { FormTopicMessage } from '.'
 
@@ -27,7 +28,7 @@ describe('<FormTopicMessage />', () => {
 
     expect(wrapper.contains(topic.content)).toBeTruthy()
     expect(wrapper.contains(topic.user.name)).toBeTruthy()
-    expect(wrapper.contains(topic.updatedAt)).toBeTruthy()
+    expect(wrapper.contains(formatDate(topic.createdAt))).toBeTruthy()
 
     expect(toJSON(wrapper)).toMatchSnapshot()
   })

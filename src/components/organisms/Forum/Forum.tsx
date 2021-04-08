@@ -7,6 +7,7 @@ import { PATHS } from '@config'
 import { useDispatch, useSelector } from 'react-redux'
 import { getTopicsSelector } from '@store/topics/fetchTopics/selectors'
 import { fetchTopicsRequest } from '@store/topics/fetchTopics/actions'
+import { formatDate } from '@utils/misc'
 
 type TForumProps = {}
 
@@ -40,6 +41,7 @@ const Forum: FC<TForumProps> = memo(() => {
           <ActionsListItem
             key={topic.id}
             name={topic.subject}
+            value={formatDate(topic.updatedAt)}
             onClick={() => history.push(`${PATHS.FORUM}/topics/${topic.id}`)}
           />
         ))}

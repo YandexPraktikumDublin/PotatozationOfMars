@@ -29,3 +29,14 @@ export const clearCookies = () => {
 export const hardRedirectTo = (location: string) => {
   if (!isServer()) window.location.href = location
 }
+
+export const formatDate = (date?: string): string =>
+  date
+    ? new Date(date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric'
+      })
+    : ''

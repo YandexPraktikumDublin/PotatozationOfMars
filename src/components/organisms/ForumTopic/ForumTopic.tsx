@@ -25,17 +25,19 @@ const ForumTopic: FC<TForumTopicProps> = memo(() => {
     history.push(PATHS.FORUM)
   }
 
+  if (!topic) return null
+
   return (
     <div className="relative">
       <PageMeta title="New Games" />
-      <Title>{topic?.subject}</Title>
+      <Title>{topic.subject}</Title>
 
       <BackButton
         onClick={handleBackButtonClick}
         className="absolute top-0 left-0"
       />
 
-      {topic && <FormTopicMessage topic={topic} />}
+      <FormTopicMessage topic={topic} />
 
       <div className="mb-4">
         {topic?.comments?.map((comment) => (

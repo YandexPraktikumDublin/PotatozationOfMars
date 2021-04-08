@@ -10,11 +10,11 @@ exports[`<FormTopicMessage /> should renders correct <FormTopicMessage /> 1`] = 
     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
   </div>
   <div
-    className="text-xs"
+    className="text-sm"
   >
     Ivan Ivanov
-     
-    01.12.20
+     at 
+    1/12/2020, 12:00 AM
   </div>
 </div>
 `;
