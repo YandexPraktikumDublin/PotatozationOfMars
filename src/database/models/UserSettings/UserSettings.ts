@@ -5,7 +5,8 @@ import {
   DataType,
   AllowNull,
   BelongsTo,
-  ForeignKey
+  ForeignKey,
+  Default
 } from 'sequelize-typescript'
 
 import { IUser, User, ITheme, Theme } from '@models'
@@ -14,6 +15,7 @@ export interface IUserSettings {
   id?: number
   themeId?: number
   theme?: ITheme
+  isDarkModeEnabled: boolean
   userId: number
   user?: Omit<IUser, 'passwordHash' | 'role' | 'createdAt' | 'updatedAt'>
   createdAt?: string
@@ -29,6 +31,11 @@ export class UserSettings extends Model<IUserSettings> {
 
   @BelongsTo(() => Theme)
   theme!: Theme
+
+  @AllowNull(false)
+  @Default(true)
+  @Column(DataType.BOOLEAN)
+  isDarkModeEnabled!: boolean
 
   @ForeignKey(() => User)
   @AllowNull(false)

@@ -34,7 +34,7 @@ export const userSettingsFactory = (
         const userSettings = await userSettingsRepository.create(
           { ...req.body, userId: req.user.id },
           {
-            fields: ['themeId', 'userId'],
+            fields: ['themeId', 'isDarkModeEnabled', 'userId'],
             validate: true
           }
         )
@@ -55,7 +55,7 @@ export const userSettingsFactory = (
 
         const theme = await userSettingsRepository.update(req.body, {
           where: { userId: req.user.id },
-          fields: ['themeId'],
+          fields: ['themeId', 'isDarkModeEnabled'],
           validate: true
         })
 

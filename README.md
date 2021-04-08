@@ -132,11 +132,13 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 ```
   {
     themeId: number
+    isDarkModeEnabled?: boolean
   }
 ```
 - `PUT /api/v1/user-settings` - обновить настройки текущего пользователя.
 ```
   {
-    themeId: number
+    themeId?: number
+    isDarkModeEnabled?: boolean
   }
 ```
