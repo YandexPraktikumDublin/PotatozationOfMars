@@ -10,6 +10,7 @@ type TForumTopicCommentFormProps = {
   topicId: number
   parentId?: number
   hierarchyLevel?: number
+  submitCallback?: () => void
 }
 
 const validationSchema = Yup.object().shape({
@@ -21,7 +22,12 @@ const initialValues = {
 }
 
 const ForumTopicCommentForm: FC<TForumTopicCommentFormProps> = memo(
-  ({ topicId, parentId, hierarchyLevel = 0 }: TForumTopicCommentFormProps) => {
+  ({
+    topicId,
+    parentId,
+    hierarchyLevel = 0,
+    submitCallback
+  }: TForumTopicCommentFormProps) => {
     const dispatch = useDispatch()
 
     const createCommentError = useSelector(getCommentErrorSelector) ?? ''
@@ -35,6 +41,8 @@ const ForumTopicCommentForm: FC<TForumTopicCommentFormProps> = memo(
           parentId
         })
       )
+
+      submitCallback?.()
     }
 
     return (

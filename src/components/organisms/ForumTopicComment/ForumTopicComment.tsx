@@ -50,6 +50,7 @@ const ForumTopicComment: FC<TForumTopicCommentProps> = memo(
               topicId={comment.topicId}
               parentId={comment.id}
               hierarchyLevel={1}
+              submitCallback={toggleForm}
             />
           </div>
         )}
