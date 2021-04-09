@@ -3,12 +3,13 @@ import { Repository } from 'sequelize-typescript'
 import bcrypt from 'bcrypt'
 import { uid } from 'rand-token'
 
-import { AuthToken, User } from '@models'
+import { AuthToken, User, UserSettings } from '@models'
 import { INNER_API_V1_URL, DEFAULT_ERROR_MESSAGE } from '@config'
 
 export const userRouterFactory = (
   userRepository: Repository<User>,
-  authTokenRepository: Repository<AuthToken>
+  authTokenRepository: Repository<AuthToken>,
+  userSettingsRepository: Repository<UserSettings>
 ) =>
   Router()
     .get(`${INNER_API_V1_URL}/user`, (req, res) =>
@@ -90,6 +91,12 @@ export const userRouterFactory = (
             validate: true
           }
         )
+
+        await userSettingsRepository.create({
+          themeId: 1,
+          isDarkModeEnabled: true,
+          userId: user.id
+        })
 
         const token = uid(32)
         await authTokenRepository.create({ token, userId: user.id })

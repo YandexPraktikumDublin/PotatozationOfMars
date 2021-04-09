@@ -43,7 +43,13 @@ app.use((req, res, next) => {
 
 app.use(authMiddleware)
 
-app.use(userRouterFactory(db.userRepository, db.authTokenRepository))
+app.use(
+  userRouterFactory(
+    db.userRepository,
+    db.authTokenRepository,
+    db.userSettingsRepository
+  )
+)
 app.use(topicRouterFactory(db.topicRepository, db.userRepository))
 app.use(
   commentRouterFactory(

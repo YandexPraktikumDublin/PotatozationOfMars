@@ -14,6 +14,7 @@ import {
 import { PATHS } from '@config'
 import { fetchLeaderboardRequest } from '@store/leaderboard/fetchLeaderboard/actions'
 import { fetchTopicsRequest } from '@store/topics/fetchTopics/actions'
+import { fetchUserSettingsRequest } from '@store/userSettings/fetchUserSettings/actions'
 
 export default [
   {
@@ -22,6 +23,7 @@ export default [
     exact: true,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
       dispatch(fetchUserRequest())
+      dispatch(fetchUserSettingsRequest())
     }
   },
   {
@@ -30,6 +32,7 @@ export default [
     exact: false,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
       dispatch(fetchUserRequest())
+      dispatch(fetchUserSettingsRequest())
     }
   },
   {
@@ -38,6 +41,7 @@ export default [
     exact: true,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
       dispatch(fetchUserRequest())
+      dispatch(fetchUserSettingsRequest())
       dispatch(fetchTopicsRequest())
     }
   },
@@ -47,6 +51,7 @@ export default [
     exact: false,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
       dispatch(fetchUserRequest())
+      dispatch(fetchUserSettingsRequest())
     }
   },
   {
@@ -55,6 +60,7 @@ export default [
     exact: false,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
       dispatch(fetchUserRequest())
+      dispatch(fetchUserSettingsRequest())
     }
   },
   {
@@ -63,6 +69,7 @@ export default [
     exact: false,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
       dispatch(fetchUserRequest())
+      dispatch(fetchUserSettingsRequest())
       dispatch(fetchLeaderboardRequest({ cursor: 0 }))
     }
   },
@@ -72,6 +79,7 @@ export default [
     exact: false,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
       dispatch(fetchUserRequest())
+      dispatch(fetchUserSettingsRequest())
     }
   },
   {
