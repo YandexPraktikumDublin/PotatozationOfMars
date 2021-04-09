@@ -1,20 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ForumTopicComment /> should renders correct <ForumTopicComment /> 1`] = `
-<div
-  className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
->
+<Fragment>
   <div
-    className="mb-4"
+    className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
   >
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    <div
+      className="mb-2 text-xs"
+    >
+      Ivan Ivanov
+       at 
+      1/12/2020, 12:00 AM
+    </div>
+    <div
+      className="mb-2"
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </div>
+    <button
+      className="text-xs underline"
+      onClick={[Function]}
+    >
+      Reply
+    </button>
   </div>
-  <div
-    className="text-xs"
-  >
-    Ivan Ivanov
-     at 
-    1/12/2020, 12:00 AM
-  </div>
-</div>
+</Fragment>
 `;

@@ -1,17 +1,14 @@
-import React, { FC, memo, useEffect } from 'react'
+import React, { FC, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as Yup from 'yup'
 import { FormikValues } from 'formik'
 import { BaseForm, BaseTextarea } from '@components/organisms'
-import {
-  getCommentErrorSelector,
-  getCommentSelector
-} from '@store/comment/fetchComment/selectors'
+import { getCommentErrorSelector } from '@store/comment/fetchComment/selectors'
 import { createCommentRequest } from '@store/comment/createComment/actions'
-import { addComments } from '@store/comments/addComments/actions'
 
 type TTopicCommentFormProps = {
   topicId: number
+  parentId?: number
   hierarchyLevel?: number
 }
 
@@ -24,25 +21,18 @@ const initialValues = {
 }
 
 const TopicCommentForm: FC<TTopicCommentFormProps> = memo(
-  ({ topicId, hierarchyLevel = 0 }: TTopicCommentFormProps) => {
+  ({ topicId, parentId, hierarchyLevel = 0 }: TTopicCommentFormProps) => {
     const dispatch = useDispatch()
 
     const createCommentError = useSelector(getCommentErrorSelector) ?? ''
-
-    const comment = useSelector(getCommentSelector)
-
-    useEffect(() => {
-      if (comment) {
-        dispatch(addComments({ comments: [comment] }))
-      }
-    }, [comment])
 
     const handleSubmit = async (values: FormikValues) => {
       dispatch(
         createCommentRequest({
           content: values.content,
           topicId,
-          hierarchyLevel
+          hierarchyLevel,
+          parentId
         })
       )
     }

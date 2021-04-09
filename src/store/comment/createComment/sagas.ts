@@ -4,6 +4,7 @@ import { INNER_API_V1_URL } from '@config'
 import { createCommentFailure, createCommentSuccess } from './actions'
 import { CREATE_COMMENT_REQUEST } from './actionTypes'
 import { ICreateCommentRequestPayload } from '@store/comment/createComment/types'
+import { addComments } from '@store/comments/addComments/actions'
 
 const createComment = (data: ICreateCommentRequestPayload) =>
   getAxiosInstance(INNER_API_V1_URL).post('/comments', data)
@@ -13,6 +14,7 @@ function* createCommentSaga(data: Record<string, any>) {
     const response = yield call(createComment, data.payload)
 
     yield put(createCommentSuccess({ comment: response.data }))
+    yield put(addComments({ comments: [response.data] }))
   } catch (error) {
     yield put(
       createCommentFailure({
