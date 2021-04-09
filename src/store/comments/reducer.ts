@@ -6,6 +6,7 @@ import {
 import { TFetchCommentsActions } from './fetchComments/types'
 import { TActions, ICommentsState } from './types'
 import { ADD_COMMENT, ADD_COMMENTS } from '@store/comments/actionTypes'
+import { addNewCommentToCommentsArray } from '@utils/comment'
 
 type TCommonAction = TFetchCommentsActions | TActions
 
@@ -40,28 +41,12 @@ export default (
         error: action.payload.error
       }
     case ADD_COMMENT:
-      // eslint-disable-next-line no-case-declarations
-      const hierarchyLevel = action.payload.comment?.hierarchyLevel ?? 0
-
-      if (hierarchyLevel > 0) {
-        const comments = state.comments.map((item) =>
-          item.id === action.payload.comment?.parentId
-            ? {
-                ...item,
-                children: [...(item?.children ?? []), action.payload.comment]
-              }
-            : item
-        )
-
-        return {
-          ...state,
-          comments
-        }
-      }
-
       return {
         ...state,
-        comments: [...state.comments, action.payload.comment]
+        comments: addNewCommentToCommentsArray(
+          state.comments,
+          action.payload.comment
+        )
       }
     case ADD_COMMENTS:
       return {

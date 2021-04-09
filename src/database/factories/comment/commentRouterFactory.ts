@@ -20,7 +20,11 @@ export const commentRouterFactory = (
           include: [
             userRepository,
             reactionRepository,
-            { model: commentRepository, as: 'children' }
+            {
+              model: commentRepository,
+              as: 'children',
+              include: [userRepository, reactionRepository]
+            }
           ],
           order: [['createdAt', 'ASC']]
         })
@@ -43,7 +47,11 @@ export const commentRouterFactory = (
           include: [
             userRepository,
             reactionRepository,
-            { model: commentRepository, as: 'children' }
+            {
+              model: commentRepository,
+              as: 'children',
+              include: [userRepository, reactionRepository]
+            }
           ]
         })
 
@@ -83,7 +91,11 @@ export const commentRouterFactory = (
           include: [
             userRepository,
             reactionRepository,
-            { model: commentRepository, as: 'children' }
+            {
+              model: commentRepository,
+              as: 'children',
+              include: [userRepository, reactionRepository]
+            }
           ]
         })
 
