@@ -3,12 +3,14 @@ import { getAxiosInstance } from '@api'
 import { INNER_API_V1_URL } from '@config'
 import { fetchCommentsFailure, fetchCommentsSuccess } from './actions'
 import { FETCH_COMMENTS_REQUEST } from './actionTypes'
+import { IFetchCommentsRequestPayload } from './types'
 
-const getComments = () => getAxiosInstance(INNER_API_V1_URL).get('/comments')
+const getComments = (data: IFetchCommentsRequestPayload) =>
+  getAxiosInstance(INNER_API_V1_URL).get(`/topic-comments/${data.topicId}`)
 
-function* fetchCommentsSaga() {
+function* fetchCommentsSaga(data: Record<string, any>) {
   try {
-    const response = yield call(getComments)
+    const response = yield call(getComments, data.payload)
 
     yield put(fetchCommentsSuccess({ comments: response.data }))
   } catch (error) {

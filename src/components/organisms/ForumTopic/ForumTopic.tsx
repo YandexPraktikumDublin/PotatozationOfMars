@@ -7,6 +7,8 @@ import { Title, TopicCommentForm } from '@components/organisms'
 import { getTopicSelector } from '@store/topic/fetchTopic/selectors'
 import { PATHS } from '@config'
 import { fetchTopicRequest } from '@store/topic/fetchTopic/actions'
+import { getCommentsSelector } from '@store/comments/fetchComments/selectors'
+import { fetchCommentsRequest } from '@store/comments/fetchComments/actions'
 
 type TForumTopicProps = {}
 
@@ -19,9 +21,11 @@ const ForumTopic: FC<TForumTopicProps> = memo(() => {
   const dispatch = useDispatch()
 
   const topic = useSelector(getTopicSelector)
+  const comments = useSelector(getCommentsSelector)
 
   useEffect(() => {
     dispatch(fetchTopicRequest({ id: topicId }))
+    dispatch(fetchCommentsRequest({ topicId }))
   }, [])
 
   const handleBackButtonClick = () => {
@@ -43,7 +47,7 @@ const ForumTopic: FC<TForumTopicProps> = memo(() => {
       <FormTopicMessage topic={topic} />
 
       <div className="mb-4">
-        {topic?.comments?.map((comment) => (
+        {comments?.map((comment) => (
           <ForumTopicComment key={comment.id} comment={comment} />
         ))}
       </div>

@@ -5,6 +5,10 @@ import {
 } from './actionTypes'
 import { IComment } from '@models'
 
+export interface IFetchCommentsRequestPayload {
+  topicId: number
+}
+
 export interface IFetchCommentsSuccessPayload {
   comments: IComment[]
 }
@@ -15,6 +19,7 @@ export interface IFetchCommentsFailurePayload {
 
 export type TFetchCommentsRequest = {
   type: typeof FETCH_COMMENTS_REQUEST
+  payload: IFetchCommentsRequestPayload
 }
 
 export type TFetchCommentsSuccess = {

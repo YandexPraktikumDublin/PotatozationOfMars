@@ -4,6 +4,7 @@ import {
   FETCH_REACTIONS_FAILURE
 } from './actionTypes'
 import {
+  IFetchReactionsRequestPayload,
   IFetchReactionsSuccessPayload,
   IFetchReactionsFailurePayload,
   TFetchReactionsRequest,
@@ -11,8 +12,11 @@ import {
   TFetchReactionsFailure
 } from './types'
 
-export const fetchReactionsRequest = (): TFetchReactionsRequest => ({
-  type: FETCH_REACTIONS_REQUEST
+export const fetchReactionsRequest = (
+  payload: IFetchReactionsRequestPayload
+): TFetchReactionsRequest => ({
+  type: FETCH_REACTIONS_REQUEST,
+  payload
 })
 
 export const fetchReactionsSuccess = (

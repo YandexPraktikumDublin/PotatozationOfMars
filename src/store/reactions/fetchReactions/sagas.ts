@@ -3,12 +3,14 @@ import { getAxiosInstance } from '@api'
 import { INNER_API_V1_URL } from '@config'
 import { fetchReactionsFailure, fetchReactionsSuccess } from './actions'
 import { FETCH_REACTIONS_REQUEST } from './actionTypes'
+import { IFetchReactionsRequestPayload } from './types'
 
-const getReactions = () => getAxiosInstance(INNER_API_V1_URL).get('/reactions')
+const getReactions = (data: IFetchReactionsRequestPayload) =>
+  getAxiosInstance(INNER_API_V1_URL).get(`/comment-reactions/${data.commentId}`)
 
-function* fetchReactionsSaga() {
+function* fetchReactionsSaga(data: Record<string, any>) {
   try {
-    const response = yield call(getReactions)
+    const response = yield call(getReactions, data.payload)
 
     yield put(fetchReactionsSuccess({ reactions: response.data }))
   } catch (error) {

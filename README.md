@@ -80,7 +80,7 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 
 ### Comments
 
-- `GET /api/v1/comments` - получить все комментарии.
+- `GET /api/v1/topic-comments/:topicId` - получить все комментарии топика.
 - `GET /api/v1/comments/:id` - получить комментарии по id.
 - `POST /api/v1/comments` - создать новый комментарий.
 ```
@@ -94,7 +94,7 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 
 ### Reactions
 
-- `GET /api/v1/reactions` - получить все реакции.
+- `GET /api/v1/comment-reactions/:commentId` - получить все реакции комментария.
 - `GET /api/v1/reactions/:id` - получить реакции по id.
 - `POST /api/v1/reactions` - создать новую реакции.
 ```

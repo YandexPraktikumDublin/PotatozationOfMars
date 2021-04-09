@@ -4,6 +4,7 @@ import {
   FETCH_COMMENTS_FAILURE
 } from './actionTypes'
 import {
+  IFetchCommentsRequestPayload,
   IFetchCommentsSuccessPayload,
   IFetchCommentsFailurePayload,
   TFetchCommentsRequest,
@@ -11,8 +12,11 @@ import {
   TFetchCommentsFailure
 } from './types'
 
-export const fetchCommentsRequest = (): TFetchCommentsRequest => ({
-  type: FETCH_COMMENTS_REQUEST
+export const fetchCommentsRequest = (
+  payload: IFetchCommentsRequestPayload
+): TFetchCommentsRequest => ({
+  type: FETCH_COMMENTS_REQUEST,
+  payload
 })
 
 export const fetchCommentsSuccess = (

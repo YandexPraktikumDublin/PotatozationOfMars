@@ -1,13 +1,11 @@
 import { Router } from 'express'
 import { Repository } from 'sequelize-typescript'
-import { Topic, Comment, User, Reaction } from '@models'
+import { Topic, User } from '@models'
 import { DEFAULT_ERROR_MESSAGE, INNER_API_V1_URL } from '@config'
 
 export const topicRouterFactory = (
   topicRepository: Repository<Topic>,
-  userRepository: Repository<User>,
-  commentRepository: Repository<Comment>,
-  reactionRepository: Repository<Reaction>
+  userRepository: Repository<User>
 ) =>
   Router()
     .get(`${INNER_API_V1_URL}/topics`, async (req, res) => {
@@ -35,19 +33,7 @@ export const topicRouterFactory = (
         }
 
         const topic = await topicRepository.findByPk(req.params.id, {
-          include: [
-            userRepository,
-            {
-              model: commentRepository,
-              include: [
-                userRepository,
-                {
-                  model: reactionRepository,
-                  include: [userRepository]
-                }
-              ]
-            }
-          ]
+          include: [userRepository]
         })
 
         if (!topic) {

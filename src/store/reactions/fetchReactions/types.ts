@@ -5,6 +5,10 @@ import {
 } from './actionTypes'
 import { IReaction } from '@models'
 
+export interface IFetchReactionsRequestPayload {
+  commentId: number
+}
+
 export interface IFetchReactionsSuccessPayload {
   reactions: IReaction[]
 }
@@ -15,6 +19,7 @@ export interface IFetchReactionsFailurePayload {
 
 export type TFetchReactionsRequest = {
   type: typeof FETCH_REACTIONS_REQUEST
+  payload: IFetchReactionsRequestPayload
 }
 
 export type TFetchReactionsSuccess = {

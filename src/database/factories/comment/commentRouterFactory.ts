@@ -9,14 +9,16 @@ export const commentRouterFactory = (
   reactionRepository: Repository<Reaction>
 ) =>
   Router()
-    .get(`${INNER_API_V1_URL}/comments`, async (req, res) => {
+    .get(`${INNER_API_V1_URL}/topic-comments/:topicId`, async (req, res) => {
       try {
         if (!req.user) {
           return res.status(401).json({ errors: ['Not Authorized'] })
         }
 
         const comments = await commentRepository.findAll({
-          include: [userRepository, reactionRepository]
+          where: { topicId: req.params.topicId },
+          include: [userRepository, reactionRepository],
+          order: [['createdAt', 'ASC']]
         })
 
         return res.json(comments)
