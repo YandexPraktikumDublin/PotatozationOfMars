@@ -37,7 +37,7 @@ const Forum: FC<TForumProps> = memo(() => {
       <AddButton onClick={toggleModal} className="absolute top-0 right-0" />
 
       <List className="mb-12">
-        {topics.map((topic) => (
+        {topics?.map((topic) => (
           <ActionsListItem
             key={topic.id}
             name={topic.subject}
