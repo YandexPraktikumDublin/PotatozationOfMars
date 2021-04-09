@@ -4,11 +4,10 @@ import {
   FETCH_COMMENTS_FAILURE
 } from './fetchComments/actionTypes'
 import { TFetchCommentsActions } from './fetchComments/types'
-import { TAddCommentsActions } from './addComments/types'
-import { ICommentsState } from './types'
-import { ADD_COMMENTS } from '@store/comments/addComments/actionTypes'
+import { TActions, ICommentsState } from './types'
+import { ADD_COMMENT, ADD_COMMENTS } from '@store/comments/actionTypes'
 
-type TCommonAction = TFetchCommentsActions | TAddCommentsActions
+type TCommonAction = TFetchCommentsActions | TActions
 
 const initialState: ICommentsState = {
   pending: false,
@@ -39,6 +38,11 @@ export default (
         pending: false,
         comments: [],
         error: action.payload.error
+      }
+    case ADD_COMMENT:
+      return {
+        ...state,
+        comments: [...state.comments, action.payload.comment]
       }
     case ADD_COMMENTS:
       return {
