@@ -6,7 +6,7 @@ import { BaseForm, BaseTextarea } from '@components/organisms'
 import { getCommentErrorSelector } from '@store/comment/fetchComment/selectors'
 import { createCommentRequest } from '@store/comment/createComment/actions'
 
-type TTopicCommentFormProps = {
+type TForumTopicCommentFormProps = {
   topicId: number
   parentId?: number
   hierarchyLevel?: number
@@ -20,8 +20,8 @@ const initialValues = {
   content: ''
 }
 
-const TopicCommentForm: FC<TTopicCommentFormProps> = memo(
-  ({ topicId, parentId, hierarchyLevel = 0 }: TTopicCommentFormProps) => {
+const ForumTopicCommentForm: FC<TForumTopicCommentFormProps> = memo(
+  ({ topicId, parentId, hierarchyLevel = 0 }: TForumTopicCommentFormProps) => {
     const dispatch = useDispatch()
 
     const createCommentError = useSelector(getCommentErrorSelector) ?? ''
@@ -51,6 +51,6 @@ const TopicCommentForm: FC<TTopicCommentFormProps> = memo(
   }
 )
 
-TopicCommentForm.displayName = 'TopicCommentForm'
+ForumTopicCommentForm.displayName = 'ForumTopicCommentForm'
 
-export default TopicCommentForm
+export default ForumTopicCommentForm

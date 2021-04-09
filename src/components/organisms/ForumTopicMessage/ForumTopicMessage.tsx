@@ -3,12 +3,12 @@ import classNames from 'classnames'
 import { ITopic } from '@models'
 import { formatDate } from '@utils/misc'
 
-type TFormTopicMessageProps = {
+type TForumTopicMessageProps = {
   topic: ITopic
 }
 
-const FormTopicMessage: FC<TFormTopicMessageProps> = memo(
-  ({ topic }: TFormTopicMessageProps) => {
+const ForumTopicMessage: FC<TForumTopicMessageProps> = memo(
+  ({ topic }: TForumTopicMessageProps) => {
     const formattedDate = useMemo(() => formatDate(topic.createdAt), [
       topic.createdAt
     ])
@@ -29,6 +29,6 @@ const FormTopicMessage: FC<TFormTopicMessageProps> = memo(
   }
 )
 
-FormTopicMessage.displayName = 'FormTopicMessage'
+ForumTopicMessage.displayName = 'ForumTopicMessage'
 
-export default FormTopicMessage
+export default ForumTopicMessage

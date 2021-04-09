@@ -2,8 +2,12 @@ import React, { FC, memo, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { PageMeta, BackButton } from '@components/atoms'
-import { FormTopicMessage, ForumTopicComment } from '@components/molecules'
-import { Title, TopicCommentForm } from '@components/organisms'
+import {
+  Title,
+  ForumTopicMessage,
+  ForumTopicComment,
+  ForumTopicCommentForm
+} from '@components/organisms'
 import { getTopicSelector } from '@store/topic/fetchTopic/selectors'
 import { PATHS } from '@config'
 import { fetchTopicRequest } from '@store/topic/fetchTopic/actions'
@@ -44,7 +48,7 @@ const ForumTopic: FC<TForumTopicProps> = memo(() => {
         className="absolute top-0 left-0"
       />
 
-      <FormTopicMessage topic={topic} />
+      <ForumTopicMessage topic={topic} />
 
       <div className="mb-4">
         {comments?.map((comment) => (
@@ -52,7 +56,7 @@ const ForumTopic: FC<TForumTopicProps> = memo(() => {
         ))}
       </div>
 
-      <TopicCommentForm topicId={topicId} />
+      <ForumTopicCommentForm topicId={topicId} />
     </div>
   )
 })

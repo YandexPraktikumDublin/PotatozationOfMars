@@ -3,7 +3,10 @@ import classNames from 'classnames'
 import { IComment } from '@models'
 import { formatDate } from '@utils/misc'
 import { useToggle } from '@hooks'
-import { TopicCommentForm } from '@components/organisms'
+import {
+  ForumTopicChildComment,
+  ForumTopicCommentForm
+} from '@components/organisms'
 
 type TForumTopicCommentProps = {
   comment: IComment
@@ -34,9 +37,16 @@ const ForumTopicComment: FC<TForumTopicCommentProps> = memo(
           </button>
         </div>
 
+        {comment.children?.map((childComment) => (
+          <ForumTopicChildComment
+            key={childComment.id}
+            childComment={childComment}
+          />
+        ))}
+
         {isShowForm && (
-          <div className="ml-4 mb-4">
-            <TopicCommentForm
+          <div className="mb-4 ml-4">
+            <ForumTopicCommentForm
               topicId={comment.topicId}
               parentId={comment.id}
               hierarchyLevel={1}

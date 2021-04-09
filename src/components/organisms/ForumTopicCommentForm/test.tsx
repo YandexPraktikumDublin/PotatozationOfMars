@@ -5,11 +5,11 @@ import { Store } from 'redux'
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 
-import { TopicCommentForm } from '.'
+import { ForumTopicCommentForm } from '.'
 
 const mockStore = configureStore([])
 
-describe('<TopicCommentForm />', () => {
+describe('<ForumTopicCommentForm />', () => {
   const topicId = 1
 
   let store: Store
@@ -22,10 +22,10 @@ describe('<TopicCommentForm />', () => {
     store = mockStore(initialState)
   })
 
-  it('should renders correct <TopicCommentForm />', () => {
+  it('should renders correct <ForumTopicCommentForm />', () => {
     const wrapper = shallow(
       <Provider store={store}>
-        <TopicCommentForm topicId={topicId} />
+        <ForumTopicCommentForm topicId={topicId} />
       </Provider>
     )
 

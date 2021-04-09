@@ -40,6 +40,25 @@ export default (
         error: action.payload.error
       }
     case ADD_COMMENT:
+      // eslint-disable-next-line no-case-declarations
+      const hierarchyLevel = action.payload.comment?.hierarchyLevel ?? 0
+
+      if (hierarchyLevel > 0) {
+        const comments = state.comments.map((item) =>
+          item.id === action.payload.comment?.parentId
+            ? {
+                ...item,
+                children: [...(item?.children ?? []), action.payload.comment]
+              }
+            : item
+        )
+
+        return {
+          ...state,
+          comments
+        }
+      }
+
       return {
         ...state,
         comments: [...state.comments, action.payload.comment]

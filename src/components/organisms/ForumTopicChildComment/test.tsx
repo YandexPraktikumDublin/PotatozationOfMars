@@ -2,12 +2,11 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import toJSON from 'enzyme-to-json'
 
-import { ForumTopicComment } from '.'
-import { formatDate } from '@utils/misc'
+import { ForumTopicChildComment } from '.'
 
-describe('<ForumTopicComment />', () => {
-  const comment = {
-    id: 1,
+describe('<ForumTopicChildComment />', () => {
+  const childComment = {
+    id: 2,
     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     userId: 1,
     user: {
@@ -18,9 +17,11 @@ describe('<ForumTopicComment />', () => {
       updatedAt: '01.12.20'
     },
     topicId: 1,
+    parentId: 1,
+    hierarchyLevel: 1,
     reactions: [
       {
-        id: 1,
+        id: 2,
         content: '😂',
         userId: 1,
         user: {
@@ -39,12 +40,10 @@ describe('<ForumTopicComment />', () => {
     updatedAt: '01.12.20'
   }
 
-  it('should renders correct <ForumTopicComment />', () => {
-    const wrapper = shallow(<ForumTopicComment comment={comment} />)
-
-    expect(wrapper.contains(comment.content)).toBeTruthy()
-    expect(wrapper.contains(comment.user.name)).toBeTruthy()
-    expect(wrapper.contains(formatDate(comment.createdAt))).toBeTruthy()
+  it('should renders correct <ForumTopicChildComment />', () => {
+    const wrapper = shallow(
+      <ForumTopicChildComment childComment={childComment} />
+    )
 
     expect(toJSON(wrapper)).toMatchSnapshot()
   })

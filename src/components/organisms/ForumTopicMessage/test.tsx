@@ -3,9 +3,9 @@ import { shallow } from 'enzyme'
 import toJSON from 'enzyme-to-json'
 import { formatDate } from '@utils/misc'
 
-import { FormTopicMessage } from '.'
+import { ForumTopicMessage } from './index'
 
-describe('<FormTopicMessage />', () => {
+describe('<ForumTopicMessage />', () => {
   const topic = {
     id: 1,
     subject: 'New Games',
@@ -23,8 +23,8 @@ describe('<FormTopicMessage />', () => {
     comments: []
   }
 
-  it('should renders correct <FormTopicMessage />', () => {
-    const wrapper = shallow(<FormTopicMessage topic={topic} />)
+  it('should renders correct <ForumTopicMessage />', () => {
+    const wrapper = shallow(<ForumTopicMessage topic={topic} />)
 
     expect(wrapper.contains(topic.content)).toBeTruthy()
     expect(wrapper.contains(topic.user.name)).toBeTruthy()
