@@ -62,6 +62,8 @@ export const topicRouterFactory = (
           }
         )
 
+        await topic.reload({ include: [userRepository] })
+
         return res.status(201).json(topic)
       } catch (error) {
         res

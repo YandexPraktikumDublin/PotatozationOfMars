@@ -71,6 +71,8 @@ export const commentRouterFactory = (
           }
         )
 
+        await comment.reload({ include: [userRepository, reactionRepository] })
+
         return res.status(201).json(comment)
       } catch (error) {
         res

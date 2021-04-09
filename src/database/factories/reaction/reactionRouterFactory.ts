@@ -58,7 +58,8 @@ export const reactionRouterFactory = (
           { ...req.body, userId: req.user.id },
           {
             fields: ['content', 'userId', 'commentId'],
-            validate: true
+            validate: true,
+            include: [userRepository]
           }
         )
 
