@@ -5,7 +5,7 @@ import { fetchUserSettingsFailure, fetchUserSettingsSuccess } from './actions'
 import { FETCH_USER_SETTINGS_REQUEST } from './actionTypes'
 
 const getUserSettings = () =>
-  getAxiosInstance(INNER_API_V1_URL).get('/user-settings')
+  getAxiosInstance(INNER_API_V1_URL).get('user-settings')
 
 function* fetchUserSettingsSaga() {
   try {

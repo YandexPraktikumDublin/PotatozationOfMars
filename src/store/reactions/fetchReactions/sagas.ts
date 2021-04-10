@@ -6,7 +6,7 @@ import { FETCH_REACTIONS_REQUEST } from './actionTypes'
 import { IFetchReactionsRequestPayload } from './types'
 
 const getReactions = (data: IFetchReactionsRequestPayload) =>
-  getAxiosInstance(INNER_API_V1_URL).get(`/comment-reactions/${data.commentId}`)
+  getAxiosInstance(INNER_API_V1_URL).get(`comment-reactions/${data.commentId}`)
 
 function* fetchReactionsSaga(data: Record<string, any>) {
   try {

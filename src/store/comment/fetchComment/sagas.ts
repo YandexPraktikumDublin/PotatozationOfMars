@@ -6,7 +6,7 @@ import { FETCH_COMMENT_REQUEST } from './actionTypes'
 import { IFetchCommentRequestPayload } from '@store/comment/fetchComment/types'
 
 const getComment = (data: IFetchCommentRequestPayload) =>
-  getAxiosInstance(INNER_API_V1_URL).get(`/comments/${data.id}`)
+  getAxiosInstance(INNER_API_V1_URL).get(`comments/${data.id}`)
 
 function* fetchCommentSaga(data: Record<string, any>) {
   try {

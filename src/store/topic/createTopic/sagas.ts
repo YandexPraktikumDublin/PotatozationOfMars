@@ -7,7 +7,7 @@ import { ICreateTopicRequestPayload } from '@store/topic/createTopic/types'
 import { history } from '@store/store'
 
 const createTopic = (data: ICreateTopicRequestPayload) =>
-  getAxiosInstance(INNER_API_V1_URL).post('/topics', data)
+  getAxiosInstance(INNER_API_V1_URL).post('topics', data)
 
 function* createTopicSaga(data: Record<string, any>) {
   try {

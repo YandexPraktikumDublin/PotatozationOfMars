@@ -48,24 +48,13 @@ export default (state = initialState, action: TCommonAction): IUserState => {
         pending: true
       }
     case FETCH_USER_SUCCESS:
-      return {
-        ...state,
-        pending: false,
-        user: normalizeUser(action.payload?.user),
-        error: null
-      }
     case UPDATE_USER_SUCCESS:
-      return {
-        ...state,
-        pending: false,
-        user: normalizeUser(action.payload?.user),
-        error: null
-      }
     case UPDATE_AVATAR_SUCCESS:
       return {
         ...state,
         pending: false,
-        user: normalizeUser(action.payload?.user)
+        user: normalizeUser(action.payload?.user),
+        error: null
       }
     case UPDATE_PASSWORD_SUCCESS:
       return <IUserState>{

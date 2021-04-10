@@ -4,7 +4,7 @@ import { INNER_API_V1_URL } from '@config'
 import { fetchThemesFailure, fetchThemesSuccess } from './actions'
 import { FETCH_THEMES_REQUEST } from './actionTypes'
 
-const getThemes = () => getAxiosInstance(INNER_API_V1_URL).get('/themes')
+const getThemes = () => getAxiosInstance(INNER_API_V1_URL).get('themes')
 
 function* fetchThemesSaga() {
   try {

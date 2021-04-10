@@ -40,3 +40,5 @@ export const formatDate = (date?: string): string =>
         minute: 'numeric'
       })
     : ''
+
+export const generatePassword = () => Math.random().toString(36).slice(-8)

@@ -6,7 +6,7 @@ import { FETCH_TOPIC_REQUEST } from './actionTypes'
 import { IFetchTopicRequestPayload } from '@store/topic/fetchTopic/types'
 
 const getTopic = (data: IFetchTopicRequestPayload) =>
-  getAxiosInstance(INNER_API_V1_URL).get(`/topics/${data.id}`)
+  getAxiosInstance(INNER_API_V1_URL).get(`topics/${data.id}`)
 
 function* fetchTopicSaga(data: Record<string, any>) {
   try {

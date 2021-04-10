@@ -9,6 +9,12 @@ import {
 import { Redirect, useLocation } from 'react-router'
 import { PATHS } from '@config'
 import { getAxiosInstance } from '@api'
+import {
+  getIUserErrorSelector,
+  getIUserPendingSelector,
+  getIUserSelector
+} from '@store/iuser/fetchIUser/selectors'
+import { fetchIUserRequest } from '@store/iuser/fetchIUser/actions'
 
 export default function withAuth<T>(Component: React.FC<T>) {
   return (props: any) => {
@@ -19,33 +25,45 @@ export default function withAuth<T>(Component: React.FC<T>) {
     const pendingUser = useSelector(getUserPendingSelector)
     const errorUser = useSelector(getUserErrorSelector)
 
-    const code = new URLSearchParams(location.search)?.get('code')
+    const iuser = useSelector(getIUserSelector)
+    const pendingIUser = useSelector(getIUserPendingSelector)
+    const errorIUser = useSelector(getIUserErrorSelector)
 
     const isAuthOrSignup =
       location.pathname === PATHS.AUTH || location.pathname === PATHS.SIGNUP
 
     useEffect(() => {
+      const code = new URLSearchParams(location.search)?.get('code')
+
+      if (!user && code) {
+        getAxiosInstance()
+          .post('oauth/yandex', { code })
+          .then(() => {
+            dispatch(fetchUserRequest())
+          })
+          .catch()
+
+        return
+      }
+
       if (!user) {
-        if (code) {
-          getAxiosInstance()
-            .post('oauth/yandex', { code })
-            .then(() => dispatch(fetchUserRequest()))
-            .catch()
-        } else {
-          dispatch(fetchUserRequest())
-        }
+        dispatch(fetchUserRequest())
+      }
+
+      if (!iuser) {
+        dispatch(fetchIUserRequest())
       }
     }, [])
 
-    if (pendingUser) {
+    if (pendingUser || pendingIUser) {
       return null
     }
 
-    if (user && isAuthOrSignup) {
+    if (user && iuser && isAuthOrSignup) {
       return <Redirect to={PATHS.BASE} />
     }
 
-    if (errorUser && !isAuthOrSignup) {
+    if ((errorUser || errorIUser) && !isAuthOrSignup) {
       return <Redirect to={PATHS.AUTH} />
     }
 

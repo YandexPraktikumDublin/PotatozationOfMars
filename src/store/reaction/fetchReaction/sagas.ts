@@ -6,7 +6,7 @@ import { FETCH_REACTION_REQUEST } from './actionTypes'
 import { IFetchReactionRequestPayload } from '@store/reaction/fetchReaction/types'
 
 const getReaction = (data: IFetchReactionRequestPayload) =>
-  getAxiosInstance(INNER_API_V1_URL).get(`/reactions/${data.id}`)
+  getAxiosInstance(INNER_API_V1_URL).get(`reactions/${data.id}`)
 
 function* fetchReactionSaga(data: Record<string, any>) {
   try {

@@ -4,7 +4,7 @@ import { INNER_API_V1_URL } from '@config'
 import { fetchTopicsFailure, fetchTopicsSuccess } from './actions'
 import { FETCH_TOPICS_REQUEST } from './actionTypes'
 
-const getTopics = () => getAxiosInstance(INNER_API_V1_URL).get('/topics')
+const getTopics = () => getAxiosInstance(INNER_API_V1_URL).get('topics')
 
 function* fetchTopicsSaga() {
   try {

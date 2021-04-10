@@ -13,12 +13,14 @@ import { IReactionState } from '@store/reaction/types'
 import { IReactionsState } from '@store/reactions/types'
 import { IThemesState } from '@store/themes/types'
 import { IUserSettingsState } from '@store/userSettings/types'
+import { IIUserState } from '@store/iuser/types'
 
 export interface IAppState {
   auth: IAuthState
   logout: ILogoutState
   signup: ISignupState
   user: IUserState
+  iuser: IIUserState
   leaderboard: ILeaderboardState
   router: RouterState
   game: IGameState

@@ -6,7 +6,7 @@ import { CREATE_REACTION_REQUEST } from './actionTypes'
 import { ICreateReactionRequestPayload } from '@store/reaction/createReaction/types'
 
 const createReaction = (data: ICreateReactionRequestPayload) =>
-  getAxiosInstance(INNER_API_V1_URL).post('/reactions', data)
+  getAxiosInstance(INNER_API_V1_URL).post('reactions', data)
 
 function* createReactionSaga(data: Record<string, any>) {
   try {

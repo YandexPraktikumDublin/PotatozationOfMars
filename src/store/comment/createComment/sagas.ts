@@ -7,7 +7,7 @@ import { ICreateCommentRequestPayload } from '@store/comment/createComment/types
 import { addComment } from '@store/comments/actions'
 
 const createComment = (data: ICreateCommentRequestPayload) =>
-  getAxiosInstance(INNER_API_V1_URL).post('/comments', data)
+  getAxiosInstance(INNER_API_V1_URL).post('comments', data)
 
 function* createCommentSaga(data: Record<string, any>) {
   try {

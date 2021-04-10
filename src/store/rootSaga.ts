@@ -3,6 +3,12 @@ import userSaga from '@store/user/fetchUser/sagas'
 import updateUserSaga from '@store/user/updateUser/sagas'
 import updateAvatarSaga from '@store/user/updateAvatar/sagas'
 import updatePassword from '@store/user/updatePassword/sagas'
+import fetchIUserSaga from '@store/iuser/fetchIUser/sagas'
+import createIUserSaga from '@store/iuser/createIUser/sagas'
+import updateIUserSaga from '@store/iuser/updateIUser/sagas'
+import updateIUserPasswordSaga from '@store/iuser/updateIUserPassword/sagas'
+import signinIUserSaga from '@store/iuser/signinIUser/sagas'
+import logoutIUserSaga from '@store/iuser/logoutIUser/sagas'
 import signupSaga from '@store/signup/sagas'
 import authSaga from '@store/auth/sagas'
 import logoutSaga from '@store/logout/sagas'
@@ -28,6 +34,12 @@ export default function* rootSaga() {
     fork(updateUserSaga),
     fork(updateAvatarSaga),
     fork(updatePassword),
+    fork(fetchIUserSaga),
+    fork(createIUserSaga),
+    fork(updateIUserSaga),
+    fork(updateIUserPasswordSaga),
+    fork(signinIUserSaga),
+    fork(logoutIUserSaga),
     fork(signupSaga),
     fork(authSaga),
     fork(logoutSaga),

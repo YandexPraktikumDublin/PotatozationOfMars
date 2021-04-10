@@ -37,13 +37,6 @@ const ForumTopicComment: FC<TForumTopicCommentProps> = memo(
           </button>
         </div>
 
-        {comment.children?.map((childComment) => (
-          <ForumTopicChildComment
-            key={childComment.id}
-            childComment={childComment}
-          />
-        ))}
-
         {isShowForm && (
           <div className="mb-4 ml-4">
             <ForumTopicCommentForm
@@ -54,6 +47,13 @@ const ForumTopicComment: FC<TForumTopicCommentProps> = memo(
             />
           </div>
         )}
+
+        {comment.children?.map((childComment) => (
+          <ForumTopicChildComment
+            key={childComment.id}
+            childComment={childComment}
+          />
+        ))}
       </>
     )
   }
