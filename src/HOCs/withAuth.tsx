@@ -9,11 +9,7 @@ import {
 import { Redirect, useLocation } from 'react-router'
 import { PATHS } from '@config'
 import { getAxiosInstance } from '@api'
-import {
-  getIUserErrorSelector,
-  getIUserPendingSelector,
-  getIUserSelector
-} from '@store/iuser/fetchIUser/selectors'
+import { getIUserSelector } from '@store/iuser/fetchIUser/selectors'
 import { fetchIUserRequest } from '@store/iuser/fetchIUser/actions'
 
 export default function withAuth<T>(Component: React.FC<T>) {
@@ -24,10 +20,7 @@ export default function withAuth<T>(Component: React.FC<T>) {
     const user = useSelector(getUserSelector)
     const pendingUser = useSelector(getUserPendingSelector)
     const errorUser = useSelector(getUserErrorSelector)
-
     const iuser = useSelector(getIUserSelector)
-    const pendingIUser = useSelector(getIUserPendingSelector)
-    const errorIUser = useSelector(getIUserErrorSelector)
 
     const isAuthOrSignup =
       location.pathname === PATHS.AUTH || location.pathname === PATHS.SIGNUP
@@ -55,7 +48,7 @@ export default function withAuth<T>(Component: React.FC<T>) {
       }
     }, [])
 
-    if (pendingUser || pendingIUser) {
+    if (pendingUser) {
       return null
     }
 
@@ -63,7 +56,7 @@ export default function withAuth<T>(Component: React.FC<T>) {
       return <Redirect to={PATHS.BASE} />
     }
 
-    if ((errorUser || errorIUser) && !isAuthOrSignup) {
+    if (errorUser && !isAuthOrSignup) {
       return <Redirect to={PATHS.AUTH} />
     }
 
