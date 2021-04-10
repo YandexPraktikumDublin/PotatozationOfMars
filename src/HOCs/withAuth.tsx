@@ -11,6 +11,8 @@ import { PATHS } from '@config'
 import { getAxiosInstance } from '@api'
 import { getIUserSelector } from '@store/iuser/fetchIUser/selectors'
 import { fetchIUserRequest } from '@store/iuser/fetchIUser/actions'
+import { createIUserRequest } from '@store/iuser/createIUser/actions'
+import { generatePassword } from '@utils/misc'
 
 export default function withAuth<T>(Component: React.FC<T>) {
   return (props: any) => {
@@ -47,6 +49,18 @@ export default function withAuth<T>(Component: React.FC<T>) {
         dispatch(fetchIUserRequest())
       }
     }, [])
+
+    useEffect(() => {
+      if (user && !iuser) {
+        dispatch(
+          createIUserRequest({
+            login: user.login,
+            name: `${user.firstName} ${user.secondName}`,
+            password: generatePassword()
+          })
+        )
+      }
+    }, [user])
 
     if (pendingUser) {
       return null
