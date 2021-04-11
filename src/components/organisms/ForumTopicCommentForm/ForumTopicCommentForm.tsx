@@ -52,6 +52,7 @@ const ForumTopicCommentForm: FC<TForumTopicCommentFormProps> = memo(
         onSubmit={handleSubmit}
         buttonText="Send"
         formError={createCommentError}
+        isResetOnSubmit
       >
         <BaseTextarea name="content" placeholder="Message" />
       </BaseForm>
