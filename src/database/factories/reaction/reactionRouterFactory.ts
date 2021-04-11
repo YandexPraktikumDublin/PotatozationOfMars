@@ -57,7 +57,7 @@ export const reactionRouterFactory = (
         const reaction = await reactionRepository.create(
           { ...req.body, userId: req.user.id },
           {
-            fields: ['content', 'userId', 'commentId'],
+            fields: ['content', 'userId', 'hierarchyLevel', 'commentId'],
             validate: true
           }
         )

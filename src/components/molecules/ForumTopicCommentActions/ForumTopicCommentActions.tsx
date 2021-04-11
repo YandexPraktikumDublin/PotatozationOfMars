@@ -7,7 +7,7 @@ import React, {
   useMemo,
   useRef
 } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { IEmojiData } from 'emoji-picker-react'
 import groupBy from 'lodash/groupBy'
 import classNames from 'classnames'
@@ -16,6 +16,7 @@ import { useOnClickOutside, useToggle } from '@hooks'
 import { ForumTopicCommentReaction } from '@components/atoms'
 import { createReactionRequest } from '@store/reaction/createReaction/actions'
 import { deleteReactionRequest } from '@store/reaction/deleteReaction/actions'
+import { getIUserSelector } from '@store/iuser/fetchIUser/selectors'
 
 type TForumTopicCommentActionsProps = {
   comment: IComment
@@ -30,6 +31,8 @@ const ForumTopicCommentActions: FC<TForumTopicCommentActionsProps> = memo(
     const emojiPickerWrapperRef = useRef<HTMLDivElement>(null)
 
     const dispatch = useDispatch()
+
+    const iuser = useSelector(getIUserSelector)
 
     const [isShowEmojiPicker, toggleEmojiPicker] = useToggle(false)
 
@@ -48,7 +51,8 @@ const ForumTopicCommentActions: FC<TForumTopicCommentActionsProps> = memo(
         dispatch(
           createReactionRequest({
             content: emojiObject.emoji,
-            commentId: comment.id
+            commentId: comment.id,
+            hierarchyLevel: comment?.hierarchyLevel
           })
         )
       }
@@ -57,7 +61,7 @@ const ForumTopicCommentActions: FC<TForumTopicCommentActionsProps> = memo(
     const handleReactionClick = (content: string) => {
       const currentReaction = comment?.reactions?.find(
         (reaction) =>
-          reaction.content === content && reaction.userId === comment.userId
+          reaction.content === content && reaction.userId === iuser?.id
       )
 
       if (currentReaction?.id && comment.id) {
@@ -66,7 +70,11 @@ const ForumTopicCommentActions: FC<TForumTopicCommentActionsProps> = memo(
 
       if (!currentReaction?.id && comment.id) {
         dispatch(
-          createReactionRequest({ content: content, commentId: comment.id })
+          createReactionRequest({
+            content: content,
+            commentId: comment.id,
+            hierarchyLevel: comment?.hierarchyLevel
+          })
         )
       }
     }

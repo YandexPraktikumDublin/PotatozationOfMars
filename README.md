@@ -97,9 +97,11 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 - `GET /api/v1/comment-reactions/:commentId` - получить все реакции комментария.
 - `GET /api/v1/reactions/:id` - получить реакции по id.
 - `POST /api/v1/reactions` - создать новую реакции.
+- `DELETE /api/v1/reactions/:id` - удалить реакцию по id.
 ```
   {
     content: string
+    hierarchyLevel?: number
     commentId: number
   }
 ```
