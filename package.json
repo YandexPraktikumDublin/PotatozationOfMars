@@ -13,7 +13,7 @@
     "start:build-client": "webpack serve --config webpack.client.js",
     "start": "cross-env NODE_ENV=development TAILWIND_MODE=build npm-run-all clear --parallel start:nodemon start:build-client",
     "lint": "eslint \"src/**/*.@(tsx|ts|jsx|js)\" --fix && prettier --check \"src/**/*.@(tsx|ts|jsx|js)\" --write",
-    "test": "jest --config .jest/config.json --runInBand",
+    "test": "jest --config .jest/config.json --runInBand -u",
     "generate": "plop"
   },
   "husky": {
@@ -116,9 +116,11 @@
     "classnames": "2.2.6",
     "compression": "1.7.4",
     "connected-react-router": "6.9.1",
+    "emoji-picker-react": "3.4.4",
     "express": "4.17.1",
     "express-http-context": "1.2.4",
     "formik": "2.2.6",
+    "lodash": "4.17.21",
     "pg": "8.5.1",
     "rand-token": "1.0.1",
     "react": "17.0.1",

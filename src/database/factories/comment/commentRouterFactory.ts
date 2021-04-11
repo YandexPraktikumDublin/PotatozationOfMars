@@ -19,11 +19,14 @@ export const commentRouterFactory = (
           where: { topicId: req.params.topicId, hierarchyLevel: 0 },
           include: [
             userRepository,
-            reactionRepository,
+            { model: reactionRepository, include: [userRepository] },
             {
               model: commentRepository,
               as: 'children',
-              include: [userRepository, reactionRepository]
+              include: [
+                userRepository,
+                { model: reactionRepository, include: [userRepository] }
+              ]
             }
           ],
           order: [['createdAt', 'ASC']]
@@ -46,11 +49,14 @@ export const commentRouterFactory = (
         const comment = await commentRepository.findByPk(req.params.id, {
           include: [
             userRepository,
-            reactionRepository,
+            { model: reactionRepository, include: [userRepository] },
             {
               model: commentRepository,
               as: 'children',
-              include: [userRepository, reactionRepository]
+              include: [
+                userRepository,
+                { model: reactionRepository, include: [userRepository] }
+              ]
             }
           ]
         })
@@ -90,11 +96,14 @@ export const commentRouterFactory = (
         await comment.reload({
           include: [
             userRepository,
-            reactionRepository,
+            { model: reactionRepository, include: [userRepository] },
             {
               model: commentRepository,
               as: 'children',
-              include: [userRepository, reactionRepository]
+              include: [
+                userRepository,
+                { model: reactionRepository, include: [userRepository] }
+              ]
             }
           ]
         })

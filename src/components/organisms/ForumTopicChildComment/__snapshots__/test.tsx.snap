@@ -5,7 +5,7 @@ exports[`<ForumTopicChildComment /> should renders correct <ForumTopicChildComme
   className="text-left border border-primary rounded-2xl p-4 mb-4 ml-4 last:mb-0 dark:border-white"
 >
   <div
-    className="mb-2 text-xs"
+    className="flex justify-between mb-2 text-xs"
   >
     Ivan Ivanov
      at 
@@ -16,5 +16,43 @@ exports[`<ForumTopicChildComment /> should renders correct <ForumTopicChildComme
   >
     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
   </div>
+  <ForumTopicCommentActions
+    comment={
+      Object {
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "createdAt": "01.12.20",
+        "hierarchyLevel": 1,
+        "id": 2,
+        "parentId": 1,
+        "reactions": Array [
+          Object {
+            "commentId": 2,
+            "content": "😂",
+            "createdAt": "01.12.20",
+            "id": 2,
+            "updatedAt": "01.12.20",
+            "user": Object {
+              "createdAt": "01.12.20",
+              "id": 1,
+              "login": "IvanIvanov",
+              "name": "Ivan Ivanov",
+              "updatedAt": "01.12.20",
+            },
+            "userId": 1,
+          },
+        ],
+        "topicId": 1,
+        "updatedAt": "01.12.20",
+        "user": Object {
+          "createdAt": "01.12.20",
+          "id": 1,
+          "login": "IvanIvanov",
+          "name": "Ivan Ivanov",
+          "updatedAt": "01.12.20",
+        },
+        "userId": 1,
+      }
+    }
+  />
 </div>
 `;

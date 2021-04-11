@@ -1,4 +1,4 @@
-import { IComment } from '@models'
+import { IComment, IReaction } from '@models'
 
 export const addNewCommentToCommentsArray = (
   comments: IComment[],
@@ -15,5 +15,35 @@ export const addNewCommentToCommentsArray = (
           children: [...(item?.children ?? []), newComment]
         }
       : item
+  )
+}
+
+export const addNewReactionToCommentsArray = (
+  comments: IComment[],
+  reaction: IReaction
+): IComment[] => {
+  return comments.map((comment) =>
+    comment.id === reaction?.commentId
+      ? {
+          ...comment,
+          reactions: [...(comment?.reactions ?? []), reaction]
+        }
+      : comment
+  )
+}
+
+export const removeReactionFromCommentsArray = (
+  comments: IComment[],
+  reaction: IReaction
+): IComment[] => {
+  return comments.map((comment) =>
+    comment.id === reaction?.commentId
+      ? {
+          ...comment,
+          reactions: comment?.reactions?.filter(
+            (item) => item.id !== reaction.id
+          )
+        }
+      : comment
   )
 }

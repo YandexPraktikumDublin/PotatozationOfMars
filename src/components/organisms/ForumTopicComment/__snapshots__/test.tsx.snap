@@ -6,23 +6,64 @@ exports[`<ForumTopicComment /> should renders correct <ForumTopicComment /> 1`] 
     className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
   >
     <div
-      className="mb-2 text-xs"
+      className="flex justify-between items-center mb-2 text-sm"
     >
-      Ivan Ivanov
-       at 
-      1/12/2020, 12:00 AM
+      <span
+        className=""
+      >
+        Ivan Ivanov
+         at 
+        1/12/2020, 12:00 AM
+      </span>
+      <button
+        className="underline"
+        onClick={[Function]}
+        title="Add reaction"
+      >
+        Reply
+      </button>
     </div>
     <div
-      className="mb-2"
+      className="mb-3 text-lg"
     >
       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
     </div>
-    <button
-      className="text-xs underline"
-      onClick={[Function]}
-    >
-      Reply
-    </button>
+    <ForumTopicCommentActions
+      comment={
+        Object {
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "createdAt": "01.12.20",
+          "id": 1,
+          "reactions": Array [
+            Object {
+              "commentId": 2,
+              "content": "😂",
+              "createdAt": "01.12.20",
+              "id": 1,
+              "updatedAt": "01.12.20",
+              "user": Object {
+                "createdAt": "01.12.20",
+                "id": 1,
+                "login": "IvanIvanov",
+                "name": "Ivan Ivanov",
+                "updatedAt": "01.12.20",
+              },
+              "userId": 1,
+            },
+          ],
+          "topicId": 1,
+          "updatedAt": "01.12.20",
+          "user": Object {
+            "createdAt": "01.12.20",
+            "id": 1,
+            "login": "IvanIvanov",
+            "name": "Ivan Ivanov",
+            "updatedAt": "01.12.20",
+          },
+          "userId": 1,
+        }
+      }
+    />
   </div>
 </Fragment>
 `;

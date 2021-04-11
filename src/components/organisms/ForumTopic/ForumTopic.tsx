@@ -28,8 +28,13 @@ const ForumTopic: FC<TForumTopicProps> = memo(() => {
   const comments = useSelector(getCommentsSelector)
 
   useEffect(() => {
-    dispatch(fetchTopicRequest({ id: topicId }))
-    dispatch(fetchCommentsRequest({ topicId }))
+    if (!topic || topic.id !== topicId) {
+      dispatch(fetchTopicRequest({ id: topicId }))
+    }
+
+    if (!comments || comments?.[0]?.topicId !== topicId) {
+      dispatch(fetchCommentsRequest({ topicId }))
+    }
   }, [])
 
   const handleBackButtonClick = () => {

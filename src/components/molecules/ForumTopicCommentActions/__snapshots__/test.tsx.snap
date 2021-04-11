@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ForumTopicCommentActions /> should renders correct <ForumTopicCommentActions /> 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Subscription {
+        "handleChangeWrapper": [Function],
+        "listeners": Object {
+          "notify": [Function],
+        },
+        "onStateChange": [Function],
+        "parentSub": undefined,
+        "store": Object {
+          "clearActions": [Function],
+          "dispatch": [Function],
+          "getActions": [Function],
+          "getState": [Function],
+          "replaceReducer": [Function],
+          "subscribe": [Function],
+        },
+        "unsubscribe": null,
+      },
+    }
+  }
+>
+  <ForumTopicCommentActions
+    comment={
+      Object {
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "createdAt": "01.12.20",
+        "id": 1,
+        "reactions": Array [
+          Object {
+            "commentId": 2,
+            "content": "😂",
+            "createdAt": "01.12.20",
+            "id": 1,
+            "updatedAt": "01.12.20",
+            "user": Object {
+              "createdAt": "01.12.20",
+              "id": 1,
+              "login": "IvanIvanov",
+              "name": "Ivan Ivanov",
+              "updatedAt": "01.12.20",
+            },
+            "userId": 1,
+          },
+        ],
+        "topicId": 1,
+        "updatedAt": "01.12.20",
+        "user": Object {
+          "createdAt": "01.12.20",
+          "id": 1,
+          "login": "IvanIvanov",
+          "name": "Ivan Ivanov",
+          "updatedAt": "01.12.20",
+        },
+        "userId": 1,
+      }
+    }
+  />
+</ContextProvider>
+`;

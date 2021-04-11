@@ -11,7 +11,7 @@ services:
       - "8080:8080"
     volumes:
       - .:/app/
-      - /app/node_modules # для починки сборки с bcrypt на MacOS
+      # - /app/node_modules # для починки сборки с bcrypt на MacOS
     depends_on:
       - postgres
       - pgadmin

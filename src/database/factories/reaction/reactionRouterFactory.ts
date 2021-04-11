@@ -58,12 +58,31 @@ export const reactionRouterFactory = (
           { ...req.body, userId: req.user.id },
           {
             fields: ['content', 'userId', 'commentId'],
-            validate: true,
-            include: [userRepository]
+            validate: true
           }
         )
 
+        await reaction.reload({ include: [userRepository] })
+
         return res.status(201).json(reaction)
+      } catch (error) {
+        res
+          .status(500)
+          .json({ errors: [error.message ?? DEFAULT_ERROR_MESSAGE] })
+      }
+    })
+
+    .delete(`${INNER_API_V1_URL}/reactions/:id`, async (req, res) => {
+      try {
+        if (!req.user) {
+          return res.status(401).json({ errors: ['Not Authorized'] })
+        }
+
+        await reactionRepository.destroy({
+          where: { id: req.params.id, userId: req.user.id }
+        })
+
+        return res.status(204).json()
       } catch (error) {
         res
           .status(500)

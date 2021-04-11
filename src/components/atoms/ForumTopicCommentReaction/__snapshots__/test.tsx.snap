@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ForumTopicCommentReaction /> should renders correct <ForumTopicCommentReaction /> 1`] = `
+<button
+  className="inline-flex relative py-px px-1 rounded-full border border-primary color-primary text-sm mb-1 mr-2 last:mr-0 dark:border-white dark:color-white"
+  onClick={[Function]}
+  title="Ivan Ivanov"
+>
+  😂
+  <span
+    className="ml-1"
+  >
+    1
+  </span>
+</button>
+`;

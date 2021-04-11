@@ -22,6 +22,7 @@ import createCommentSaga from '@store/comment/createComment/sagas'
 import fetchCommentsSaga from '@store/comments/fetchComments/sagas'
 import fetchReactionSaga from '@store/reaction/fetchReaction/sagas'
 import createReactionSaga from '@store/reaction/createReaction/sagas'
+import deleteReactionSaga from '@store/reaction/deleteReaction/sagas'
 import fetchReactionsSaga from '@store/reactions/fetchReactions/sagas'
 import fetchThemesSaga from '@store/themes/fetchThemes/sagas'
 import fetchUserSettingsSaga from '@store/userSettings/fetchUserSettings/sagas'
@@ -53,6 +54,7 @@ export default function* rootSaga() {
     fork(fetchCommentsSaga),
     fork(fetchReactionSaga),
     fork(createReactionSaga),
+    fork(deleteReactionSaga),
     fork(fetchReactionsSaga),
     fork(fetchThemesSaga),
     fork(fetchUserSettingsSaga),

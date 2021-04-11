@@ -2,6 +2,7 @@ import React, { FC, memo, useMemo } from 'react'
 import classNames from 'classnames'
 import { formatDate } from '@utils/misc'
 import { IComment } from '@models'
+import { ForumTopicCommentActions } from '@components/molecules'
 
 type TForumTopicChildCommentProps = {
   childComment: IComment
@@ -20,10 +21,11 @@ const ForumTopicChildComment: FC<TForumTopicChildCommentProps> = memo(
           'dark:border-white'
         )}
       >
-        <div className="mb-2 text-xs">
+        <div className="flex justify-between mb-2 text-xs">
           {childComment?.user?.name} at {formattedDate}
         </div>
         <div className="mb-2">{childComment.content}</div>
+        <ForumTopicCommentActions comment={childComment} />
       </div>
     )
   }
