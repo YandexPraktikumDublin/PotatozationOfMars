@@ -19,7 +19,7 @@ const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
   const userSettings = useSelector(getUserSettingsSelector)
 
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(() => {
-    return userSettings?.isDarkModeEnabled || true
+    return userSettings?.isDarkModeEnabled ?? true
   })
 
   const [style, setStyle] = useState(defaultImageStyle)
@@ -48,7 +48,7 @@ const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
       })
     }
     if (userSettings) {
-      setIsDarkTheme(userSettings.isDarkModeEnabled)
+      setIsDarkTheme(userSettings?.isDarkModeEnabled ?? true)
     }
   }, [isDarkTheme, userSettings])
 

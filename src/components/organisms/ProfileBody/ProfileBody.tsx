@@ -9,10 +9,11 @@ import { getThemesSelector } from '@store/themes/fetchThemes/selectors'
 
 type TProfileBodyProps = {
   togglePasswordForm: () => void
+  toggleThemeForm: () => void
 }
 
 const ProfileBody: FC<TProfileBodyProps> = memo(
-  ({ togglePasswordForm }: TProfileBodyProps) => {
+  ({ togglePasswordForm, toggleThemeForm }: TProfileBodyProps) => {
     const dispatch = useDispatch()
 
     const user = useSelector(getUserSelector)
@@ -38,9 +39,6 @@ const ProfileBody: FC<TProfileBodyProps> = memo(
           <NameValueListItem name="Display name" value={user?.displayName} />
           <NameValueListItem name="Phone" value={user?.phone} />
           <NameValueListItem name="Password" value="********" />
-        </List>
-
-        <List className="mb-12">
           <NameValueListItem
             name="Selected theme"
             value={selectedTheme?.name}
@@ -52,6 +50,7 @@ const ProfileBody: FC<TProfileBodyProps> = memo(
             name="Change password"
             onClick={togglePasswordForm}
           />
+          <ActionsListItem name="Change theme" onClick={toggleThemeForm} />
           <ActionsListItem name="Log out" onClick={handleLogoutButtonClick} />
         </List>
       </>

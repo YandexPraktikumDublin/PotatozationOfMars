@@ -15,7 +15,7 @@ export interface IUserSettings {
   id?: number
   themeId?: number
   theme?: ITheme
-  isDarkModeEnabled: boolean
+  isDarkModeEnabled?: boolean
   userId: number
   user?: Omit<IUser, 'passwordHash' | 'role' | 'createdAt' | 'updatedAt'>
   createdAt?: string

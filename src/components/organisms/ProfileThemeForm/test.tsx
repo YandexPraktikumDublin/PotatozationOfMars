@@ -5,31 +5,25 @@ import { Store } from 'redux'
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 
-import { ProfileBody } from '.'
+import { ProfileThemeForm } from '.'
 
 const mockStore = configureStore([])
 
-describe('<ProfileBody />', () => {
+describe('<ProfileThemeForm />', () => {
   let store: Store
 
   const initialState = {
-    user: {}
+    userSettings: {}
   }
 
   beforeEach(() => {
     store = mockStore(initialState)
   })
 
-  it('should renders correct <ProfileBody />', () => {
-    const togglePasswordForm = jest.fn()
-    const toggleThemeForm = jest.fn()
-
+  it('should renders correct <ProfileThemeForm />', () => {
     const wrapper = shallow(
       <Provider store={store}>
-        <ProfileBody
-          togglePasswordForm={togglePasswordForm}
-          toggleThemeForm={toggleThemeForm}
-        />
+        <ProfileThemeForm />
       </Provider>
     )
 

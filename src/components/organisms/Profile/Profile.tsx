@@ -1,12 +1,14 @@
 import React, { FC, memo, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { getUserSelector } from '@store/user/fetchUser/selectors'
+import { getUserSettingsSelector } from '@store/userSettings/fetchUserSettings/selectors'
 import { BackButton, EditButton } from '@components/atoms'
 import { ProfileHeader } from '@components/molecules'
 import {
   ProfileForm,
   ProfileBody,
-  ProfilePasswordForm
+  ProfilePasswordForm,
+  ProfileThemeForm
 } from '@components/organisms'
 import { useToggle } from '@hooks'
 
@@ -14,11 +16,14 @@ type TProfileProps = {}
 
 const Profile: FC<TProfileProps> = memo(() => {
   const user = useSelector(getUserSelector)
+  const userSettings = useSelector(getUserSettingsSelector)
 
   const [isShowProfileForm, toggleProfileForm] = useToggle(false)
   const [isShowPasswordForm, togglePasswordForm] = useToggle(false)
+  const [isShowThemeForm, toggleThemedForm] = useToggle(false)
 
-  const isShownForms = isShowProfileForm || isShowPasswordForm
+  const isShownForms =
+    isShowProfileForm || isShowPasswordForm || isShowThemeForm
 
   useEffect(() => {
     if (isShowProfileForm) {
@@ -29,6 +34,12 @@ const Profile: FC<TProfileProps> = memo(() => {
       togglePasswordForm()
     }
   }, [user])
+
+  useEffect(() => {
+    if (isShowThemeForm) {
+      toggleThemedForm()
+    }
+  }, [userSettings])
 
   return (
     <div className="relative">
@@ -46,6 +57,13 @@ const Profile: FC<TProfileProps> = memo(() => {
         />
       )}
 
+      {isShowThemeForm && (
+        <BackButton
+          onClick={toggleThemedForm}
+          className="absolute top-0 left-0"
+        />
+      )}
+
       {!isShownForms && (
         <EditButton
           onClick={toggleProfileForm}
@@ -55,11 +73,18 @@ const Profile: FC<TProfileProps> = memo(() => {
 
       <ProfileHeader className="mb-6" />
 
-      {!isShownForms && <ProfileBody togglePasswordForm={togglePasswordForm} />}
+      {!isShownForms && (
+        <ProfileBody
+          togglePasswordForm={togglePasswordForm}
+          toggleThemeForm={toggleThemedForm}
+        />
+      )}
 
       {isShowProfileForm && <ProfileForm />}
 
       {isShowPasswordForm && <ProfilePasswordForm />}
+
+      {isShowThemeForm && <ProfileThemeForm />}
     </div>
   )
 })
