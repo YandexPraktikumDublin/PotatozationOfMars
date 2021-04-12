@@ -158,6 +158,8 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 - `POST /api/v1/feedbacks` - создать обратную связь.
 ```
   {
+    name: string
+    email: string
     content: string
   }
 ```
