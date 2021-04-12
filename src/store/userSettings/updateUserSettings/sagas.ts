@@ -1,12 +1,15 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects'
 import { getAxiosInstance } from '@api'
-import { INNER_API_V1_URL } from '@config'
+import { INNER_API_V1_URL, INNER_SERVER_API_V1_URL } from '@config'
 import { updateUserSettingsFailure, updateUserSettingsSuccess } from './actions'
 import { UPDATE_USER_SETTINGS_REQUEST } from './actionTypes'
 import { IUpdateUserSettingsRequestPayload } from '@store/userSettings/updateUserSettings/types'
 
 const updateUserSettings = (data: IUpdateUserSettingsRequestPayload) =>
-  getAxiosInstance(INNER_API_V1_URL).put('user-settings', data)
+  getAxiosInstance(INNER_API_V1_URL, INNER_SERVER_API_V1_URL).put(
+    'user-settings',
+    data
+  )
 
 function* updateUserSettingsSaga(data: Record<string, any>) {
   try {

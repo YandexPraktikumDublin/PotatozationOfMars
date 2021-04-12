@@ -6,10 +6,13 @@ import {
 } from './actions'
 import { UPDATE_IUSER_PASSWORD_REQUEST } from './actionTypes'
 import { IUpdateIUserPasswordRequestPayload } from './types'
-import { INNER_API_V1_URL } from '@config'
+import { INNER_API_V1_URL, INNER_SERVER_API_V1_URL } from '@config'
 
 const updateIUserPassword = (data: IUpdateIUserPasswordRequestPayload) =>
-  getAxiosInstance(INNER_API_V1_URL).put('user/password', data)
+  getAxiosInstance(INNER_API_V1_URL, INNER_SERVER_API_V1_URL).put(
+    'user/password',
+    data
+  )
 
 function* updateIUserPasswordSaga(data: Record<string, any>) {
   try {

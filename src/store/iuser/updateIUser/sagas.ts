@@ -3,10 +3,10 @@ import { getAxiosInstance } from '@api'
 import { updateIUserSuccess, updateIUserFailure } from './actions'
 import { UPDATE_IUSER_REQUEST } from './actionTypes'
 import { IUpdateIUserRequestPayload } from './types'
-import { INNER_API_V1_URL } from '@config'
+import { INNER_API_V1_URL, INNER_SERVER_API_V1_URL } from '@config'
 
 const updateIUser = (data: IUpdateIUserRequestPayload) =>
-  getAxiosInstance(INNER_API_V1_URL).put('user', data)
+  getAxiosInstance(INNER_API_V1_URL, INNER_SERVER_API_V1_URL).put('user', data)
 
 function* updateIUserSaga(data: Record<string, any>) {
   try {

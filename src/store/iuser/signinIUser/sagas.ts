@@ -3,10 +3,13 @@ import { getAxiosInstance } from '@api'
 import { signinIUserSuccess, signinIUserFailure } from './actions'
 import { SIGNIN_IUSER_REQUEST } from './actionTypes'
 import { ISigninIUserRequestPayload } from './types'
-import { INNER_API_V1_URL } from '@config'
+import { INNER_API_V1_URL, INNER_SERVER_API_V1_URL } from '@config'
 
 export const signinIUser = (data: ISigninIUserRequestPayload) =>
-  getAxiosInstance(INNER_API_V1_URL).post('signin', data)
+  getAxiosInstance(INNER_API_V1_URL, INNER_SERVER_API_V1_URL).post(
+    'signin',
+    data
+  )
 
 function* signinIUserSaga(data: Record<string, any>) {
   try {

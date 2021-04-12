@@ -3,10 +3,13 @@ import { getAxiosInstance } from '@api'
 import { createIUserSuccess, createIUserFailure } from './actions'
 import { CREATE_IUSER_REQUEST } from './actionTypes'
 import { ICreateIUserRequestPayload } from './types'
-import { INNER_API_V1_URL } from '@config'
+import { INNER_API_V1_URL, INNER_SERVER_API_V1_URL } from '@config'
 
 export const createIUser = (data: ICreateIUserRequestPayload) =>
-  getAxiosInstance(INNER_API_V1_URL).post('signup', data)
+  getAxiosInstance(INNER_API_V1_URL, INNER_SERVER_API_V1_URL).post(
+    'signup',
+    data
+  )
 
 function* createIUserSaga(data: Record<string, any>) {
   try {

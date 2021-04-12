@@ -1,3 +1,5 @@
+const IS_DEV = process.env.NODE_ENV !== 'production'
+
 export const PATHS = {
   BASE: '/',
   AUTH: '/auth',
@@ -13,6 +15,9 @@ export const SERVER_URL = 'https://ya-praktikum.tech'
 export const BASE_API_URL = `${SERVER_URL}/api/v2`
 
 export const INNER_API_V1_URL = '/api/v1'
+export const INNER_SERVER_API_V1_URL = IS_DEV
+  ? `https://web:5000/${INNER_API_V1_URL}`
+  : INNER_API_V1_URL
 
 export const YANDEX_OAUTH_REDIRECT_URL = 'https://oauth.yandex.ru/authorize'
 

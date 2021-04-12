@@ -2,9 +2,10 @@ import { all, call, put, takeLatest } from 'redux-saga/effects'
 import { getAxiosInstance } from '@api'
 import { fetchIUserFailure, fetchIUserSuccess } from './actions'
 import { FETCH_IUSER_REQUEST } from './actionTypes'
-import { INNER_API_V1_URL } from '@config'
+import { INNER_API_V1_URL, INNER_SERVER_API_V1_URL } from '@config'
 
-const getIUser = () => getAxiosInstance(INNER_API_V1_URL).get('user')
+const getIUser = () =>
+  getAxiosInstance(INNER_API_V1_URL, INNER_SERVER_API_V1_URL).get('user')
 
 function* fetchIUserSaga() {
   try {
