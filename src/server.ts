@@ -18,7 +18,7 @@ import {
   feedbackRouterFactory
 } from '@factories'
 
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync({ force: false }).then(() => {
   console.info('Successful connection to the database!')
 
   db.seeder
