@@ -16,6 +16,7 @@ import { fetchLeaderboardRequest } from '@store/leaderboard/fetchLeaderboard/act
 import { fetchTopicsRequest } from '@store/topics/fetchTopics/actions'
 import { fetchUserSettingsRequest } from '@store/userSettings/fetchUserSettings/actions'
 import { fetchIUserRequest } from '@store/iuser/fetchIUser/actions'
+import { fetchThemesRequest } from '@store/themes/fetchThemes/actions'
 
 export default [
   {
@@ -23,6 +24,7 @@ export default [
     component: Start,
     exact: true,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
+      dispatch(fetchThemesRequest())
       dispatch(fetchUserRequest())
       dispatch(fetchIUserRequest())
       dispatch(fetchUserSettingsRequest())
@@ -35,7 +37,6 @@ export default [
     fetchData({ dispatch }: IRouterFetchDataArgs) {
       dispatch(fetchUserRequest())
       dispatch(fetchIUserRequest())
-      dispatch(fetchUserSettingsRequest())
     }
   },
   {
@@ -43,6 +44,7 @@ export default [
     component: Forum,
     exact: true,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
+      dispatch(fetchThemesRequest())
       dispatch(fetchUserRequest())
       dispatch(fetchIUserRequest())
       dispatch(fetchUserSettingsRequest())
@@ -54,6 +56,7 @@ export default [
     component: ForumTopic,
     exact: false,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
+      dispatch(fetchThemesRequest())
       dispatch(fetchUserRequest())
       dispatch(fetchIUserRequest())
       dispatch(fetchUserSettingsRequest())
@@ -64,6 +67,7 @@ export default [
     component: Game,
     exact: false,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
+      dispatch(fetchThemesRequest())
       dispatch(fetchUserRequest())
       dispatch(fetchIUserRequest())
       dispatch(fetchUserSettingsRequest())
@@ -74,6 +78,7 @@ export default [
     component: Leaderboard,
     exact: false,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
+      dispatch(fetchThemesRequest())
       dispatch(fetchUserRequest())
       dispatch(fetchIUserRequest())
       dispatch(fetchUserSettingsRequest())
@@ -85,6 +90,7 @@ export default [
     component: Profile,
     exact: false,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
+      dispatch(fetchThemesRequest())
       dispatch(fetchUserRequest())
       dispatch(fetchIUserRequest())
       dispatch(fetchUserSettingsRequest())
@@ -97,7 +103,6 @@ export default [
     fetchData({ dispatch }: IRouterFetchDataArgs) {
       dispatch(fetchUserRequest())
       dispatch(fetchIUserRequest())
-      dispatch(fetchUserSettingsRequest())
     }
   },
   {

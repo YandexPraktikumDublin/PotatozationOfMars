@@ -13,16 +13,24 @@ import { getIUserSelector } from '@store/iuser/fetchIUser/selectors'
 import { fetchIUserRequest } from '@store/iuser/fetchIUser/actions'
 import { createIUserRequest } from '@store/iuser/createIUser/actions'
 import { generatePassword } from '@utils/misc'
+import { getUserSettingsSelector } from '@store/userSettings/fetchUserSettings/selectors'
+import { fetchUserSettingsRequest } from '@store/userSettings/fetchUserSettings/actions'
+import { getThemesSelector } from '@store/themes/fetchThemes/selectors'
+import { fetchThemesRequest } from '@store/themes/fetchThemes/actions'
 
 export default function withAuth<T>(Component: React.FC<T>) {
   return (props: any) => {
     const location = useLocation()
 
     const dispatch = useDispatch()
+
     const user = useSelector(getUserSelector)
     const pendingUser = useSelector(getUserPendingSelector)
     const errorUser = useSelector(getUserErrorSelector)
+
+    const themes = useSelector(getThemesSelector)
     const iuser = useSelector(getIUserSelector)
+    const userSettings = useSelector(getUserSettingsSelector)
 
     const isAuthOrSignup =
       location.pathname === PATHS.AUTH || location.pathname === PATHS.SIGNUP
@@ -45,8 +53,16 @@ export default function withAuth<T>(Component: React.FC<T>) {
         dispatch(fetchUserRequest())
       }
 
+      if (themes?.length === 0) {
+        dispatch(fetchThemesRequest())
+      }
+
       if (!iuser) {
         dispatch(fetchIUserRequest())
+      }
+
+      if (!userSettings) {
+        dispatch(fetchUserSettingsRequest())
       }
     }, [])
 
