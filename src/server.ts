@@ -41,7 +41,7 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use(authMiddleware)
+app.use('/api/*', authMiddleware)
 
 app.use(
   userRouterFactory(

@@ -24,7 +24,7 @@ const Window: FC<TWindowProps> = memo(
         )}
         style={wrapperStyle}
       >
-        <div className="absolute inset-0 z-0 bg-white rounded-3xl opacity-40 dark:bg-primary" />
+        <div className="absolute inset-0 z-0 bg-white rounded-3xl opacity-70 dark:bg-primary" />
         <div className="overflow-y-auto relative pr-6 h-full">{children}</div>
       </div>
     )
