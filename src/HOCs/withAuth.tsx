@@ -43,8 +43,10 @@ export default function withAuth<T>(Component: React.FC<T>) {
       const code = new URLSearchParams(location.search)?.get('code')
 
       if (!user && code) {
+        const redirectUri = window ? window.location.origin : null
+
         getAxiosInstance()
-          .post('oauth/yandex', { code })
+          .post('oauth/yandex', { code, redirect_uri: redirectUri })
           .then(() => dispatch(fetchUserRequest()))
           .catch()
       }

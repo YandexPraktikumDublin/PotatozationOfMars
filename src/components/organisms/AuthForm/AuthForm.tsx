@@ -42,7 +42,7 @@ const AuthForm: FC<TAuthFormProps> = memo(() => {
     const redirectUri = !isServer() ? window.location.origin : null
 
     getAxiosInstance()
-      .get('/oauth/yandex/service-id')
+      .get(`/oauth/yandex/service-id?redirect_uri=${redirectUri}`)
       .then((response) => {
         if (response.data.service_id && redirectUri) {
           hardRedirectTo(
