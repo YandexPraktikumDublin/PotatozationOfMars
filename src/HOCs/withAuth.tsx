@@ -15,6 +15,7 @@ import { getUserSettingsSelector } from '@store/userSettings/fetchUserSettings/s
 import { fetchUserSettingsRequest } from '@store/userSettings/fetchUserSettings/actions'
 import { getThemesSelector } from '@store/themes/fetchThemes/selectors'
 import { fetchThemesRequest } from '@store/themes/fetchThemes/actions'
+import { setStyleVariable } from '@utils/misc'
 
 export default function withAuth<T>(Component: React.FC<T>) {
   return (props: any) => {
@@ -50,12 +51,12 @@ export default function withAuth<T>(Component: React.FC<T>) {
     }, [])
 
     useEffect(() => {
-      if (!user) {
-        dispatch(fetchUserRequest())
-      }
-
       if (!iuser) {
         dispatch(fetchIUserRequest())
+      }
+
+      if (!user) {
+        dispatch(fetchUserRequest())
       }
 
       if (themes?.length === 0) {
@@ -69,10 +70,8 @@ export default function withAuth<T>(Component: React.FC<T>) {
 
     useEffect(() => {
       if (selectedTheme) {
-        document.documentElement.style.setProperty(
-          '--primaryColor',
-          selectedTheme.preset?.primaryColor ?? ''
-        )
+        const primaryColor = selectedTheme.preset?.primaryColor ?? ''
+        setStyleVariable('--primaryColor', primaryColor)
       }
     }, [selectedTheme])
 
