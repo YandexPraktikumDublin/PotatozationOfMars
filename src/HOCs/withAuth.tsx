@@ -11,8 +11,6 @@ import { PATHS } from '@config'
 import { getAxiosInstance } from '@api'
 import { getIUserSelector } from '@store/iuser/fetchIUser/selectors'
 import { fetchIUserRequest } from '@store/iuser/fetchIUser/actions'
-import { createIUserRequest } from '@store/iuser/createIUser/actions'
-import { generatePassword } from '@utils/misc'
 import { getUserSettingsSelector } from '@store/userSettings/fetchUserSettings/selectors'
 import { fetchUserSettingsRequest } from '@store/userSettings/fetchUserSettings/actions'
 import { getThemesSelector } from '@store/themes/fetchThemes/selectors'
@@ -41,42 +39,28 @@ export default function withAuth<T>(Component: React.FC<T>) {
       if (!user && code) {
         getAxiosInstance()
           .post('oauth/yandex', { code })
-          .then(() => {
-            dispatch(fetchUserRequest())
-          })
+          .then(() => dispatch(fetchUserRequest()))
           .catch()
-
-        return
       }
+    }, [])
 
+    useEffect(() => {
       if (!user) {
         dispatch(fetchUserRequest())
-      }
-
-      if (themes?.length === 0) {
-        dispatch(fetchThemesRequest())
       }
 
       if (!iuser) {
         dispatch(fetchIUserRequest())
       }
 
+      if (themes?.length === 0) {
+        dispatch(fetchThemesRequest())
+      }
+
       if (!userSettings) {
         dispatch(fetchUserSettingsRequest())
       }
     }, [])
-
-    useEffect(() => {
-      if (user && !iuser) {
-        dispatch(
-          createIUserRequest({
-            login: user.login,
-            name: `${user.firstName} ${user.secondName}`,
-            password: generatePassword()
-          })
-        )
-      }
-    }, [user])
 
     if (pendingUser) {
       return null
