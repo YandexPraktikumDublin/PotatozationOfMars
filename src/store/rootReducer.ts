@@ -15,6 +15,7 @@ import reactionReducer from '@store/reaction/reducer'
 import reactionsReducer from '@store/reactions/reducer'
 import themesReducer from '@store/themes/reducer'
 import userSettingsReducer from '@store/userSettings/reducer'
+import feedbackReducer from '@store/feedback/reducer'
 import { History } from 'history'
 import { IAppState } from '@types'
 
@@ -35,6 +36,7 @@ const createRootReducer = (history: History) =>
     reactions: reactionsReducer,
     themes: themesReducer,
     userSettings: userSettingsReducer,
+    feedback: feedbackReducer,
     router: connectRouter(history)
   })
 

@@ -3,7 +3,7 @@ import { getAxiosInstance } from '@api'
 import { INNER_API_V1_URL, INNER_SERVER_API_V1_URL } from '@config'
 import { createCommentFailure, createCommentSuccess } from './actions'
 import { CREATE_COMMENT_REQUEST } from './actionTypes'
-import { ICreateCommentRequestPayload } from '@store/comment/createComment/types'
+import { ICreateCommentRequestPayload } from './types'
 import { addComment } from '@store/comments/actions'
 
 const createComment = (data: ICreateCommentRequestPayload) =>

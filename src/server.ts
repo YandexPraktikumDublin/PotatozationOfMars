@@ -14,10 +14,11 @@ import {
   commentRouterFactory,
   reactionRouterFactory,
   themeRouterFactory,
-  userSettingsFactory
+  userSettingsRouterFactory,
+  feedbackRouterFactory
 } from '@factories'
 
-db.sequelize.sync({ force: false }).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   console.info('Successful connection to the database!')
 
   db.seeder
@@ -60,7 +61,8 @@ app.use(
 )
 app.use(reactionRouterFactory(db.reactionRepository, db.userRepository))
 app.use(themeRouterFactory(db.themeRepository))
-app.use(userSettingsFactory(db.userSettingsRepository))
+app.use(userSettingsRouterFactory(db.userSettingsRepository))
+app.use(feedbackRouterFactory(db.feedbackRepository))
 
 app.use(compression()).use(express.static(path.resolve(__dirname, '../dist')))
 

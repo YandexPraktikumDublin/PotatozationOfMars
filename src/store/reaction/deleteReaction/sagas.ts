@@ -3,7 +3,7 @@ import { getAxiosInstance } from '@api'
 import { INNER_API_V1_URL, INNER_SERVER_API_V1_URL } from '@config'
 import { deleteReactionFailure, deleteReactionSuccess } from './actions'
 import { DELETE_REACTION_REQUEST } from './actionTypes'
-import { IDeleteReactionRequestPayload } from '@store/reaction/deleteReaction/types'
+import { IDeleteReactionRequestPayload } from './types'
 import { removeReaction } from '@store/comments/actions'
 
 const deleteReaction = (data: IDeleteReactionRequestPayload) =>

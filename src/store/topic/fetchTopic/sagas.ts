@@ -3,7 +3,7 @@ import { getAxiosInstance } from '@api'
 import { INNER_API_V1_URL, INNER_SERVER_API_V1_URL } from '@config'
 import { fetchTopicFailure, fetchTopicSuccess } from './actions'
 import { FETCH_TOPIC_REQUEST } from './actionTypes'
-import { IFetchTopicRequestPayload } from '@store/topic/fetchTopic/types'
+import { IFetchTopicRequestPayload } from './types'
 
 const getTopic = (data: IFetchTopicRequestPayload) =>
   getAxiosInstance(INNER_API_V1_URL, INNER_SERVER_API_V1_URL).get(

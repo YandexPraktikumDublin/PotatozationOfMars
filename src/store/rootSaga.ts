@@ -28,6 +28,7 @@ import fetchThemesSaga from '@store/themes/fetchThemes/sagas'
 import fetchUserSettingsSaga from '@store/userSettings/fetchUserSettings/sagas'
 import createUserSettingsSaga from '@store/userSettings/createUserSettings/sagas'
 import updateUserSettingsSaga from '@store/userSettings/updateUserSettings/sagas'
+import createFeedbackSaga from '@store/feedback/createFeedback/sagas'
 
 export default function* rootSaga() {
   yield all([
@@ -59,6 +60,7 @@ export default function* rootSaga() {
     fork(fetchThemesSaga),
     fork(fetchUserSettingsSaga),
     fork(createUserSettingsSaga),
-    fork(updateUserSettingsSaga)
+    fork(updateUserSettingsSaga),
+    fork(createFeedbackSaga)
   ])
 }

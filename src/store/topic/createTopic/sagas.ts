@@ -3,7 +3,7 @@ import { getAxiosInstance } from '@api'
 import { INNER_API_V1_URL, INNER_SERVER_API_V1_URL, PATHS } from '@config'
 import { createTopicFailure, createTopicSuccess } from './actions'
 import { CREATE_TOPIC_REQUEST } from './actionTypes'
-import { ICreateTopicRequestPayload } from '@store/topic/createTopic/types'
+import { ICreateTopicRequestPayload } from './types'
 import { history } from '@store/store'
 
 const createTopic = (data: ICreateTopicRequestPayload) =>

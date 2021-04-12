@@ -3,7 +3,7 @@ import { Repository } from 'sequelize-typescript'
 import { UserSettings } from '@models'
 import { DEFAULT_ERROR_MESSAGE, INNER_API_V1_URL } from '@config'
 
-export const userSettingsFactory = (
+export const userSettingsRouterFactory = (
   userSettingsRepository: Repository<UserSettings>
 ) =>
   Router()

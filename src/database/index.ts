@@ -7,7 +7,8 @@ import {
   Comment,
   CommentAncestor,
   Reaction,
-  Theme
+  Theme,
+  Feedback
 } from '@models'
 import { Umzug, SequelizeStorage } from 'umzug'
 
@@ -27,7 +28,8 @@ const sequelizeOptions: SequelizeOptions = {
     Comment,
     CommentAncestor,
     Reaction,
-    Theme
+    Theme,
+    Feedback
   ]
 }
 
@@ -52,6 +54,7 @@ const topicRepository = sequelize.getRepository(Topic)
 const commentRepository = sequelize.getRepository(Comment)
 const reactionRepository = sequelize.getRepository(Reaction)
 const themeRepository = sequelize.getRepository(Theme)
+const feedbackRepository = sequelize.getRepository(Feedback)
 
 const db = {
   Sequelize,
@@ -63,7 +66,8 @@ const db = {
   topicRepository,
   commentRepository,
   reactionRepository,
-  themeRepository
+  themeRepository,
+  feedbackRepository
 }
 
 export default db

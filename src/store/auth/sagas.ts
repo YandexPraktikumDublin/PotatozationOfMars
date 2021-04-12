@@ -4,7 +4,7 @@ import { PATHS } from '@config'
 import { hardRedirectTo } from '@utils/misc'
 import { authFailure, authSuccess } from './actions'
 import { AUTH_REQUEST } from './actionTypes'
-import { IAuthRequestPayload } from '@store/auth/types'
+import { IAuthRequestPayload } from './types'
 import { signinIUserRequest } from '@store/iuser/signinIUser/actions'
 
 const signin = (data: IAuthRequestPayload) =>

@@ -150,3 +150,14 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
     isDarkModeEnabled?: boolean
   }
 ```
+
+### Feedbacks
+
+- `GET /api/v1/feedbacks` - получить всю обратную связь (может только пользователь с ролью admin).
+- `GET /api/v1/feedbacks/:id` - получить обратную связь по id (может только пользователь с ролью admin).
+- `POST /api/v1/feedbacks` - создать обратную связь.
+```
+  {
+    content: string
+  }
+```

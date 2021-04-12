@@ -3,7 +3,7 @@ import { getAxiosInstance } from '@api'
 import { INNER_API_V1_URL, INNER_SERVER_API_V1_URL } from '@config'
 import { createReactionFailure, createReactionSuccess } from './actions'
 import { CREATE_REACTION_REQUEST } from './actionTypes'
-import { ICreateReactionRequestPayload } from '@store/reaction/createReaction/types'
+import { ICreateReactionRequestPayload } from './types'
 import { addReaction } from '@store/comments/actions'
 
 const createReaction = (data: ICreateReactionRequestPayload) =>

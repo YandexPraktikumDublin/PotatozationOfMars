@@ -5,25 +5,25 @@ import { Store } from 'redux'
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 
-import { ChangeAvatarForm } from '.'
+import { FeedbackForm } from '.'
 
 const mockStore = configureStore([])
 
-describe('<ChangeAvatarForm />', () => {
+describe('<FeedbackForm />', () => {
   let store: Store
 
   const initialState = {
-    user: {}
+    feedback: {}
   }
 
   beforeEach(() => {
     store = mockStore(initialState)
   })
 
-  it('should renders correct <ChangeAvatarForm />', () => {
+  it('should renders correct <FeedbackForm />', () => {
     const wrapper = shallow(
       <Provider store={store}>
-        <ChangeAvatarForm />
+        <FeedbackForm />
       </Provider>
     )
 

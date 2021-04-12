@@ -3,7 +3,7 @@ import { getAxiosInstance } from '@api'
 import { INNER_API_V1_URL, INNER_SERVER_API_V1_URL } from '@config'
 import { fetchReactionFailure, fetchReactionSuccess } from './actions'
 import { FETCH_REACTION_REQUEST } from './actionTypes'
-import { IFetchReactionRequestPayload } from '@store/reaction/fetchReaction/types'
+import { IFetchReactionRequestPayload } from './types'
 
 const getReaction = (data: IFetchReactionRequestPayload) =>
   getAxiosInstance(INNER_API_V1_URL, INNER_SERVER_API_V1_URL).get(
