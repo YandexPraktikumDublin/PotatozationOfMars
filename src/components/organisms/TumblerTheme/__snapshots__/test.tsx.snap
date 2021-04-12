@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TumblerTheme /> should renders correct <TumblerTheme /> 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Subscription {
+        "handleChangeWrapper": [Function],
+        "listeners": Object {
+          "notify": [Function],
+        },
+        "onStateChange": [Function],
+        "parentSub": undefined,
+        "store": Object {
+          "clearActions": [Function],
+          "dispatch": [Function],
+          "getActions": [Function],
+          "getState": [Function],
+          "replaceReducer": [Function],
+          "subscribe": [Function],
+        },
+        "unsubscribe": null,
+      },
+    }
+  }
+>
+  <TumblerTheme />
+</ContextProvider>
+`;
+
+exports[`<TumblerTheme /> should toggle theme 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <TumblerTheme>
+    <button
+      className="relative bg-primary border-2 border-white rounded-2xl w-12	h-5 outline-none"
+      onClick={[Function]}
+    >
+      <img
+        alt="Toggle theme"
+        className="absolute transition ease-in-out w-6 h-6"
+        height="24"
+        src={[Function]}
+        style={
+          Object {
+            "display": "block",
+            "top": "calc(50% - 0.75rem)",
+            "transform": "translateX(-2px)",
+          }
+        }
+        width="24"
+      />
+    </button>
+  </TumblerTheme>
+</Provider>
+`;
