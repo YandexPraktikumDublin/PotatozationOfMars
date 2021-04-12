@@ -12,5 +12,7 @@ export const normalizeUser = (user: IServerUser) => ({
   login: user?.login ?? '',
   email: user?.email ?? '',
   phone: user?.phone ?? '',
-  avatar: user?.avatar ? `${SERVER_URL}/${user?.avatar}` : profile
+  avatar: user?.avatar
+    ? `${SERVER_URL}/api/v2/resources/${user?.avatar}`
+    : profile
 })
