@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUserRequest } from '@store/user/fetchUser/actions'
 import {
@@ -33,6 +33,11 @@ export default function withAuth<T>(Component: React.FC<T>) {
     const isAuthOrSignup =
       location.pathname === PATHS.AUTH || location.pathname === PATHS.SIGNUP
 
+    const selectedTheme = useMemo(
+      () => themes?.find((theme) => theme.id === userSettings?.themeId),
+      [themes, userSettings?.themeId]
+    )
+
     useEffect(() => {
       const code = new URLSearchParams(location.search)?.get('code')
 
@@ -61,6 +66,15 @@ export default function withAuth<T>(Component: React.FC<T>) {
         dispatch(fetchUserSettingsRequest())
       }
     }, [])
+
+    useEffect(() => {
+      if (selectedTheme) {
+        document.documentElement.style.setProperty(
+          '--primaryColor',
+          selectedTheme.preset?.primaryColor ?? ''
+        )
+      }
+    }, [selectedTheme])
 
     if (pendingUser) {
       return null

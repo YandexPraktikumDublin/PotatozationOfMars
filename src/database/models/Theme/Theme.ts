@@ -13,7 +13,7 @@ import { IUserSettings, UserSettings } from '../UserSettings/UserSettings'
 export interface ITheme {
   id?: number
   name: string
-  preset: string
+  preset: any
   isEnabled: boolean
   userSettings?: IUserSettings[]
   createdAt?: string
@@ -29,7 +29,7 @@ export class Theme extends Model<ITheme> {
 
   @AllowNull(false)
   @Column(DataType.JSONB)
-  preset!: string
+  preset!: any
 
   @AllowNull(false)
   @Default(true)
