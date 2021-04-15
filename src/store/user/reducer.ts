@@ -18,10 +18,11 @@ import {
   UPDATE_PASSWORD_SUCCESS,
   UPDATE_PASSWORD_FAILURE
 } from './updatePassword/actionTypes'
-import { TUserActions, IUserState } from './fetchUser/types'
+import { TUserActions } from './fetchUser/types'
 import { TUpdateUserActions } from './updateUser/types'
 import { TUpdateAvatarActions } from './updateAvatar/types'
 import { TUpdatePasswordActions } from './updatePassword/types'
+import { IUserState } from './types'
 import { normalizeUser } from '@utils/user'
 
 type TCommonAction =
@@ -47,24 +48,13 @@ export default (state = initialState, action: TCommonAction): IUserState => {
         pending: true
       }
     case FETCH_USER_SUCCESS:
-      return {
-        ...state,
-        pending: false,
-        user: normalizeUser(action.payload?.user),
-        error: null
-      }
     case UPDATE_USER_SUCCESS:
-      return {
-        ...state,
-        pending: false,
-        user: normalizeUser(action.payload?.user),
-        error: null
-      }
     case UPDATE_AVATAR_SUCCESS:
       return {
         ...state,
         pending: false,
-        user: normalizeUser(action.payload?.user)
+        user: normalizeUser(action.payload?.user),
+        error: null
       }
     case UPDATE_PASSWORD_SUCCESS:
       return <IUserState>{
@@ -90,8 +80,6 @@ export default (state = initialState, action: TCommonAction): IUserState => {
         error: action.payload.error
       }
     default:
-      return {
-        ...state
-      }
+      return state
   }
 }

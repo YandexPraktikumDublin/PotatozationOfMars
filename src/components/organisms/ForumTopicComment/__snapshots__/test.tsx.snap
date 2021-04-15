@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ForumTopicComment /> should renders correct <ForumTopicComment /> 1`] = `
+<Fragment>
+  <div
+    className="text-left border border-primary rounded-2xl p-4 mb-4 last:mb-0 dark:border-white"
+  >
+    <div
+      className="flex justify-between items-center mb-2 text-sm"
+    >
+      <span
+        className=""
+      >
+        Ivan Ivanov
+         at 
+        1/12/2020, 12:00 AM
+      </span>
+      <button
+        className="underline"
+        onClick={[Function]}
+        title="Add reaction"
+      >
+        Reply
+      </button>
+    </div>
+    <div
+      className="mb-3 text-lg"
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </div>
+    <ForumTopicCommentActions
+      comment={
+        Object {
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "createdAt": "01.12.20",
+          "enjoyer": Object {
+            "createdAt": "01.12.20",
+            "id": 1,
+            "login": "IvanIvanov",
+            "name": "Ivan Ivanov",
+            "updatedAt": "01.12.20",
+          },
+          "enjoyerId": 1,
+          "id": 1,
+          "reactions": Array [
+            Object {
+              "commentId": 2,
+              "content": "😂",
+              "createdAt": "01.12.20",
+              "enjoyer": Object {
+                "createdAt": "01.12.20",
+                "id": 1,
+                "login": "IvanIvanov",
+                "name": "Ivan Ivanov",
+                "updatedAt": "01.12.20",
+              },
+              "enjoyerId": 1,
+              "id": 1,
+              "updatedAt": "01.12.20",
+            },
+          ],
+          "topicId": 1,
+          "updatedAt": "01.12.20",
+        }
+      }
+    />
+  </div>
+</Fragment>
+`;

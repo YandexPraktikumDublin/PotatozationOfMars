@@ -12,3 +12,12 @@ declare module '*.png' {
   const content: any
   export default content
 }
+
+declare namespace Express {
+  export interface Request {
+    enjoyer: any
+    universalCookies: {
+      cookies: Record<string, any>
+    }
+  }
+}

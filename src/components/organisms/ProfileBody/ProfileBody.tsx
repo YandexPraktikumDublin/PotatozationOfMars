@@ -1,19 +1,29 @@
-import React, { FC, memo } from 'react'
+import React, { FC, memo, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ActionsListItem, NameValueListItem } from '@components/atoms'
 import { List } from '@components/molecules'
 import { getUserSelector } from '@store/user/fetchUser/selectors'
 import { logoutRequest } from '@store/logout/actions'
+import { getEnjoyerSettingsSelector } from '@store/enjoyerSettings/fetchEnjoyerSettings/selectors'
+import { getThemesSelector } from '@store/themes/fetchThemes/selectors'
 
 type TProfileBodyProps = {
   togglePasswordForm: () => void
+  toggleThemeForm: () => void
 }
 
 const ProfileBody: FC<TProfileBodyProps> = memo(
-  ({ togglePasswordForm }: TProfileBodyProps) => {
+  ({ togglePasswordForm, toggleThemeForm }: TProfileBodyProps) => {
     const dispatch = useDispatch()
 
     const user = useSelector(getUserSelector)
+    const enjoyerSettings = useSelector(getEnjoyerSettingsSelector)
+    const themes = useSelector(getThemesSelector)
+
+    const selectedTheme = useMemo(
+      () => themes?.find((theme) => theme.id === enjoyerSettings?.themeId),
+      [themes, enjoyerSettings?.themeId]
+    )
 
     const handleLogoutButtonClick = () => {
       dispatch(logoutRequest())
@@ -29,6 +39,10 @@ const ProfileBody: FC<TProfileBodyProps> = memo(
           <NameValueListItem name="Display name" value={user?.displayName} />
           <NameValueListItem name="Phone" value={user?.phone} />
           <NameValueListItem name="Password" value="********" />
+          <NameValueListItem
+            name="Selected theme"
+            value={selectedTheme?.name}
+          />
         </List>
 
         <List>
@@ -36,6 +50,7 @@ const ProfileBody: FC<TProfileBodyProps> = memo(
             name="Change password"
             onClick={togglePasswordForm}
           />
+          <ActionsListItem name="Change theme" onClick={toggleThemeForm} />
           <ActionsListItem name="Log out" onClick={handleLogoutButtonClick} />
         </List>
       </>

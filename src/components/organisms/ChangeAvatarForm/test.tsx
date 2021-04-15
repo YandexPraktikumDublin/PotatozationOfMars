@@ -1,10 +1,11 @@
 import React from 'react'
-import { Store } from 'redux'
-import { Provider } from 'react-redux'
 import { shallow } from 'enzyme'
 import toJSON from 'enzyme-to-json'
-import { ChangeAvatarForm } from '.'
+import { Store } from 'redux'
+import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
+
+import { ChangeAvatarForm } from '.'
 
 const mockStore = configureStore([])
 

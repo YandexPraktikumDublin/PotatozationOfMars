@@ -26,8 +26,6 @@ export default (state = initialState, action: TLogoutActions) => {
         error: action.payload.error ?? DEFAULT_ERROR_MESSAGE
       }
     default:
-      return {
-        ...state
-      }
+      return state
   }
 }

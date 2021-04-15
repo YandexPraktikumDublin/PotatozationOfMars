@@ -4,7 +4,9 @@ exports[`<LeaderboardTemplate /> should renders correct <LeaderboardTemplate /> 
 <div
   className="w-full max-w-2xl"
 >
-  <Window>
+  <Window
+    isFullHeight={true}
+  >
     <Title>
       Leaderboard
     </Title>

@@ -18,6 +18,9 @@ module.exports = {
     hot: true,
     port: 8080,
     host: '0.0.0.0',
+    proxy: {
+      '*': 'http://0.0.0.0:8000'
+    },
     liveReload: false,
     https: {
       key: readFileSync(path.resolve('network/config/key.pem'), 'utf8'),
@@ -48,7 +51,8 @@ module.exports = {
               ],
               plugins: [
                 ['@babel/plugin-proposal-class-properties', { loose: true }],
-                'react-hot-loader/babel'
+                'react-hot-loader/babel',
+                ['@babel/plugin-proposal-decorators', { legacy: true }]
               ]
             }
           }

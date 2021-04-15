@@ -11,7 +11,7 @@
 Сюжет/Тематика игры: Главный герой бизнесмен Илон Маск, который летит на Марс с целью колонизации, грузом его космического корабля является картошка, выращивание которой он хочет наладить в будущей колонии. Потеряв весь свой груз он возвращается на Землю, что бы повторить попытку и игра начинается заново.
 
 ## Ссылка на игру
-https://potatozationofmars.herokuapp.com/
+https://dublin-potatozation-of-mars.ya-praktikum.tech
 
 ## Дизайн-макет
 https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0%3A1
@@ -24,6 +24,142 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 - `npm run test` - запуск тестов
 - `npm run generate` - генерация компонентов
 
+## Особенности локального запуска
+
+Так как мы используем в проекте самоподписной ssl сертификат для локальной разработки, при первом запуске нужно в отдельной вкладке открыть следующие файлы и разрешить их исполнение:
+- https://127.0.0.1:8080/main.css
+- https://127.0.0.1:8080/main.js
+
 ## Запуск в Docker
 
-- `docker-compose up web` - запуск
+- `docker-compose up web` - запуск.
+- `docker-compose up --build web` - запуск с пересборкой.
+
+## Внутреннее API
+
+### Enjoyer
+
+- `GET /api/v1/enjoyer` - получить текущего пользователя.
+- `POST /api/v1/signup` - регистрация.
+```
+  {
+    login: string
+    name: string
+    password: string
+  }
+```
+- `POST /api/v1/signin` - аутентификация.
+```
+  {
+    login: string
+    password: string
+  }
+```
+- `POST /api/v1/logout` - выход.
+- `PUT /api/v1/enjoyer` - обновить текущего пользователя.
+```
+  {
+    login: string
+    name: string
+  }
+```
+
+- `PUT /api/v1/enjoyer/password` - обновить пароль текущего пользователя.
+```
+  {
+    oldPassword: string
+    newPassword: string
+  }
+```
+
+### Topics
+
+- `GET /api/v1/topics` - получить все топики.
+- `GET /api/v1/topics/:id` - получить топик по id.
+- `POST /api/v1/topics` - создать новый топик.
+```
+  {
+      subject: string
+      content: string
+  }
+```
+
+### Comments
+
+- `GET /api/v1/topic-comments/:topicId` - получить все комментарии топика.
+- `GET /api/v1/comments/:id` - получить комментарии по id.
+- `POST /api/v1/comments` - создать новый комментарий.
+```
+  {
+    content: string
+    topicId: number
+    parentId?: number | null
+    hierarchyLevel?: number
+  }
+```
+
+### Reactions
+
+- `GET /api/v1/comment-reactions/:commentId` - получить все реакции комментария.
+- `GET /api/v1/reactions/:id` - получить реакции по id.
+- `POST /api/v1/reactions` - создать новую реакции.
+- `DELETE /api/v1/reactions/:id` - удалить реакцию по id.
+```
+  {
+    content: string
+    hierarchyLevel?: number
+    commentId: number
+  }
+```
+
+### Themes
+
+- `GET /api/v1/themes` - получить все темы оформления.
+- `GET /api/v1/themes/:id` - получить тему оформления по id.
+- `POST /api/v1/themes` - создать новую тему оформления (может только пользователь с ролью admin).
+```
+  {
+    name: string
+    preset: string(JSONB)
+    isEnabled?: boolean
+  }
+```
+- `PUT /api/v1/themes` - обновить тему оформления (может только пользователь с ролью admin).
+```
+  {
+    name: string
+    preset: string(JSONB)
+    isEnabled?: boolean
+  }
+```
+
+### Enjoyer settings
+
+- `GET /api/v1/enjoyer-settings` - получить настройки текущего пользователя.
+- `POST /api/v1/enjoyer-settings` - создать настройки текущего пользователя.
+```
+  {
+    themeId: number
+    isDarkModeEnabled?: boolean
+  }
+```
+- `PUT /api/v1/enjoyer-settings` - обновить настройки текущего пользователя.
+```
+  {
+    themeId?: number
+    isDarkModeEnabled?: boolean
+  }
+```
+
+### Feedbacks
+
+- `GET /api/v1/feedbacks` - получить всю обратную связь (может только пользователь с ролью admin).
+- `GET /api/v1/feedbacks/:id` - получить обратную связь по id (может только пользователь с ролью admin).
+- `POST /api/v1/feedbacks` - создать обратную связь.
+```
+  {
+    name: string
+    email: string
+    content: string
+  }
+```

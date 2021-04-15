@@ -10,6 +10,7 @@ type TBaseFormProps = {
   onSubmit: (values: FormikValues) => Promise<Record<string, any> | void> | void
   buttonText: string
   formError?: string
+  isResetOnSubmit?: boolean
 }
 
 const BaseForm: FC<TBaseFormProps> = memo(
@@ -19,14 +20,17 @@ const BaseForm: FC<TBaseFormProps> = memo(
     validationSchema,
     onSubmit,
     buttonText,
-    formError = ''
+    formError = '',
+    isResetOnSubmit = false
   }: TBaseFormProps) => {
     return (
       <Formik
         enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values, { setSubmitting, resetForm }) => {
+          if (isResetOnSubmit) resetForm()
+
           onSubmit(values)
           setSubmitting(false)
         }}

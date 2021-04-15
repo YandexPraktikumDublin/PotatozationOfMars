@@ -1,6 +1,7 @@
 const { colors } = require('tailwindcss/defaultTheme')
 
 module.exports = {
+  mode: 'jit',
   purge: {
     content: ['./src/**/*.tsx'],
     options: {
@@ -16,7 +17,7 @@ module.exports = {
       body: ['Roboto', 'sans-serif']
     },
     colors: {
-      primary: '#353535',
+      primary: 'var(--primaryColor, #353535)',
       black: colors.black,
       white: colors.white,
       transparent: colors.transparent,

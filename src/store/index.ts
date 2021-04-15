@@ -6,7 +6,14 @@ import logger from 'redux-logger'
 import createRootReducer from '@store/rootReducer'
 import rootSaga from '@store/rootSaga'
 import { IAppStore } from '@types'
-import { isServer } from '@utils/misc'
+
+function isServer() {
+  return !(
+    typeof window !== 'undefined' &&
+    window.document &&
+    window.document.createElement
+  )
+}
 
 function getComposeEnhancers() {
   if (process.env.NODE_ENV !== 'production' && !isServer()) {

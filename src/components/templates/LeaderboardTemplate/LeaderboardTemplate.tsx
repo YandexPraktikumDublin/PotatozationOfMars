@@ -5,7 +5,7 @@ type TLeaderboardTemplateProps = {}
 
 const LeaderboardTemplate: FC<TLeaderboardTemplateProps> = memo(() => (
   <div className="w-full max-w-2xl">
-    <Window>
+    <Window isFullHeight>
       <Title>Leaderboard</Title>
       <Leaderboard />
     </Window>

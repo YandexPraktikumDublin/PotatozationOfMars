@@ -13,6 +13,10 @@ import {
 } from '@pages'
 import { PATHS } from '@config'
 import { fetchLeaderboardRequest } from '@store/leaderboard/fetchLeaderboard/actions'
+import { fetchTopicsRequest } from '@store/topics/fetchTopics/actions'
+import { fetchEnjoyerSettingsRequest } from '@store/enjoyerSettings/fetchEnjoyerSettings/actions'
+import { fetchEnjoyerRequest } from '@store/enjoyer/fetchEnjoyer/actions'
+import { fetchThemesRequest } from '@store/themes/fetchThemes/actions'
 
 export default [
   {
@@ -20,7 +24,10 @@ export default [
     component: Start,
     exact: true,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
+      dispatch(fetchThemesRequest())
       dispatch(fetchUserRequest())
+      dispatch(fetchEnjoyerRequest())
+      dispatch(fetchEnjoyerSettingsRequest())
     }
   },
   {
@@ -29,6 +36,7 @@ export default [
     exact: false,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
       dispatch(fetchUserRequest())
+      dispatch(fetchEnjoyerRequest())
     }
   },
   {
@@ -36,7 +44,11 @@ export default [
     component: Forum,
     exact: true,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
+      dispatch(fetchThemesRequest())
       dispatch(fetchUserRequest())
+      dispatch(fetchEnjoyerRequest())
+      dispatch(fetchEnjoyerSettingsRequest())
+      dispatch(fetchTopicsRequest())
     }
   },
   {
@@ -44,7 +56,10 @@ export default [
     component: ForumTopic,
     exact: false,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
+      dispatch(fetchThemesRequest())
       dispatch(fetchUserRequest())
+      dispatch(fetchEnjoyerRequest())
+      dispatch(fetchEnjoyerSettingsRequest())
     }
   },
   {
@@ -52,7 +67,10 @@ export default [
     component: Game,
     exact: false,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
+      dispatch(fetchThemesRequest())
       dispatch(fetchUserRequest())
+      dispatch(fetchEnjoyerRequest())
+      dispatch(fetchEnjoyerSettingsRequest())
     }
   },
   {
@@ -60,7 +78,10 @@ export default [
     component: Leaderboard,
     exact: false,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
+      dispatch(fetchThemesRequest())
       dispatch(fetchUserRequest())
+      dispatch(fetchEnjoyerRequest())
+      dispatch(fetchEnjoyerSettingsRequest())
       dispatch(fetchLeaderboardRequest({ cursor: 0 }))
     }
   },
@@ -69,7 +90,10 @@ export default [
     component: Profile,
     exact: false,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
+      dispatch(fetchThemesRequest())
       dispatch(fetchUserRequest())
+      dispatch(fetchEnjoyerRequest())
+      dispatch(fetchEnjoyerSettingsRequest())
     }
   },
   {
@@ -78,6 +102,7 @@ export default [
     exact: false,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
       dispatch(fetchUserRequest())
+      dispatch(fetchEnjoyerRequest())
     }
   },
   {
