@@ -8,7 +8,7 @@ import { IReaction } from '@models'
 export interface ICreateReactionRequestPayload
   extends Omit<
     IReaction,
-    'id' | 'userId' | 'user' | 'createdAt' | 'updatedAt'
+    'id' | 'enjoyerId' | 'enjoyer' | 'createdAt' | 'updatedAt'
   > {}
 
 export interface ICreateReactionSuccessPayload {

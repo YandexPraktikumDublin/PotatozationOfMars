@@ -3,7 +3,7 @@ import { getAxiosInstance } from '@api'
 import { updateUserSuccess, updateUserFailure } from './actions'
 import { UPDATE_USER_REQUEST } from './actionTypes'
 import { IUpdateUserRequestPayload } from './types'
-import { updateIUserRequest } from '@store/iuser/updateIUser/actions'
+import { updateEnjoyerRequest } from '@store/enjoyer/updateEnjoyer/actions'
 
 const changeUserData = (data: IUpdateUserRequestPayload) =>
   getAxiosInstance().put('user/profile', data)
@@ -14,7 +14,7 @@ function* updateUserSaga(data: Record<string, any>) {
     yield put(updateUserSuccess({ user: response.data }))
 
     yield put(
-      updateIUserRequest({
+      updateEnjoyerRequest({
         login: data.payload.login,
         name:
           data.payload.display_name ??

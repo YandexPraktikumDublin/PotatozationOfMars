@@ -9,10 +9,10 @@ import {
 import { Redirect, useLocation } from 'react-router'
 import { PATHS } from '@config'
 import { getAxiosInstance } from '@api'
-import { getIUserSelector } from '@store/iuser/fetchIUser/selectors'
-import { fetchIUserRequest } from '@store/iuser/fetchIUser/actions'
-import { getUserSettingsSelector } from '@store/userSettings/fetchUserSettings/selectors'
-import { fetchUserSettingsRequest } from '@store/userSettings/fetchUserSettings/actions'
+import { getEnjoyerSelector } from '@store/enjoyer/fetchEnjoyer/selectors'
+import { fetchEnjoyerRequest } from '@store/enjoyer/fetchEnjoyer/actions'
+import { getEnjoyerSettingsSelector } from '@store/enjoyerSettings/fetchEnjoyerSettings/selectors'
+import { fetchEnjoyerSettingsRequest } from '@store/enjoyerSettings/fetchEnjoyerSettings/actions'
 import { getThemesSelector } from '@store/themes/fetchThemes/selectors'
 import { fetchThemesRequest } from '@store/themes/fetchThemes/actions'
 import { setStyleVariable } from '@utils/misc'
@@ -28,15 +28,15 @@ export default function withAuth<T>(Component: React.FC<T>) {
     const errorUser = useSelector(getUserErrorSelector)
 
     const themes = useSelector(getThemesSelector)
-    const iuser = useSelector(getIUserSelector)
-    const userSettings = useSelector(getUserSettingsSelector)
+    const enjoyer = useSelector(getEnjoyerSelector)
+    const enjoyerSettings = useSelector(getEnjoyerSettingsSelector)
 
     const isAuthOrSignup =
       location.pathname === PATHS.AUTH || location.pathname === PATHS.SIGNUP
 
     const selectedTheme = useMemo(
-      () => themes?.find((theme) => theme.id === userSettings?.themeId),
-      [themes, userSettings?.themeId]
+      () => themes?.find((theme) => theme.id === enjoyerSettings?.themeId),
+      [themes, enjoyerSettings?.themeId]
     )
 
     useEffect(() => {
@@ -53,8 +53,8 @@ export default function withAuth<T>(Component: React.FC<T>) {
     }, [])
 
     useEffect(() => {
-      if (!iuser) {
-        dispatch(fetchIUserRequest())
+      if (!enjoyer) {
+        dispatch(fetchEnjoyerRequest())
       }
 
       if (!user) {
@@ -65,8 +65,8 @@ export default function withAuth<T>(Component: React.FC<T>) {
         dispatch(fetchThemesRequest())
       }
 
-      if (!userSettings) {
-        dispatch(fetchUserSettingsRequest())
+      if (!enjoyerSettings) {
+        dispatch(fetchEnjoyerSettingsRequest())
       }
     }, [])
 
@@ -81,7 +81,7 @@ export default function withAuth<T>(Component: React.FC<T>) {
       return null
     }
 
-    if (user && iuser && isAuthOrSignup) {
+    if (user && enjoyer && isAuthOrSignup) {
       return <Redirect to={PATHS.BASE} />
     }
 

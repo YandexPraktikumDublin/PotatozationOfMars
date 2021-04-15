@@ -13,7 +13,7 @@ describe('<ProfileThemeForm />', () => {
   let store: Store
 
   const initialState = {
-    userSettings: {}
+    enjoyerSettings: {}
   }
 
   beforeEach(() => {

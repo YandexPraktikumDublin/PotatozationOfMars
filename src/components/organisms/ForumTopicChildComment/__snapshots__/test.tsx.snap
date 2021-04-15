@@ -21,6 +21,14 @@ exports[`<ForumTopicChildComment /> should renders correct <ForumTopicChildComme
       Object {
         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         "createdAt": "01.12.20",
+        "enjoyer": Object {
+          "createdAt": "01.12.20",
+          "id": 1,
+          "login": "IvanIvanov",
+          "name": "Ivan Ivanov",
+          "updatedAt": "01.12.20",
+        },
+        "enjoyerId": 1,
         "hierarchyLevel": 1,
         "id": 2,
         "parentId": 1,
@@ -29,28 +37,20 @@ exports[`<ForumTopicChildComment /> should renders correct <ForumTopicChildComme
             "commentId": 2,
             "content": "😂",
             "createdAt": "01.12.20",
-            "id": 2,
-            "updatedAt": "01.12.20",
-            "user": Object {
+            "enjoyer": Object {
               "createdAt": "01.12.20",
               "id": 1,
               "login": "IvanIvanov",
               "name": "Ivan Ivanov",
               "updatedAt": "01.12.20",
             },
-            "userId": 1,
+            "enjoyerId": 1,
+            "id": 2,
+            "updatedAt": "01.12.20",
           },
         ],
         "topicId": 1,
         "updatedAt": "01.12.20",
-        "user": Object {
-          "createdAt": "01.12.20",
-          "id": 1,
-          "login": "IvanIvanov",
-          "name": "Ivan Ivanov",
-          "updatedAt": "01.12.20",
-        },
-        "userId": 1,
       }
     }
   />

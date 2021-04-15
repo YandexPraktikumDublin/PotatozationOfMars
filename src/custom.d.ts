@@ -15,7 +15,7 @@ declare module '*.png' {
 
 declare namespace Express {
   export interface Request {
-    user: any
+    enjoyer: any
     universalCookies: {
       cookies: Record<string, any>
     }

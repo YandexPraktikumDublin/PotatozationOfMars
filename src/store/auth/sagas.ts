@@ -5,7 +5,7 @@ import { hardRedirectTo } from '@utils/misc'
 import { authFailure, authSuccess } from './actions'
 import { AUTH_REQUEST } from './actionTypes'
 import { IAuthRequestPayload } from './types'
-import { signinIUserRequest } from '@store/iuser/signinIUser/actions'
+import { signinEnjoyerRequest } from '@store/enjoyer/signinEnjoyer/actions'
 
 const signin = (data: IAuthRequestPayload) =>
   getAxiosInstance().post('auth/signin', data)
@@ -15,7 +15,7 @@ function* authSaga(data: Record<string, any>) {
     const response = yield call(signin, data.payload)
     yield put(authSuccess(response.data))
 
-    yield put(signinIUserRequest(data.payload))
+    yield put(signinEnjoyerRequest(data.payload))
 
     yield call(hardRedirectTo, PATHS.BASE)
   } catch (error) {

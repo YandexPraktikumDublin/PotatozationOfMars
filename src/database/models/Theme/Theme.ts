@@ -8,14 +8,17 @@ import {
   Default,
   HasMany
 } from 'sequelize-typescript'
-import { IUserSettings, UserSettings } from '../UserSettings/UserSettings'
+import {
+  IEnjoyerSettings,
+  EnjoyerSettings
+} from '../EnjoyerSettings/EnjoyerSettings'
 
 export interface ITheme {
   id?: number
   name: string
   preset: any
   isEnabled: boolean
-  userSettings?: IUserSettings[]
+  enjoyerSettings?: IEnjoyerSettings[]
   createdAt?: string
   updatedAt?: string
 }
@@ -36,6 +39,6 @@ export class Theme extends Model<ITheme> {
   @Column(DataType.BOOLEAN)
   isEnabled!: boolean
 
-  @HasMany(() => UserSettings)
-  userSettings!: UserSettings[]
+  @HasMany(() => EnjoyerSettings)
+  enjoyerSettings!: EnjoyerSettings[]
 }

@@ -31,7 +31,7 @@ const ForumTopicComment: FC<TForumTopicCommentProps> = memo(
         >
           <div className="flex justify-between items-center mb-2 text-sm">
             <span className="">
-              {comment?.user?.name} at {formattedDate}
+              {comment?.enjoyer?.name} at {formattedDate}
             </span>
 
             <button

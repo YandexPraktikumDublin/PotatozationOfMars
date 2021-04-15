@@ -9,8 +9,8 @@ describe('<ForumTopicComment />', () => {
   const comment = {
     id: 1,
     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    userId: 1,
-    user: {
+    enjoyerId: 1,
+    enjoyer: {
       id: 1,
       login: 'IvanIvanov',
       name: 'Ivan Ivanov',
@@ -22,8 +22,8 @@ describe('<ForumTopicComment />', () => {
       {
         id: 1,
         content: '😂',
-        userId: 1,
-        user: {
+        enjoyerId: 1,
+        enjoyer: {
           id: 1,
           login: 'IvanIvanov',
           name: 'Ivan Ivanov',
@@ -43,7 +43,7 @@ describe('<ForumTopicComment />', () => {
     const wrapper = shallow(<ForumTopicComment comment={comment} />)
 
     expect(wrapper.contains(comment.content)).toBeTruthy()
-    expect(wrapper.contains(comment.user.name)).toBeTruthy()
+    expect(wrapper.contains(comment.enjoyer.name)).toBeTruthy()
     expect(wrapper.contains(formatDate(comment.createdAt))).toBeTruthy()
 
     expect(toJSON(wrapper)).toMatchSnapshot()

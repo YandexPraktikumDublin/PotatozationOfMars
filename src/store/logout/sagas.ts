@@ -4,7 +4,7 @@ import { PATHS } from '@config'
 import { hardRedirectTo, clearCookies } from '@utils/misc'
 import { logoutFailure, logoutSuccess } from './actions'
 import { LOGOUT_REQUEST } from './actionTypes'
-import { logoutIUserRequest } from '@store/iuser/logoutIUser/actions'
+import { logoutEnjoyerRequest } from '@store/enjoyer/logoutEnjoyer/actions'
 
 const logout = () => getAxiosInstance().post('auth/logout')
 
@@ -13,7 +13,7 @@ function* logoutSaga() {
     const response = yield call(logout)
     yield put(logoutSuccess(response.data))
 
-    yield put(logoutIUserRequest())
+    yield put(logoutEnjoyerRequest())
 
     yield call(clearCookies)
     yield call(hardRedirectTo, PATHS.AUTH)

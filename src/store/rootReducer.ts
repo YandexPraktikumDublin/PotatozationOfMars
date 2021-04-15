@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { connectRouter } from 'connected-react-router'
 import userReducer from '@store/user/reducer'
-import iuserReducer from '@store/iuser/reducer'
+import enjoyerReducer from '@store/enjoyer/reducer'
 import signupReducer from '@store/signup/reducer'
 import authReducer from '@store/auth/reducer'
 import logoutReducer from '@store/logout/reducer'
@@ -14,7 +14,7 @@ import commentsReducer from '@store/comments/reducer'
 import reactionReducer from '@store/reaction/reducer'
 import reactionsReducer from '@store/reactions/reducer'
 import themesReducer from '@store/themes/reducer'
-import userSettingsReducer from '@store/userSettings/reducer'
+import enjoyerSettingsReducer from '@store/enjoyerSettings/reducer'
 import feedbackReducer from '@store/feedback/reducer'
 import { History } from 'history'
 import { IAppState } from '@types'
@@ -22,7 +22,7 @@ import { IAppState } from '@types'
 const createRootReducer = (history: History) =>
   combineReducers<IAppState>({
     user: userReducer,
-    iuser: iuserReducer,
+    enjoyer: enjoyerReducer,
     signup: signupReducer,
     auth: authReducer,
     logout: logoutReducer,
@@ -35,7 +35,7 @@ const createRootReducer = (history: History) =>
     reaction: reactionReducer,
     reactions: reactionsReducer,
     themes: themesReducer,
-    userSettings: userSettingsReducer,
+    enjoyerSettings: enjoyerSettingsReducer,
     feedback: feedbackReducer,
     router: connectRouter(history)
   })

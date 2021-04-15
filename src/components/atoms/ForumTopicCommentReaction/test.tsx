@@ -11,8 +11,8 @@ describe('<ForumTopicCommentReaction />', () => {
     {
       id: 1,
       content: '😂',
-      userId: 1,
-      user: {
+      enjoyerId: 1,
+      enjoyer: {
         id: 1,
         login: 'IvanIvanov',
         name: 'Ivan Ivanov',

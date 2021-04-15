@@ -16,7 +16,7 @@ import { useOnClickOutside, useToggle } from '@hooks'
 import { ForumTopicCommentReaction } from '@components/atoms'
 import { createReactionRequest } from '@store/reaction/createReaction/actions'
 import { deleteReactionRequest } from '@store/reaction/deleteReaction/actions'
-import { getIUserSelector } from '@store/iuser/fetchIUser/selectors'
+import { getEnjoyerSelector } from '@store/enjoyer/fetchEnjoyer/selectors'
 
 type TForumTopicCommentActionsProps = {
   comment: IComment
@@ -32,7 +32,7 @@ const ForumTopicCommentActions: FC<TForumTopicCommentActionsProps> = memo(
 
     const dispatch = useDispatch()
 
-    const iuser = useSelector(getIUserSelector)
+    const enjoyer = useSelector(getEnjoyerSelector)
 
     const [isShowEmojiPicker, toggleEmojiPicker] = useToggle(false)
 
@@ -61,7 +61,7 @@ const ForumTopicCommentActions: FC<TForumTopicCommentActionsProps> = memo(
     const handleReactionClick = (content: string) => {
       const currentReaction = comment?.reactions?.find(
         (reaction) =>
-          reaction.content === content && reaction.userId === iuser?.id
+          reaction.content === content && reaction.enjoyerId === enjoyer?.id
       )
 
       if (currentReaction?.id && comment.id) {

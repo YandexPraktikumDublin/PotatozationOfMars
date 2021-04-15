@@ -1,7 +1,7 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript'
 import {
-  User,
-  UserSettings,
+  Enjoyer,
+  EnjoyerSettings,
   AuthToken,
   Topic,
   Comment,
@@ -21,8 +21,8 @@ const sequelizeOptions: SequelizeOptions = {
   dialect: 'postgres',
   repositoryMode: true,
   models: [
-    User,
-    UserSettings,
+    Enjoyer,
+    EnjoyerSettings,
     AuthToken,
     Topic,
     Comment,
@@ -47,8 +47,8 @@ const seeder = new Umzug({
   logger: console
 })
 
-const userRepository = sequelize.getRepository(User)
-const userSettingsRepository = sequelize.getRepository(UserSettings)
+const enjoyerRepository = sequelize.getRepository(Enjoyer)
+const enjoyerSettingsRepository = sequelize.getRepository(EnjoyerSettings)
 const authTokenRepository = sequelize.getRepository(AuthToken)
 const topicRepository = sequelize.getRepository(Topic)
 const commentRepository = sequelize.getRepository(Comment)
@@ -60,8 +60,8 @@ const db = {
   Sequelize,
   sequelize,
   seeder,
-  userRepository,
-  userSettingsRepository,
+  enjoyerRepository,
+  enjoyerSettingsRepository,
   authTokenRepository,
   topicRepository,
   commentRepository,

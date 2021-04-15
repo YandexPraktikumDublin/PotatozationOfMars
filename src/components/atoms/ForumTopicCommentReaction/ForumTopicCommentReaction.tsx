@@ -11,7 +11,7 @@ type TForumTopicCommentReactionProps = {
 const ForumTopicCommentReaction: FC<TForumTopicCommentReactionProps> = memo(
   ({ content, reactions, handleClick }: TForumTopicCommentReactionProps) => {
     const userNames = useMemo(
-      () => reactions?.map((item) => item?.user?.name)?.join(', '),
+      () => reactions?.map((item) => item?.enjoyer?.name)?.join(', '),
       [reactions]
     )
 

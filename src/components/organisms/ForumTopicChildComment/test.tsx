@@ -8,8 +8,8 @@ describe('<ForumTopicChildComment />', () => {
   const childComment = {
     id: 2,
     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    userId: 1,
-    user: {
+    enjoyerId: 1,
+    enjoyer: {
       id: 1,
       login: 'IvanIvanov',
       name: 'Ivan Ivanov',
@@ -23,8 +23,8 @@ describe('<ForumTopicChildComment />', () => {
       {
         id: 2,
         content: '😂',
-        userId: 1,
-        user: {
+        enjoyerId: 1,
+        enjoyer: {
           id: 1,
           login: 'IvanIvanov',
           name: 'Ivan Ivanov',

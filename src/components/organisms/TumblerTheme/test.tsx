@@ -12,14 +12,14 @@ const mockStore = configureStore([])
 describe('<TumblerTheme />', () => {
   const darkThemeClass = 'dark'
 
-  const userSettings = {
+  const enjoyerSettings = {
     isDarkModeEnabled: true
   }
 
   let store: Store
 
   const initialState = {
-    userSettings
+    enjoyerSettings
   }
 
   beforeEach(() => {

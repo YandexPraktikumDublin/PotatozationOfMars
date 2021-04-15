@@ -8,7 +8,7 @@ import { IComment } from '@models'
 export interface ICreateCommentRequestPayload
   extends Omit<
     IComment,
-    'id' | 'userId' | 'user' | 'createdAt' | 'updatedAt'
+    'id' | 'enjoyerId' | 'enjoyer' | 'createdAt' | 'updatedAt'
   > {}
 
 export interface ICreateCommentSuccessPayload {

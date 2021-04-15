@@ -1,7 +1,7 @@
 import React, { FC, memo, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserSettingsSelector } from '@store/userSettings/fetchUserSettings/selectors'
-import { updateUserSettingsRequest } from '@store/userSettings/updateUserSettings/actions'
+import { getEnjoyerSettingsSelector } from '@store/enjoyerSettings/fetchEnjoyerSettings/selectors'
+import { updateEnjoyerSettingsRequest } from '@store/enjoyerSettings/updateEnjoyerSettings/actions'
 import { moon } from '@images'
 
 type TTumblerThemeProps = {}
@@ -16,16 +16,16 @@ const defaultImageStyle = {
 
 const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
   const dispatch = useDispatch()
-  const userSettings = useSelector(getUserSettingsSelector)
+  const enjoyerSettings = useSelector(getEnjoyerSettingsSelector)
 
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(() => {
-    return userSettings?.isDarkModeEnabled ?? true
+    return enjoyerSettings?.isDarkModeEnabled ?? true
   })
 
   const [style, setStyle] = useState(defaultImageStyle)
 
   const toggleTheme = () => {
-    dispatch(updateUserSettingsRequest({ isDarkModeEnabled: !isDarkTheme }))
+    dispatch(updateEnjoyerSettingsRequest({ isDarkModeEnabled: !isDarkTheme }))
     setIsDarkTheme((value) => !value)
   }
 
@@ -47,10 +47,10 @@ const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
         transform: 'translateX(100%)'
       })
     }
-    if (userSettings) {
-      setIsDarkTheme(userSettings?.isDarkModeEnabled ?? true)
+    if (enjoyerSettings) {
+      setIsDarkTheme(enjoyerSettings?.isDarkModeEnabled ?? true)
     }
-  }, [isDarkTheme, userSettings])
+  }, [isDarkTheme, enjoyerSettings])
 
   return (
     <button

@@ -4,7 +4,7 @@ import { ActionsListItem, NameValueListItem } from '@components/atoms'
 import { List } from '@components/molecules'
 import { getUserSelector } from '@store/user/fetchUser/selectors'
 import { logoutRequest } from '@store/logout/actions'
-import { getUserSettingsSelector } from '@store/userSettings/fetchUserSettings/selectors'
+import { getEnjoyerSettingsSelector } from '@store/enjoyerSettings/fetchEnjoyerSettings/selectors'
 import { getThemesSelector } from '@store/themes/fetchThemes/selectors'
 
 type TProfileBodyProps = {
@@ -17,12 +17,12 @@ const ProfileBody: FC<TProfileBodyProps> = memo(
     const dispatch = useDispatch()
 
     const user = useSelector(getUserSelector)
-    const userSettings = useSelector(getUserSettingsSelector)
+    const enjoyerSettings = useSelector(getEnjoyerSettingsSelector)
     const themes = useSelector(getThemesSelector)
 
     const selectedTheme = useMemo(
-      () => themes?.find((theme) => theme.id === userSettings?.themeId),
-      [themes, userSettings?.themeId]
+      () => themes?.find((theme) => theme.id === enjoyerSettings?.themeId),
+      [themes, enjoyerSettings?.themeId]
     )
 
     const handleLogoutButtonClick = () => {

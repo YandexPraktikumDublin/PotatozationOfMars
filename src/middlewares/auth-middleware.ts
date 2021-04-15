@@ -18,48 +18,50 @@ export default async function (
     if (token) {
       const authToken = await db.authTokenRepository.findOne({
         where: { token },
-        include: db.userRepository
+        include: db.enjoyerRepository
       })
 
       if (authToken) {
-        req.user = await authToken?.$get('user', { scope: 'withSensitiveData' })
+        req.enjoyer = await authToken?.$get('enjoyer', {
+          scope: 'withSensitiveData'
+        })
       }
     }
 
-    if (!req.user) {
-      const outerUser = await getAxiosInstance().get('auth/user')
+    if (!req.enjoyer) {
+      const user = await getAxiosInstance().get('auth/user')
 
-      if (outerUser.data) {
-        let user = await db.userRepository.findOne({
-          where: { login: outerUser.data?.login }
+      if (user.data) {
+        let enjoyer = await db.enjoyerRepository.findOne({
+          where: { login: user.data?.login }
         })
 
-        if (!user) {
+        if (!enjoyer) {
           const passwordHash = bcrypt.hashSync(generatePassword(), 10)
 
-          const userName =
-            outerUser.data?.display_name ??
-            `${outerUser.data?.first_name} ${outerUser.data?.second_name}`
+          const enjoyerName =
+            user.data?.display_name ??
+            `${user.data?.first_name} ${user.data?.second_name}`
 
-          user = await db.userRepository.create({
-            login: outerUser.data?.login,
-            name: userName,
+          enjoyer = await db.enjoyerRepository.create({
+            login: user.data?.login,
+            name: enjoyerName,
             passwordHash
           })
 
-          await db.userSettingsRepository.create({
+          await db.enjoyerSettingsRepository.create({
             themeId: 1,
             isDarkModeEnabled: true,
-            userId: user.id
+            enjoyerId: enjoyer.id
           })
         }
 
         const token = uid(32)
 
-        await db.authTokenRepository.create({ token, userId: user.id })
+        await db.authTokenRepository.create({ token, enjoyerId: enjoyer.id })
 
         res.cookie('token', token)
-        req.user = user
+        req.enjoyer = enjoyer
       }
     }
   } catch (error) {

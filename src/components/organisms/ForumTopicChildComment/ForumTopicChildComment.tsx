@@ -22,7 +22,7 @@ const ForumTopicChildComment: FC<TForumTopicChildCommentProps> = memo(
         )}
       >
         <div className="flex justify-between mb-2 text-xs">
-          {childComment?.user?.name} at {formattedDate}
+          {childComment?.enjoyer?.name} at {formattedDate}
         </div>
         <div className="mb-2">{childComment.content}</div>
         <ForumTopicCommentActions comment={childComment} />

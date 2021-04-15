@@ -3,12 +3,12 @@ import userSaga from '@store/user/fetchUser/sagas'
 import updateUserSaga from '@store/user/updateUser/sagas'
 import updateAvatarSaga from '@store/user/updateAvatar/sagas'
 import updatePassword from '@store/user/updatePassword/sagas'
-import fetchIUserSaga from '@store/iuser/fetchIUser/sagas'
-import createIUserSaga from '@store/iuser/createIUser/sagas'
-import updateIUserSaga from '@store/iuser/updateIUser/sagas'
-import updateIUserPasswordSaga from '@store/iuser/updateIUserPassword/sagas'
-import signinIUserSaga from '@store/iuser/signinIUser/sagas'
-import logoutIUserSaga from '@store/iuser/logoutIUser/sagas'
+import fetchEnjoyerSaga from '@store/enjoyer/fetchEnjoyer/sagas'
+import createEnjoyerSaga from '@store/enjoyer/createEnjoyer/sagas'
+import updateEnjoyerSaga from '@store/enjoyer/updateEnjoyer/sagas'
+import updateEnjoyerPasswordSaga from '@store/enjoyer/updateEnjoyerPassword/sagas'
+import signinEnjoyerSaga from '@store/enjoyer/signinEnjoyer/sagas'
+import logoutEnjoyerSaga from '@store/enjoyer/logoutEnjoyer/sagas'
 import signupSaga from '@store/signup/sagas'
 import authSaga from '@store/auth/sagas'
 import logoutSaga from '@store/logout/sagas'
@@ -25,9 +25,9 @@ import createReactionSaga from '@store/reaction/createReaction/sagas'
 import deleteReactionSaga from '@store/reaction/deleteReaction/sagas'
 import fetchReactionsSaga from '@store/reactions/fetchReactions/sagas'
 import fetchThemesSaga from '@store/themes/fetchThemes/sagas'
-import fetchUserSettingsSaga from '@store/userSettings/fetchUserSettings/sagas'
-import createUserSettingsSaga from '@store/userSettings/createUserSettings/sagas'
-import updateUserSettingsSaga from '@store/userSettings/updateUserSettings/sagas'
+import fetchEnjoyerSettingsSaga from '@store/enjoyerSettings/fetchEnjoyerSettings/sagas'
+import createEnjoyerSettingsSaga from '@store/enjoyerSettings/createEnjoyerSettings/sagas'
+import updateEnjoyerSettingsSaga from '@store/enjoyerSettings/updateEnjoyerSettings/sagas'
 import createFeedbackSaga from '@store/feedback/createFeedback/sagas'
 
 export default function* rootSaga() {
@@ -36,12 +36,12 @@ export default function* rootSaga() {
     fork(updateUserSaga),
     fork(updateAvatarSaga),
     fork(updatePassword),
-    fork(fetchIUserSaga),
-    fork(createIUserSaga),
-    fork(updateIUserSaga),
-    fork(updateIUserPasswordSaga),
-    fork(signinIUserSaga),
-    fork(logoutIUserSaga),
+    fork(fetchEnjoyerSaga),
+    fork(createEnjoyerSaga),
+    fork(updateEnjoyerSaga),
+    fork(updateEnjoyerPasswordSaga),
+    fork(signinEnjoyerSaga),
+    fork(logoutEnjoyerSaga),
     fork(signupSaga),
     fork(authSaga),
     fork(logoutSaga),
@@ -58,9 +58,9 @@ export default function* rootSaga() {
     fork(deleteReactionSaga),
     fork(fetchReactionsSaga),
     fork(fetchThemesSaga),
-    fork(fetchUserSettingsSaga),
-    fork(createUserSettingsSaga),
-    fork(updateUserSettingsSaga),
+    fork(fetchEnjoyerSettingsSaga),
+    fork(createEnjoyerSettingsSaga),
+    fork(updateEnjoyerSettingsSaga),
     fork(createFeedbackSaga)
   ])
 }

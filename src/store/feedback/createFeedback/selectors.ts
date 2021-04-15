@@ -12,7 +12,10 @@ export const getFeedbackPendingSelector = createSelector(
   (pending) => pending
 )
 
-export const getFeedbackSelector = createSelector(getFeedback, (iuser) => iuser)
+export const getFeedbackSelector = createSelector(
+  getFeedback,
+  (feedback) => feedback
+)
 
 export const getFeedbackErrorSelector = createSelector(
   getError,

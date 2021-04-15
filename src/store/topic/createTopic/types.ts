@@ -6,7 +6,10 @@ import {
 import { ITopic } from '@models'
 
 export interface ICreateTopicRequestPayload
-  extends Omit<ITopic, 'id' | 'userId' | 'user' | 'createdAt' | 'updatedAt'> {}
+  extends Omit<
+    ITopic,
+    'id' | 'enjoyerId' | 'enjoyer' | 'createdAt' | 'updatedAt'
+  > {}
 
 export interface ICreateTopicSuccessPayload {
   topic: ITopic

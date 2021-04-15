@@ -1,5 +1,5 @@
-export * from './User/User'
-export * from './UserSettings/UserSettings'
+export * from './Enjoyer/Enjoyer'
+export * from './EnjoyerSettings/EnjoyerSettings'
 export * from './AuthToken/AuthToken'
 export * from './Topic/Topic'
 export * from './Comment/Comment'

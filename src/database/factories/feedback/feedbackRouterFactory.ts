@@ -9,7 +9,10 @@ export const feedbackRouterFactory = (
   Router()
     .get(`${INNER_API_V1_URL}/feedbacks`, async (req, res) => {
       try {
-        if (!req.user || req.user.getDataValue('role') !== RoleEnum.admin) {
+        if (
+          !req.enjoyer ||
+          req.enjoyer.getDataValue('role') !== RoleEnum.admin
+        ) {
           return res.status(401).json({ errors: ['Not Authorized'] })
         }
 
@@ -25,7 +28,10 @@ export const feedbackRouterFactory = (
 
     .get(`${INNER_API_V1_URL}/feedbacks/:id`, async (req, res) => {
       try {
-        if (!req.user || req.user.getDataValue('role') !== RoleEnum.admin) {
+        if (
+          !req.enjoyer ||
+          req.enjoyer.getDataValue('role') !== RoleEnum.admin
+        ) {
           return res.status(401).json({ errors: ['Not Authorized'] })
         }
 

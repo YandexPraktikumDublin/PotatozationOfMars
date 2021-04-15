@@ -13,8 +13,8 @@ describe('<ForumTopicCommentActions />', () => {
   const comment = {
     id: 1,
     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    userId: 1,
-    user: {
+    enjoyerId: 1,
+    enjoyer: {
       id: 1,
       login: 'IvanIvanov',
       name: 'Ivan Ivanov',
@@ -26,8 +26,8 @@ describe('<ForumTopicCommentActions />', () => {
       {
         id: 1,
         content: '😂',
-        userId: 1,
-        user: {
+        enjoyerId: 1,
+        enjoyer: {
           id: 1,
           login: 'IvanIvanov',
           name: 'Ivan Ivanov',

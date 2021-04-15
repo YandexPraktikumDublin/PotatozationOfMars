@@ -1,7 +1,7 @@
 import React, { FC, memo, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { getUserSelector } from '@store/user/fetchUser/selectors'
-import { getUserSettingsSelector } from '@store/userSettings/fetchUserSettings/selectors'
+import { getEnjoyerSettingsSelector } from '@store/enjoyerSettings/fetchEnjoyerSettings/selectors'
 import { BackButton, EditButton } from '@components/atoms'
 import { ProfileHeader } from '@components/molecules'
 import {
@@ -16,7 +16,7 @@ type TProfileProps = {}
 
 const Profile: FC<TProfileProps> = memo(() => {
   const user = useSelector(getUserSelector)
-  const userSettings = useSelector(getUserSettingsSelector)
+  const enjoyerSettings = useSelector(getEnjoyerSettingsSelector)
 
   const [isShowProfileForm, toggleProfileForm] = useToggle(false)
   const [isShowPasswordForm, togglePasswordForm] = useToggle(false)
@@ -39,7 +39,7 @@ const Profile: FC<TProfileProps> = memo(() => {
     if (isShowThemeForm) {
       toggleThemedForm()
     }
-  }, [userSettings])
+  }, [enjoyerSettings])
 
   return (
     <div className="relative">

@@ -9,13 +9,13 @@ import {
   Default
 } from 'sequelize-typescript'
 
-import { User, Comment, IUser, IComment } from '@models'
+import { Enjoyer, Comment, IEnjoyer, IComment } from '@models'
 
 export interface IReaction {
   id?: number
   content: string
-  userId: number
-  user?: Omit<IUser, 'passwordHash' | 'role' | 'createdAt' | 'updatedAt'>
+  enjoyerId: number
+  enjoyer?: Omit<IEnjoyer, 'passwordHash' | 'role' | 'createdAt' | 'updatedAt'>
   hierarchyLevel?: number
   commentId: number
   comment?: IComment
@@ -29,13 +29,13 @@ export class Reaction extends Model<IReaction> {
   @Column(DataType.STRING)
   content!: string
 
-  @ForeignKey(() => User)
+  @ForeignKey(() => Enjoyer)
   @AllowNull(false)
   @Column(DataType.INTEGER)
-  userId!: number
+  enjoyerId!: number
 
-  @BelongsTo(() => User)
-  user!: User
+  @BelongsTo(() => Enjoyer)
+  enjoyer!: Enjoyer
 
   @AllowNull(false)
   @Default(0)

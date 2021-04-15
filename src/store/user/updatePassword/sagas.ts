@@ -3,7 +3,7 @@ import { getAxiosInstance } from '@api'
 import { updatePasswordSuccess, updatePasswordFailure } from './actions'
 import { UPDATE_PASSWORD_REQUEST } from './actionTypes'
 import { IUpdatePasswordRequestPayload } from './types'
-import { updateIUserPasswordRequest } from '@store/iuser/updateIUserPassword/actions'
+import { updateEnjoyerPasswordRequest } from '@store/enjoyer/updateEnjoyerPassword/actions'
 
 const updatePassword = (data: IUpdatePasswordRequestPayload) =>
   getAxiosInstance().put('user/password', data)
@@ -13,7 +13,7 @@ function* updatePasswordSaga(data: Record<string, any>) {
     const response = yield call(updatePassword, data.payload)
     yield put(updatePasswordSuccess({ user: response.data }))
 
-    yield put(updateIUserPasswordRequest(data.payload))
+    yield put(updateEnjoyerPasswordRequest(data.payload))
   } catch (error) {
     yield put(
       updatePasswordFailure({

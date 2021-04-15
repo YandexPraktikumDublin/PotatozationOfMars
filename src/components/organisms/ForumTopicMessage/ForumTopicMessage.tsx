@@ -22,7 +22,7 @@ const ForumTopicMessage: FC<TForumTopicMessageProps> = memo(
       >
         <div className="mb-4">{topic.content}</div>
         <div className="text-sm">
-          {topic?.user?.name} at {formattedDate}
+          {topic?.enjoyer?.name} at {formattedDate}
         </div>
       </div>
     )

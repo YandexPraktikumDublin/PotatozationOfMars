@@ -37,9 +37,9 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 
 ## Внутреннее API
 
-### User
+### Enjoyer
 
-- `GET /api/v1/user` - получить текущего пользователя.
+- `GET /api/v1/enjoyer` - получить текущего пользователя.
 - `POST /api/v1/signup` - регистрация.
 ```
   {
@@ -56,7 +56,7 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
   }
 ```
 - `POST /api/v1/logout` - выход.
-- `PUT /api/v1/user` - обновить текущего пользователя.
+- `PUT /api/v1/enjoyer` - обновить текущего пользователя.
 ```
   {
     login: string
@@ -64,7 +64,7 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
   }
 ```
 
-- `PUT /api/v1/user/password` - обновить пароль текущего пользователя.
+- `PUT /api/v1/enjoyer/password` - обновить пароль текущего пользователя.
 ```
   {
     oldPassword: string
@@ -133,17 +133,17 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
   }
 ```
 
-### User settings
+### Enjoyer settings
 
-- `GET /api/v1/user-settings` - получить настройки текущего пользователя.
-- `POST /api/v1/user-settings` - создать настройки текущего пользователя.
+- `GET /api/v1/enjoyer-settings` - получить настройки текущего пользователя.
+- `POST /api/v1/enjoyer-settings` - создать настройки текущего пользователя.
 ```
   {
     themeId: number
     isDarkModeEnabled?: boolean
   }
 ```
-- `PUT /api/v1/user-settings` - обновить настройки текущего пользователя.
+- `PUT /api/v1/enjoyer-settings` - обновить настройки текущего пользователя.
 ```
   {
     themeId?: number

@@ -5,7 +5,7 @@ import { hardRedirectTo } from '@utils/misc'
 import { signupFailure, signupSuccess } from './actions'
 import { SIGNUP_REQUEST } from './actionTypes'
 import { ISignupRequestPayload } from './types'
-import { createIUserRequest } from '@store/iuser/createIUser/actions'
+import { createEnjoyerRequest } from '@store/enjoyer/createEnjoyer/actions'
 
 const signup = (data: ISignupRequestPayload) =>
   getAxiosInstance().post('auth/signup', data)
@@ -16,7 +16,7 @@ function* signupSaga(data: Record<string, any>) {
     yield put(signupSuccess(response.data))
 
     yield put(
-      createIUserRequest({
+      createEnjoyerRequest({
         login: data.payload.login,
         name: `${data.payload.first_name} ${data.payload.second_name}`,
         password: data.payload.password

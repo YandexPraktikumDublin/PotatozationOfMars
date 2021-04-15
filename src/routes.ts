@@ -14,8 +14,8 @@ import {
 import { PATHS } from '@config'
 import { fetchLeaderboardRequest } from '@store/leaderboard/fetchLeaderboard/actions'
 import { fetchTopicsRequest } from '@store/topics/fetchTopics/actions'
-import { fetchUserSettingsRequest } from '@store/userSettings/fetchUserSettings/actions'
-import { fetchIUserRequest } from '@store/iuser/fetchIUser/actions'
+import { fetchEnjoyerSettingsRequest } from '@store/enjoyerSettings/fetchEnjoyerSettings/actions'
+import { fetchEnjoyerRequest } from '@store/enjoyer/fetchEnjoyer/actions'
 import { fetchThemesRequest } from '@store/themes/fetchThemes/actions'
 
 export default [
@@ -26,8 +26,8 @@ export default [
     fetchData({ dispatch }: IRouterFetchDataArgs) {
       dispatch(fetchThemesRequest())
       dispatch(fetchUserRequest())
-      dispatch(fetchIUserRequest())
-      dispatch(fetchUserSettingsRequest())
+      dispatch(fetchEnjoyerRequest())
+      dispatch(fetchEnjoyerSettingsRequest())
     }
   },
   {
@@ -36,7 +36,7 @@ export default [
     exact: false,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
       dispatch(fetchUserRequest())
-      dispatch(fetchIUserRequest())
+      dispatch(fetchEnjoyerRequest())
     }
   },
   {
@@ -46,8 +46,8 @@ export default [
     fetchData({ dispatch }: IRouterFetchDataArgs) {
       dispatch(fetchThemesRequest())
       dispatch(fetchUserRequest())
-      dispatch(fetchIUserRequest())
-      dispatch(fetchUserSettingsRequest())
+      dispatch(fetchEnjoyerRequest())
+      dispatch(fetchEnjoyerSettingsRequest())
       dispatch(fetchTopicsRequest())
     }
   },
@@ -58,8 +58,8 @@ export default [
     fetchData({ dispatch }: IRouterFetchDataArgs) {
       dispatch(fetchThemesRequest())
       dispatch(fetchUserRequest())
-      dispatch(fetchIUserRequest())
-      dispatch(fetchUserSettingsRequest())
+      dispatch(fetchEnjoyerRequest())
+      dispatch(fetchEnjoyerSettingsRequest())
     }
   },
   {
@@ -69,8 +69,8 @@ export default [
     fetchData({ dispatch }: IRouterFetchDataArgs) {
       dispatch(fetchThemesRequest())
       dispatch(fetchUserRequest())
-      dispatch(fetchIUserRequest())
-      dispatch(fetchUserSettingsRequest())
+      dispatch(fetchEnjoyerRequest())
+      dispatch(fetchEnjoyerSettingsRequest())
     }
   },
   {
@@ -80,8 +80,8 @@ export default [
     fetchData({ dispatch }: IRouterFetchDataArgs) {
       dispatch(fetchThemesRequest())
       dispatch(fetchUserRequest())
-      dispatch(fetchIUserRequest())
-      dispatch(fetchUserSettingsRequest())
+      dispatch(fetchEnjoyerRequest())
+      dispatch(fetchEnjoyerSettingsRequest())
       dispatch(fetchLeaderboardRequest({ cursor: 0 }))
     }
   },
@@ -92,8 +92,8 @@ export default [
     fetchData({ dispatch }: IRouterFetchDataArgs) {
       dispatch(fetchThemesRequest())
       dispatch(fetchUserRequest())
-      dispatch(fetchIUserRequest())
-      dispatch(fetchUserSettingsRequest())
+      dispatch(fetchEnjoyerRequest())
+      dispatch(fetchEnjoyerSettingsRequest())
     }
   },
   {
@@ -102,7 +102,7 @@ export default [
     exact: false,
     fetchData({ dispatch }: IRouterFetchDataArgs) {
       dispatch(fetchUserRequest())
-      dispatch(fetchIUserRequest())
+      dispatch(fetchEnjoyerRequest())
     }
   },
   {
