@@ -80,8 +80,6 @@ export default (state = initialState, action: TCommonAction): IUserState => {
         error: action.payload.error
       }
     default:
-      return {
-        ...state
-      }
+      return state
   }
 }

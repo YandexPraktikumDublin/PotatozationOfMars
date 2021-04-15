@@ -36,8 +36,6 @@ export default (state = initialState, action: TCommonAction): IThemesState => {
         error: action.payload.error
       }
     default:
-      return {
-        ...state
-      }
+      return state
   }
 }

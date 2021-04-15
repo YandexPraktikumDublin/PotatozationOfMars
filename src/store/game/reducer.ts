@@ -58,8 +58,6 @@ export default (state = initialState, action: TGameActions) => {
         ...action.payload
       }
     default:
-      return {
-        ...state
-      }
+      return state
   }
 }

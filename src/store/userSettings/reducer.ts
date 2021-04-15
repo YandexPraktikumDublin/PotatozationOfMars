@@ -60,8 +60,6 @@ export default (
         error: action.payload.error
       }
     default:
-      return {
-        ...state
-      }
+      return state
   }
 }

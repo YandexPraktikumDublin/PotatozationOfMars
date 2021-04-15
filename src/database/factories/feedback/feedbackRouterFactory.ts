@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { Repository } from 'sequelize-typescript'
-import { Feedback, roleEnum } from '@models'
+import { Feedback, RoleEnum } from '@models'
 import { DEFAULT_ERROR_MESSAGE, INNER_API_V1_URL } from '@config'
 
 export const feedbackRouterFactory = (
@@ -9,7 +9,7 @@ export const feedbackRouterFactory = (
   Router()
     .get(`${INNER_API_V1_URL}/feedbacks`, async (req, res) => {
       try {
-        if (!req.user || req.user.getDataValue('role') !== roleEnum.admin) {
+        if (!req.user || req.user.getDataValue('role') !== RoleEnum.admin) {
           return res.status(401).json({ errors: ['Not Authorized'] })
         }
 
@@ -25,7 +25,7 @@ export const feedbackRouterFactory = (
 
     .get(`${INNER_API_V1_URL}/feedbacks/:id`, async (req, res) => {
       try {
-        if (!req.user || req.user.getDataValue('role') !== roleEnum.admin) {
+        if (!req.user || req.user.getDataValue('role') !== RoleEnum.admin) {
           return res.status(401).json({ errors: ['Not Authorized'] })
         }
 

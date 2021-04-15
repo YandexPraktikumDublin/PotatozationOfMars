@@ -22,7 +22,7 @@ import {
   IReaction
 } from '@models'
 
-export enum roleEnum {
+export enum RoleEnum {
   regular = 'regular',
   admin = 'admin'
 }
@@ -32,7 +32,7 @@ export interface IUser {
   login: string
   name: string
   passwordHash?: string
-  role?: roleEnum
+  role?: RoleEnum
   authTokens?: IAuthToken[]
   topics?: ITopic[]
   comments?: IComment[]
@@ -69,9 +69,9 @@ export class User extends Model<IUser> {
   passwordHash!: string
 
   @AllowNull(false)
-  @Default(roleEnum.regular)
+  @Default(RoleEnum.regular)
   @Column(DataType.STRING)
-  role!: roleEnum
+  role!: RoleEnum
 
   @HasMany(() => AuthToken)
   authTokens!: AuthToken[]
