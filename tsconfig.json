@@ -33,9 +33,12 @@
       "@game/controllers": ["./src/game/controllers/index.ts"],
       "@hooks": ["./src/hooks/index.ts"],
       "@types": ["./src/types/index.ts"],
+      "@database": ["./src/database/index.ts"],
       "@store/*": ["./src/store/*"],
       "@utils/*": ["./src/utils/*"],
-      "@routes": ["./src/routes.ts"]
+      "@routes": ["./src/routes.ts"],
+      "@models": ["./src/database/models/index.ts"],
+      "@factories": ["./src/database/factories/index.ts"]
     },
     "typeRoots": ["node_modules/@types"]
   },

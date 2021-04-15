@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAuthErrorSelector } from '@store/auth/selectors'
 import { authRequest } from '@store/auth/actions'
 import { getAxiosInstance } from '@api'
-import { hardRedirectTo } from '@utils/misc'
+import { hardRedirectTo, isServer } from '@utils/misc'
 import { YANDEX_OAUTH_REDIRECT_URL } from '@config'
 
 type TAuthFormProps = {}
@@ -39,9 +39,10 @@ const AuthForm: FC<TAuthFormProps> = memo(() => {
   }
 
   const handleOAuth = () => {
-    const redirectUri = window ? window.location.origin : null
+    const redirectUri = !isServer() ? window.location.origin : null
+
     getAxiosInstance()
-      .get('/oauth/yandex/service-id')
+      .get(`/oauth/yandex/service-id?redirect_uri=${redirectUri}`)
       .then((response) => {
         if (response.data.service_id && redirectUri) {
           hardRedirectTo(

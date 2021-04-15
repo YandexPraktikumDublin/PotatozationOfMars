@@ -4,19 +4,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider as ReduxProvider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
+import { store, history } from '@store/store'
 import App from './App'
-import { configureStore } from '@store/index'
-
-const initialState = window.__INITIAL_STATE__
-
-const { store, history } = configureStore(initialState)
-
-declare global {
-  interface Window {
-    __INITIAL_STATE__: {}
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: Function
-  }
-}
 
 const RootComponent = () => (
   <ReduxProvider store={store}>

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GameHud /> should renders correct <GameHud /> 1`] = `
+<div
+  className="flex"
+>
+  <img
+    alt=""
+    className="w-8 h-8 mr-2"
+    src=""
+  />
+  <div
+    className="text-white text-2xl"
+  >
+    x
+    0
+  </div>
+</div>
+`;

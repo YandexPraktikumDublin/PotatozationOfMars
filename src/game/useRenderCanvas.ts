@@ -1,72 +1,120 @@
-import { useRef, useEffect, useState, useCallback } from 'react'
+import { useRef, useEffect } from 'react'
 import { GameplayController, InputsController } from '@game/controllers'
-import { KEYS } from '@game/config'
+import { controlTypes, KEYS } from '@game/config'
+import { useDispatch, useSelector, useStore } from 'react-redux'
+import { getControlsSelector } from '@store/game/selectors'
+import {
+  requestNewGame,
+  resetScore,
+  togglePause,
+  updatePlayerHealth,
+  updateScore
+} from '@store/game/actions'
+import { isServer } from '@utils/misc'
+import { updateLeaderboardRequest } from '@store/leaderboard/updateLeaderboard/actions'
+import { getUserSelector } from '@store/user/fetchUser/selectors'
 
 const useRenderCanvas = () => {
+  const store = useStore()
+  const dispatch = useDispatch()
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [isGamePaused, setIsGamePaused] = useState<boolean>(false)
-  const [controlWithMouse, setControlWithMouse] = useState<boolean>(
-    window.localStorage.controlWithMouse === 'true'
-  )
+  const backgroundRef = useRef<HTMLCanvasElement>(null)
+  const user = useSelector(getUserSelector)
 
-  const game = new GameplayController()
+  let controls = isServer()
+    ? useSelector(getControlsSelector)
+    : window.localStorage.controlWithMouse ?? useSelector(getControlsSelector)
 
-  let pause = isGamePaused
+  let { isPaused, score } = store.getState().game
 
-  const toggleModal = useCallback(() => {
-    pause = !pause
-    setIsGamePaused(pause)
-    if (pause) {
-      game.stop()
-    } else {
-      game.start()
-    }
-  }, [])
+  const updateHealth = (health: number) => {
+    dispatch(updatePlayerHealth({ health }))
+  }
 
-  let mouseControl = controlWithMouse
+  const updateGameScore = (score: number) => {
+    dispatch(updateScore({ score }))
+  }
 
-  const toggleControlInput = useCallback(() => {
-    mouseControl = !mouseControl
-    setControlWithMouse(mouseControl)
-    window.localStorage.controlWithMouse = mouseControl ? 'true' : 'false'
-    if (mouseControl) {
-      game.controlWithMouse()
-    } else {
-      game.controlWithKeyboard()
-    }
-  }, [])
+  const initNewGame = () => {
+    dispatch(requestNewGame({ newGame: false }))
+    dispatch(resetScore())
+  }
 
-  const increaseFireRate = useCallback(() => {
-    const firePeriod = game.player.firePeriod
-    game.player.firePeriod = firePeriod > 5 ? firePeriod - 5 : 1
-    game.player.fireCooldown = game.player.firePeriod
-  }, [])
-
-  const decreaseFireRate = useCallback(() => {
-    const firePeriod = game.player.firePeriod
-    game.player.firePeriod = firePeriod === 1 ? 5 : firePeriod + 5
-    game.player.fireCooldown = game.player.firePeriod
-  }, [])
-
-  const addProjectile = useCallback(() => {
-    const quantity = game.player.fireQuantity
-    game.player.fireQuantity = quantity + 1
-  }, [])
-
-  const removeProjectile = useCallback(() => {
-    const quantity = game.player.fireQuantity
-    game.player.fireQuantity = quantity > 1 ? quantity - 1 : 1
-  }, [])
+  const updateLeaderBoard = (score: number) => {
+    if (!user) return
+    dispatch(
+      updateLeaderboardRequest({
+        data: {
+          potatozationOfMarsScores: score,
+          potatozationOfMarsUserId: user.id,
+          potatozationOfMarsUserLogin: user.login
+        }
+      })
+    )
+  }
 
   useEffect(() => {
     const canvas = canvasRef.current as HTMLCanvasElement
+    const backgroundCanvas = backgroundRef.current as HTMLCanvasElement
+
+    const game = new GameplayController(canvas, backgroundCanvas, {
+      updateHealth,
+      updateGameScore,
+      initNewGame,
+      updateLeaderBoard
+    })
+
+    const toggleModal = () => {
+      dispatch(togglePause({ isPaused: !isPaused }))
+    }
+
+    const listener = () => {
+      const {
+        isPaused: newIsPaused,
+        controls: newControls,
+        score: newScore,
+        newGame
+      } = store.getState().game
+
+      if (newGame) {
+        game.newGame()
+      }
+
+      if (controls !== newControls) {
+        controls = newControls
+        if (newControls === controlTypes.mouse) {
+          game.controlWithMouse()
+        }
+        if (newControls === controlTypes.keyboard) {
+          game.controlWithKeyboard()
+        }
+      }
+
+      if (isPaused !== newIsPaused) {
+        isPaused = newIsPaused
+        if (isPaused) {
+          game.stop()
+        } else {
+          game.start()
+        }
+      }
+
+      if (score !== newScore) {
+        score = newScore
+        game.score = score
+      }
+    }
+    const unsubscribe = store.subscribe(listener)
 
     const handlePause = InputsController.onKeyPress(KEYS.pause, toggleModal)
 
-    game.init(canvas)
+    game.init()
     game.start()
 
-    if (!controlWithMouse) {
+    if (controls === controlTypes.mouse) {
+      game.controlWithMouse()
+    }
+    if (controls === controlTypes.keyboard) {
       game.controlWithKeyboard()
     }
 
@@ -74,21 +122,13 @@ const useRenderCanvas = () => {
       game.stop()
       game.kill()
       handlePause()
+      unsubscribe()
     }
   }, [])
 
   return {
     canvasRef,
-    isGamePaused,
-    toggleModal,
-    settings: {
-      controlWithMouse,
-      toggleControlInput,
-      increaseFireRate,
-      decreaseFireRate,
-      addProjectile,
-      removeProjectile
-    }
+    backgroundRef
   }
 }
 

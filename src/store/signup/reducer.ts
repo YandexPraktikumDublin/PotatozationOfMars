@@ -29,8 +29,6 @@ export default (state = initialState, action: TSignupActions) => {
         error: action.payload.error ?? DEFAULT_ERROR_MESSAGE
       }
     default:
-      return {
-        ...state
-      }
+      return state
   }
 }

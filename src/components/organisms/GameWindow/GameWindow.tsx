@@ -1,35 +1,54 @@
-import React, { FC, memo } from 'react'
+import React, { FC, memo, useCallback } from 'react'
 import { GameCanvas, NavigationButton } from '@components/molecules'
 import useRenderCanvas from '@game/useRenderCanvas'
 import useFullScreen from '@game/useFullScreen'
-import { pause } from '@images'
-import { GamePauseMenuDisplay } from '@components/organisms'
+import { diamond, pause, potato } from '@images'
+import { GameHud, GamePauseMenuDisplay } from '@components/organisms'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  getFullscreenSelector,
+  getHealthSelector,
+  getPauseSelector,
+  getScoreSelector
+} from '@store/game/selectors'
+import { togglePause } from '@store/game/actions'
 
 type TGameWindowProps = {}
 
 const GameWindow: FC<TGameWindowProps> = memo(() => {
-  const { canvasRef, isGamePaused, toggleModal, settings } = useRenderCanvas()
-  const { windowRef, FSIcon, toggleFullScreen } = useFullScreen()
+  const dispatch = useDispatch()
+
+  const isPaused = useSelector(getPauseSelector)
+  const fullscreenIcon = useSelector(getFullscreenSelector)
+  const health = useSelector(getHealthSelector)
+  const score = useSelector(getScoreSelector)
+
+  const toggleModal = useCallback(() => {
+    dispatch(togglePause({ isPaused: !isPaused }))
+  }, [isPaused])
+
+  const { canvasRef, backgroundRef } = useRenderCanvas()
+  const { windowRef, toggleFullScreen } = useFullScreen()
 
   return (
     <div className="relative flex justify-center items-center" ref={windowRef}>
-      <GameCanvas forwardRef={canvasRef} />
+      <GameCanvas forwardRef={canvasRef} backgroundRef={backgroundRef} />
+      <div className="absolute flex space-x-6 top-3 right-3 z-20 pointer-events-none">
+        <GameHud title="health" value={health} imageSrc={potato} />
+        <GameHud title="money" value={score} imageSrc={diamond} />
+      </div>
       <NavigationButton
-        className="absolute top-3 left-3"
+        className="z-20 absolute top-3 left-3"
         title="Pause"
         onClick={toggleModal}
         imageSrc={pause}
       />
-      <GamePauseMenuDisplay
-        isGamePaused={isGamePaused}
-        toggleModal={toggleModal}
-        settings={settings}
-      />
+      <GamePauseMenuDisplay isGamePaused={isPaused} toggleModal={toggleModal} />
       <NavigationButton
-        className="absolute top-3 right-3"
+        className="z-20 absolute bottom-3 right-3"
         title="Full screen"
         onClick={toggleFullScreen}
-        imageSrc={FSIcon}
+        imageSrc={fullscreenIcon}
       />
     </div>
   )

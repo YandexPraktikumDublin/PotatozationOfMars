@@ -33,7 +33,7 @@ const ProfileHeader: FC<TProfileHeaderProps> = memo(
           />
 
           <div
-            className="hidden group-hover:flex justify-center items-center absolute inset-0 bg-primary bg-opacity-50 text-white"
+            className="relative hidden group-hover:flex justify-center items-center absolute inset-0 bg-primary text-white"
             onClick={toggleAvatarChangeModal}
           >
             change

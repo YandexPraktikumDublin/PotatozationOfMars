@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback, useEffect } from 'react'
+import React, { FC, memo, useCallback, useEffect, useMemo } from 'react'
 import { musk, bubble } from '@images'
 import { useWindowSize } from '@hooks'
 import classNames from 'classnames'
@@ -12,6 +12,9 @@ const portraitText =
 const landscapeText =
   'You think I launched Tesla into space as a joke? No way, it`s a secret potatozation of Mars project. Click any button to help me.'
 
+const wrapperStyle = { maxHeight: 'calc(100vh - 4.5rem)' }
+const bubbleStyle = { backgroundImage: `url(${bubble})` }
+
 const WelcomeMessage: FC<TWelcomeMessageProps> = memo(() => {
   const history = useHistory()
   const windowSize = useWindowSize()
@@ -23,6 +26,13 @@ const WelcomeMessage: FC<TWelcomeMessageProps> = memo(() => {
     history.push(PATHS.GAME)
   }, [history])
 
+  const elonMuskStyle = useMemo(
+    () => ({
+      right: !isPortraitOrientation || isNotMobile ? '0' : '-3.5625rem'
+    }),
+    [isPortraitOrientation, isNotMobile]
+  )
+
   useEffect(() => {
     document.addEventListener('keypress', startGame)
 
@@ -33,25 +43,15 @@ const WelcomeMessage: FC<TWelcomeMessageProps> = memo(() => {
 
   return (
     <div
-      className="fixed bottom-0 max-w-full"
-      style={{
-        width: '44rem',
-        height: '30.625rem',
-        maxHeight: 'calc(100vh - 4.5rem)',
-        right: '3.5625rem'
-      }}
+      className="fixed bottom-0 max-w-full w-[44rem] h-[30.625rem] right-[3.5625rem]"
+      style={wrapperStyle}
       onTouchStart={startGame}
     >
       <div
-        className="bg-contain bg-no-repeat text-center absolute top-0 z-10 flex px-14"
-        style={{
-          width: '25rem',
-          height: '18.75rem',
-          backgroundImage: `url(${bubble})`,
-          left: !isNotMobile ? '3.5625rem' : '0'
-        }}
+        className="flex absolute top-0 z-10 px-14 text-center bg-no-repeat bg-contain w-[25rem] h-[18.75rem] md:left-0 left-[3.5625rem]"
+        style={bubbleStyle}
       >
-        <div className="font-bold m-auto">
+        <div className="m-auto font-bold">
           {isPortraitOrientation ? portraitText : landscapeText}
         </div>
       </div>
@@ -62,9 +62,7 @@ const WelcomeMessage: FC<TWelcomeMessageProps> = memo(() => {
           'transform translate-x-1/2': isPortraitOrientation
         })}
         alt="Elon Musk"
-        style={{
-          right: !isPortraitOrientation || isNotMobile ? '0' : '-3.5625rem'
-        }}
+        style={elonMuskStyle}
       />
     </div>
   )

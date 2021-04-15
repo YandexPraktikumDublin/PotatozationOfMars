@@ -34,6 +34,7 @@ exports[`<ProfileBody /> should renders correct <ProfileBody /> 1`] = `
 >
   <ProfileBody
     togglePasswordForm={[MockFunction]}
+    toggleThemeForm={[MockFunction]}
   />
 </ContextProvider>
 `;

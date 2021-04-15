@@ -3,13 +3,7 @@ import {
   FETCH_USER_SUCCESS,
   FETCH_USER_FAILURE
 } from './actionTypes'
-import { IServerUser, IUser } from '@types'
-
-export interface IUserState {
-  pending: boolean
-  user: IUser | null
-  error: string | null
-}
+import { IServerUser } from '@types'
 
 export interface IFetchUserSuccessPayload {
   user: IServerUser

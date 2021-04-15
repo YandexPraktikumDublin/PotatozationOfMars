@@ -1,14 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<GameCanvas /> should renders correct <GameCanvas /> 1`] = `
-<canvas
-  className="border-2 border-white rounded-2xl h-screen"
-  style={
-    Object {
-      "height": "calc(100vh - 7rem)",
-      "maxHeight": "48vw",
-      "maxWidth": "96vw",
+<Fragment>
+  <canvas
+    className="z-10 border-2 border-white rounded-2xl h-screen max-h-[48vw] max-w-[96vw]"
+    style={
+      Object {
+        "height": "calc(100vh - 7rem)",
+      }
     }
-  }
-/>
+  />
+  <canvas
+    className="z-0 absolute border-2 border-white rounded-2xl h-screen max-h-[48vw] max-w-[96vw]"
+    style={
+      Object {
+        "height": "calc(100vh - 7rem)",
+      }
+    }
+  />
+</Fragment>
 `;

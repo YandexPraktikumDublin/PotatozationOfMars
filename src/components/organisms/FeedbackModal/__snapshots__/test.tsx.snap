@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FeedbackModal /> should renders correct <FeedbackModal /> 1`] = `
+<Modal
+  toggleModal={[MockFunction]}
+>
+  <Title>
+    Feedback
+  </Title>
+  <FeedbackForm />
+</Modal>
+`;

@@ -1,67 +1,46 @@
-import { teslaWithAGun } from '@images'
+import { laser, teslaWithAGun } from '@images'
 import {
   ContextController,
   GameClock,
   InputsController
 } from '@game/controllers'
 import { TPosition } from '@game/@types'
-import { Vector, Projectile } from '@game/entities'
+import { Entity } from '@game/entities'
 import { KEYS } from '@game/config'
 
-class Player {
-  readonly image = new Image()
-  private clockEvent: () => void
-  position: TPosition
-  destination: TPosition | { x: null; y: null }
-  size: number
-  velocity: Vector
-  firePeriod: number
-  fireCooldown: number
-  fireQuantity: number
-  projectiles: Array<Projectile>
+class Player extends Entity {
+  opacity: number
+  damagePeriod: number
+  damageCooldown: number
+  homingIntensity?: number
 
-  constructor(size = 50, velocity = 10) {
-    this.clockEvent = () => {}
-    this.position = { x: 0, y: 0 }
-    this.destination = this.position
-    this.size = size
-    this.velocity = new Vector(velocity)
-    this.firePeriod = 50
-    this.fireCooldown = this.firePeriod
-    this.fireQuantity = 1
-    this.projectiles = []
+  constructor(killCallback = () => {}, velocity = 10, size = 50) {
+    super(killCallback, velocity, size, teslaWithAGun, 3)
+    this.opacity = 1
+    this.damage = 10
+    this.projectileVelocity = 30
+    this.damagePeriod = 60
+    this.damageCooldown = this.damagePeriod
   }
 
-  public init = (clock: GameClock) => {
-    const fire = this.initFire(clock)
-    const callBack = (context: ContextController) => {
-      fire(context)
-      this.move(context)
-    }
-    this.render(clock, callBack)
+  init = (clock: GameClock) => {
+    this.fire = this.initFire(clock, laser, {
+      player: true,
+      positionOffset: { x: 60, y: -20 }
+    })
+    this.deathAnimation = this.initDeathAnimation(clock)
+    this.render(clock, this.move)
   }
 
-  private initFire = (clock: GameClock) => {
-    return (context: ContextController) => {
-      this.fireCooldown--
-      if (this.fireCooldown <= 0) {
-        this.fireCooldown = this.firePeriod
-        for (let i = 0; i < this.fireQuantity; i++) {
-          if (this.projectiles.length >= 200) {
-            this.projectiles[0].kill()
-            this.projectiles.shift()
-          }
-          const projectile = new Projectile()
-          this.projectiles.push(projectile)
-          const angle =
-            (i - (this.fireQuantity - 1) / 2) / (6 * this.fireQuantity)
-          projectile.init(clock, context, this.position, angle)
-        }
-      }
+  initDeathAnimation = (clock: GameClock) => {
+    return () => {
+      clock.startEvent((context) => {
+        context.drawText('Game over')
+      })
     }
   }
 
-  private moveTo = (destination: TPosition, controller: unknown) => {
+  protected followPointer = (destination: TPosition, controller: unknown) => {
     const { coefficient, center } = controller as ContextController
     const { x, y } = destination as TPosition
     const { cx, cy } = coefficient
@@ -69,7 +48,18 @@ class Player {
     this.destination = { x: x * cx - ox, y: y * cy - oy }
   }
 
-  controlWithKeyboard = () => {
+  public controlWithMouse = (
+    controlSurface: HTMLElement,
+    context: ContextController
+  ) => {
+    return InputsController.onMouseDrag(
+      controlSurface,
+      this.followPointer,
+      context
+    )
+  }
+
+  public controlWithKeyboard = () => {
     const keysPressed = {
       up: false,
       down: false,
@@ -154,38 +144,44 @@ class Player {
     }
   }
 
-  controlWithMouse = (
-    context: HTMLCanvasElement,
-    controller: ContextController
-  ) => {
-    return InputsController.onMouseDrag(context, this.moveTo, controller)
+  damageTimer = () => {
+    if (this.damageCooldown > 0) {
+      this.damageCooldown--
+      this.modifiers.invincible = this.damageCooldown !== 0
+      this.opacity = this.modifiers.invincible ? 0.5 : 1
+    }
   }
 
-  private move = (context: ContextController) => {
-    const { top, right, bottom, left } = context.getBorders()
+  getProjectiles = () => {
+    return this.projectiles
+  }
+
+  protected move = (context: ContextController) => {
     this.velocity.defineByDirection(this.destination, this.position)
     this.position = this.velocity.applyTo(this.position)
-    const { x, y } = this.position
-    this.position.x = x > right ? right : x < left ? left : this.position.x
-    this.position.y = y > bottom ? bottom : y < top ? top : this.position.y
+
+    this.damageTimer()
+
+    this.fire(context)
+
+    const { top, right, bottom, left } = context.getBorders()
+    this.getBoundByBorders(top, right, bottom, left)
+
     context.drawImage(this.image, this.position.x, this.position.y, {
       width: this.size * 3,
-      height: this.size
+      height: this.size,
+      opacity: this.opacity
     })
   }
 
-  render = (
-    clock: GameClock,
-    callback: (context: ContextController) => void
-  ) => {
-    this.image.onload = () => {
-      this.clockEvent = clock.startEvent(callback)
-    }
-    this.image.src = teslaWithAGun
-  }
-
-  kill = () => {
-    this.clockEvent()
+  takeDamage = (damage = 1, dispatcher: (health: number) => void) => {
+    if (this.modifiers.invincible) return
+    this.damageCooldown = this.damagePeriod
+    this.opacity = 0.5
+    this.modifiers.invincible = true
+    this.health -= damage
+    dispatcher(this.health)
+    if (this.health <= 0) this.kill()
   }
 }
 

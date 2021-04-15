@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ForumTopicChildComment /> should renders correct <ForumTopicChildComment /> 1`] = `
+<div
+  className="text-left border border-primary rounded-2xl p-4 mb-4 ml-4 last:mb-0 dark:border-white"
+>
+  <div
+    className="flex justify-between mb-2 text-xs"
+  >
+    Ivan Ivanov
+     at 
+    1/12/2020, 12:00 AM
+  </div>
+  <div
+    className="mb-2"
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </div>
+  <ForumTopicCommentActions
+    comment={
+      Object {
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "createdAt": "01.12.20",
+        "enjoyer": Object {
+          "createdAt": "01.12.20",
+          "id": 1,
+          "login": "IvanIvanov",
+          "name": "Ivan Ivanov",
+          "updatedAt": "01.12.20",
+        },
+        "enjoyerId": 1,
+        "hierarchyLevel": 1,
+        "id": 2,
+        "parentId": 1,
+        "reactions": Array [
+          Object {
+            "commentId": 2,
+            "content": "😂",
+            "createdAt": "01.12.20",
+            "enjoyer": Object {
+              "createdAt": "01.12.20",
+              "id": 1,
+              "login": "IvanIvanov",
+              "name": "Ivan Ivanov",
+              "updatedAt": "01.12.20",
+            },
+            "enjoyerId": 1,
+            "id": 2,
+            "updatedAt": "01.12.20",
+          },
+        ],
+        "topicId": 1,
+        "updatedAt": "01.12.20",
+      }
+    }
+  />
+</div>
+`;

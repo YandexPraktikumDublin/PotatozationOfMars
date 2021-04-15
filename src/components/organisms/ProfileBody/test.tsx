@@ -22,10 +22,14 @@ describe('<ProfileBody />', () => {
 
   it('should renders correct <ProfileBody />', () => {
     const togglePasswordForm = jest.fn()
+    const toggleThemeForm = jest.fn()
 
     const wrapper = shallow(
       <Provider store={store}>
-        <ProfileBody togglePasswordForm={togglePasswordForm} />
+        <ProfileBody
+          togglePasswordForm={togglePasswordForm}
+          toggleThemeForm={toggleThemeForm}
+        />
       </Provider>
     )
 
