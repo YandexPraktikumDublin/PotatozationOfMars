@@ -55,7 +55,7 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
     password: string
   }
 ```
-- `GET /api/v1/logout` - выход.
+- `POST /api/v1/logout` - выход.
 - `PUT /api/v1/user` - обновить текущего пользователя.
 ```
   {

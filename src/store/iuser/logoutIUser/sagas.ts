@@ -5,7 +5,7 @@ import { LOGOUT_IUSER_REQUEST } from './actionTypes'
 import { INNER_API_V1_URL, INNER_SERVER_API_V1_URL } from '@config'
 
 const getIUser = () =>
-  getAxiosInstance(INNER_API_V1_URL, INNER_SERVER_API_V1_URL).get('logout')
+  getAxiosInstance(INNER_API_V1_URL, INNER_SERVER_API_V1_URL).post('logout')
 
 function* logoutIUserSaga() {
   try {
