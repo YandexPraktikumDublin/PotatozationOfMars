@@ -1,11 +1,14 @@
-FROM node:14.15.4-alpine
-
-WORKDIR /app
-COPY package*.json .
+FROM node:14.16.1-alpine AS build
+WORKDIR /build
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
 COPY . .
+RUN yarn build
 
-RUN yarn install --frozen-lockfile && yarn run build
-
+FROM node:14.16.1
+WORKDIR /app
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile --production
+COPY --from=build /build/dist .
 EXPOSE ${PORT}
-
-CMD ["node ./index.js"]
+CMD ["node", "./index.js"]

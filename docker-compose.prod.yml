@@ -9,6 +9,8 @@ services:
       PORT: 3000
     ports:
       - "3000:3000"
+    volumes:
+      - .:/app/
     depends_on:
       - postgres
 
@@ -21,7 +23,3 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
       POSTGRES_DB: ${POSTGRES_DB:-potatozation-of-mars}
-
-networks:
-  postgres:
-    driver: bridge
