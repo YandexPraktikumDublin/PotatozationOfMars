@@ -11,7 +11,7 @@
     "start:nodemon": "nodemon --exec \"cross-env TAILWIND_MODE=build run-s start:build-server start:server\"",
     "start:build-server": "webpack --config webpack.server.js",
     "start:build-client": "webpack serve --config webpack.client.js",
-    "start": "cross-env NODE_ENV=development npm-run-all clear --parallel start:nodemon start:build-client",
+    "start": "cross-env NODE_ENV=development PORT=5000 npm-run-all clear --parallel start:nodemon start:build-client",
     "lint": "eslint \"src/**/*.@(tsx|ts|jsx|js)\" --fix && prettier --check \"src/**/*.@(tsx|ts|jsx|js)\" --write",
     "test": "jest --config .jest/config.json --runInBand",
     "generate": "plop"

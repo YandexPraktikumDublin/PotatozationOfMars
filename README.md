@@ -34,6 +34,7 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 
 - `docker-compose up web` - запуск.
 - `docker-compose up --build web` - запуск с пересборкой.
+- `sudo docker-compose -f docker-compose.prod.yml up --build web` - запуск в боевом режиме.
 
 ## Внутреннее API
 

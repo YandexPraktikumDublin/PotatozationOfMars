@@ -3,15 +3,12 @@ services:
   web:
     build:
       context: .
+      dockerfile: Dockerfile.production
     environment:
       DATABASE_URL: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-password}@postgres:5432/${POSTGRES_DB:-potatozation-of-mars}
-      PORT: 5000
+      PORT: 3000
     ports:
-      - "5000:5000"
-      - "8080:8080" # webpack serves files through this port
-    volumes:
-      - .:/app/
-      - /app/node_modules/bcrypt/ # https://stackoverflow.com/a/61221812
+      - "3000:3000"
     depends_on:
       - postgres
 
@@ -19,8 +16,6 @@ services:
     image: postgres:12
     ports:
       - "5432:5432"
-    volumes:
-      - ./postgresdata:/var/lib/postgresql/data
     restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
@@ -30,6 +25,3 @@ services:
 networks:
   postgres:
     driver: bridge
-
-volumes:
-  db-data:

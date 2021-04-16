@@ -6,7 +6,7 @@ const { findIP } = require('./findIP')
 const { makeStartLogsText } = require('./startLogs')
 const devHosts = require('./config/hosts.json')
 
-const { PORT = 5000, NODE_ENV } = process.env
+const { PORT = 3000, NODE_ENV = 'production' } = process.env
 
 const isDev = NODE_ENV === 'development'
 

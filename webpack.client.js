@@ -86,7 +86,7 @@ module.exports = {
     ]
   },
   output: {
-    publicPath: 'https://0.0.0.0:8080/',
+    publicPath: IS_DEV ? 'https://0.0.0.0:8080/' : 'main.js',
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js'
   },
