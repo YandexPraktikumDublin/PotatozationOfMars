@@ -32,9 +32,33 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 
 ## Запуск в Docker
 
-- `docker-compose up web` - запуск.
-- `docker-compose up --build web` - запуск с пересборкой.
-- `sudo docker-compose -f docker-compose.prod.yml up --build web` - запуск в боевом режиме.
+- `sudo docker rm -vf $(docker ps -a -q)` - удалить все контейнеры.
+- `sudo docker rmi -f $(docker images -a -q)` - удалить все образы.
+- `sudo docker-compose up` - запуск в режиме разработки.
+- `sudo docker-compose up --build` - запуск в режиме разработки с пересборкой.
+
+## Деплой
+- `sudo docker-compose --no-cache -f docker-compose.prod.yml build` - создание образа для боевого режима.
+- `sudo docker tag potatozationofmars_web cr.yandex/crp0a71agbjm7td67833/potatozationofmars_web` - создание тега для образа.
+- `sudo docker push cr.yandex/crp0a71agbjm7td67833/potatozationofmars_web` - отправить образ.
+- `ssh <login>@178.154.214.1` - войти на виртуальную машину.
+- https://cloud.yandex.ru/docs/container-registry/solutions/run-docker-on-vm?utm_source=console&utm_medium=side-bar-left&utm_campaign=container-registry - раздел 4 "Аутентифицируйтесь в реестре от своего имени". Нужно получить токен.
+- `sudo docker login  --username oauth --password <OAuth token> cr.yandex` - аутентификация через OAuth токен.
+- `sudo docker pull cr.yandex/crp0a71agbjm7td67833/potatozationofmars_web:latest` - скачать образ на виртуальную машину.
+- запустить postgres с помощью следующей команды:
+`sudo docker run -d \
+  --name postgres \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_PASSWORD=password \
+  -e POSTGRES_DB=potatozation-of-mars \
+  -e PGDATA=/var/lib/postgresql/data/pgdata \
+  -v /potatozation-of-mars/postgresdata:/var/lib/postgresql/data \
+  -p 5432:5432 \
+  postgres:12`
+- `sudo docker exec -it postgres bash` - войти в образ postgres.
+- `psql -U postgres` - запустить psql.
+- `CREATE DATABASE "potatozation-of-mars";` - создать базу данных.
+- `sudo docker run cr.yandex/crp0a71agbjm7td67833/potatozationofmars_web:latest` - запустить образ.
 
 ## Внутреннее API
 

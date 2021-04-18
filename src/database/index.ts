@@ -12,8 +12,10 @@ import {
 } from '@models'
 import { Umzug, SequelizeStorage } from 'umzug'
 
+const IS_DEV = process.env.NODE_ENV !== 'production'
+
 const sequelizeOptions: SequelizeOptions = {
-  host: 'postgres',
+  host: IS_DEV ? 'postgres' : '0.0.0.0',
   port: 5432,
   username: process.env.POSTGRES_USER ?? 'postgres',
   password: process.env.POSTGRES_PASSWORD ?? 'password',

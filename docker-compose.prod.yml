@@ -5,21 +5,18 @@ services:
       context: .
       dockerfile: Dockerfile.production
     environment:
-      DATABASE_URL: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-password}@postgres:5432/${POSTGRES_DB:-potatozation-of-mars}
       PORT: 3000
     ports:
       - "3000:3000"
-    volumes:
-      - .:/app/
     depends_on:
       - postgres
 
   postgres:
     image: postgres:12
-    ports:
-      - "5432:5432"
-    restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
       POSTGRES_DB: ${POSTGRES_DB:-potatozation-of-mars}
+    ports:
+      - "5432:5432"
+    restart: always
