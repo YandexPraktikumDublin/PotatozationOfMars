@@ -6,13 +6,13 @@ const { findIP } = require('./findIP')
 const { makeStartLogsText } = require('./startLogs')
 const devHosts = require('./config/hosts.json')
 
-const { PORT = 3000, NODE_ENV = 'production' } = process.env
+const { PORT = 5000, NODE_ENV = 'production' } = process.env
 
-const isDev = NODE_ENV === 'development'
+const IS_DEV = NODE_ENV !== 'production'
 
 const APP_HOSTS = ['localhost']
 
-if (isDev) {
+if (IS_DEV) {
   const devLocalIP = findIP()
 
   if (devLocalIP) {
@@ -21,7 +21,7 @@ if (isDev) {
 }
 
 function startApp(app) {
-  if (isDev) {
+  if (IS_DEV) {
     const options = {
       key: readFileSync(resolve('network/config/key.pem'), 'utf8'),
       cert: readFileSync(resolve('network/config/server.crt'), 'utf8')

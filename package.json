@@ -4,14 +4,14 @@
   "description": "Проектная работа второй когорты курса Яндекс.Практикум \"Мидл Фронт-Энд разработчик\" команды \"Дублин\" Веб-Приложение \"Игра\" - \"Potatozation of Mars\".",
   "main": "webpack.config.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production NODE_PATH=. webpack --config webpack.config.js",
+    "build": "cross-env PORT=5000 NODE_ENV=production NODE_PATH=. webpack --config webpack.config.js",
     "make-aliases": "node network/makeAliases.js",
     "clear": "rimraf dist",
     "start:server": "node index.js",
     "start:nodemon": "nodemon --exec \"cross-env TAILWIND_MODE=build run-s start:build-server start:server\"",
     "start:build-server": "webpack --config webpack.server.js",
     "start:build-client": "webpack serve --config webpack.client.js",
-    "start": "cross-env NODE_ENV=development PORT=5000 npm-run-all clear --parallel start:nodemon start:build-client",
+    "start": "cross-env PORT=5000 NODE_ENV=development npm-run-all clear --parallel start:nodemon start:build-client",
     "lint": "eslint \"src/**/*.@(tsx|ts|jsx|js)\" --fix && prettier --check \"src/**/*.@(tsx|ts|jsx|js)\" --write",
     "test": "jest --config .jest/config.json --runInBand",
     "generate": "plop"

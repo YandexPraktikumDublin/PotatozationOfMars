@@ -5,7 +5,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
-const IS_DEV = process.env.NODE_ENV !== 'production'
+const { NODE_ENV = 'production' } = process.env
+
+const IS_DEV = NODE_ENV !== 'production'
 
 module.exports = {
   name: 'client',

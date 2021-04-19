@@ -34,19 +34,17 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 
 - `sudo docker rm -vf $(docker ps -a -q)` - удалить все контейнеры.
 - `sudo docker rmi -f $(docker images -a -q)` - удалить все образы.
+- `sudo docker system prune -a` - удалить все неиспользуемые образы.
+- `sudo docker system prune --volumes` - удалить все volumes.
 - `sudo docker-compose up` - запуск в режиме разработки.
 - `sudo docker-compose up --build` - запуск в режиме разработки с пересборкой.
 
 ## Деплой
-- `sudo docker-compose --no-cache -f docker-compose.prod.yml build` - создание образа для боевого режима.
-- `sudo docker tag potatozationofmars_web cr.yandex/crp0a71agbjm7td67833/potatozationofmars_web` - создание тега для образа.
-- `sudo docker push cr.yandex/crp0a71agbjm7td67833/potatozationofmars_web` - отправить образ.
-- `ssh <login>@178.154.214.1` - войти на виртуальную машину.
-- https://cloud.yandex.ru/docs/container-registry/solutions/run-docker-on-vm?utm_source=console&utm_medium=side-bar-left&utm_campaign=container-registry - раздел 4 "Аутентифицируйтесь в реестре от своего имени". Нужно получить токен.
-- `sudo docker login  --username oauth --password <OAuth token> cr.yandex` - аутентификация через OAuth токен.
-- `sudo docker pull cr.yandex/crp0a71agbjm7td67833/potatozationofmars_web:latest` - скачать образ на виртуальную машину.
-- запустить postgres с помощью следующей команды:
-`sudo docker run -d \
+
+### База данных
+1. `ssh <login>@178.154.214.1` - войти на виртуальную машину.
+2. запустить postgres с помощью следующей команды (нужно задать нормальный пароль):
+  `sudo docker run -d \
   --name postgres \
   -e POSTGRES_USER=postgres \
   -e POSTGRES_PASSWORD=password \
@@ -55,10 +53,32 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
   -v /potatozation-of-mars/postgresdata:/var/lib/postgresql/data \
   -p 5432:5432 \
   postgres:12`
+
+#### Дополнительные команды
 - `sudo docker exec -it postgres bash` - войти в образ postgres.
 - `psql -U postgres` - запустить psql.
-- `CREATE DATABASE "potatozation-of-mars";` - создать базу данных.
-- `sudo docker run cr.yandex/crp0a71agbjm7td67833/potatozationofmars_web:latest` - запустить образ.
+
+### Приложение
+
+1. `sudo docker build -f Dockerfile.production --no-cache --force-rm --tag potatozation-of-mars .` - создание образа для боевого режима.
+2. `sudo docker tag potatozation-of-mars cr.yandex/crp0a71agbjm7td67833/potatozation-of-mars` - создание тега для образа.
+3. `sudo docker push cr.yandex/crp0a71agbjm7td67833/potatozation-of-mars` - отправить образ (если требуется авторизация, выполнить шаг 7 на локальном компьютере).
+4. https://console.cloud.yandex.ru/folders/b1g8sio5liqo869jm3o8/container-registry - здесь проверить образ.
+5. `ssh <login>@178.154.214.1` - войти на виртуальную машину (<login> - вместо этого использовать свой логин).
+6. https://cloud.yandex.ru/docs/container-registry/solutions/run-docker-on-vm?utm_source=console&utm_medium=side-bar-left&utm_campaign=container-registry - раздел 4 "Аутентифицируйтесь в реестре от своего имени". Нужно получить токен.
+7. `sudo docker login  --username oauth --password <OAuth token> cr.yandex` - аутентификация через OAuth токен (токен получить на шаге 6).
+8. `sudo docker pull cr.yandex/crp0a71agbjm7td67833/potatozation-of-mars:latest` - скачать образ на виртуальную машину.
+9. запустить образ. Здесь нужно подставить пароль, который был использован при запуске базы данных. Если база данных уже запущена, спросить у Игоря пароль:
+   `sudo docker run \
+   --env NODE_ENV=production \
+   --env PORT=5000 \
+   --env POSTGRES_HOST=0.0.0.0 \
+   --env POSTGRES_USER=postgres \
+   --env POSTGRES_PASSWORD=password \
+   --env POSTGRES_DB=potatozation-of-mars \
+   --detach \
+   --net=host \
+   cr.yandex/crp0a71agbjm7td67833/potatozation-of-mars:latest`
 
 ## Внутреннее API
 

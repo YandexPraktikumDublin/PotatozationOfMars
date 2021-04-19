@@ -12,7 +12,7 @@ import App from '../App'
 
 const { NODE_ENV = 'production' } = process.env
 
-const IS_DEV = NODE_ENV === 'development'
+const IS_DEV = NODE_ENV !== 'production'
 
 function getHtml(reactHtml: string, reduxState = {}, helmet: HelmetData) {
   const cssUrl = IS_DEV ? 'https://127.0.0.1:8080/main.css' : '/main.css'
