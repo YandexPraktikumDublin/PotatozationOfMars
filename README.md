@@ -80,6 +80,12 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
    --net=host \
    cr.yandex/crp0a71agbjm7td67833/potatozation-of-mars:latest`
 
+## NGNIX
+
+- `sudo nano /etc/nginx/sites-available/dublin-potatozation-of-mars.ya-praktikum.tech` - редактировать конфиг-файл ngnix.
+- `sudo ln -s /etc/nginx/sites-available/dublin-potatozation-of-mars.ya-praktikum.tech /etc/nginx/sites-enabled/` - связать конфиг-файл ngnix.
+- `sudo nginx -t` - проверить конфиг-файл ngnix.
+
 ## Внутреннее API
 
 ### Enjoyer
