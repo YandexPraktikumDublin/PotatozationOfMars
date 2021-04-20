@@ -69,7 +69,7 @@ class GameplayController {
 
   init = () => {
     this.clock = new GameClock()
-    this.player = new Player()
+    this.initPlayer()
     this.initBackground()
     this.handlers = {
       canvasResize: this.context.resize(),
@@ -83,6 +83,14 @@ class GameplayController {
     this.player.init(this.clock)
     this.dispatchers.updateHealth(this.player.health)
     this.getRandomReward()
+  }
+
+  private initPlayer = () => {
+    this.player = new Player()
+    this.player.killCallback = () => {
+      console.log(this.score)
+      this.dispatchers.updateLeaderBoard(this.score)
+    }
   }
 
   private initLevel = (level: TLevel) => {

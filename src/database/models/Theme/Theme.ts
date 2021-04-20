@@ -8,14 +8,17 @@ import {
   Default,
   HasMany
 } from 'sequelize-typescript'
-import { IUserSettings, UserSettings } from '../UserSettings/UserSettings'
+import {
+  IEnjoyerSettings,
+  EnjoyerSettings
+} from '../EnjoyerSettings/EnjoyerSettings'
 
 export interface ITheme {
   id?: number
   name: string
-  preset: string
+  preset: any
   isEnabled: boolean
-  userSettings?: IUserSettings[]
+  enjoyerSettings?: IEnjoyerSettings[]
   createdAt?: string
   updatedAt?: string
 }
@@ -29,13 +32,13 @@ export class Theme extends Model<ITheme> {
 
   @AllowNull(false)
   @Column(DataType.JSONB)
-  preset!: string
+  preset!: any
 
   @AllowNull(false)
   @Default(true)
   @Column(DataType.BOOLEAN)
   isEnabled!: boolean
 
-  @HasMany(() => UserSettings)
-  userSettings!: UserSettings[]
+  @HasMany(() => EnjoyerSettings)
+  enjoyerSettings!: EnjoyerSettings[]
 }

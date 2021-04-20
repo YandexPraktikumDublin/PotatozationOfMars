@@ -5,8 +5,17 @@ import {
 } from './fetchComments/actionTypes'
 import { TFetchCommentsActions } from './fetchComments/types'
 import { TActions, ICommentsState } from './types'
-import { ADD_COMMENT, ADD_COMMENTS } from '@store/comments/actionTypes'
-import { addNewCommentToCommentsArray } from '@utils/comment'
+import {
+  ADD_COMMENT,
+  ADD_COMMENTS,
+  ADD_REACTION,
+  REMOVE_REACTION
+} from '@store/comments/actionTypes'
+import {
+  addNewCommentToCommentsArray,
+  addNewReactionToCommentsArray,
+  removeReactionFromCommentsArray
+} from '@utils/comment'
 
 type TCommonAction = TFetchCommentsActions | TActions
 
@@ -53,9 +62,23 @@ export default (
         ...state,
         comments: [...state.comments, ...action.payload.comments]
       }
-    default:
+    case ADD_REACTION:
       return {
-        ...state
+        ...state,
+        comments: addNewReactionToCommentsArray(
+          state.comments,
+          action.payload.reaction
+        )
       }
+    case REMOVE_REACTION:
+      return {
+        ...state,
+        comments: removeReactionFromCommentsArray(
+          state.comments,
+          action.payload.reaction
+        )
+      }
+    default:
+      return state
   }
 }

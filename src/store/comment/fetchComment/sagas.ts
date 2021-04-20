@@ -1,12 +1,14 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects'
 import { getAxiosInstance } from '@api'
-import { INNER_API_V1_URL } from '@config'
+import { INNER_API_V1_URL, INNER_SERVER_API_V1_URL } from '@config'
 import { fetchCommentFailure, fetchCommentSuccess } from './actions'
 import { FETCH_COMMENT_REQUEST } from './actionTypes'
-import { IFetchCommentRequestPayload } from '@store/comment/fetchComment/types'
+import { IFetchCommentRequestPayload } from './types'
 
 const getComment = (data: IFetchCommentRequestPayload) =>
-  getAxiosInstance(INNER_API_V1_URL).get(`/comments/${data.id}`)
+  getAxiosInstance(INNER_API_V1_URL, INNER_SERVER_API_V1_URL).get(
+    `comments/${data.id}`
+  )
 
 function* fetchCommentSaga(data: Record<string, any>) {
   try {

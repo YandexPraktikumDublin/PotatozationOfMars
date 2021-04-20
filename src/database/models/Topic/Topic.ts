@@ -8,14 +8,14 @@ import {
   AllowNull,
   HasMany
 } from 'sequelize-typescript'
-import { User, Comment, IUser, IComment } from '@models'
+import { Enjoyer, Comment, IEnjoyer, IComment } from '@models'
 
 export interface ITopic {
   id?: number
   subject: string
   content: string
-  userId: number
-  user?: Omit<IUser, 'passwordHash' | 'role' | 'createdAt' | 'updatedAt'>
+  enjoyerId: number
+  enjoyer?: Omit<IEnjoyer, 'passwordHash' | 'role' | 'createdAt' | 'updatedAt'>
   comments?: IComment[]
   createdAt?: string
   updatedAt?: string
@@ -31,13 +31,13 @@ export class Topic extends Model<ITopic> {
   @Column(DataType.STRING)
   content!: string
 
-  @ForeignKey(() => User)
+  @ForeignKey(() => Enjoyer)
   @AllowNull(false)
   @Column(DataType.INTEGER)
-  userId!: number
+  enjoyerId!: number
 
-  @BelongsTo(() => User)
-  user!: User
+  @BelongsTo(() => Enjoyer)
+  enjoyer!: Enjoyer
 
   @HasMany(() => Comment)
   comments!: Comment[]

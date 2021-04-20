@@ -12,11 +12,11 @@ import {
 } from 'sequelize-typescript'
 
 import {
-  User,
+  Enjoyer,
   Topic,
   CommentAncestor,
   Reaction,
-  IUser,
+  IEnjoyer,
   ITopic,
   IReaction
 } from '@models'
@@ -24,8 +24,8 @@ import {
 export interface IComment {
   id?: number
   content: string
-  userId: number
-  user: Omit<IUser, 'passwordHash' | 'role' | 'createdAt' | 'updatedAt'>
+  enjoyerId: number
+  enjoyer: Omit<IEnjoyer, 'passwordHash' | 'role' | 'createdAt' | 'updatedAt'>
   topicId: number
   topic?: ITopic
   parentId?: number
@@ -45,13 +45,13 @@ export class Comment extends Model<IComment> {
   @Column(DataType.STRING)
   content!: string
 
-  @ForeignKey(() => User)
+  @ForeignKey(() => Enjoyer)
   @AllowNull(false)
   @Column(DataType.INTEGER)
-  userId!: number
+  enjoyerId!: number
 
-  @BelongsTo(() => User)
-  user!: User
+  @BelongsTo(() => Enjoyer)
+  enjoyer!: Enjoyer
 
   @ForeignKey(() => Topic)
   @AllowNull(false)

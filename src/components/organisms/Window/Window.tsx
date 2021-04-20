@@ -16,15 +16,16 @@ const Window: FC<TWindowProps> = memo(
     return (
       <div
         className={classNames(
-          'text-center border border-primary rounded-3xl py-6 pl-6 bg-white bg-opacity-40',
-          'dark:text-white dark:border-white dark:bg-primary dark:bg-opacity-40',
+          'relative text-center border border-primary rounded-3xl py-6 pl-6',
+          'dark:text-white dark:border-white',
           {
             'h-screen overflow-hidden': isFullHeight
           }
         )}
         style={wrapperStyle}
       >
-        <div className="overflow-y-auto pr-6 h-full">{children}</div>
+        <div className="absolute inset-0 z-0 bg-white rounded-3xl opacity-70 dark:bg-primary" />
+        <div className="overflow-y-auto relative pr-6 h-full">{children}</div>
       </div>
     )
   }

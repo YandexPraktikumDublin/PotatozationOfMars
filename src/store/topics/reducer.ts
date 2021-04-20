@@ -36,8 +36,6 @@ export default (state = initialState, action: TCommonAction): ITopicsState => {
         error: action.payload.error
       }
     default:
-      return {
-        ...state
-      }
+      return state
   }
 }

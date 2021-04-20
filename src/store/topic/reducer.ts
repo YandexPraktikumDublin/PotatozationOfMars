@@ -45,8 +45,6 @@ export default (state = initialState, action: TCommonAction): ITopicState => {
         error: action.payload.error
       }
     default:
-      return {
-        ...state
-      }
+      return state
   }
 }

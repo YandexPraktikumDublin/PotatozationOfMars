@@ -1,5 +1,7 @@
 import React, { FC, memo, useState, useEffect } from 'react'
-import { isServer } from '@utils/misc'
+import { useDispatch, useSelector } from 'react-redux'
+import { getEnjoyerSettingsSelector } from '@store/enjoyerSettings/fetchEnjoyerSettings/selectors'
+import { updateEnjoyerSettingsRequest } from '@store/enjoyerSettings/updateEnjoyerSettings/actions'
 import { moon } from '@images'
 
 type TTumblerThemeProps = {}
@@ -13,42 +15,42 @@ const defaultImageStyle = {
 }
 
 const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
-  const [isLightTheme, setIsLightTheme] = useState<boolean>(() =>
-    !isServer() ? window.localStorage.isLightTheme === 'true' : false
-  )
+  const dispatch = useDispatch()
+  const enjoyerSettings = useSelector(getEnjoyerSettingsSelector)
+
+  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(() => {
+    return enjoyerSettings?.isDarkModeEnabled ?? true
+  })
+
   const [style, setStyle] = useState(defaultImageStyle)
 
   const toggleTheme = () => {
-    setIsLightTheme((value) => !value)
+    dispatch(updateEnjoyerSettingsRequest({ isDarkModeEnabled: !isDarkTheme }))
+    setIsDarkTheme((value) => !value)
   }
 
   useEffect(() => {
-    if (isLightTheme) {
-      document.documentElement.classList.remove(darkThemeClass)
-
-      if (!isServer()) {
-        window.localStorage.isLightTheme = 'true'
-      }
-
-      setStyle({
-        ...defaultImageStyle,
-        display: 'block',
-        transform: 'translateX(100%)'
-      })
-    } else {
+    if (isDarkTheme) {
       document.documentElement.classList.add(darkThemeClass)
-
-      if (!isServer()) {
-        window.localStorage.isLightTheme = 'false'
-      }
 
       setStyle({
         ...defaultImageStyle,
         display: 'block',
         transform: 'translateX(-2px)'
       })
+    } else {
+      document.documentElement.classList.remove(darkThemeClass)
+
+      setStyle({
+        ...defaultImageStyle,
+        display: 'block',
+        transform: 'translateX(100%)'
+      })
     }
-  }, [isLightTheme])
+    if (enjoyerSettings) {
+      setIsDarkTheme(enjoyerSettings?.isDarkModeEnabled ?? true)
+    }
+  }, [isDarkTheme, enjoyerSettings])
 
   return (
     <button

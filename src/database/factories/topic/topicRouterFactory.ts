@@ -1,21 +1,21 @@
 import { Router } from 'express'
 import { Repository } from 'sequelize-typescript'
-import { Topic, User } from '@models'
+import { Topic, Enjoyer } from '@models'
 import { DEFAULT_ERROR_MESSAGE, INNER_API_V1_URL } from '@config'
 
 export const topicRouterFactory = (
   topicRepository: Repository<Topic>,
-  userRepository: Repository<User>
+  enjoyerRepository: Repository<Enjoyer>
 ) =>
   Router()
     .get(`${INNER_API_V1_URL}/topics`, async (req, res) => {
       try {
-        if (!req.user) {
+        if (!req.enjoyer) {
           return res.status(401).json({ errors: ['Not Authorized'] })
         }
 
         const topics = await topicRepository.findAll({
-          include: [userRepository]
+          include: [enjoyerRepository]
         })
 
         return res.json(topics)
@@ -28,12 +28,12 @@ export const topicRouterFactory = (
 
     .get(`${INNER_API_V1_URL}/topics/:id`, async (req, res) => {
       try {
-        if (!req.user) {
+        if (!req.enjoyer) {
           return res.status(401).json({ errors: ['Not Authorized'] })
         }
 
         const topic = await topicRepository.findByPk(req.params.id, {
-          include: [userRepository]
+          include: [enjoyerRepository]
         })
 
         if (!topic) {
@@ -50,19 +50,19 @@ export const topicRouterFactory = (
 
     .post(`${INNER_API_V1_URL}/topics`, async (req, res) => {
       try {
-        if (!req.user) {
+        if (!req.enjoyer) {
           return res.status(401).json({ errors: ['Not Authorized'] })
         }
 
         const topic = await topicRepository.create(
-          { ...req.body, userId: req.user.id },
+          { ...req.body, enjoyerId: req.enjoyer.id },
           {
-            fields: ['subject', 'content', 'userId'],
+            fields: ['subject', 'content', 'enjoyerId'],
             validate: true
           }
         )
 
-        await topic.reload({ include: [userRepository] })
+        await topic.reload({ include: [enjoyerRepository] })
 
         return res.status(201).json(topic)
       } catch (error) {

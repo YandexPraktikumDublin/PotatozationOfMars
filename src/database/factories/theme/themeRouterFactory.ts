@@ -1,13 +1,13 @@
 import { Router } from 'express'
 import { Repository } from 'sequelize-typescript'
-import { roleEnum, Theme } from '@models'
+import { RoleEnum, Theme } from '@models'
 import { DEFAULT_ERROR_MESSAGE, INNER_API_V1_URL } from '@config'
 
 export const themeRouterFactory = (themeRepository: Repository<Theme>) =>
   Router()
     .get(`${INNER_API_V1_URL}/themes`, async (req, res) => {
       try {
-        if (!req.user) {
+        if (!req.enjoyer) {
           return res.status(401).json({ errors: ['Not Authorized'] })
         }
 
@@ -23,7 +23,7 @@ export const themeRouterFactory = (themeRepository: Repository<Theme>) =>
 
     .get(`${INNER_API_V1_URL}/themes/:id`, async (req, res) => {
       try {
-        if (!req.user) {
+        if (!req.enjoyer) {
           return res.status(401).json({ errors: ['Not Authorized'] })
         }
 
@@ -43,7 +43,10 @@ export const themeRouterFactory = (themeRepository: Repository<Theme>) =>
 
     .post(`${INNER_API_V1_URL}/themes`, async (req, res) => {
       try {
-        if (!req.user || req.user.getDataValue('role') !== roleEnum.admin) {
+        if (
+          !req.enjoyer ||
+          req.enjoyer.getDataValue('role') !== RoleEnum.admin
+        ) {
           return res.status(401).json({ errors: ['Not Authorized'] })
         }
 
@@ -62,7 +65,10 @@ export const themeRouterFactory = (themeRepository: Repository<Theme>) =>
 
     .put(`${INNER_API_V1_URL}/themes/:id`, async (req, res) => {
       try {
-        if (!req.user || req.user.getDataValue('role') !== roleEnum.admin) {
+        if (
+          !req.enjoyer ||
+          req.enjoyer.getDataValue('role') !== RoleEnum.admin
+        ) {
           return res.status(401).json({ errors: ['Not Authorized'] })
         }
 

@@ -1,5 +1,10 @@
-import { ADD_COMMENT, ADD_COMMENTS } from './actionTypes'
-import { IComment } from '@models'
+import {
+  ADD_COMMENT,
+  ADD_COMMENTS,
+  ADD_REACTION,
+  REMOVE_REACTION
+} from './actionTypes'
+import { IComment, IReaction } from '@models'
 
 export interface ICommentsState {
   pending: boolean
@@ -25,4 +30,26 @@ export type TAddComments = {
   payload: IAddCommentsPayload
 }
 
-export type TActions = TAddComment | TAddComments
+export interface IAddReactionPayload {
+  reaction: IReaction
+}
+
+export type TAddReaction = {
+  type: typeof ADD_REACTION
+  payload: IAddReactionPayload
+}
+
+export interface IRemoveReactionPayload {
+  reaction: IReaction
+}
+
+export type TRemoveReaction = {
+  type: typeof REMOVE_REACTION
+  payload: IRemoveReactionPayload
+}
+
+export type TActions =
+  | TAddComment
+  | TAddComments
+  | TAddReaction
+  | TRemoveReaction

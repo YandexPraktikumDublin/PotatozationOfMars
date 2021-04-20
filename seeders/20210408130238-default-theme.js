@@ -10,6 +10,12 @@ module.exports = {
           preset: '{"primaryColor": "#353535"}',
           createdAt: new Date(),
           updatedAt: new Date()
+        },
+        {
+          name: 'Dracula',
+          preset: '{"primaryColor": "#800000"}',
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       ],
       {}

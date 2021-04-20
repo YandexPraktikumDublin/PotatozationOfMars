@@ -26,7 +26,7 @@ export const clearCookies = () => {
   })
 }
 
-export const hardRedirectTo = (location: string) => {
+export const hardRedirectTo = (location: string): void => {
   if (!isServer()) window.location.href = location
 }
 
@@ -40,3 +40,10 @@ export const formatDate = (date?: string): string =>
         minute: 'numeric'
       })
     : ''
+
+export const generatePassword = (): string =>
+  Math.random().toString(36).slice(-8)
+
+export const setStyleVariable = (name: string, value: string): void => {
+  if (!isServer()) document.documentElement.style.setProperty(name, value)
+}

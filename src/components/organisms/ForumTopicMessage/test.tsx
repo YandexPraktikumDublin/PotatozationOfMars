@@ -10,8 +10,8 @@ describe('<ForumTopicMessage />', () => {
     id: 1,
     subject: 'New Games',
     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    userId: 1,
-    user: {
+    enjoyerId: 1,
+    enjoyer: {
       id: 1,
       login: 'IvanIvanov',
       name: 'Ivan Ivanov',
@@ -27,7 +27,7 @@ describe('<ForumTopicMessage />', () => {
     const wrapper = shallow(<ForumTopicMessage topic={topic} />)
 
     expect(wrapper.contains(topic.content)).toBeTruthy()
-    expect(wrapper.contains(topic.user.name)).toBeTruthy()
+    expect(wrapper.contains(topic.enjoyer.name)).toBeTruthy()
     expect(wrapper.contains(formatDate(topic.createdAt))).toBeTruthy()
 
     expect(toJSON(wrapper)).toMatchSnapshot()

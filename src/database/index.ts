@@ -1,13 +1,14 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript'
 import {
-  User,
-  UserSettings,
+  Enjoyer,
+  EnjoyerSettings,
   AuthToken,
   Topic,
   Comment,
   CommentAncestor,
   Reaction,
-  Theme
+  Theme,
+  Feedback
 } from '@models'
 import { Umzug, SequelizeStorage } from 'umzug'
 
@@ -20,14 +21,15 @@ const sequelizeOptions: SequelizeOptions = {
   dialect: 'postgres',
   repositoryMode: true,
   models: [
-    User,
-    UserSettings,
+    Enjoyer,
+    EnjoyerSettings,
     AuthToken,
     Topic,
     Comment,
     CommentAncestor,
     Reaction,
-    Theme
+    Theme,
+    Feedback
   ]
 }
 
@@ -45,25 +47,27 @@ const seeder = new Umzug({
   logger: console
 })
 
-const userRepository = sequelize.getRepository(User)
-const userSettingsRepository = sequelize.getRepository(UserSettings)
+const enjoyerRepository = sequelize.getRepository(Enjoyer)
+const enjoyerSettingsRepository = sequelize.getRepository(EnjoyerSettings)
 const authTokenRepository = sequelize.getRepository(AuthToken)
 const topicRepository = sequelize.getRepository(Topic)
 const commentRepository = sequelize.getRepository(Comment)
 const reactionRepository = sequelize.getRepository(Reaction)
 const themeRepository = sequelize.getRepository(Theme)
+const feedbackRepository = sequelize.getRepository(Feedback)
 
 const db = {
   Sequelize,
   sequelize,
   seeder,
-  userRepository,
-  userSettingsRepository,
+  enjoyerRepository,
+  enjoyerSettingsRepository,
   authTokenRepository,
   topicRepository,
   commentRepository,
   reactionRepository,
-  themeRepository
+  themeRepository,
+  feedbackRepository
 }
 
 export default db

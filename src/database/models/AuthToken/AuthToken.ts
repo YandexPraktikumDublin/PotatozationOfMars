@@ -10,13 +10,13 @@ import {
   Unique
 } from 'sequelize-typescript'
 
-import { IUser, User } from '@models'
+import { IEnjoyer, Enjoyer } from '@models'
 
 export interface IAuthToken {
   id?: number
   token: string
-  userId: number
-  user?: Omit<IUser, 'passwordHash' | 'role' | 'createdAt' | 'updatedAt'>
+  enjoyerId: number
+  enjoyer?: Omit<IEnjoyer, 'passwordHash' | 'role' | 'createdAt' | 'updatedAt'>
   createdAt?: string
   updatedAt?: string
 }
@@ -29,11 +29,11 @@ export class AuthToken extends Model<IAuthToken> {
   @Column(DataType.STRING)
   token!: string
 
-  @ForeignKey(() => User)
+  @ForeignKey(() => Enjoyer)
   @AllowNull(false)
   @Column(DataType.INTEGER)
-  userId!: number
+  enjoyerId!: number
 
-  @BelongsTo(() => User)
-  user!: User
+  @BelongsTo(() => Enjoyer)
+  enjoyer!: Enjoyer
 }

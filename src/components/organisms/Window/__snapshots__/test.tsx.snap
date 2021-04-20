@@ -2,7 +2,7 @@
 
 exports[`<Window /> should renders correct <Window /> 1`] = `
 <div
-  className="text-center border border-primary rounded-3xl py-6 pl-6 bg-white bg-opacity-40 dark:text-white dark:border-white dark:bg-primary dark:bg-opacity-40"
+  className="relative text-center border border-primary rounded-3xl py-6 pl-6 dark:text-white dark:border-white"
   style={
     Object {
       "maxHeight": "none",
@@ -10,7 +10,10 @@ exports[`<Window /> should renders correct <Window /> 1`] = `
   }
 >
   <div
-    className="overflow-y-auto pr-6 h-full"
+    className="absolute inset-0 z-0 bg-white rounded-3xl opacity-70 dark:bg-primary"
+  />
+  <div
+    className="overflow-y-auto relative pr-6 h-full"
   >
     Test children
   </div>

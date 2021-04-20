@@ -1,29 +1,32 @@
 import { Router } from 'express'
 import { Repository } from 'sequelize-typescript'
-import { Comment, User, Reaction } from '@models'
+import { Comment, Enjoyer, Reaction } from '@models'
 import { DEFAULT_ERROR_MESSAGE, INNER_API_V1_URL } from '@config'
 
 export const commentRouterFactory = (
   commentRepository: Repository<Comment>,
-  userRepository: Repository<User>,
+  enjoyerRepository: Repository<Enjoyer>,
   reactionRepository: Repository<Reaction>
 ) =>
   Router()
     .get(`${INNER_API_V1_URL}/topic-comments/:topicId`, async (req, res) => {
       try {
-        if (!req.user) {
+        if (!req.enjoyer) {
           return res.status(401).json({ errors: ['Not Authorized'] })
         }
 
         const comments = await commentRepository.findAll({
           where: { topicId: req.params.topicId, hierarchyLevel: 0 },
           include: [
-            userRepository,
-            reactionRepository,
+            enjoyerRepository,
+            { model: reactionRepository, include: [enjoyerRepository] },
             {
               model: commentRepository,
               as: 'children',
-              include: [userRepository, reactionRepository]
+              include: [
+                enjoyerRepository,
+                { model: reactionRepository, include: [enjoyerRepository] }
+              ]
             }
           ],
           order: [['createdAt', 'ASC']]
@@ -39,18 +42,21 @@ export const commentRouterFactory = (
 
     .get(`${INNER_API_V1_URL}/comments/:id`, async (req, res) => {
       try {
-        if (!req.user) {
+        if (!req.enjoyer) {
           return res.status(401).json({ errors: ['Not Authorized'] })
         }
 
         const comment = await commentRepository.findByPk(req.params.id, {
           include: [
-            userRepository,
-            reactionRepository,
+            enjoyerRepository,
+            { model: reactionRepository, include: [enjoyerRepository] },
             {
               model: commentRepository,
               as: 'children',
-              include: [userRepository, reactionRepository]
+              include: [
+                enjoyerRepository,
+                { model: reactionRepository, include: [enjoyerRepository] }
+              ]
             }
           ]
         })
@@ -69,16 +75,16 @@ export const commentRouterFactory = (
 
     .post(`${INNER_API_V1_URL}/comments`, async (req, res) => {
       try {
-        if (!req.user) {
+        if (!req.enjoyer) {
           return res.status(401).json({ errors: ['Not Authorized'] })
         }
 
         const comment = await commentRepository.create(
-          { ...req.body, userId: req.user.id },
+          { ...req.body, enjoyerId: req.enjoyer.id },
           {
             fields: [
               'content',
-              'userId',
+              'enjoyerId',
               'topicId',
               'parentId',
               'hierarchyLevel'
@@ -89,12 +95,15 @@ export const commentRouterFactory = (
 
         await comment.reload({
           include: [
-            userRepository,
-            reactionRepository,
+            enjoyerRepository,
+            { model: reactionRepository, include: [enjoyerRepository] },
             {
               model: commentRepository,
               as: 'children',
-              include: [userRepository, reactionRepository]
+              include: [
+                enjoyerRepository,
+                { model: reactionRepository, include: [enjoyerRepository] }
+              ]
             }
           ]
         })

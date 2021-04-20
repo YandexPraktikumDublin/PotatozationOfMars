@@ -12,13 +12,16 @@ import { ICommentsState } from '@store/comments/types'
 import { IReactionState } from '@store/reaction/types'
 import { IReactionsState } from '@store/reactions/types'
 import { IThemesState } from '@store/themes/types'
-import { IUserSettingsState } from '@store/userSettings/types'
+import { IEnjoyerSettingsState } from '@store/enjoyerSettings/types'
+import { IEnjoyerState } from '@store/enjoyer/types'
+import { IFeedbackState } from '@store/feedback/types'
 
 export interface IAppState {
   auth: IAuthState
   logout: ILogoutState
   signup: ISignupState
   user: IUserState
+  enjoyer: IEnjoyerState
   leaderboard: ILeaderboardState
   router: RouterState
   game: IGameState
@@ -29,5 +32,6 @@ export interface IAppState {
   reaction: IReactionState
   reactions: IReactionsState
   themes: IThemesState
-  userSettings: IUserSettingsState
+  feedback: IFeedbackState
+  enjoyerSettings: IEnjoyerSettingsState
 }

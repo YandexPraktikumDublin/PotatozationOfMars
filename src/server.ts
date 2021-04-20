@@ -9,15 +9,16 @@ import serverRenderMiddleware from './middlewares/server-render-middleware'
 import authMiddleware from './middlewares/auth-middleware'
 import db from '@database'
 import {
-  userRouterFactory,
+  enjoyerRouterFactory,
   topicRouterFactory,
   commentRouterFactory,
   reactionRouterFactory,
   themeRouterFactory,
-  userSettingsFactory
+  enjoyerSettingsRouterFactory,
+  feedbackRouterFactory
 } from '@factories'
 
-db.sequelize.sync({ force: false }).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   console.info('Successful connection to the database!')
 
   db.seeder
@@ -41,26 +42,27 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use(authMiddleware)
+app.use('/api/*', authMiddleware)
 
 app.use(
-  userRouterFactory(
-    db.userRepository,
+  enjoyerRouterFactory(
+    db.enjoyerRepository,
     db.authTokenRepository,
-    db.userSettingsRepository
+    db.enjoyerSettingsRepository
   )
 )
-app.use(topicRouterFactory(db.topicRepository, db.userRepository))
+app.use(topicRouterFactory(db.topicRepository, db.enjoyerRepository))
 app.use(
   commentRouterFactory(
     db.commentRepository,
-    db.userRepository,
+    db.enjoyerRepository,
     db.reactionRepository
   )
 )
-app.use(reactionRouterFactory(db.reactionRepository, db.userRepository))
+app.use(reactionRouterFactory(db.reactionRepository, db.enjoyerRepository))
 app.use(themeRouterFactory(db.themeRepository))
-app.use(userSettingsFactory(db.userSettingsRepository))
+app.use(enjoyerSettingsRouterFactory(db.enjoyerSettingsRepository))
+app.use(feedbackRouterFactory(db.feedbackRepository))
 
 app.use(compression()).use(express.static(path.resolve(__dirname, '../dist')))
 

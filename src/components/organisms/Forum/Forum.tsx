@@ -18,7 +18,9 @@ const Forum: FC<TForumProps> = memo(() => {
   const topics = useSelector(getTopicsSelector)
 
   useEffect(() => {
-    dispatch(fetchTopicsRequest())
+    if (topics?.length === 0) {
+      dispatch(fetchTopicsRequest())
+    }
   }, [])
 
   const [

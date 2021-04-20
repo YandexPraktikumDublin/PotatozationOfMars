@@ -29,7 +29,7 @@ exports[`<ProfileHeader /> should has className from className prop 1`] = `
           width="80"
         />
         <div
-          className="hidden group-hover:flex justify-center items-center absolute inset-0 bg-primary bg-opacity-50 text-white"
+          className="relative hidden group-hover:flex justify-center items-center absolute inset-0 bg-primary text-white"
           onClick={[Function]}
         >
           change

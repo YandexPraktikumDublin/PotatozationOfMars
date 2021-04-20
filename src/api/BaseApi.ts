@@ -2,11 +2,15 @@ import axios from 'axios'
 import { BASE_API_URL } from '@config'
 import { isServer, getInlineCookiesFromHttpContext } from '@utils/misc'
 
-export const getAxiosInstance = (baseUrl = BASE_API_URL) => {
+export const getAxiosInstance = (
+  browserBaseURL = BASE_API_URL,
+  serverBaseURL = BASE_API_URL
+) => {
   let serverOptions = {}
 
   if (isServer()) {
     serverOptions = {
+      baseURL: serverBaseURL,
       headers: {
         Cookie: getInlineCookiesFromHttpContext()
       }
@@ -14,7 +18,7 @@ export const getAxiosInstance = (baseUrl = BASE_API_URL) => {
   }
 
   return axios.create({
-    baseURL: baseUrl,
+    baseURL: browserBaseURL,
     withCredentials: true,
     ...serverOptions
   })

@@ -14,10 +14,9 @@ class Player extends Entity {
   damageCooldown: number
   homingIntensity?: number
 
-  constructor(velocity = 10, size = 50) {
-    super(() => {}, velocity, size, teslaWithAGun, 3)
+  constructor(killCallback = () => {}, velocity = 10, size = 50) {
+    super(killCallback, velocity, size, teslaWithAGun, 3)
     this.opacity = 1
-    this.health = 3
     this.damage = 10
     this.fireAngle = 0
     this.projectileVelocity = 30

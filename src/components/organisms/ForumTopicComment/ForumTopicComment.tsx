@@ -7,6 +7,7 @@ import {
   ForumTopicChildComment,
   ForumTopicCommentForm
 } from '@components/organisms'
+import { ForumTopicCommentActions } from '@components/molecules'
 
 type TForumTopicCommentProps = {
   comment: IComment
@@ -28,21 +29,22 @@ const ForumTopicComment: FC<TForumTopicCommentProps> = memo(
             'dark:border-white'
           )}
         >
-          <div className="mb-2 text-xs">
-            {comment?.user?.name} at {formattedDate}
-          </div>
-          <div className="mb-2">{comment.content}</div>
-          <button className="text-xs underline" onClick={toggleForm}>
-            {isShowForm ? 'Cancel' : 'Reply'}
-          </button>
-        </div>
+          <div className="flex justify-between items-center mb-2 text-sm">
+            <span className="">
+              {comment?.enjoyer?.name} at {formattedDate}
+            </span>
 
-        {comment.children?.map((childComment) => (
-          <ForumTopicChildComment
-            key={childComment.id}
-            childComment={childComment}
-          />
-        ))}
+            <button
+              title="Add reaction"
+              className="underline"
+              onClick={toggleForm}
+            >
+              {isShowForm ? 'Cancel' : 'Reply'}
+            </button>
+          </div>
+          <div className="mb-3 text-lg">{comment.content}</div>
+          <ForumTopicCommentActions comment={comment} />
+        </div>
 
         {isShowForm && (
           <div className="mb-4 ml-4">
@@ -54,6 +56,13 @@ const ForumTopicComment: FC<TForumTopicCommentProps> = memo(
             />
           </div>
         )}
+
+        {comment.children?.map((childComment) => (
+          <ForumTopicChildComment
+            key={childComment.id}
+            childComment={childComment}
+          />
+        ))}
       </>
     )
   }

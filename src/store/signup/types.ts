@@ -17,12 +17,6 @@ export interface ISignupRequestPayload {
   password: string
 }
 
-export interface IInnerSignupRequestPayload {
-  login: string
-  name: string
-  password: string
-}
-
 export interface ISignupSuccessPayload {
   id: number
 }
