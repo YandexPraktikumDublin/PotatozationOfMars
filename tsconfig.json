@@ -38,7 +38,8 @@
       "@utils/*": ["./src/utils/*"],
       "@routes": ["./src/routes.ts"],
       "@models": ["./src/database/models/index.ts"],
-      "@factories": ["./src/database/factories/index.ts"]
+      "@factories": ["./src/database/factories/index.ts"],
+      "@webmanifest": ["./src/webmanifest"]
     },
     "typeRoots": ["node_modules/@types"]
   },

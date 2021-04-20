@@ -12,5 +12,21 @@ exports[`<PageMeta /> should renders correct <PageMeta /> 1`] = `
     content="The main character is a businessman Elon Musk, who is flying to Mars for the purpose of colonization, the cargo of his spaceship is potatoes, the cultivation of which he wants to establish in a future colony. After losing all his cargo, he returns to Earth to try again and the game starts again."
     name="description"
   />
+  <meta
+    content="https://dublin-potatozation-of-mars.ya-praktikum.tech"
+    property="og:url"
+  />
+  <meta
+    content="website"
+    property="og:type"
+  />
+  <meta
+    content="Potatozation of Mars"
+    property="og:title"
+  />
+  <meta
+    content="The main character is a businessman Elon Musk, who is flying to Mars for the purpose of colonization, the cargo of his spaceship is potatoes, the cultivation of which he wants to establish in a future colony. After losing all his cargo, he returns to Earth to try again and the game starts again."
+    property="og:description"
+  />
 </HelmetWrapper>
 `;

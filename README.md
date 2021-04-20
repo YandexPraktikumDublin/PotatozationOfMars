@@ -42,7 +42,7 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 ## Деплой
 
 ### База данных
-1. `ssh <login>@178.154.214.1` - войти на виртуальную машину.
+1. `ssh <login>@130.193.58.220` - войти на виртуальную машину.
 2. запустить postgres с помощью следующей команды (нужно задать нормальный пароль):
   `sudo docker run -d \
   --name postgres \
@@ -60,14 +60,14 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 
 ### Приложение
 
-1. `sudo docker build -f Dockerfile.production --no-cache --force-rm --tag potatozation-of-mars .` - создание образа для боевого режима.
-2. `sudo docker tag potatozation-of-mars cr.yandex/crp0a71agbjm7td67833/potatozation-of-mars` - создание тега для образа.
-3. `sudo docker push cr.yandex/crp0a71agbjm7td67833/potatozation-of-mars` - отправить образ (если требуется авторизация, выполнить шаг 7 на локальном компьютере).
+1. `sudo docker build -f Dockerfile.production --no-cache --force-rm --tag dublin-potatozation-of-mars .` - создание образа для боевого режима.
+2. `sudo docker tag dublin-potatozation-of-mars cr.yandex/crp44cptgt36thhl5qjc/dublin-potatozation-of-mars` - создание тега для образа.
+3. `sudo docker push cr.yandex/crp44cptgt36thhl5qjc/dublin-potatozation-of-mars` - отправить образ (если требуется авторизация, выполнить шаг 7 на локальном компьютере).
 4. https://console.cloud.yandex.ru/folders/b1g8sio5liqo869jm3o8/container-registry - здесь проверить образ.
-5. `ssh <login>@178.154.214.1` - войти на виртуальную машину (<login> - вместо этого использовать свой логин).
+5. `ssh <login>@130.193.58.220` - войти на виртуальную машину (<login> - вместо этого использовать свой логин).
 6. https://cloud.yandex.ru/docs/container-registry/solutions/run-docker-on-vm?utm_source=console&utm_medium=side-bar-left&utm_campaign=container-registry - раздел 4 "Аутентифицируйтесь в реестре от своего имени". Нужно получить токен.
 7. `sudo docker login  --username oauth --password <OAuth token> cr.yandex` - аутентификация через OAuth токен (токен получить на шаге 6).
-8. `sudo docker pull cr.yandex/crp0a71agbjm7td67833/potatozation-of-mars:latest` - скачать образ на виртуальную машину.
+8. `sudo docker pull cr.yandex/crp44cptgt36thhl5qjc/dublin-potatozation-of-mars:latest` - скачать образ на виртуальную машину.
 9. запустить образ. Здесь нужно подставить пароль, который был использован при запуске базы данных. Если база данных уже запущена, спросить у Игоря пароль:
    `sudo docker run \
    --env NODE_ENV=production \
@@ -78,7 +78,15 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
    --env POSTGRES_DB=potatozation-of-mars \
    --detach \
    --net=host \
-   cr.yandex/crp0a71agbjm7td67833/potatozation-of-mars:latest`
+   cr.yandex/crp44cptgt36thhl5qjc/dublin-potatozation-of-mars:latest`
+
+## Добавить пользователя на виртуальную машину
+
+`sudo adduser <логин>`
+`sudo mkdir /home/<логин>/.ssh/`
+`sudo chmod 0700 /home/<логин>/.ssh/`
+`sudo -- sh -c "echo '<публичный ключ пользователя>' > /home/<логин>/.ssh/authorized_keys"`
+`sudo chown -R <логин>:<логин> /home/<логин>/.ssh/`
 
 ## NGNIX
 
