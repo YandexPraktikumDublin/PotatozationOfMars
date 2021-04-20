@@ -19,6 +19,7 @@ class Player extends Entity {
     this.opacity = 1
     this.health = 3
     this.damage = 10
+    this.fireAngle = 0
     this.projectileVelocity = 30
     this.damagePeriod = 60
     this.damageCooldown = this.damagePeriod
@@ -26,7 +27,6 @@ class Player extends Entity {
 
   init = (clock: GameClock) => {
     this.fire = this.initFire(clock, laser, {
-      player: true,
       positionOffset: { x: 60, y: -20 }
     })
     this.deathAnimation = this.initDeathAnimation(clock)
@@ -36,7 +36,7 @@ class Player extends Entity {
   initDeathAnimation = (clock: GameClock) => {
     return () => {
       clock.startEvent((context) => {
-        context.drawText('Game over')
+        context.drawText('Game over', 0, 0, { fontSize: 120 })
       })
     }
   }
@@ -165,8 +165,7 @@ class Player extends Entity {
 
     this.fire(context)
 
-    const { top, right, bottom, left } = context.getBorders()
-    this.getBoundByBorders(top, right, bottom, left)
+    this.getBoundByBorders(context.getBorders())
 
     context.drawImage(this.image, this.position.x, this.position.y, {
       width: this.size * 3,

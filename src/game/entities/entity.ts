@@ -17,6 +17,7 @@ class Entity {
   firePeriod: number
   fireCooldown: number
   fireQuantity: number
+  fireAngle: number
   protected projectiles: Array<Projectile>
   protected fire: (context: ContextController) => void
   deathAnimation: () => void
@@ -47,6 +48,7 @@ class Entity {
     this.firePeriod = 50
     this.fireCooldown = this.firePeriod
     this.fireQuantity = 1
+    this.fireAngle = 1
     this.projectileVelocity = 10
     this.velocity = new Vector(velocity)
     this.fire = () => {}
@@ -81,18 +83,20 @@ class Entity {
     clock: GameClock,
     src: string,
     options?: {
-      player?: boolean
       spread?: number
       positionOffset?: TPosition
+      maxLimit?: number
+      callbackAll?: (projectiles: Array<Projectile>) => void
+      callbackEach?: (projectile: Projectile) => void
     }
   ) => {
-    const { player, spread, positionOffset } = options ?? {}
+    const { spread, positionOffset, maxLimit } = options ?? {}
     return (context: ContextController) => {
       this.fireCooldown--
       if (this.fireCooldown <= 0) {
         this.fireCooldown = this.firePeriod
         for (let i = 0; i < this.fireQuantity; i++) {
-          if (this.projectiles.length >= 200) {
+          if (this.projectiles.length >= (maxLimit ?? 200)) {
             this.projectiles[0].deathAnimation = () => {}
             this.projectiles[0].kill()
             this.projectiles.shift()
@@ -114,8 +118,18 @@ class Entity {
                 y: this.position.y + positionOffset.y
               }
             : this.position
-          projectile.init(clock, context, position, player ? angle : angle - 1)
+          projectile.init(clock, context, position, angle + this.fireAngle)
+          const callback = options?.callbackEach
+            ? options.callbackEach
+            : () => {}
+          callback(projectile)
         }
+        const callback = options?.callbackAll ? options.callbackAll : () => {}
+        callback(
+          this.projectiles.slice(
+            Math.max(this.projectiles.length - this.fireQuantity, 0)
+          )
+        )
       }
     }
   }
@@ -170,15 +184,38 @@ class Entity {
   }
 
   protected getBoundByBorders = (
-    top: number,
-    right: number,
-    bottom: number,
-    left: number
+    borders: { top: number; right: number; bottom: number; left: number },
+    sizeX: number = 0,
+    sizeY?: number
   ) => {
+    const { top, right, bottom, left } = borders
     const { x, y } = this.position
-    if (x > right || x < left || y > bottom || y < top) {
-      this.position.x = x > right ? right : x < left ? left : this.position.x
-      this.position.y = y > bottom ? bottom : y < top ? top : this.position.y
+    const offsetX = sizeX / 2
+    const offsetY = sizeY ?? sizeX / 2
+    const [offsetRight, offsetLeft, offsetBottom, offsetTop] = [
+      right - offsetX,
+      left + offsetX,
+      bottom - offsetY,
+      top + offsetY
+    ]
+    if (
+      x > offsetRight ||
+      x < offsetLeft ||
+      y > offsetBottom ||
+      y < offsetTop
+    ) {
+      this.position.x =
+        x > offsetRight
+          ? offsetRight
+          : x < offsetLeft
+          ? offsetLeft
+          : this.position.x
+      this.position.y =
+        y > offsetBottom
+          ? offsetBottom
+          : y < offsetTop
+          ? offsetTop
+          : this.position.y
       return true
     }
   }

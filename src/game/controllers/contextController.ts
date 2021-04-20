@@ -36,14 +36,15 @@ class ContextController {
     }
   }
 
-  drawText = (text: string, x = 0, y = 0) => {
+  drawText = (text: string, x = 0, y = 0, options?: { fontSize?: number }) => {
     const context = this.instance
+    const { fontSize } = options ?? {}
     context.save()
 
     const { ox, oy } = this.center
     context.translate(Math.round(x + ox), Math.round(y + oy))
 
-    context.font = '120px serif'
+    context.font = fontSize ? `${fontSize}px serif` : '40px serif'
     context.fillStyle = 'white'
     context.textAlign = 'center'
 

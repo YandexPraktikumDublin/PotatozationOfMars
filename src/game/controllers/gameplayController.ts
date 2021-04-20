@@ -8,7 +8,8 @@ import {
   AsteroidSnake,
   EnemyAsteroid,
   Entity,
-  Player
+  Player,
+  PotatoAlienBoss
 } from '@game/entities'
 import TPosition from '@game/@types/position'
 import { starsBack, starsFront, starsMiddle } from '@images'
@@ -54,7 +55,7 @@ class GameplayController {
         enemyType: Alien,
         quantity: 5,
         simultaneously: 5,
-        bossType: AsteroidSnake,
+        bossType: PotatoAlienBoss,
         scalable: true
       }
     ]
@@ -207,13 +208,30 @@ class GameplayController {
   increaseDamage = () => {
     if (this.player.isAlive) {
       this.player.damage *= 1.2
+      let count = 60
+      const hideText = this.clock.startEvent((context) => {
+        count--
+        if (count <= 0) hideText()
+        context.drawText(
+          `Damage increased to ${Math.round(this.player.damage)}`
+        )
+      })
     }
   }
 
   addProjectile = () => {
     if (this.player.isAlive) {
-      if (this.player.fireQuantity < 8) this.player.fireQuantity += 2
-      else this.getRandomReward()
+      if (this.player.fireQuantity < 8) {
+        this.player.fireQuantity += 2
+        let count = 60
+        const hideText = this.clock.startEvent((context) => {
+          count--
+          if (count <= 0) hideText()
+          context.drawText(
+            `You now fire ${this.player.fireQuantity} projectiles`
+          )
+        })
+      } else this.getRandomReward()
     }
   }
 
@@ -228,6 +246,12 @@ class GameplayController {
         this.player.firePeriod * 0.8 < maxSpeed
           ? maxSpeed
           : this.player.firePeriod * 0.8
+      let count = 60
+      const hideText = this.clock.startEvent((context) => {
+        count--
+        if (count <= 0) hideText()
+        context.drawText(`Attack speed is increased by 20%`)
+      })
     }
   }
 
@@ -241,10 +265,22 @@ class GameplayController {
         return
       }
       this.player.homingIntensity++
+      let count = 60
+      const hideText = this.clock.startEvent((context) => {
+        count--
+        if (count <= 0) hideText()
+        context.drawText(`Homing is improved`)
+      })
       return
     }
     this.player.modifiers.homingProjectiles = true
     this.player.homingIntensity = 1
+    let count = 60
+    const hideText = this.clock.startEvent((context) => {
+      count--
+      if (count <= 0) hideText()
+      context.drawText(`Projectiles are now homing`)
+    })
   }
 
   getRandomReward = () => {
