@@ -22,8 +22,8 @@ export const BASE_API_URL = `${SERVER_URL}/api/v2`
 
 export const INNER_API_V1_URL = '/api/v1'
 export const INNER_SERVER_API_V1_URL = IS_DEV
-  ? `https://web:5000/${INNER_API_V1_URL}`
-  : `${SITE_URL}${INNER_API_V1_URL}`
+  ? `https://web:5000${INNER_API_V1_URL}`
+  : `http://localhost:5000${INNER_API_V1_URL}`
 
 export const YANDEX_OAUTH_REDIRECT_URL = 'https://oauth.yandex.ru/authorize'
 
