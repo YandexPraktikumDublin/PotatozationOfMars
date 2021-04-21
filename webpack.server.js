@@ -94,6 +94,10 @@ module.exports = {
         {
           from: path.resolve(__dirname, 'src/webmanifest'),
           to: path.resolve(__dirname, 'dist/webmanifest')
+        },
+        {
+          from: path.resolve(__dirname, 'src/robots.txt'),
+          to: path.resolve(__dirname, 'dist/robots.txt')
         }
       ]
     })

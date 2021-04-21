@@ -70,6 +70,7 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 8. `sudo docker pull cr.yandex/crp44cptgt36thhl5qjc/dublin-potatozation-of-mars:latest` - скачать образ на виртуальную машину.
 9. запустить образ. Здесь нужно подставить пароль, который был использован при запуске базы данных. Если база данных уже запущена, спросить у Игоря пароль:
    `sudo docker run \
+   --name=web \
    --env NODE_ENV=production \
    --env PORT=5000 \
    --env POSTGRES_HOST=0.0.0.0 \
@@ -88,11 +89,12 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 `sudo -- sh -c "echo '<публичный ключ пользователя>' > /home/<логин>/.ssh/authorized_keys"`
 `sudo chown -R <логин>:<логин> /home/<логин>/.ssh/`
 
-## NGNIX
+## NGINX
 
-- `sudo nano /etc/nginx/sites-available/dublin-potatozation-of-mars.ya-praktikum.tech` - редактировать конфиг-файл ngnix.
-- `sudo ln -s /etc/nginx/sites-available/dublin-potatozation-of-mars.ya-praktikum.tech /etc/nginx/sites-enabled/` - связать конфиг-файл ngnix.
-- `sudo nginx -t` - проверить конфиг-файл ngnix.
+- `sudo nano /etc/nginx/sites-available/dublin-potatozation-of-mars.ya-praktikum.tech` - редактировать конфиг-файл NGINX.
+- `sudo ln -s /etc/nginx/sites-available/dublin-potatozation-of-mars.ya-praktikum.tech /etc/nginx/sites-enabled/` - связать конфиг-файл NGINX.
+- `sudo nginx -t` - проверить конфиг-файл NGINX.
+- `sudo systemctl restart nginx` - перезапустить NGINX.
 
 ## Внутреннее API
 

@@ -89,7 +89,7 @@ module.exports = {
     ]
   },
   output: {
-    publicPath: IS_DEV ? 'https://0.0.0.0:8080/' : 'main.js',
+    publicPath: IS_DEV ? 'https://127.0.0.1:8080/' : '/',
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js'
   },
@@ -115,6 +115,10 @@ module.exports = {
         {
           from: path.resolve(__dirname, 'src/webmanifest'),
           to: path.resolve(__dirname, 'dist/webmanifest')
+        },
+        {
+          from: path.resolve(__dirname, 'src/robots.txt'),
+          to: path.resolve(__dirname, 'dist/robots.txt')
         }
       ]
     })
