@@ -63,7 +63,7 @@ exports[`<TumblerTheme /> should toggle theme 1`] = `
           Object {
             "display": "block",
             "top": "calc(50% - 0.75rem)",
-            "transform": "translateX(-2px)",
+            "transform": "translateX(100%)",
           }
         }
         width="24"
