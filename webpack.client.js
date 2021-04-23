@@ -4,8 +4,11 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
-const IS_DEV = process.env.NODE_ENV !== 'production'
+const { NODE_ENV = 'production' } = process.env
+
+const IS_DEV = NODE_ENV !== 'production'
 
 module.exports = {
   name: 'client',
@@ -86,7 +89,7 @@ module.exports = {
     ]
   },
   output: {
-    publicPath: 'https://0.0.0.0:8080/',
+    publicPath: IS_DEV ? 'https://127.0.0.1:8080/' : '/',
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js'
   },
@@ -106,6 +109,18 @@ module.exports = {
   },
   plugins: [
     IS_DEV && new ForkTsCheckerWebpackPlugin(),
-    new MiniCssExtractPlugin({ filename: '[name].css' })
+    new MiniCssExtractPlugin({ filename: '[name].css' }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'src/webmanifest'),
+          to: path.resolve(__dirname, 'dist/webmanifest')
+        },
+        {
+          from: path.resolve(__dirname, 'src/robots.txt'),
+          to: path.resolve(__dirname, 'dist/robots.txt')
+        }
+      ]
+    })
   ].filter(Boolean)
 }
