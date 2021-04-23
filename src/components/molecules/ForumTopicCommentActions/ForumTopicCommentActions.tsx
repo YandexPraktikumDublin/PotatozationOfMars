@@ -1,14 +1,7 @@
-import React, {
-  FC,
-  lazy,
-  memo,
-  MouseEvent,
-  Suspense,
-  useMemo,
-  useRef
-} from 'react'
+import React, { FC, memo, MouseEvent, useMemo, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { IEmojiData } from 'emoji-picker-react'
+import loadable from '@loadable/component'
 import groupBy from 'lodash/groupBy'
 import classNames from 'classnames'
 import { IComment } from '@models'
@@ -22,7 +15,7 @@ type TForumTopicCommentActionsProps = {
   comment: IComment
 }
 
-const EmojiPicker = lazy(() => import('emoji-picker-react'))
+const EmojiPicker = loadable(() => import('emoji-picker-react'))
 
 const emojiPickerStyle = { boxShadow: 'none' }
 
@@ -95,25 +88,21 @@ const ForumTopicCommentActions: FC<TForumTopicCommentActionsProps> = memo(
           </button>
 
           {isShowEmojiPicker && (
-            <Suspense
-              fallback={<span className="mr-2 text-xs">Loading...</span>}
+            <div
+              ref={emojiPickerWrapperRef}
+              className="absolute top-0 left-0 z-10"
             >
-              <div
-                ref={emojiPickerWrapperRef}
-                className="absolute top-0 left-0 z-10"
-              >
-                <EmojiPicker
-                  onEmojiClick={onEmojiClick}
-                  groupVisibility={{
-                    flags: false
-                  }}
-                  pickerStyle={emojiPickerStyle}
-                  disableAutoFocus
-                  disableSearchBar
-                  disableSkinTonePicker
-                />
-              </div>
-            </Suspense>
+              <EmojiPicker
+                onEmojiClick={onEmojiClick}
+                groupVisibility={{
+                  flags: false
+                }}
+                pickerStyle={emojiPickerStyle}
+                disableAutoFocus
+                disableSearchBar
+                disableSkinTonePicker
+              />
+            </div>
           )}
         </div>
 

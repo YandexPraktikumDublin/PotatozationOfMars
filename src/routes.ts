@@ -1,22 +1,22 @@
 import { fetchUserRequest } from '@store/user/fetchUser/actions'
 import { IRouterFetchDataArgs } from '@types'
-import {
-  Auth,
-  Error404,
-  Forum,
-  ForumTopic,
-  Game,
-  Leaderboard,
-  Profile,
-  SignUp,
-  Start
-} from '@pages'
+import loadable from '@loadable/component'
 import { PATHS } from '@config'
 import { fetchLeaderboardRequest } from '@store/leaderboard/fetchLeaderboard/actions'
 import { fetchTopicsRequest } from '@store/topics/fetchTopics/actions'
 import { fetchEnjoyerSettingsRequest } from '@store/enjoyerSettings/fetchEnjoyerSettings/actions'
 import { fetchEnjoyerRequest } from '@store/enjoyer/fetchEnjoyer/actions'
 import { fetchThemesRequest } from '@store/themes/fetchThemes/actions'
+
+const Auth = loadable(() => import('./pages/Auth'))
+const Error404 = loadable(() => import('./pages/Error404'))
+const Forum = loadable(() => import('./pages/Forum'))
+const ForumTopic = loadable(() => import('./pages/ForumTopic'))
+const Game = loadable(() => import('./pages/Game'))
+const Leaderboard = loadable(() => import('./pages/Leaderboard'))
+const Profile = loadable(() => import('./pages/Profile'))
+const SignUp = loadable(() => import('./pages/SignUp'))
+const Start = loadable(() => import('./pages/Start'))
 
 export default [
   {

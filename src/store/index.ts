@@ -32,10 +32,14 @@ export function configureStore(initialState: {}, url = '/') {
   const composeEnhancers = getComposeEnhancers()
   const middlewares = [routerMiddleware(history), sagaMiddleware]
 
+  if (process.env.NODE_ENV !== 'production') {
+    middlewares.push(logger)
+  }
+
   const store = createStore(
     createRootReducer(history),
     initialState,
-    composeEnhancers(applyMiddleware(...middlewares, logger))
+    composeEnhancers(applyMiddleware(...middlewares))
   ) as IAppStore
 
   store.runSaga = sagaMiddleware.run

@@ -32,8 +32,69 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 
 ## Запуск в Docker
 
-- `docker-compose up web` - запуск.
-- `docker-compose up --build web` - запуск с пересборкой.
+- `sudo docker rm -vf $(docker ps -a -q)` - удалить все контейнеры.
+- `sudo docker rmi -f $(docker images -a -q)` - удалить все образы.
+- `sudo docker system prune -a` - удалить все неиспользуемые образы.
+- `sudo docker system prune --volumes` - удалить все volumes.
+- `sudo docker-compose up` - запуск в режиме разработки.
+- `sudo docker-compose up --build` - запуск в режиме разработки с пересборкой.
+
+## Деплой
+
+### База данных
+1. `ssh <login>@130.193.58.220` - войти на виртуальную машину.
+2. запустить postgres с помощью следующей команды (нужно задать нормальный пароль):
+  `sudo docker run -d \
+  --name postgres \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_PASSWORD=password \
+  -e POSTGRES_DB=potatozation-of-mars \
+  -e PGDATA=/var/lib/postgresql/data/pgdata \
+  -v /potatozation-of-mars/postgresdata:/var/lib/postgresql/data \
+  -p 5432:5432 \
+  postgres:12`
+
+#### Дополнительные команды
+- `sudo docker exec -it postgres bash` - войти в образ postgres.
+- `psql -U postgres` - запустить psql.
+
+### Приложение
+
+1. `sudo docker build -f Dockerfile.production --no-cache --force-rm --tag dublin-potatozation-of-mars .` - создание образа для боевого режима.
+2. `sudo docker tag dublin-potatozation-of-mars cr.yandex/crp44cptgt36thhl5qjc/dublin-potatozation-of-mars` - создание тега для образа.
+3. `sudo docker push cr.yandex/crp44cptgt36thhl5qjc/dublin-potatozation-of-mars` - отправить образ (если требуется авторизация, выполнить шаг 7 на локальном компьютере).
+4. https://console.cloud.yandex.ru/folders/b1g8sio5liqo869jm3o8/container-registry - здесь проверить образ.
+5. `ssh <login>@130.193.58.220` - войти на виртуальную машину (<login> - вместо этого использовать свой логин).
+6. https://cloud.yandex.ru/docs/container-registry/solutions/run-docker-on-vm?utm_source=console&utm_medium=side-bar-left&utm_campaign=container-registry - раздел 4 "Аутентифицируйтесь в реестре от своего имени". Нужно получить токен.
+7. `sudo docker login  --username oauth --password <OAuth token> cr.yandex` - аутентификация через OAuth токен (токен получить на шаге 6).
+8. `sudo docker pull cr.yandex/crp44cptgt36thhl5qjc/dublin-potatozation-of-mars:latest` - скачать образ на виртуальную машину.
+9. запустить образ. Здесь нужно подставить пароль, который был использован при запуске базы данных. Если база данных уже запущена, спросить у Игоря пароль:
+   `sudo docker run \
+   --name=web \
+   --env NODE_ENV=production \
+   --env PORT=5000 \
+   --env POSTGRES_HOST=0.0.0.0 \
+   --env POSTGRES_USER=postgres \
+   --env POSTGRES_PASSWORD=password \
+   --env POSTGRES_DB=potatozation-of-mars \
+   --detach \
+   --net=host \
+   cr.yandex/crp44cptgt36thhl5qjc/dublin-potatozation-of-mars:latest`
+
+## Добавить пользователя на виртуальную машину
+
+`sudo adduser <логин>`
+`sudo mkdir /home/<логин>/.ssh/`
+`sudo chmod 0700 /home/<логин>/.ssh/`
+`sudo -- sh -c "echo '<публичный ключ пользователя>' > /home/<логин>/.ssh/authorized_keys"`
+`sudo chown -R <логин>:<логин> /home/<логин>/.ssh/`
+
+## NGINX
+
+- `sudo nano /etc/nginx/sites-available/dublin-potatozation-of-mars.ya-praktikum.tech` - редактировать конфиг-файл NGINX.
+- `sudo ln -s /etc/nginx/sites-available/dublin-potatozation-of-mars.ya-praktikum.tech /etc/nginx/sites-enabled/` - связать конфиг-файл NGINX.
+- `sudo nginx -t` - проверить конфиг-файл NGINX.
+- `sudo systemctl restart nginx` - перезапустить NGINX.
 
 ## Внутреннее API
 
