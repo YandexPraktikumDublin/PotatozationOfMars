@@ -7,7 +7,7 @@ class Alien extends Entity {
   phaseCooldown: number
   phase: 'move' | 'fire'
   constructor(killCallback = () => {}, velocity = 5, size = 100) {
-    super(killCallback, velocity, size, saucer1, 40)
+    super(killCallback, velocity, size, saucer1, 60)
     this.phaseCooldown = this.phasePeriod
     this.phase = 'move'
     this.reward.score = 100

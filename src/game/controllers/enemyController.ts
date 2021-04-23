@@ -23,7 +23,11 @@ class EnemyController {
     this.current = this.quantity
   }
 
-  init = (clock: GameClock, context: ContextController) => {
+  init = (
+    clock: GameClock,
+    context: ContextController,
+    killCallback: (entity: Entity) => void = () => {}
+  ) => {
     this.current = this.quantity
 
     const createEntity = (i: number, callback: () => void) => {
@@ -35,6 +39,7 @@ class EnemyController {
     for (let i = 0; i < this.simultaneously; i++) {
       const callback = () => {
         if (this.entities[i].isAlive) return
+        killCallback(this.entities[i])
         if (this.current > this.simultaneously) {
           createEntity(i, callback)
         }

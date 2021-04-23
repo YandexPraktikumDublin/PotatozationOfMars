@@ -5,8 +5,9 @@ import {
   InputsController
 } from '@game/controllers'
 import { TPosition } from '@game/@types'
-import { Entity } from '@game/entities'
+import { Entity, Sound } from '@game/entities'
 import { KEYS } from '@game/config'
+import { explosionSound1, gameOverSound } from '@game/sound'
 
 class Player extends Entity {
   opacity: number
@@ -33,9 +34,16 @@ class Player extends Entity {
   }
 
   initDeathAnimation = (clock: GameClock) => {
+    const sound = new Sound(gameOverSound)
+    const sound2 = new Sound(explosionSound1)
     return () => {
       clock.startEvent((context) => {
         context.drawText('Game over', 0, 0, { fontSize: 120 })
+        if (context.currentSoundtrack?.isPlaying) {
+          context.pauseSoundtrack()
+          sound.play(context.soundVolume)
+          sound2.play(context.soundVolume)
+        }
       })
     }
   }
@@ -173,13 +181,13 @@ class Player extends Entity {
     })
   }
 
-  takeDamage = (damage = 1, dispatcher: (health: number) => void) => {
-    if (this.modifiers.invincible) return
+  takeDamage = (damage = 1, dispatcher?: (health: number) => void) => {
+    if (this.modifiers.invincible || damage <= 0) return
     this.damageCooldown = this.damagePeriod
     this.opacity = 0.5
     this.modifiers.invincible = true
     this.health -= damage
-    dispatcher(this.health)
+    dispatcher?.(this.health)
     if (this.health <= 0) this.kill()
   }
 }

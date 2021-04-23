@@ -5,7 +5,9 @@ import {
   UPDATE_PLAYER_HEALTH,
   UPDATE_SCORE,
   NEW_GAME_REQUEST,
-  RESET_SCORE
+  RESET_SCORE,
+  UPDATE_SOUND_VOLUME,
+  UPDATE_MUSIC_VOLUME
 } from './actionTypes'
 
 export interface IGameState {
@@ -15,6 +17,8 @@ export interface IGameState {
   health: number
   score: number
   newGame: boolean
+  soundVolume: number
+  musicVolume: number
 }
 
 export interface ITogglePausePayload {
@@ -39,6 +43,14 @@ export interface IUpdateScorePayload {
 
 export interface IRequestNewGamePayload {
   newGame: boolean
+}
+
+export interface IUpdateSoundVolumePayload {
+  soundVolume: number
+}
+
+export interface IUpdateMusicVolumePayload {
+  musicVolume: number
 }
 
 export type TTogglePause = {
@@ -75,6 +87,16 @@ export type TRequestNewGame = {
   payload: IRequestNewGamePayload
 }
 
+export type TUpdateSoundVolume = {
+  type: typeof UPDATE_SOUND_VOLUME
+  payload: IUpdateSoundVolumePayload
+}
+
+export type TUpdateMusicVolume = {
+  type: typeof UPDATE_MUSIC_VOLUME
+  payload: IUpdateMusicVolumePayload
+}
+
 export type TGameActions =
   | TTogglePause
   | TToggleFullscreen
@@ -83,3 +105,5 @@ export type TGameActions =
   | TUpdateScore
   | TResetScore
   | TRequestNewGame
+  | TUpdateSoundVolume
+  | TUpdateMusicVolume

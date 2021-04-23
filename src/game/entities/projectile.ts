@@ -1,6 +1,6 @@
 import { ContextController, GameClock } from '@game/controllers'
 import { Entity } from '@game/entities'
-import { laser } from '@images'
+import { explosion, laser } from '@images'
 import TPosition from '@game/@types/position'
 
 class Projectile extends Entity {
@@ -25,7 +25,9 @@ class Projectile extends Entity {
     this.isAlive = true
     this.position = position || { x: ox, y: oy }
     this.velocity.defineByAngle(angle)
-    this.deathAnimation = this.initDeathAnimation(clock)
+    this.deathAnimation = this.initDeathAnimation(clock, explosion, {
+      soundURL: []
+    })
     this.render(clock, this.move)
   }
 

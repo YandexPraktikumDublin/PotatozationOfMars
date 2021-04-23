@@ -1,6 +1,13 @@
+import { Sound } from '@game/entities'
+import { soundtrack1 } from '@game/sound'
+
 class ContextController {
   instance: CanvasRenderingContext2D
   canvas: HTMLCanvasElement
+  soundVolume: number
+  musicVolume: number
+  soundTrack: Array<Sound>
+  currentSoundtrack?: Sound
   coefficient: { cx: number; cy: number }
   center: { ox: number; oy: number }
   constructor(canvas: HTMLCanvasElement, width = 2000, height = 1000) {
@@ -8,8 +15,33 @@ class ContextController {
     this.canvas = canvas
     this.canvas.width = width
     this.canvas.height = height
+    this.soundVolume = 0.1
+    this.musicVolume = 0.5
+    this.soundTrack = [new Sound(soundtrack1)]
     this.center = { ox: width / 2, oy: height / 2 }
     this.coefficient = { cx: 1, cy: 1 }
+  }
+
+  startSoundTrack = (sound?: Sound) => {
+    const randomSoundIndex = Math.floor(Math.random() * this.soundTrack.length)
+    this.currentSoundtrack?.stop()
+    const nextSoundTrack = sound ?? this.soundTrack[randomSoundIndex]
+    console.log(nextSoundTrack)
+    this.currentSoundtrack = nextSoundTrack
+      .play(this.soundVolume * this.musicVolume)
+      .next(this.startSoundTrack)
+  }
+
+  pauseSoundtrack = () => {
+    this.currentSoundtrack?.pause()
+  }
+
+  unpauseSoundtrack = () => {
+    this.currentSoundtrack?.unpause()
+  }
+
+  stopSoundtrack = () => {
+    this.currentSoundtrack?.stop()
   }
 
   getSize = () => {

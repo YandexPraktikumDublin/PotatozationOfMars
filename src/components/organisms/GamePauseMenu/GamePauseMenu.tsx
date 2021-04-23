@@ -1,11 +1,20 @@
 import React, { FC, memo, useCallback, useState } from 'react'
-import { Button } from '@components/organisms'
+import { Button, GamePauseMenuRange } from '@components/organisms'
 import { useHistory } from 'react-router-dom'
 import { PATHS } from '@config'
 import { controlTypes } from '@game/config'
-import { requestNewGame, toggleControls } from '@store/game/actions'
+import {
+  requestNewGame,
+  toggleControls,
+  updateMusicVolume,
+  updateSoundVolume
+} from '@store/game/actions'
 import { useDispatch, useSelector } from 'react-redux'
-import { getControlsSelector } from '@store/game/selectors'
+import {
+  getControlsSelector,
+  getMusicVolumeSelector,
+  getSoundVolumeSelector
+} from '@store/game/selectors'
 
 type TGamePauseMenuProps = {
   toggleModal: () => void
@@ -18,6 +27,8 @@ const GamePauseMenu: FC<TGamePauseMenuProps> = memo(
     const dispatch = useDispatch()
 
     const controls = useSelector(getControlsSelector)
+    const volume = useSelector(getSoundVolumeSelector)
+    const musicVolume = useSelector(getMusicVolumeSelector)
 
     const toggleControlInput = useCallback(() => {
       const newControls =
@@ -26,6 +37,22 @@ const GamePauseMenu: FC<TGamePauseMenuProps> = memo(
           : controlTypes.keyboard
       dispatch(toggleControls({ controls: newControls }))
     }, [controls])
+
+    const increaseVolume = useCallback(() => {
+      dispatch(updateSoundVolume({ soundVolume: volume + 0.1 }))
+    }, [volume])
+
+    const decreaseVolume = useCallback(() => {
+      dispatch(updateSoundVolume({ soundVolume: volume - 0.1 }))
+    }, [volume])
+
+    const increaseMusicVolume = useCallback(() => {
+      dispatch(updateMusicVolume({ musicVolume: musicVolume + 0.1 }))
+    }, [musicVolume])
+
+    const decreaseMusicVolume = useCallback(() => {
+      dispatch(updateMusicVolume({ musicVolume: musicVolume - 0.1 }))
+    }, [musicVolume])
 
     const startNewGame = () => {
       dispatch(requestNewGame({ newGame: true }))
@@ -64,6 +91,18 @@ const GamePauseMenu: FC<TGamePauseMenuProps> = memo(
         )}
         {currentMenu === Menus.setting && (
           <>
+            <GamePauseMenuRange
+              decrease={decreaseVolume}
+              increase={increaseVolume}
+              text="General volume"
+              value={volume}
+            />
+            <GamePauseMenuRange
+              decrease={decreaseMusicVolume}
+              increase={increaseMusicVolume}
+              text="Music volume"
+              value={musicVolume}
+            />
             <Button onClick={toggleControlInput}>{controls} control</Button>
             <Button onClick={toMainMenu}>Back</Button>
           </>

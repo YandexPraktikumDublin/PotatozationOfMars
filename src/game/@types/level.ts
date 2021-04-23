@@ -5,7 +5,8 @@ type TLevel = {
   quantity: number
   simultaneously: number
   bossType: typeof Entity
-  scalable?: boolean
+  bossEntranceMusic?: string
+  bossMusic?: string
 }
 
 export default TLevel

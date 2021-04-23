@@ -65,7 +65,7 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|gif|mp3)$/i,
         use: [
           {
             loader: 'url-loader'
@@ -86,7 +86,7 @@ module.exports = {
     ]
   },
   output: {
-    publicPath: 'https://0.0.0.0:8080/',
+    publicPath: 'https://127.0.0.1:8080/',
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js'
   },

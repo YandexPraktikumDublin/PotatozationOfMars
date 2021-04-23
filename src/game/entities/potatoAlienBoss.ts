@@ -21,7 +21,7 @@ class PotatoAlienBoss extends Entity {
     this.isAlive = true
     this.fire = this.initFire(clock, laserGreen, {
       spread: 2,
-      callbackAll: this.rotatePattern,
+      callbackWave: this.rotatePattern,
       maxLimit: 400,
       positionOffset: { x: -this.size / 6, y: (this.size / 12) * 5 }
     })

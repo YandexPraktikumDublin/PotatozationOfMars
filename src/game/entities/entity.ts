@@ -1,7 +1,14 @@
 import { TPosition } from '@game/@types'
 import { ContextController, GameClock } from '@game/controllers'
-import { Projectile, Vector } from '@game/entities'
+import { Projectile, Vector, Sound } from '@game/entities'
 import { explosion } from '@images'
+import {
+  explosionSound1,
+  explosionSound2,
+  fireSound1,
+  fireSound2,
+  fireSound3
+} from '@game/sound'
 
 class Entity {
   readonly image = new Image()
@@ -86,45 +93,67 @@ class Entity {
       spread?: number
       positionOffset?: TPosition
       maxLimit?: number
-      callbackAll?: (projectiles: Array<Projectile>) => void
+      callbackWave?: (projectiles: Array<Projectile>) => void
       callbackEach?: (projectile: Projectile) => void
+      soundURL?: Array<string>
     }
   ) => {
-    const { spread, positionOffset, maxLimit } = options ?? {}
+    const { spread, positionOffset, maxLimit, soundURL: tempSoundURL } =
+      options ?? {}
+    const soundURL = tempSoundURL ?? [fireSound1, fireSound2, fireSound3]
+    const sounds: Array<Sound> = []
+    soundURL?.forEach((sound) => {
+      sounds.push(new Sound(sound, { initialVolume: 0.1 }))
+    })
     return (context: ContextController) => {
       this.fireCooldown--
       if (this.fireCooldown <= 0) {
         this.fireCooldown = this.firePeriod
+        if (sounds.length !== 0) {
+          const randomSoundIndex = Math.floor(Math.random() * sounds.length)
+          sounds[randomSoundIndex].stop()
+          sounds[randomSoundIndex].play(context.soundVolume)
+        }
         for (let i = 0; i < this.fireQuantity; i++) {
           if (this.projectiles.length >= (maxLimit ?? 200)) {
             this.projectiles[0].deathAnimation = () => {}
-            this.projectiles[0].kill()
+            this.projectiles[0].delete()
             this.projectiles.shift()
           }
+
           const projectile = new Projectile(
             this.projectileVelocity,
             10,
             src,
             this.damage
           )
+
           this.projectiles.push(projectile)
+
           const projectileSpread = spread ?? 0.5
+
           const angle =
             ((i - (this.fireQuantity - 1) / 2) * projectileSpread) /
             this.fireQuantity
+
           const position = positionOffset
             ? {
                 x: this.position.x + positionOffset.x,
                 y: this.position.y + positionOffset.y
               }
             : this.position
+
           projectile.init(clock, context, position, angle + this.fireAngle)
+
           const callback = options?.callbackEach
             ? options.callbackEach
             : () => {}
+
           callback(projectile)
         }
-        const callback = options?.callbackAll ? options.callbackAll : () => {}
+
+        const callback = options?.callbackWave ? options.callbackWave : () => {}
+
         callback(
           this.projectiles.slice(
             Math.max(this.projectiles.length - this.fireQuantity, 0)
@@ -134,13 +163,29 @@ class Entity {
     }
   }
 
-  protected initDeathAnimation = (clock: GameClock, src = explosion) => {
+  protected initDeathAnimation = (
+    clock: GameClock,
+    src = explosion,
+    options?: {
+      soundURL?: Array<string>
+    }
+  ) => {
     const image = new Image()
     image.src = src
+    const sounds: Array<Sound> = []
+    const soundURL = options?.soundURL ?? [explosionSound1, explosionSound2]
+    soundURL.forEach((sound) => {
+      sounds.push(new Sound(sound))
+    })
     return () => {
       let size = this.size * 2
       let opacity = 1
       const deathAnimation = clock.startEvent((context) => {
+        if (opacity === 1 && sounds.length !== 0) {
+          const randomSoundIndex = Math.floor(Math.random() * sounds.length)
+          sounds[randomSoundIndex].stop()
+          sounds[randomSoundIndex].play(context.soundVolume)
+        }
         size -= 1
         opacity = opacity - 0.03
         if (opacity <= 0) {
@@ -159,8 +204,8 @@ class Entity {
     const { width, height } = context.getSize()
     const { ox, oy } = context.center
     this.moveTo(
-      Math.random() * (width / 2) + width / 2 - ox,
-      Math.random() * height - oy
+      Math.random() * (width / 2 - this.size) + width / 2 + this.size / 2 - ox,
+      Math.random() * (height - this.size) + this.size / 2 - oy
     )
   }
 
@@ -237,21 +282,29 @@ class Entity {
     }
   }
 
-  public takeDamage = (damage: number, dispatcher: (score: number) => void) => {
+  public takeDamage = (damage: number) => {
     this.health -= damage
-    if (this.health <= 0) this.kill(dispatcher)
+    if (this.health <= 0) this.kill()
   }
 
   public hit = () => {
     this.kill()
   }
 
-  public kill = (dispatcher: (score: number) => void = () => {}) => {
+  public kill = () => {
+    if (!this.isAlive) return
     this.projectiles.forEach((projectile) => projectile.kill())
     this.isAlive = false
     this.clockEvent()
     this.deathAnimation()
-    dispatcher(this.reward.score)
+    this.killCallback()
+  }
+
+  public delete = () => {
+    if (!this.isAlive) return
+    this.projectiles.forEach((projectile) => projectile.delete())
+    this.isAlive = false
+    this.clockEvent()
     this.killCallback()
   }
 }

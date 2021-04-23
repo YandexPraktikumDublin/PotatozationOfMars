@@ -1,5 +1,6 @@
 export { default as Entity } from './entity'
 export { default as Vector } from './vector'
+export { default as Sound } from './sound'
 export { default as Projectile } from './projectile'
 export { default as Player } from './player'
 export { default as EnemyAsteroid } from './enemyAsteroid'
