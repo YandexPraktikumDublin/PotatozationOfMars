@@ -30,7 +30,6 @@ self.addEventListener('install', (evt) =>
 const update = (request) =>
   caches.open(CURRENT_CACHE).then((cache) =>
     fetch(request).then((response) => {
-      console.log(response)
       if (response.status === 200) {
         return cache.put(request, response)
       }
@@ -57,9 +56,6 @@ const fromCache = (request) =>
     )
 
 self.addEventListener('fetch', (evt) => {
-  if (!(evt.request.url.indexOf('http') === 0)) {
-    return
-  }
   evt.respondWith(
     fromNetwork(evt.request, 10000).catch(() => fromCache(evt.request))
   )

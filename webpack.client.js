@@ -15,7 +15,7 @@ module.exports = {
   target: 'web',
   entry: [path.join(__dirname, '/src/index.tsx')],
   mode: IS_DEV ? 'development' : 'production',
-  devtool: 'eval',
+  devtool: IS_DEV ? 'eval' : false,
   devServer: {
     historyApiFallback: true,
     hot: true,

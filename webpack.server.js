@@ -85,7 +85,7 @@ module.exports = {
     extensions: ['*', '.js', '.jsx', '.json', '.ts', '.tsx'],
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })]
   },
-  devtool: 'eval',
+  devtool: IS_DEV ? 'eval' : false,
   externals: [nodeExternals()],
   plugins: [
     new MiniCssExtractPlugin({ filename: '[name].css' }),
