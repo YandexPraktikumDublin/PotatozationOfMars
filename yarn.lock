@@ -12908,7 +12908,7 @@ wordwrap@^1.0.0:
   resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-1.0.0.tgz#27584810891456a4171c8d0226441ade90cbcaeb"
   integrity sha1-J1hIEIkUVqQXHI0CJkQa3pDLyus=
 
-workbox-background-sync@6.1.1, workbox-background-sync@^6.1.1:
+workbox-background-sync@^6.1.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/workbox-background-sync/-/workbox-background-sync-6.1.1.tgz#db51214299b4be7a8aa274d8037f22d917241101"
   integrity sha512-w1b3j7snz4pQ8xp0i5Nci40qlglqdk70pbORBtMfl9uikI1qGjYfKq6oYeResCXYxb5mUYS245HsUclb6RFVJA==
@@ -12922,7 +12922,7 @@ workbox-broadcast-update@^6.1.1:
   dependencies:
     workbox-core "^6.1.1"
 
-workbox-build@6.1.1, workbox-build@^6.1.1:
+workbox-build@^6.1.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/workbox-build/-/workbox-build-6.1.1.tgz#8333626fad45734d842293e6c2c1b725f4e15752"
   integrity sha512-mAI3dS4VnXri6BFg02arK1403SqHy2sOlzC4NVAk6Rl2+Ddxs+PmJO4cMTyHw0KEhQFcwk6V8cJeGiXJXYzinA==
@@ -12965,19 +12965,19 @@ workbox-build@6.1.1, workbox-build@^6.1.1:
     workbox-sw "^6.1.1"
     workbox-window "^6.1.1"
 
-workbox-cacheable-response@6.1.1, workbox-cacheable-response@^6.1.1:
+workbox-cacheable-response@^6.1.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/workbox-cacheable-response/-/workbox-cacheable-response-6.1.1.tgz#1dc71393cbce83559ad05a8ccb6c6fafa4cccc70"
   integrity sha512-jasNxelRrqCbzIAIMjHk7Ej9BOViBTQlvRJzv3Y0nYuWvxK0CDPQJSraGmTbu3LGiTBbrWEmxe1hVqvLyFKR9A==
   dependencies:
     workbox-core "^6.1.1"
 
-workbox-core@6.1.1, workbox-core@^6.1.1:
+workbox-core@^6.1.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/workbox-core/-/workbox-core-6.1.1.tgz#c8a9b424031b0cf7dacf9d7b8e023d126c9d0167"
   integrity sha512-xsc/72AQxFtt2BHmwU8QtnVV+W5ln4nnYGuz9Q5sPWYGqW4cH0P+FpZDoGM59bmNEyNf+W9bEmidW//e5GsbwQ==
 
-workbox-expiration@6.1.1, workbox-expiration@^6.1.1:
+workbox-expiration@^6.1.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/workbox-expiration/-/workbox-expiration-6.1.1.tgz#4468c3cdfe76b5888f4ae7e3aad63797a7bc24b1"
   integrity sha512-WbEv8NG1ZUiWI+jv3v7Jqed/PyCMoTpLcf3Nw7tKq0nGy6DFQtmSizO37uJ73oc8vttck97UBPQRiwyP1bZnAg==
@@ -13001,7 +13001,7 @@ workbox-navigation-preload@^6.1.1:
   dependencies:
     workbox-core "^6.1.1"
 
-workbox-precaching@6.1.1, workbox-precaching@^6.1.1:
+workbox-precaching@^6.1.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/workbox-precaching/-/workbox-precaching-6.1.1.tgz#f387ccdf60aab30228a4c7ed20a1cd8dee6aaaa4"
   integrity sha512-x8OKwtjd5ewe/x3VlKcXri1P3Tm0uV+uChdMYg/QryrCR9K8x9xwhAw8PZPkwrY0bLLsJMUoX9/lBu8DmjVqTA==
@@ -13029,14 +13029,14 @@ workbox-recipes@^6.1.1:
     workbox-routing "^6.1.1"
     workbox-strategies "^6.1.1"
 
-workbox-routing@6.1.1, workbox-routing@^6.1.1:
+workbox-routing@^6.1.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/workbox-routing/-/workbox-routing-6.1.1.tgz#833ef6439905757241f9e4d56d8e282c20199c02"
   integrity sha512-Az3Gt3cHNK+W0gTfSb4eKGfwEap9Slak16Krr5SiLhE1gXUY2C2O123HucVCedXgIoqTLOXMtNj71Cm6SwYDEg==
   dependencies:
     workbox-core "^6.1.1"
 
-workbox-strategies@6.1.1, workbox-strategies@^6.1.1:
+workbox-strategies@^6.1.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/workbox-strategies/-/workbox-strategies-6.1.1.tgz#6e0adda84bcda17d3d0c48baec2eab9b988b9ca6"
   integrity sha512-7qYA9Eiq6hnP2dyenlD7ZtWI1ArBMT8yhTvHVlaOl9kYY7W+Iv3lAfRCjj/nucOKeVXATx4iVJEuFPn5J+8lzw==
