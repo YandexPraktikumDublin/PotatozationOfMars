@@ -27,7 +27,7 @@ module.exports = {
     liveReload: false,
     https: {
       key: readFileSync(path.resolve('network/config/key.pem'), 'utf8'),
-      cert: readFileSync(path.resolve('network/config/server.crt'), 'utf8')
+      cert: readFileSync(path.resolve('network/config/server.pem'), 'utf8')
     },
     disableHostCheck: true,
     headers: {
@@ -119,6 +119,10 @@ module.exports = {
         {
           from: path.resolve(__dirname, 'src/robots.txt'),
           to: path.resolve(__dirname, 'dist/robots.txt')
+        },
+        {
+          from: path.resolve(__dirname, 'src/sw.js'),
+          to: path.resolve(__dirname, 'dist/sw.js')
         }
       ]
     })

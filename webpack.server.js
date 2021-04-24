@@ -98,6 +98,10 @@ module.exports = {
         {
           from: path.resolve(__dirname, 'src/robots.txt'),
           to: path.resolve(__dirname, 'dist/robots.txt')
+        },
+        {
+          from: path.resolve(__dirname, 'src/sw.js'),
+          to: path.resolve(__dirname, 'dist/sw.js')
         }
       ]
     })

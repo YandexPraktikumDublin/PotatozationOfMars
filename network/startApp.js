@@ -24,7 +24,7 @@ function startApp(app) {
   if (IS_DEV) {
     const options = {
       key: readFileSync(resolve('network/config/key.pem'), 'utf8'),
-      cert: readFileSync(resolve('network/config/server.crt'), 'utf8')
+      cert: readFileSync(resolve('network/config/server.pem'), 'utf8')
     }
 
     https.createServer(options, app).listen(PORT, '0.0.0.0', () => {
