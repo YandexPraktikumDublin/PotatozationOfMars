@@ -1,6 +1,7 @@
 const path = require('path')
 const { readFileSync } = require('fs')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
@@ -101,6 +102,7 @@ module.exports = {
   optimization: {
     minimize: !IS_DEV,
     minimizer: [
+      new TerserPlugin(),
       new CssMinimizerPlugin({
         parallel: 4
       })

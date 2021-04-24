@@ -1,6 +1,7 @@
 const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -75,6 +76,7 @@ module.exports = {
     splitChunks: false,
     minimize: !IS_DEV,
     minimizer: [
+      new TerserPlugin(),
       new CssMinimizerPlugin({
         parallel: 4
       })
