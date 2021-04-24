@@ -4,7 +4,6 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const { NODE_ENV = 'production' } = process.env
 
@@ -109,22 +108,6 @@ module.exports = {
   },
   plugins: [
     IS_DEV && new ForkTsCheckerWebpackPlugin(),
-    new MiniCssExtractPlugin({ filename: '[name].css' }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'src/webmanifest'),
-          to: path.resolve(__dirname, 'dist/webmanifest')
-        },
-        {
-          from: path.resolve(__dirname, 'src/robots.txt'),
-          to: path.resolve(__dirname, 'dist/robots.txt')
-        },
-        {
-          from: path.resolve(__dirname, 'src/sw.js'),
-          to: path.resolve(__dirname, 'dist/sw.js')
-        }
-      ]
-    })
+    new MiniCssExtractPlugin({ filename: '[name].css' })
   ].filter(Boolean)
 }
