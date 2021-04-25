@@ -43,12 +43,12 @@ jobs:
           key: ${{ secrets.T_800_PRIVATE_KEY }}
           script: |
             whoami
-            docker stop $(docker ps -a -q)
-            docker rm $(docker ps -a -q)
-            docker rmi $(docker images -q)
-            docker login --username oauth --password ${{ secrets.OAUTH_TOKEN }} cr.yandex
-            docker pull cr.yandex/crp44cptgt36thhl5qjc/dublin-potatozation-of-mars:latest
-            docker run \
+            sudo docker stop $(docker ps -a -q)
+            sudo docker rm $(docker ps -a -q)
+            sudo docker rmi $(docker images -q)
+            sudo docker login --username oauth --password ${{ secrets.OAUTH_TOKEN }} cr.yandex
+            sudo docker pull cr.yandex/crp44cptgt36thhl5qjc/dublin-potatozation-of-mars:latest
+            sudo docker run \
                --name=web \
                --env NODE_ENV=production \
                --env PORT=5000 \
