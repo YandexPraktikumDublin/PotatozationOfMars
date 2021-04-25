@@ -26,8 +26,12 @@ module.exports = {
     },
     liveReload: false,
     https: {
-      key: readFileSync(path.resolve('network/config/key.pem'), 'utf8'),
-      cert: readFileSync(path.resolve('network/config/server.pem'), 'utf8')
+      key: IS_DEV
+        ? readFileSync(path.resolve('network/config/key.pem'), 'utf8')
+        : null,
+      cert: IS_DEV
+        ? readFileSync(path.resolve('network/config/server.pem'), 'utf8')
+        : null
     },
     disableHostCheck: true,
     headers: {
