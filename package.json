@@ -106,7 +106,6 @@
     "webpack-cli": "4.5.0",
     "webpack-dev-server": "3.11.2",
     "webpack-node-externals": "2.5.2",
-    "workbox-webpack-plugin": "6.1.1",
     "yarn-run-all": "3.1.1"
   },
   "dependencies": {

@@ -26,7 +26,7 @@ https://www.figma.com/file/43ecmoZ23TjLMOEkq6ouKI/Potatozation-of-Mars?node-id=0
 
 ## Особенности локального запуска
 
- Нужно сгенерировать ssl-сертификат и положить файлы key.pem и server.pem по пути `network/config/`.
+Нужно сгенерировать ssl-сертификат и положить файлы key.pem и server.pem по пути `network/config/`.
 
 ## Запуск в Docker
 
