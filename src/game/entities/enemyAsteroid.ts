@@ -37,7 +37,7 @@ class EnemyAsteroid extends Entity {
     this.velocity.defineByDirection(this.destination, this.position)
     this.position = this.velocity.applyTo(this.position)
     if (this.isAtDestination()) {
-      this.kill()
+      this.delete()
       return
     }
     this.angle += this.rotation

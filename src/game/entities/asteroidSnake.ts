@@ -105,14 +105,13 @@ class AsteroidSnake extends Entity {
     this.deathAnimation()
   }
 
-  public kill = (dispatcher: (score: number) => void = () => {}) => {
+  public kill = () => {
     this.tail.forEach((entity) => {
       entity.kill()
     })
     this.isAlive = false
     this.clockEvent()
     this.deathAnimation()
-    dispatcher(this.reward.score)
     this.killCallback()
   }
 }

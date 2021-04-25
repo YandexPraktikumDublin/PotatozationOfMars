@@ -25,7 +25,7 @@ const useRenderCanvas = () => {
     ? useSelector(getControlsSelector)
     : window.localStorage.controlWithMouse ?? useSelector(getControlsSelector)
 
-  let { isPaused, score } = store.getState().game
+  let { isPaused, score, soundVolume, musicVolume } = store.getState().game
 
   const updateHealth = (health: number) => {
     dispatch(updatePlayerHealth({ health }))
@@ -73,6 +73,8 @@ const useRenderCanvas = () => {
         isPaused: newIsPaused,
         controls: newControls,
         score: newScore,
+        soundVolume: newSoundVolume,
+        musicVolume: newMusicVolume,
         newGame
       } = store.getState().game
 
@@ -103,6 +105,16 @@ const useRenderCanvas = () => {
         score = newScore
         game.score = score
       }
+
+      if (soundVolume !== newSoundVolume) {
+        soundVolume = newSoundVolume
+        game.setSoundVolume(soundVolume)
+      }
+
+      if (musicVolume !== newMusicVolume) {
+        musicVolume = newMusicVolume
+        game.setMusicVolume(musicVolume)
+      }
     }
     const unsubscribe = store.subscribe(listener)
 
@@ -110,6 +122,7 @@ const useRenderCanvas = () => {
 
     game.init()
     game.start()
+    dispatch(resetScore())
 
     if (controls === controlTypes.mouse) {
       game.controlWithMouse()

@@ -8,7 +8,7 @@ class AsteroidSnakeTail extends Entity {
   damagePeriod: number
   damageCooldown: number
   homingIntensity: number
-  divertDamage: (damage: number, dispatcher: (score: number) => void) => void
+  divertDamage: (damage: number) => void
   head: AsteroidSnake | AsteroidSnakeTail | null
 
   constructor(killCallback = () => {}, velocity = 10, size = 100) {
@@ -30,7 +30,7 @@ class AsteroidSnakeTail extends Entity {
 
   attach = (
     head: AsteroidSnake | AsteroidSnakeTail,
-    diverDamage: (damage: number, dispatcher: (score: number) => void) => void
+    diverDamage: (damage: number) => void
   ) => {
     this.head = head
     this.position = this.head.position
@@ -69,8 +69,8 @@ class AsteroidSnakeTail extends Entity {
     this.deathAnimation()
   }
 
-  takeDamage = (damage: number, dispatcher: (score: number) => void) => {
-    this.divertDamage(damage, dispatcher)
+  takeDamage = (damage: number) => {
+    this.divertDamage(damage)
   }
 }
 
