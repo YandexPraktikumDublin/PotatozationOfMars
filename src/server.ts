@@ -64,7 +64,11 @@ app.use(themeRouterFactory(db.themeRepository))
 app.use(enjoyerSettingsRouterFactory(db.enjoyerSettingsRepository))
 app.use(feedbackRouterFactory(db.feedbackRepository))
 
-app.use(compression()).use(express.static(path.resolve(__dirname, '../dist')))
+app.use(compression()).use(
+  express.static(path.resolve(__dirname, '../dist'), {
+    maxAge: '31536000'
+  })
+)
 
 app.get('/sw.js', (req, res) => {
   res.sendFile(path.resolve(__dirname, '/', 'sw.js'))
