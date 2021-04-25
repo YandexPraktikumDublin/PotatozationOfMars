@@ -76,7 +76,10 @@ module.exports = {
     splitChunks: false,
     minimize: !IS_DEV,
     minimizer: [
-      new TerserPlugin(),
+      new TerserPlugin({
+        keep_classnames: true,
+        keep_fnames: true
+      }),
       new CssMinimizerPlugin({
         parallel: 4
       })
