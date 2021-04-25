@@ -6,6 +6,17 @@ on:
       - task_89
 
 jobs:
+  unit-tests:
+    name: Jest tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: yarn install
+      - run: yarn test
+
   deploy:
     name: Deploy to Yandex Cloud VM
     runs-on: ubuntu-latest
@@ -18,7 +29,7 @@ jobs:
         with:
           registry: cr.yandex
           username: oauth
-          password: ${{ secrets.OAUTH_TOKEN }}
+          password: test
 
       - name: Build and push
         id: docker_build
