@@ -77,8 +77,10 @@ module.exports = {
     minimize: !IS_DEV,
     minimizer: [
       new TerserPlugin({
-        keep_classnames: true,
-        keep_fnames: true
+        terserOptions: {
+          keep_classnames: true,
+          keep_fnames: true
+        }
       }),
       new CssMinimizerPlugin({
         parallel: 4
