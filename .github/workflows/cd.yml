@@ -21,10 +21,9 @@ jobs:
     name: Deploy to Yandex Cloud VM
     runs-on: ubuntu-latest
     steps:
-      - name: Check Out Repo
-        uses: actions/checkout@v2
-        run: |
-          docker login --username oauth --password ${{ secrets.OAUTH_TOKEN }} cr.yandex
+      - uses: actions/checkout@v2
+      - name: Login
+        run: docker login --username oauth --password ${{ secrets.OAUTH_TOKEN }} cr.yandex
 
       - name: Build and push
         id: docker_build
