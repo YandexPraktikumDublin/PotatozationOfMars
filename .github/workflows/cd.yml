@@ -39,8 +39,8 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: 130.193.58.220
-          username: t-800
-          key: ${{ secrets.T_800_PRIVATE_KEY }}
+          username: t-1000
+          key: ${{ secrets.T_1000_PRIVATE_KEY }}
           script: |
             whoami
             sudo docker stop $(docker ps -a -q)
