@@ -19,7 +19,7 @@ function getHtml(reactHtml: string, reduxState = {}, helmet: HelmetData) {
   const jsUrl = IS_DEV ? 'https://127.0.0.1:8080/main.js' : '/main.js'
 
   const startServerWorkerScript = `
-    <!--<script>
+    <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker
@@ -35,7 +35,7 @@ function getHtml(reactHtml: string, reduxState = {}, helmet: HelmetData) {
             })
         })
        }
-    </script>-->
+    </script>
   `
 
   return `
