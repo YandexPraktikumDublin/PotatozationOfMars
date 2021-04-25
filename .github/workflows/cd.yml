@@ -23,9 +23,8 @@ jobs:
     steps:
       - name: Check Out Repo
         uses: actions/checkout@v2
-
-      - name: Login to Yandex Cloud Container Registry
-        run: 'docker login  --username oauth --password ${{ secrets.OAUTH_TOKEN }} cr.yandex'
+        run: |
+          docker login --username oauth --password ${{ secrets.OAUTH_TOKEN }} cr.yandex
 
       - name: Build and push
         id: docker_build
