@@ -1,6 +1,7 @@
 const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -75,6 +76,12 @@ module.exports = {
     splitChunks: false,
     minimize: !IS_DEV,
     minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          keep_classnames: true,
+          keep_fnames: true
+        }
+      }),
       new CssMinimizerPlugin({
         parallel: 4
       })
@@ -85,7 +92,7 @@ module.exports = {
     extensions: ['*', '.js', '.jsx', '.json', '.ts', '.tsx'],
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })]
   },
-  devtool: 'eval',
+  devtool: IS_DEV ? 'eval' : false,
   externals: [nodeExternals()],
   plugins: [
     new MiniCssExtractPlugin({ filename: '[name].css' }),
@@ -98,6 +105,10 @@ module.exports = {
         {
           from: path.resolve(__dirname, 'src/robots.txt'),
           to: path.resolve(__dirname, 'dist/robots.txt')
+        },
+        {
+          from: path.resolve(__dirname, 'src/sw.js'),
+          to: path.resolve(__dirname, 'dist/sw.js')
         }
       ]
     })

@@ -1,10 +1,10 @@
 const path = require('path')
 const { readFileSync } = require('fs')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const { NODE_ENV = 'production' } = process.env
 
@@ -15,7 +15,7 @@ module.exports = {
   target: 'web',
   entry: [path.join(__dirname, '/src/index.tsx')],
   mode: IS_DEV ? 'development' : 'production',
-  devtool: 'eval',
+  devtool: IS_DEV ? 'eval' : false,
   devServer: {
     historyApiFallback: true,
     hot: true,
@@ -26,8 +26,12 @@ module.exports = {
     },
     liveReload: false,
     https: {
-      key: readFileSync(path.resolve('network/config/key.pem'), 'utf8'),
-      cert: readFileSync(path.resolve('network/config/server.crt'), 'utf8')
+      key: IS_DEV
+        ? readFileSync(path.resolve('network/config/key.pem'), 'utf8')
+        : null,
+      cert: IS_DEV
+        ? readFileSync(path.resolve('network/config/server.pem'), 'utf8')
+        : null
     },
     disableHostCheck: true,
     headers: {
@@ -102,6 +106,12 @@ module.exports = {
   optimization: {
     minimize: !IS_DEV,
     minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          keep_classnames: true,
+          keep_fnames: true
+        }
+      }),
       new CssMinimizerPlugin({
         parallel: 4
       })
@@ -109,18 +119,6 @@ module.exports = {
   },
   plugins: [
     IS_DEV && new ForkTsCheckerWebpackPlugin(),
-    new MiniCssExtractPlugin({ filename: '[name].css' }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'src/webmanifest'),
-          to: path.resolve(__dirname, 'dist/webmanifest')
-        },
-        {
-          from: path.resolve(__dirname, 'src/robots.txt'),
-          to: path.resolve(__dirname, 'dist/robots.txt')
-        }
-      ]
-    })
+    new MiniCssExtractPlugin({ filename: '[name].css' })
   ].filter(Boolean)
 }

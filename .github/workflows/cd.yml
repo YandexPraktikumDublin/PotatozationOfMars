@@ -1,0 +1,69 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to Yandex Cloud VM
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Out Repo
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: yarn install
+      - run: yarn test
+
+      - name: Login to Yandex Cloud Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: cr.yandex
+          username: oauth
+          password: ${{ secrets.OAUTH_TOKEN }}
+
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: ./Dockerfile.production
+          push: true
+          tags: cr.yandex/crp44cptgt36thhl5qjc/dublin-potatozation-of-mars
+
+      - name: Creating and starting app container
+        uses: appleboy/ssh-action@master
+        with:
+          host: 130.193.58.220
+          username: t-1000
+          key: ${{ secrets.T_1000_PRIVATE_KEY }}
+          script: |
+            whoami
+            docker stop $(docker ps -a -q)
+            docker rm $(docker ps -a -q)
+            docker rmi $(docker images -q)
+            docker login --username oauth --password ${{ secrets.OAUTH_TOKEN }} cr.yandex
+            docker pull cr.yandex/crp44cptgt36thhl5qjc/dublin-potatozation-of-mars:latest
+            docker run -d \
+              --name postgres \
+              -e POSTGRES_USER=postgres \
+              -e POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} \
+              -e POSTGRES_DB=potatozation-of-mars \
+              -e PGDATA=/var/lib/postgresql/data/pgdata \
+              -v /potatozation-of-mars/postgresdata:/var/lib/postgresql/data \
+              -p 5432:5432 \
+              postgres:12
+            docker run -d \
+               --name=web \
+               --env NODE_ENV=production \
+               --env PORT=5000 \
+               --env POSTGRES_HOST=0.0.0.0 \
+               --env POSTGRES_USER=postgres \
+               --env POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} \
+               --env POSTGRES_DB=potatozation-of-mars \
+               --net=host \
+               cr.yandex/crp44cptgt36thhl5qjc/dublin-potatozation-of-mars:latest

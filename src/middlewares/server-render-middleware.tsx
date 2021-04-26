@@ -18,6 +18,26 @@ function getHtml(reactHtml: string, reduxState = {}, helmet: HelmetData) {
   const cssUrl = IS_DEV ? 'https://127.0.0.1:8080/main.css' : '/main.css'
   const jsUrl = IS_DEV ? 'https://127.0.0.1:8080/main.js' : '/main.js'
 
+  const startServerWorkerScript = `
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {
+              console.info(
+                'ServiceWorker registration successful with scope: ',
+                registration.scope
+              )
+            })
+            .catch((error) => {
+              console.error('ServiceWorker registration failed: ', error)
+            })
+        })
+       }
+    </script>
+  `
+
   return `
     <!doctype html>
     <html lang="en" class="dark">
@@ -47,6 +67,7 @@ function getHtml(reactHtml: string, reduxState = {}, helmet: HelmetData) {
           window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}
         </script>
         <script src="${jsUrl}"></script>
+        ${!IS_DEV && startServerWorkerScript}
     </body>
   </html>
   `

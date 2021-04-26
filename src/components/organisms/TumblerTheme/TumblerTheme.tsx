@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getEnjoyerSettingsSelector } from '@store/enjoyerSettings/fetchEnjoyerSettings/selectors'
 import { updateEnjoyerSettingsRequest } from '@store/enjoyerSettings/updateEnjoyerSettings/actions'
 import { moon } from '@images'
+import { isServer } from '@utils/misc'
 
 type TTumblerThemeProps = {}
 
@@ -19,7 +20,9 @@ const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
   const enjoyerSettings = useSelector(getEnjoyerSettingsSelector)
 
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(() => {
-    return enjoyerSettings?.isDarkModeEnabled ?? true
+    return enjoyerSettings?.isDarkModeEnabled ?? !isServer()
+      ? window.localStorage.isLightTheme === 'true'
+      : false
   })
 
   const [style, setStyle] = useState(defaultImageStyle)
@@ -38,6 +41,10 @@ const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
         display: 'block',
         transform: 'translateX(-2px)'
       })
+
+      if (!isServer()) {
+        window.localStorage.isLightTheme = 'true'
+      }
     } else {
       document.documentElement.classList.remove(darkThemeClass)
 
@@ -46,7 +53,12 @@ const TumblerTheme: FC<TTumblerThemeProps> = memo(() => {
         display: 'block',
         transform: 'translateX(100%)'
       })
+
+      if (!isServer()) {
+        window.localStorage.isLightTheme = 'false'
+      }
     }
+
     if (enjoyerSettings) {
       setIsDarkTheme(enjoyerSettings?.isDarkModeEnabled ?? true)
     }

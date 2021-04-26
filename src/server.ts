@@ -66,6 +66,10 @@ app.use(feedbackRouterFactory(db.feedbackRepository))
 
 app.use(compression()).use(express.static(path.resolve(__dirname, '../dist')))
 
+app.get('/sw.js', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '/', 'sw.js'))
+})
+
 app.get('*', serverRenderMiddleware)
 
 export { app }

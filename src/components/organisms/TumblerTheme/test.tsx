@@ -46,18 +46,6 @@ describe('<TumblerTheme />', () => {
     expect(wrapper.find('img').prop('style')).toEqual({
       display: 'block',
       top: 'calc(50% - 0.75rem)',
-      transform: 'translateX(-2px)'
-    })
-
-    expect(
-      document.documentElement.classList.contains(darkThemeClass)
-    ).toBeTruthy()
-
-    wrapper.simulate('click')
-
-    expect(wrapper.find('img').prop('style')).toEqual({
-      display: 'block',
-      top: 'calc(50% - 0.75rem)',
       transform: 'translateX(100%)'
     })
 
@@ -76,6 +64,18 @@ describe('<TumblerTheme />', () => {
     expect(
       document.documentElement.classList.contains(darkThemeClass)
     ).toBeTruthy()
+
+    wrapper.simulate('click')
+
+    expect(wrapper.find('img').prop('style')).toEqual({
+      display: 'block',
+      top: 'calc(50% - 0.75rem)',
+      transform: 'translateX(100%)'
+    })
+
+    expect(
+      document.documentElement.classList.contains(darkThemeClass)
+    ).toBeFalsy()
 
     expect(toJSON(wrapper)).toMatchSnapshot()
   })
