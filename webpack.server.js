@@ -44,12 +44,16 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
       },
       {
-        test: /\.(png|jpe?g|gif|mp3)$/i,
+        test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
             loader: 'url-loader'
           }
         ]
+      },
+      {
+        test: /.mp3$/,
+        loader: 'file-loader'
       },
       {
         test: /\.svg$/i,
