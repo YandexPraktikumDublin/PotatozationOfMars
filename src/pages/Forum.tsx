@@ -5,7 +5,7 @@ import { PageMeta } from '@components/atoms'
 
 const Forum: FC = () => (
   <>
-    <PageMeta title="forum" />
+    <PageMeta title="Forum" />
     <ForumTemplate />
   </>
 )

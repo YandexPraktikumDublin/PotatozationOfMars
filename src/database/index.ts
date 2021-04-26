@@ -13,11 +13,11 @@ import {
 import { Umzug, SequelizeStorage } from 'umzug'
 
 const sequelizeOptions: SequelizeOptions = {
-  host: 'postgres',
+  host: process.env.POSTGRES_HOST,
   port: 5432,
-  username: process.env.POSTGRES_USER ?? 'postgres',
-  password: process.env.POSTGRES_PASSWORD ?? 'password',
-  database: process.env.POSTGRES_DB ?? 'potatozation-of-mars',
+  username: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.POSTGRES_DB,
   dialect: 'postgres',
   repositoryMode: true,
   models: [

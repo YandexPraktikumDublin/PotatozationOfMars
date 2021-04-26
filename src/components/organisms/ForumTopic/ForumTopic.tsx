@@ -45,7 +45,7 @@ const ForumTopic: FC<TForumTopicProps> = memo(() => {
 
   return (
     <div className="relative">
-      <PageMeta title="New Games" />
+      <PageMeta title={topic.subject} />
       <Title>{topic.subject}</Title>
 
       <BackButton

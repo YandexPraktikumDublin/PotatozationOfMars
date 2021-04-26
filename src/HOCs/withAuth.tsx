@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchUserRequest } from '@store/user/fetchUser/actions'
 import {
   getUserErrorSelector,
-  getUserPendingSelector,
   getUserSelector
 } from '@store/user/fetchUser/selectors'
 import { Redirect, useLocation } from 'react-router'
@@ -24,7 +23,6 @@ export default function withAuth<T>(Component: React.FC<T>) {
     const dispatch = useDispatch()
 
     const user = useSelector(getUserSelector)
-    const pendingUser = useSelector(getUserPendingSelector)
     const errorUser = useSelector(getUserErrorSelector)
 
     const themes = useSelector(getThemesSelector)
@@ -33,6 +31,9 @@ export default function withAuth<T>(Component: React.FC<T>) {
 
     const isAuthOrSignup =
       location.pathname === PATHS.AUTH || location.pathname === PATHS.SIGNUP
+
+    const isPublicPage =
+      location.pathname === PATHS.BASE || location.pathname === PATHS.GAME
 
     const selectedTheme = useMemo(
       () => themes?.find((theme) => theme.id === enjoyerSettings?.themeId),
@@ -77,15 +78,11 @@ export default function withAuth<T>(Component: React.FC<T>) {
       }
     }, [selectedTheme])
 
-    if (pendingUser) {
-      return null
-    }
-
     if (user && enjoyer && isAuthOrSignup) {
       return <Redirect to={PATHS.BASE} />
     }
 
-    if (errorUser && !isAuthOrSignup) {
+    if (errorUser && !isPublicPage && !isAuthOrSignup) {
       return <Redirect to={PATHS.AUTH} />
     }
 

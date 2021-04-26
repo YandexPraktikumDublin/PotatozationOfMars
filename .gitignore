@@ -106,3 +106,6 @@ dist
 .DS_Store
 
 postgresdata
+
+network/config/key.pem
+network/config/server.pem

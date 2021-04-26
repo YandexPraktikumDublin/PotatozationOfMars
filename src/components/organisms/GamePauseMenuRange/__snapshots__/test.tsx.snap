@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GamePauseMenuRange /> should renders correct <GamePauseMenuRange /> 1`] = `
+<div
+  className="flex flex-grow w-full mb-4"
+>
+  <div
+    className="flex w-1/2 items-center ml-1 mr-4"
+  >
+    test
+    :
+  </div>
+  <div
+    className="flex flex-grow"
+  >
+    <Button
+      className="mb-0"
+      onClick={[MockFunction]}
+    >
+      -
+    </Button>
+    <div
+      className="flex items-center mx-4"
+    >
+      0
+    </div>
+    <Button
+      className="mb-0"
+      onClick={[MockFunction]}
+    >
+      +
+    </Button>
+  </div>
+</div>
+`;

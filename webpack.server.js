@@ -1,10 +1,14 @@
 const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
-const IS_DEV = process.env.NODE_ENV !== 'production'
+const { NODE_ENV = 'production' } = process.env
+
+const IS_DEV = NODE_ENV !== 'production'
 
 module.exports = {
   name: 'server',
@@ -40,7 +44,7 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|gif|mp3)$/i,
         use: [
           {
             loader: 'url-loader'
@@ -72,6 +76,12 @@ module.exports = {
     splitChunks: false,
     minimize: !IS_DEV,
     minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          keep_classnames: true,
+          keep_fnames: true
+        }
+      }),
       new CssMinimizerPlugin({
         parallel: 4
       })
@@ -82,7 +92,25 @@ module.exports = {
     extensions: ['*', '.js', '.jsx', '.json', '.ts', '.tsx'],
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })]
   },
-  devtool: 'eval',
+  devtool: IS_DEV ? 'eval' : false,
   externals: [nodeExternals()],
-  plugins: [new MiniCssExtractPlugin({ filename: '[name].css' })]
+  plugins: [
+    new MiniCssExtractPlugin({ filename: '[name].css' }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'src/webmanifest'),
+          to: path.resolve(__dirname, 'dist/webmanifest')
+        },
+        {
+          from: path.resolve(__dirname, 'src/robots.txt'),
+          to: path.resolve(__dirname, 'dist/robots.txt')
+        },
+        {
+          from: path.resolve(__dirname, 'src/sw.js'),
+          to: path.resolve(__dirname, 'dist/sw.js')
+        }
+      ]
+    })
+  ]
 }

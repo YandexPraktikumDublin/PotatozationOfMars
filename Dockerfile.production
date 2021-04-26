@@ -1,9 +1,8 @@
-FROM node:14.15.4-alpine
-
+FROM node:14.16.1-alpine
 WORKDIR /app
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
 COPY . .
-RUN yarn install --frozen-lockfile && yarn build
-
-EXPOSE 5000
-
-CMD node ./index.js
+RUN yarn build
+EXPOSE ${PORT}
+CMD ["node", "./index.js"]

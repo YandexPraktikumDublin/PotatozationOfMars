@@ -1,18 +1,21 @@
 const path = require('path')
 const { readFileSync } = require('fs')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
-const IS_DEV = process.env.NODE_ENV !== 'production'
+const { NODE_ENV = 'production' } = process.env
+
+const IS_DEV = NODE_ENV !== 'production'
 
 module.exports = {
   name: 'client',
   target: 'web',
   entry: [path.join(__dirname, '/src/index.tsx')],
   mode: IS_DEV ? 'development' : 'production',
-  devtool: 'eval',
+  devtool: IS_DEV ? 'eval' : false,
   devServer: {
     historyApiFallback: true,
     hot: true,
@@ -23,8 +26,12 @@ module.exports = {
     },
     liveReload: false,
     https: {
-      key: readFileSync(path.resolve('network/config/key.pem'), 'utf8'),
-      cert: readFileSync(path.resolve('network/config/server.crt'), 'utf8')
+      key: IS_DEV
+        ? readFileSync(path.resolve('network/config/key.pem'), 'utf8')
+        : null,
+      cert: IS_DEV
+        ? readFileSync(path.resolve('network/config/server.pem'), 'utf8')
+        : null
     },
     disableHostCheck: true,
     headers: {
@@ -65,7 +72,7 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|gif|mp3)$/i,
         use: [
           {
             loader: 'url-loader'
@@ -86,7 +93,7 @@ module.exports = {
     ]
   },
   output: {
-    publicPath: 'https://0.0.0.0:8080/',
+    publicPath: IS_DEV ? 'https://127.0.0.1:8080/' : '/',
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js'
   },
@@ -99,6 +106,12 @@ module.exports = {
   optimization: {
     minimize: !IS_DEV,
     minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          keep_classnames: true,
+          keep_fnames: true
+        }
+      }),
       new CssMinimizerPlugin({
         parallel: 4
       })

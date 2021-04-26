@@ -4,8 +4,10 @@ import {
   SET_FULLSCREEN_ICON,
   TOGGLE_CONTROLS,
   TOGGLE_PAUSE,
+  UPDATE_MUSIC_VOLUME,
   UPDATE_PLAYER_HEALTH,
-  UPDATE_SCORE
+  UPDATE_SCORE,
+  UPDATE_SOUND_VOLUME
 } from './actionTypes'
 import {
   IRequestNewGamePayload,
@@ -13,14 +15,18 @@ import {
   IToggleFullscreenPayload,
   ITogglePausePayload,
   IUpdateHealthPayload,
+  IUpdateMusicVolumePayload,
   IUpdateScorePayload,
+  IUpdateSoundVolumePayload,
   TRequestNewGame,
   TResetScore,
   TToggleControls,
   TToggleFullscreen,
   TTogglePause,
   TUpdateHealth,
-  TUpdateScore
+  TUpdateMusicVolume,
+  TUpdateScore,
+  TUpdateSoundVolume
 } from './types'
 
 export const togglePause = (payload: ITogglePausePayload): TTogglePause => ({
@@ -46,6 +52,20 @@ export const updatePlayerHealth = (
   payload: IUpdateHealthPayload
 ): TUpdateHealth => ({
   type: UPDATE_PLAYER_HEALTH,
+  payload
+})
+
+export const updateSoundVolume = (
+  payload: IUpdateSoundVolumePayload
+): TUpdateSoundVolume => ({
+  type: UPDATE_SOUND_VOLUME,
+  payload
+})
+
+export const updateMusicVolume = (
+  payload: IUpdateMusicVolumePayload
+): TUpdateMusicVolume => ({
+  type: UPDATE_MUSIC_VOLUME,
   payload
 })
 

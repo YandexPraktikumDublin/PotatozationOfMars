@@ -23,13 +23,14 @@
     "@utils/([^\\.]*)$": ["<rootDir>/utils/$1"],
     "@routes": ["<rootDir>/routes.ts"],
     "@models": ["<rootDir>/database/models/index.ts"],
-    "@factories": ["<rootDir>/database/factories/index.ts"]
+    "@factories": ["<rootDir>/database/factories/index.ts"],
+    "@webmanifest": ["<rootDir>/src/webmanifest"]
   },
   "setupFilesAfterEnv": ["../.jest/setupTests.js"],
   "transform": {
     "^.+\\.(j|t)sx?$": "babel-jest",
     "^.+\\.svg$": "jest-svg-transformer",
-    ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
+    ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2|mp3)$": "jest-transform-stub"
   },
   "transformIgnorePatterns": [
     "/node_modules/(?!register-service-worker).+\\.js$"
