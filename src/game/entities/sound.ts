@@ -51,10 +51,15 @@ class Sound {
     return this
   }
 
-  next = (callback: (...arr: Array<any>) => void, ...arr: Array<any>) => {
+  next = (callback: (...arr: Array<any>) => void) => {
     this.sound.onended = () => {
-      callback(arr)
+      callback()
     }
+    return this
+  }
+
+  rewind = () => {
+    this.sound.currentTime = 0
     return this
   }
 }
