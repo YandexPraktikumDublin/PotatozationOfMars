@@ -26,9 +26,9 @@ class ContextController {
     const randomSoundIndex = Math.floor(Math.random() * this.soundTrack.length)
     this.currentSoundtrack?.stop()
     const nextSoundTrack = sound ?? this.soundTrack[randomSoundIndex]
-    console.log(nextSoundTrack)
     this.currentSoundtrack = nextSoundTrack
       .play(this.soundVolume * this.musicVolume)
+      .rewind()
       .next(this.startSoundTrack)
   }
 
