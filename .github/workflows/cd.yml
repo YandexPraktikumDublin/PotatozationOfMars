@@ -50,9 +50,9 @@ jobs:
             docker pull cr.yandex/crp44cptgt36thhl5qjc/dublin-potatozation-of-mars:latest
             docker run -d \
               --name postgres \
-              -e POSTGRES_USER=postgres \
+              -e POSTGRES_USER=${{ secrets.POSTGRES_USER }} \
               -e POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} \
-              -e POSTGRES_DB=potatozation-of-mars \
+              -e POSTGRES_DB=${{ secrets.POSTGRES_DB }} \
               -e PGDATA=/var/lib/postgresql/data/pgdata \
               -v /potatozation-of-mars/postgresdata:/var/lib/postgresql/data \
               -p 5432:5432 \
@@ -62,8 +62,10 @@ jobs:
                --env NODE_ENV=production \
                --env PORT=5000 \
                --env POSTGRES_HOST=0.0.0.0 \
-               --env POSTGRES_USER=postgres \
+               --env POSTGRES_USER=${{ secrets.POSTGRES_USER }} \
                --env POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} \
-               --env POSTGRES_DB=potatozation-of-mars \
+               --env POSTGRES_DB=${{ secrets.POSTGRES_DB }} \
+               --env TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }} \
+               --env TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }} \
                --net=host \
                cr.yandex/crp44cptgt36thhl5qjc/dublin-potatozation-of-mars:latest

@@ -1,7 +1,8 @@
 import { Router } from 'express'
 import { Repository } from 'sequelize-typescript'
 import { Feedback, RoleEnum } from '@models'
-import { DEFAULT_ERROR_MESSAGE, INNER_API_V1_URL } from '@config'
+import { DEFAULT_ERROR_MESSAGE, INNER_API_V1_URL, T_800_PHRASES } from '@config'
+import { getRandomArrayElement, sendMessageByTelegram } from '@utils/misc'
 
 export const feedbackRouterFactory = (
   feedbackRepository: Repository<Feedback>
@@ -55,6 +56,16 @@ export const feedbackRouterFactory = (
           fields: ['name', 'email', 'content'],
           validate: true
         })
+
+        sendMessageByTelegram(
+          process.env.TELEGRAM_BOT_TOKEN!,
+          process.env.TELEGRAM_CHAT_ID!,
+          '<b>Feedback is received.</b>\n\n' +
+            `<b>Name:</b> ${req.body.name}\n` +
+            `<b>Email:</b> ${req.body.email}\n` +
+            `<b>Message:</b> ${req.body.content}\n\n` +
+            `<i>"${getRandomArrayElement(T_800_PHRASES)}"</i>`
+        ).catch((error) => console.error(error))
 
         return res.status(201).json(feedback)
       } catch (error) {
