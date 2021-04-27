@@ -66,7 +66,7 @@ app.use(feedbackRouterFactory(db.feedbackRepository))
 app.use('/assets', express.static(path.resolve(__dirname, '../dist/assets')))
 
 app.get('/sw.js', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '/', 'sw.js'))
+  res.sendFile(path.resolve(__dirname, '../dist', 'sw.js'))
 })
 
 app.get('*', serverRenderMiddleware)
