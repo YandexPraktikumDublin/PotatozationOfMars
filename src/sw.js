@@ -36,13 +36,17 @@ self.addEventListener('install', (evt) =>
 )
 
 self.addEventListener('fetch', function (event) {
+  if (event.request.method !== 'GET') return
+
   event.respondWith(
     caches.open(CURRENT_CACHE).then(function (cache) {
       return cache.match(event.request).then(function (response) {
         return (
           response ||
           fetch(event.request).then(function (response) {
-            cache.put(event.request, response.clone())
+            if (response.status === 200) {
+              cache.put(event.request, response.clone())
+            }
 
             return response
           })
