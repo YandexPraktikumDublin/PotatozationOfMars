@@ -1,4 +1,4 @@
-const CACHE_VERSION = '1.0.1'
+const CACHE_VERSION = '1.0.2'
 const CURRENT_CACHE = `main-${CACHE_VERSION}`
 
 const cacheFiles = [
