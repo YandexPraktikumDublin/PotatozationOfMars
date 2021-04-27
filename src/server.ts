@@ -70,6 +70,11 @@ app.get('/sw.js', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../dist', 'sw.js'))
 })
 
+app.use(
+  '/robots.txt',
+  express.static(path.resolve(__dirname, '../dist', 'robots.txt'))
+)
+
 app.use('/assets/', express.static(path.resolve(__dirname, '../dist/assets/')))
 
 app.get('*', serverRenderMiddleware)
