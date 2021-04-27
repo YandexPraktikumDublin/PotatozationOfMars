@@ -2,8 +2,6 @@ const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const { NODE_ENV = 'production' } = process.env
@@ -41,7 +39,7 @@ module.exports = {
       {
         test: /\.css$/i,
         exclude: /node_modules/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
+        loader: 'null-loader'
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
@@ -50,10 +48,6 @@ module.exports = {
             loader: 'url-loader'
           }
         ]
-      },
-      {
-        test: /.mp3$/,
-        loader: 'file-loader'
       },
       {
         test: /\.svg$/i,
@@ -65,6 +59,14 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /.mp3$/,
+        loader: 'file-loader',
+        options: {
+          outputPath: 'assets/sounds',
+          publicPath: 'assets/sounds'
+        }
       }
     ]
   },
@@ -85,9 +87,6 @@ module.exports = {
           keep_classnames: true,
           keep_fnames: true
         }
-      }),
-      new CssMinimizerPlugin({
-        parallel: 4
       })
     ]
   },
@@ -99,12 +98,11 @@ module.exports = {
   devtool: IS_DEV ? 'eval' : false,
   externals: [nodeExternals()],
   plugins: [
-    new MiniCssExtractPlugin({ filename: '[name].css' }),
     new CopyWebpackPlugin({
       patterns: [
         {
           from: path.resolve(__dirname, 'src/webmanifest'),
-          to: path.resolve(__dirname, 'dist/webmanifest')
+          to: path.resolve(__dirname, 'dist/assets/webmanifest')
         },
         {
           from: path.resolve(__dirname, 'src/robots.txt'),

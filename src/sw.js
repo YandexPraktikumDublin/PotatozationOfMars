@@ -1,4 +1,4 @@
-const CACHE_VERSION = 1
+const CACHE_VERSION = '1.0.1'
 const CURRENT_CACHE = `main-${CACHE_VERSION}`
 
 const cacheFiles = [
@@ -35,36 +35,19 @@ self.addEventListener('install', (evt) =>
   )
 )
 
-const update = (request) =>
-  caches.open(CURRENT_CACHE).then((cache) =>
-    fetch(request).then((response) => {
-      if (response.status === 200) {
-        return cache.put(request, response)
-      }
+self.addEventListener('fetch', function (event) {
+  event.respondWith(
+    caches.open(CURRENT_CACHE).then(function (cache) {
+      return cache.match(event.request).then(function (response) {
+        return (
+          response ||
+          fetch(event.request).then(function (response) {
+            cache.put(event.request, response.clone())
+
+            return response
+          })
+        )
+      })
     })
   )
-
-const fromNetwork = (request, timeout) =>
-  new Promise((resolve, reject) => {
-    const timeoutId = setTimeout(reject, timeout)
-    fetch(request).then((response) => {
-      clearTimeout(timeoutId)
-      resolve(response)
-      update(request)
-    }, reject)
-  })
-
-const fromCache = (request) =>
-  caches
-    .open(CURRENT_CACHE)
-    .then((cache) => cache.match(request).then((matching) => matching))
-
-self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') return
-
-  event.respondWith(
-    fromNetwork(event.request, 10000).catch(() => fromCache(event.request))
-  )
-
-  event.waitUntil(update(event.request))
 })

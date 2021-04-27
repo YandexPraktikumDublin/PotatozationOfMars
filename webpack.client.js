@@ -80,10 +80,6 @@ module.exports = {
         ]
       },
       {
-        test: /.mp3$/,
-        loader: 'file-loader'
-      },
-      {
         test: /\.svg$/i,
         use: [
           {
@@ -93,12 +89,20 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /.mp3$/,
+        loader: 'file-loader',
+        options: {
+          outputPath: 'assets/sounds',
+          publicPath: 'assets/sounds'
+        }
       }
     ]
   },
   output: {
-    publicPath: IS_DEV ? 'https://127.0.0.1:8080/' : '/',
-    path: path.resolve(__dirname, 'dist'),
+    publicPath: IS_DEV ? 'https://127.0.0.1:8080/assets/' : '/assets/',
+    path: path.resolve(__dirname, 'dist/assets'),
     filename: '[name].js'
   },
   resolve: {

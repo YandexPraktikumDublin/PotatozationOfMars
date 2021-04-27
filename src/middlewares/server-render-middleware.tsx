@@ -15,8 +15,12 @@ const { NODE_ENV = 'production' } = process.env
 const IS_DEV = NODE_ENV !== 'production'
 
 function getHtml(reactHtml: string, reduxState = {}, helmet: HelmetData) {
-  const cssUrl = IS_DEV ? 'https://127.0.0.1:8080/main.css' : '/main.css'
-  const jsUrl = IS_DEV ? 'https://127.0.0.1:8080/main.js' : '/main.js'
+  const cssUrl = IS_DEV
+    ? 'https://127.0.0.1:8080/assets/main.css'
+    : 'assets/main.css'
+  const jsUrl = IS_DEV
+    ? 'https://127.0.0.1:8080/assets/main.js'
+    : 'assets/main.js'
 
   const startServerWorkerScript = `
     <script>
@@ -48,11 +52,10 @@ function getHtml(reactHtml: string, reduxState = {}, helmet: HelmetData) {
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-        <link rel="apple-touch-icon" sizes="180x180" href="/webmanifest/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/webmanifest/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/webmanifest/favicon-16x16.png">
-        <link rel="manifest" href="/webmanifest/site.webmanifest">
-        <link rel="mask-icon" href="/webmanifest/safari-pinned-tab.svg" color="#5bbad5">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/webmanifest/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/webmanifest/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/webmanifest/favicon-16x16.png">
+        <link rel="manifest" href="/assets/webmanifest/site.webmanifest">
         <meta name="msapplication-TileColor" content="#da532c">
         <meta name="theme-color" content="#ffffff">
         <meta name="msapplication-TileColor" content="#da532c" />
@@ -67,7 +70,7 @@ function getHtml(reactHtml: string, reduxState = {}, helmet: HelmetData) {
           window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}
         </script>
         <script src="${jsUrl}"></script>
-        ${!IS_DEV && startServerWorkerScript}
+        ${!IS_DEV ? startServerWorkerScript : ''}
     </body>
   </html>
   `
