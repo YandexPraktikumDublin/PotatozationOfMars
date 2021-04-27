@@ -31,3 +31,9 @@ export const DEFAULT_ERROR_MESSAGE = 'something went wrong'
 
 export const RATING_FIELD_NAME = 'potatozationOfMarsScores'
 export const RATING_LIMIT = 10
+
+export const T_800_PHRASES = [
+  'Hasta la vista, baby',
+  'I need your clothes, your boots, and your motorcycle',
+  'I’ll be back'
+]

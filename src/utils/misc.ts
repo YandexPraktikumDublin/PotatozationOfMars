@@ -1,5 +1,6 @@
 import httpContext from 'express-http-context'
 import Cookies from 'universal-cookie'
+import axios from 'axios'
 
 export const isServer = (): boolean =>
   !(
@@ -46,4 +47,19 @@ export const generatePassword = (): string =>
 
 export const setStyleVariable = (name: string, value: string): void => {
   if (!isServer()) document.documentElement.style.setProperty(name, value)
+}
+
+export const getRandomArrayElement = (array: any[]) =>
+  array[Math.floor(Math.random() * array.length)]
+
+export const sendMessageByTelegram = async (
+  token: string,
+  chatId: string,
+  message: string
+) => {
+  await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
+    parse_mode: 'HTML',
+    chat_id: chatId,
+    text: message
+  })
 }
