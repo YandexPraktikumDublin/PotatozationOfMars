@@ -2,7 +2,6 @@ import httpContext from 'express-http-context'
 import path from 'path'
 import express from 'express'
 import bodyParser from 'body-parser'
-import compression from 'compression'
 import 'babel-polyfill'
 import cookiesMiddleware from 'universal-cookie-express'
 import serverRenderMiddleware from './middlewares/server-render-middleware'
@@ -64,7 +63,7 @@ app.use(themeRouterFactory(db.themeRepository))
 app.use(enjoyerSettingsRouterFactory(db.enjoyerSettingsRepository))
 app.use(feedbackRouterFactory(db.feedbackRepository))
 
-app.use(compression()).use(express.static(path.resolve(__dirname, '../dist')))
+app.use('/assets', express.static(path.resolve(__dirname, '../dist/assets')))
 
 app.get('/sw.js', (req, res) => {
   res.sendFile(path.resolve(__dirname, '/', 'sw.js'))
