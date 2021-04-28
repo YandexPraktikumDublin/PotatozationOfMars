@@ -69,3 +69,9 @@ jobs:
                --env TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }} \
                --net=host \
                cr.yandex/crp44cptgt36thhl5qjc/dublin-potatozation-of-mars:latest
+      - uses: yanzay/notify-telegram@v0.1.0
+        if: always()
+        with:
+          chat: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          status: ${{ job.status }}
