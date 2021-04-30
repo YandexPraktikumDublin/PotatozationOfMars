@@ -15,6 +15,7 @@ class Entity {
   protected clockEvent: () => void
   protected destination: TPosition | { x: null; y: null }
   health: number
+  maxHealth: number
   isAlive: boolean
   position: TPosition
   size: number
@@ -46,7 +47,8 @@ class Entity {
     health = 1
   ) {
     this.clockEvent = () => {}
-    this.health = health
+    this.maxHealth = health
+    this.health = this.maxHealth
     this.isAlive = true
     this.position = { x: 0, y: 0 }
     this.destination = this.position
@@ -301,10 +303,10 @@ class Entity {
   }
 
   public delete = () => {
-    if (!this.isAlive) return
     this.projectiles.forEach((projectile) => projectile.delete())
-    this.isAlive = false
     this.clockEvent()
+    if (!this.isAlive) return
+    this.isAlive = false
     this.killCallback()
   }
 }

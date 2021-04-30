@@ -75,8 +75,8 @@ class Player extends Entity {
       right: false
     }
 
-    const move = (key: unknown) => {
-      switch (key) {
+    const move = (key: string, keys: unknown) => {
+      switch (keys) {
         case KEYS.up:
           this.velocity.y = -this.velocity.magnitude
           keysPressed.up = true
@@ -100,8 +100,8 @@ class Player extends Entity {
       this.velocity.correct()
     }
 
-    const stay = (key: unknown) => {
-      switch (key) {
+    const stay = (key: string, keys: unknown) => {
+      switch (keys) {
         case KEYS.up:
           this.velocity.y = keysPressed.down ? this.velocity.magnitude : 0
           keysPressed.up = false

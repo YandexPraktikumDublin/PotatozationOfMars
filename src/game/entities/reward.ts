@@ -5,7 +5,6 @@ import { Entity, Sound } from '@game/entities'
 class Reward extends Entity {
   constructor(killCallback = () => {}, velocity = 2, size = 60) {
     super(killCallback, velocity, size, crystal10, 1)
-    this.velocity.magnitude = velocity * ((size * 2) / this.size)
     this.damage = 0
   }
 

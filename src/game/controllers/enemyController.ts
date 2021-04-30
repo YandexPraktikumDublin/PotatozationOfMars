@@ -17,9 +17,14 @@ class EnemyController {
   ) {
     this.EnemyType = EnemyType
     this.entities = []
-    this.simultaneously = simultaneously
-    this.difficulty = difficulty
-    this.quantity = quantity === 0 ? simultaneously * difficulty : quantity
+    this.difficulty = difficulty < 1 ? 1 : difficulty
+    this.simultaneously =
+      this.difficulty > simultaneously
+        ? simultaneously * 2
+        : simultaneously + (this.difficulty - 1)
+    this.quantity =
+      quantity < this.simultaneously ? this.simultaneously : quantity
+    this.quantity += (this.difficulty - 1) * simultaneously
     this.current = this.quantity
   }
 
@@ -33,7 +38,7 @@ class EnemyController {
     const createEntity = (i: number, callback: () => void) => {
       this.entities[i] = new this.EnemyType(callback)
       this.entities[i].init(clock, context)
-      this.entities[i].health *= this.difficulty
+      this.entities[i].health *= Math.round(1.2 ** (this.difficulty - 1))
     }
 
     for (let i = 0; i < this.simultaneously; i++) {
@@ -66,6 +71,14 @@ class EnemyController {
   kill = () => {
     this.entities.forEach((entity) => {
       entity.kill()
+    })
+  }
+
+  delete = () => {
+    this.current = 0
+    this.entities.forEach((entity) => {
+      entity.isAlive = false
+      entity.delete()
     })
   }
 }
