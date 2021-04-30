@@ -1,6 +1,6 @@
 import TPosition from '@game/@types/position'
 
-type TKeyCallback = (...rest: Array<unknown>) => void
+type TKeyCallback = (key: string, ...rest: Array<unknown>) => void
 type TMouseCallback = (mousePos: TPosition, ...rest: Array<unknown>) => void
 
 class InputsController {
@@ -30,12 +30,12 @@ class InputsController {
     const onKeyDown = (evt: KeyboardEvent) => {
       if (evt.repeat) return
       const pressed = isPressed(evt.code)
-      if (pressed) callbackDown(...rest)
+      if (pressed) callbackDown(evt.code, ...rest)
     }
 
     const onKeyUp = (evt: KeyboardEvent) => {
       const pressed = !isPressed(evt.code)
-      if (!pressed) callbackUp(...rest)
+      if (!pressed) callbackUp(evt.code, ...rest)
     }
 
     window.addEventListener('keydown', onKeyDown)

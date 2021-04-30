@@ -4,7 +4,10 @@ export const KEYS = {
   left: ['KeyA', 'ArrowLeft'],
   right: ['KeyD', 'ArrowRight'],
   fullscreen: ['KeyF'],
-  pause: ['Escape', 'KeyP']
+  pause: ['Escape', 'KeyP'],
+  killAll: ['KeyK', 'KeyI', 'KeyL'],
+  upgrade: ['KeyU', 'KeyG', 'KeyR'],
+  nextLevel: ['KeyN', 'KeyE', 'KeyX', 'KeyT']
 }
 
 export const controlTypes = {

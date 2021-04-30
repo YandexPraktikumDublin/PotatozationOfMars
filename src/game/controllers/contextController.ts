@@ -68,20 +68,107 @@ class ContextController {
     }
   }
 
-  drawText = (text: string, x = 0, y = 0, options?: { fontSize?: number }) => {
+  translateContext = (
+    x: number,
+    y: number,
+    angle: number,
+    pivotX: number,
+    pivotY: number,
+    width = 0,
+    height = 0
+  ) => {
     const context = this.instance
-    const { fontSize } = options ?? {}
+    const { ox, oy } = this.center
+    const offsetX = pivotX * width
+    const offsetY = pivotY * height
+
+    context.translate(Math.round(x + ox), Math.round(y + oy))
+    context.rotate(angle * Math.PI)
+    context.translate(Math.round(-offsetX), Math.round(-offsetY))
+  }
+
+  drawText = (
+    text: string,
+    x = 0,
+    y = 0,
+    options: {
+      fontSize?: number
+      maxWidth?: number
+      angle?: number
+      pivotX?: number
+      pivotY?: number
+      opacity?: number
+      color?: string
+    } = {}
+  ) => {
+    const context = this.instance
+    const fontSize = options.fontSize ?? 40
+    const maxWidth = options.maxWidth ?? context.canvas.width
+    const pivotX = options.pivotX ?? 0.5
+    const pivotY = options.pivotY ?? 0.5
+    const angle = options.angle ?? 0
+    const opacity = options.opacity ?? 1
+    const color =
+      options.color && /^#[0-9A-F]{6}$/i.test(options.color)
+        ? options.color
+        : '#ffffff'
+
     context.save()
 
-    const { ox, oy } = this.center
-    context.translate(Math.round(x + ox), Math.round(y + oy))
+    this.translateContext(x, y, angle, pivotX, pivotY, 0, 0)
 
-    context.font = fontSize ? `${fontSize}px serif` : '40px serif'
-    context.fillStyle = 'white'
+    context.font = `${fontSize}px serif`
+    context.globalAlpha = opacity
+    context.fillStyle = color
     context.textAlign = 'center'
 
-    context.fillText(text, 0, 0)
+    context.fillText(text, 0, 0, maxWidth)
 
+    context.restore()
+  }
+
+  drawRectangle = (
+    x: number,
+    y: number,
+    options: {
+      width?: number
+      height?: number
+      angle?: number
+      pivotX?: number
+      pivotY?: number
+      opacity?: number
+      color?: string
+      type?: 'stroke' | 'fill'
+    }
+  ) => {
+    const context = this.instance
+
+    const width = options.width ?? 0
+    const height = options.height ?? options.width ?? 0
+    const pivotX = options.pivotX ?? 0.5
+    const pivotY = options.pivotY ?? 0.5
+    const angle = options.angle ?? 0
+    const opacity = options.opacity ?? 1
+    const type = options.type ?? 'fill'
+    const color =
+      options.color && /^#[0-9A-F]{6}$/i.test(options.color)
+        ? options.color
+        : '#000000'
+
+    context.save()
+
+    this.translateContext(x, y, angle, pivotX, pivotY, width, height)
+
+    context.globalAlpha = opacity
+    context.fillStyle = color
+
+    if (type === 'stroke') {
+      context.strokeRect(0, 0, Math.round(width), Math.round(height))
+      context.restore()
+      return
+    }
+
+    context.fillRect(0, 0, Math.round(width), Math.round(height))
     context.restore()
   }
 
@@ -106,15 +193,11 @@ class ContextController {
     const pivotY = options.pivotY ?? 0.5
     const angle = options.angle ?? 0
     const opacity = options.opacity ?? 1
-    const { ox, oy } = this.center
-    const offsetX = pivotX * imageWidth
-    const offsetY = pivotY * imageHeight
 
     context.save()
 
-    context.translate(Math.round(x + ox), Math.round(y + oy))
-    context.rotate(angle * Math.PI)
-    context.translate(Math.round(-offsetX), Math.round(-offsetY))
+    this.translateContext(x, y, angle, pivotX, pivotY, imageWidth, imageHeight)
+
     context.globalAlpha = opacity
 
     context.drawImage(

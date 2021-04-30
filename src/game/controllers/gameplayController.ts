@@ -1,7 +1,8 @@
 import {
   ContextController,
   GameClock,
-  EnemyController
+  EnemyController,
+  InputsController
 } from '@game/controllers'
 import {
   Alien,
@@ -26,6 +27,7 @@ import {
   rewardSound2,
   upgradeSound
 } from '@game/sound'
+import { KEYS } from '@game/config'
 
 class GameplayController {
   context: ContextController
@@ -94,10 +96,11 @@ class GameplayController {
       ),
       rewardsHandler: this.clock.startEvent(() => {
         this.isCollidedPlayer(this.rewards)
-      })
+      }),
+      cheatsHandler: this.initCheats()
     }
     this.currentLevel = 0
-    this.initLevel(this.levels[this.currentLevel])
+    this.initLevel()
     this.player.init(this.clock)
     this.dispatchers.updateHealth(this.player.health)
     this.getRandomReward()
@@ -112,17 +115,24 @@ class GameplayController {
     }
   }
 
-  private initLevel = (level: TLevel) => {
+  private initLevel = (currentLevel = this.currentLevel) => {
+    this.enemyController.delete()
+    this.handlers.collisionHandler?.()
+    this.currentLevel = currentLevel
+    const level =
+      this.levels.length > currentLevel
+        ? this.levels[currentLevel]
+        : this.levels[currentLevel % this.levels.length]
     const { enemyType, simultaneously, quantity } = level
     const difficulty =
-      this.currentLevel > this.levels.length - 1
-        ? this.currentLevel + 1 - (this.levels.length - 1)
+      currentLevel > this.levels.length - 1
+        ? currentLevel + 1 - (this.levels.length - 1)
         : 1
     this.enemyController = new EnemyController(
       enemyType,
       simultaneously,
       difficulty,
-      quantity * difficulty
+      quantity
     )
     const killCallback = (entity: Entity) => {
       const dispatchScore = () => {
@@ -134,23 +144,33 @@ class GameplayController {
       })
     }
     this.enemyController.init(this.clock, this.context, killCallback)
-    const collisionHandler = this.clock.startEvent(() => {
+    this.handlers.collisionHandler = this.clock.startEvent(() => {
       this.isCollidedPlayer(this.enemyController.getProjectiles())
       this.isHitEnemy(this.enemyController.getEntities())
+
       if (this.enemyController.current <= 0) {
+        this.enemyController.getEntities().forEach((entity) => entity.delete())
+        this.handlers.collisionHandler()
         this.initBoss(level, difficulty)
-        collisionHandler()
       }
     })
   }
 
   private initBoss = (level: TLevel, difficulty: number) => {
+    this.boss.delete()
+    this.handlers.collisionHandler?.()
+
     const { bossType: Boss, bossEntranceMusic, bossMusic } = level
+
     this.boss = new Boss()
     this.boss.init(this.clock, this.context)
-    this.boss.health *= difficulty
+    this.boss.maxHealth = Math.round(
+      this.boss.maxHealth * 1.3 ** (difficulty - 1)
+    )
+    this.boss.health = this.boss.maxHealth
+
     const initialCount = 100
-    let count = initialCount
+
     if (bossEntranceMusic) {
       const entrance = new Sound(bossEntranceMusic)
       const music = bossMusic
@@ -162,9 +182,13 @@ class GameplayController {
         this.context.startSoundTrack(music)
       })
     }
-    const collisionHandler = this.clock.startEvent(() => {
+
+    let count = initialCount
+    this.handlers.collisionHandler = this.clock.startEvent((context) => {
       this.isCollidedPlayer(this.boss.getProjectiles())
       this.isHitEnemy(this.boss.getEntities())
+      this.drawHealthBar(context)
+
       if (!this.boss.isAlive) {
         if (count === initialCount) {
           const dispatchScore = () => {
@@ -180,20 +204,18 @@ class GameplayController {
             soundURL: [upgradeSound]
           })
         }
+
         count--
+
         if (count <= 0) {
           this.currentLevel++
           if (this.player.isAlive) {
             this.player.health++
             this.dispatchers.updateHealth(this.player.health)
           }
-          const level =
-            this.levels.length > this.currentLevel
-              ? this.levels[this.currentLevel]
-              : this.levels[this.currentLevel % this.levels.length]
-          this.initLevel(level)
+          this.handlers.collisionHandler()
           this.context.startSoundTrack()
-          collisionHandler()
+          this.initLevel()
         }
       }
     })
@@ -216,10 +238,111 @@ class GameplayController {
     this.rewards.push(reward)
   }
 
+  private initCheats = () => {
+    const killAllKeyPressed = KEYS.killAll.map(() => false)
+    const killAllDown = (keyCode: string) => {
+      KEYS.killAll.forEach((key, index) => {
+        if (key === keyCode) {
+          killAllKeyPressed[index] = true
+        }
+      })
+      if (killAllKeyPressed.every((element) => element)) {
+        this.enemyController.kill()
+        this.boss.kill()
+      }
+    }
+    const killAllUp = (keyCode: string) => {
+      KEYS.killAll.forEach((key, index) => {
+        if (key === keyCode) {
+          killAllKeyPressed[index] = false
+        }
+      })
+    }
+    const killAll = InputsController.onKeyPress(
+      KEYS.killAll,
+      killAllDown,
+      killAllUp
+    )
+    const upgradeKeyPressed = KEYS.upgrade.map(() => false)
+    const upgradeDown = (keyCode: string) => {
+      KEYS.upgrade.forEach((key, index) => {
+        if (key === keyCode) {
+          upgradeKeyPressed[index] = true
+        }
+      })
+      if (upgradeKeyPressed.every((element) => element)) {
+        this.getRandomReward()
+      }
+    }
+    const upgradeUp = (keyCode: string) => {
+      KEYS.upgrade.forEach((key, index) => {
+        if (key === keyCode) {
+          upgradeKeyPressed[index] = false
+        }
+      })
+    }
+    const upgrade = InputsController.onKeyPress(
+      KEYS.upgrade,
+      upgradeDown,
+      upgradeUp
+    )
+    const nextLevelKeyPressed = KEYS.nextLevel.map(() => false)
+    const nextLevelDown = (keyCode: string) => {
+      KEYS.nextLevel.forEach((key, index) => {
+        if (key === keyCode) {
+          nextLevelKeyPressed[index] = true
+        }
+      })
+      if (nextLevelKeyPressed.every((element) => element)) {
+        this.currentLevel++
+        this.initLevel()
+      }
+    }
+    const nextLevelUp = (keyCode: string) => {
+      KEYS.nextLevel.forEach((key, index) => {
+        if (key === keyCode) {
+          nextLevelKeyPressed[index] = false
+        }
+      })
+    }
+    const nextLevel = InputsController.onKeyPress(
+      KEYS.nextLevel,
+      nextLevelDown,
+      nextLevelUp
+    )
+    return () => {
+      killAll()
+      upgrade()
+      nextLevel()
+    }
+  }
+
   private initBackground = () => {
     this.backgroundLayers[0].src = starsBack
     this.backgroundLayers[1].src = starsMiddle
     this.backgroundLayers[2].src = starsFront
+  }
+
+  private drawHealthBar = (context: ContextController) => {
+    const { width: canvasWidth } = context.getSize()
+    const { top } = context.getBorders()
+    const { health, maxHealth } = this.boss
+    const width = canvasWidth / 2
+    const barWidth = (width - 10) * (health / maxHealth)
+    const currentHealth = health < 0 ? '0' : Math.round(health).toString()
+    context.drawRectangle(0, top + 30, {
+      width,
+      height: 30,
+      color: '#8c8c91',
+      opacity: 0.6
+    })
+    context.drawRectangle(0, top + 30, {
+      width: barWidth,
+      height: 25,
+      color: '#ff1900',
+      opacity: 0.6
+    })
+    context.drawText(currentHealth, 0, top + 40, { fontSize: 30 })
   }
 
   private isHitEnemy = (enemies: Array<Entity>) => {
