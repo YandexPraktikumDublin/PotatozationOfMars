@@ -1,5 +1,5 @@
 import { Sound } from '@game/entities'
-import { soundtrack1 } from '@game/sound'
+import { soundtrack1, soundtrack2, soundtrack3, soundtrack4 } from '@game/sound'
 
 class ContextController {
   instance: CanvasRenderingContext2D
@@ -17,7 +17,12 @@ class ContextController {
     this.canvas.height = height
     this.soundVolume = 0.1
     this.musicVolume = 0.5
-    this.soundTrack = [new Sound(soundtrack1)]
+    this.soundTrack = [
+      new Sound(soundtrack1),
+      new Sound(soundtrack2),
+      new Sound(soundtrack3),
+      new Sound(soundtrack4)
+    ]
     this.center = { ox: width / 2, oy: height / 2 }
     this.coefficient = { cx: 1, cy: 1 }
   }

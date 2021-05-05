@@ -17,7 +17,6 @@ import TPosition from '@game/@types/position'
 import { crystal9, diamond, starsBack, starsFront, starsMiddle } from '@images'
 import { TDispatchers, TLevel } from '@game/@types'
 import Reward from '@game/entities/reward'
-import { getDistance } from '@game/utils'
 import {
   asteroidSnakeBattleMusic,
   asteroidSnakeEntrance,
@@ -43,7 +42,6 @@ class GameplayController {
   private enemyController: EnemyController
   private boss: Entity
   private handlers: Record<string, () => void>
-  private animationFrameId: number
   private dispatchers: TDispatchers
 
   constructor(
@@ -69,7 +67,7 @@ class GameplayController {
       },
       {
         enemyType: Alien,
-        quantity: 10,
+        quantity: 15,
         simultaneously: 5,
         bossType: PotatoAlienBoss,
         bossEntranceMusic: potatoBossEntrance,
@@ -80,7 +78,6 @@ class GameplayController {
     this.boss = new Entity()
     this.rewards = []
     this.handlers = {}
-    this.animationFrameId = 0
     this.dispatchers = dispatchers
   }
 
@@ -347,53 +344,23 @@ class GameplayController {
 
   private isHitEnemy = (enemies: Array<Entity>) => {
     const projectiles = this.player.getProjectiles()
-    const damage = this.player.damage
     projectiles.forEach((projectile) => {
       if (!projectile.isAlive) return
-      const projectileSize = projectile.size
-      const projectilePos = projectile.velocity.applyTo(projectile.position)
-      let closest: number
-      let target: TPosition | undefined
+      projectile.reactToTargets(enemies)
+
       enemies.forEach((entity) => {
         if (!entity.isAlive) return
-        const entitySize = entity.size
-        const entityPos = entity.velocity.applyTo(entity.position)
-        const distance = getDistance(entityPos, projectilePos)
-        if (
-          this.player.modifiers.homingProjectiles &&
-          (!closest || distance < closest)
-        ) {
-          closest = distance
-          target = entityPos
-        }
-        if (distance <= projectileSize / 2 + entitySize / 2) {
-          projectile.hit()
-          entity.takeDamage(damage)
-        }
+        entity.reactToProjectile(projectile)
       })
-      if (target) {
-        projectile.velocity.deflectTo(
-          target,
-          projectilePos,
-          this.player.homingIntensity
-        )
-      }
     })
   }
 
   private isCollidedPlayer = (projectiles: Array<Entity>) => {
     if (!this.player.isAlive) return
-    const playerPos = this.player.position
-    const playerSize = this.player.size
     projectiles.forEach((projectile) => {
       if (!projectile.isAlive) return
-      const projectilePos = projectile.position
-      const projectileSize = projectile.size
-      const distance = getDistance(playerPos, projectilePos)
-      if (distance <= projectileSize / 2 + playerSize / 2) {
-        this.player.takeDamage(projectile.damage, this.dispatchers.updateHealth)
-        projectile.hit()
-      }
+      projectile.reactToTargets([this.player])
+      this.player.reactToProjectile(projectile, this.dispatchers.updateHealth)
     })
   }
 
@@ -429,20 +396,18 @@ class GameplayController {
   }
 
   homingProjectile = () => {
-    if (
-      this.player.modifiers.homingProjectiles &&
-      this.player.homingIntensity
-    ) {
-      if (this.player.homingIntensity > 10) {
+    const modifiers = this.player.modifiers
+    if (modifiers.homingProjectiles && modifiers.homingIntensity) {
+      if (modifiers.homingIntensity > 10) {
         this.getRandomReward()
         return
       }
-      this.player.homingIntensity++
+      modifiers.homingIntensity++
       this.displayText(`Homing is improved`)
       return
     }
-    this.player.modifiers.homingProjectiles = true
-    this.player.homingIntensity = 1
+    modifiers.homingProjectiles = true
+    modifiers.homingIntensity = 1
     let count = 60
     const hideText = this.clock.startEvent((context) => {
       count--
@@ -541,18 +506,13 @@ class GameplayController {
 
   start = () => {
     if (!this.context || !this.isPaused) return
-    const tick = () => {
-      this.clock.draw(this.context)
-      this.drawBackground()
-      this.animationFrameId = window.requestAnimationFrame(tick)
-    }
-    tick()
+    this.clock.start(this.context, this.drawBackground)
     this.isPaused = false
     this.context.unpauseSoundtrack()
   }
 
   stop = () => {
-    window.cancelAnimationFrame(this.animationFrameId)
+    this.clock.stop()
     this.context.pauseSoundtrack()
     this.isPaused = true
   }

@@ -8,12 +8,12 @@ import { TPosition } from '@game/@types'
 import { Entity, Sound } from '@game/entities'
 import { KEYS } from '@game/config'
 import { explosionSound1, gameOverSound } from '@game/sound'
+import { getDistance } from '@game/utils'
 
 class Player extends Entity {
   opacity: number
   damagePeriod: number
   damageCooldown: number
-  homingIntensity?: number
 
   constructor(killCallback = () => {}, velocity = 10, size = 50) {
     super(killCallback, velocity, size, teslaWithAGun, 3)
@@ -179,6 +179,19 @@ class Player extends Entity {
       height: this.size,
       opacity: this.opacity
     })
+  }
+
+  public reactToProjectile = (
+    projectile: Entity,
+    dispatcher: (health: number) => void = () => {}
+  ) => {
+    const entitySize = this.size
+    const entityPos = this.velocity.applyTo(this.position)
+    const distance = getDistance(entityPos, projectile.position)
+    if (distance <= projectile.size / 2 + entitySize / 2) {
+      projectile.hit()
+      this.takeDamage(projectile.damage, dispatcher)
+    }
   }
 
   takeDamage = (damage = 1, dispatcher?: (health: number) => void) => {
