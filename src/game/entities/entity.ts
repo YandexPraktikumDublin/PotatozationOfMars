@@ -279,8 +279,8 @@ class Entity {
 
   public reactToProjectile = (projectile: Entity) => {
     const entitySize = this.size
-    const entityPos = this.velocity.applyTo(this.position)
-    const distance = getDistance(entityPos, projectile.position)
+    const projectilePos = projectile.velocity.applyTo(projectile.position)
+    const distance = getDistance(this.position, projectilePos)
     if (distance <= projectile.size / 2 + entitySize / 2) {
       projectile.hit()
       this.takeDamage(projectile.damage)

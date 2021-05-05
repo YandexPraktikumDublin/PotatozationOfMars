@@ -63,7 +63,7 @@ class GameplayController {
         simultaneously: 5,
         bossType: AsteroidSnake,
         bossEntranceMusic: asteroidSnakeEntrance,
-        bossMusic: asteroidSnakeBattleMusic
+        bossMusic: [asteroidSnakeBattleMusic]
       },
       {
         enemyType: Alien,
@@ -71,7 +71,7 @@ class GameplayController {
         simultaneously: 5,
         bossType: PotatoAlienBoss,
         bossEntranceMusic: potatoBossEntrance,
-        bossMusic: potatoBossBattleMusic
+        bossMusic: [potatoBossBattleMusic]
       }
     ]
     this.enemyController = new EnemyController(Entity)
@@ -101,7 +101,8 @@ class GameplayController {
     this.player.init(this.clock)
     this.dispatchers.updateHealth(this.player.health)
     this.getRandomReward()
-    this.context.startSoundTrack()
+    this.context.changeSoundtrack()
+    this.context.startSoundtrack()
   }
 
   private initPlayer = () => {
@@ -120,7 +121,7 @@ class GameplayController {
       this.levels.length > currentLevel
         ? this.levels[currentLevel]
         : this.levels[currentLevel % this.levels.length]
-    const { enemyType, simultaneously, quantity } = level
+    const { enemyType, simultaneously, quantity, levelMusic } = level
     const difficulty =
       currentLevel > this.levels.length - 1
         ? currentLevel + 1 - (this.levels.length - 1)
@@ -141,6 +142,14 @@ class GameplayController {
       })
     }
     this.enemyController.init(this.clock, this.context, killCallback)
+
+    const music = levelMusic
+      ? levelMusic.map((soundtrack) => new Sound(soundtrack))
+      : this.context.baseSoundTrack
+    this.context.stopSoundtrack()
+    this.context.changeSoundtrack(music)
+    this.context.startSoundtrack()
+
     this.handlers.collisionHandler = this.clock.startEvent(() => {
       this.isCollidedPlayer(this.enemyController.getProjectiles())
       this.isHitEnemy(this.enemyController.getEntities())
@@ -171,12 +180,13 @@ class GameplayController {
     if (bossEntranceMusic) {
       const entrance = new Sound(bossEntranceMusic)
       const music = bossMusic
-        ? new Sound(bossMusic)
-        : this.context.currentSoundtrack
+        ? bossMusic.map((soundtrack) => new Sound(soundtrack))
+        : this.context.baseSoundTrack
       this.context.stopSoundtrack()
       this.context.currentSoundtrack = entrance
       entrance.play(this.context.soundVolume).next(() => {
-        this.context.startSoundTrack(music)
+        this.context.changeSoundtrack(music)
+        this.context.startSoundtrack()
       })
     }
 
@@ -211,7 +221,7 @@ class GameplayController {
             this.dispatchers.updateHealth(this.player.health)
           }
           this.handlers.collisionHandler()
-          this.context.startSoundTrack()
+          this.context.startSoundtrack()
           this.initLevel()
         }
       }

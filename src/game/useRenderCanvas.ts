@@ -2,15 +2,14 @@ import { useRef, useEffect } from 'react'
 import { GameplayController, InputsController } from '@game/controllers'
 import { controlTypes, KEYS } from '@game/config'
 import { useDispatch, useSelector, useStore } from 'react-redux'
-import { getControlsSelector } from '@store/game/selectors'
 import {
   requestNewGame,
   resetScore,
-  togglePause,
+  toggleControls,
+  togglePause, updateMusicVolume,
   updatePlayerHealth,
-  updateScore
-} from '@store/game/actions'
-import { isServer } from '@utils/misc'
+  updateScore, updateSoundVolume
+} from "@store/game/actions";
 import { updateLeaderboardRequest } from '@store/leaderboard/updateLeaderboard/actions'
 import { getUserSelector } from '@store/user/fetchUser/selectors'
 
@@ -21,11 +20,13 @@ const useRenderCanvas = () => {
   const backgroundRef = useRef<HTMLCanvasElement>(null)
   const user = useSelector(getUserSelector)
 
-  let controls = isServer()
-    ? useSelector(getControlsSelector)
-    : window.localStorage.controlWithMouse ?? useSelector(getControlsSelector)
-
-  let { isPaused, score, soundVolume, musicVolume } = store.getState().game
+  let {
+    isPaused,
+    score,
+    soundVolume,
+    musicVolume,
+    controls
+  } = store.getState().game
 
   const updateHealth = (health: number) => {
     dispatch(updatePlayerHealth({ health }))
@@ -57,6 +58,18 @@ const useRenderCanvas = () => {
     const canvas = canvasRef.current as HTMLCanvasElement
     const backgroundCanvas = backgroundRef.current as HTMLCanvasElement
 
+    if (!window.localStorage.controlType) {
+      window.localStorage.controlType = controls
+    }
+
+    if(!window.localStorage.soundVolume){
+      window.localStorage.soundVolume = soundVolume
+    }
+
+    if(!window.localStorage.musicVolume){
+      window.localStorage.musicVolume = musicVolume
+    }
+
     const game = new GameplayController(canvas, backgroundCanvas, {
       updateHealth,
       updateGameScore,
@@ -80,6 +93,12 @@ const useRenderCanvas = () => {
 
       if (newGame) {
         game.newGame()
+        if (controls === controlTypes.mouse) {
+          game.controlWithMouse()
+        }
+        if (controls === controlTypes.keyboard) {
+          game.controlWithKeyboard()
+        }
       }
 
       if (controls !== newControls) {
@@ -122,6 +141,9 @@ const useRenderCanvas = () => {
 
     game.init()
     game.start()
+    dispatch(toggleControls({ controls: window.localStorage.controlType }))
+    dispatch(updateSoundVolume({ soundVolume: window.localStorage.soundVolume }))
+    dispatch(updateMusicVolume({ musicVolume: window.localStorage.musicVolume }))
     dispatch(resetScore())
 
     if (controls === controlTypes.mouse) {
