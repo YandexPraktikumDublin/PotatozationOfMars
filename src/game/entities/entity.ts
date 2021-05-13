@@ -9,6 +9,7 @@ import {
   fireSound2,
   fireSound3
 } from '@game/sound'
+import { getDistance } from '@game/utils'
 
 class Entity {
   readonly image = new Image()
@@ -33,6 +34,7 @@ class Entity {
   modifiers: {
     invincible?: boolean
     homingProjectiles?: boolean
+    homingIntensity?: number
   }
 
   reward: {
@@ -129,6 +131,10 @@ class Entity {
             src,
             this.damage
           )
+
+          const { homingProjectiles, homingIntensity } = this.modifiers
+
+          projectile.modifiers = { homingProjectiles, homingIntensity }
 
           this.projectiles.push(projectile)
 
@@ -271,8 +277,40 @@ class Entity {
     return [this]
   }
 
+  public reactToProjectile = (projectile: Entity) => {
+    const entitySize = this.size
+    const projectilePos = projectile.velocity.applyTo(projectile.position)
+    const distance = getDistance(this.position, projectilePos)
+    if (distance <= projectile.size / 2 + entitySize / 2) {
+      projectile.hit()
+      this.takeDamage(projectile.damage)
+    }
+  }
+
   public getProjectiles = (): Array<Entity> => {
     return [this]
+  }
+
+  public reactToTargets = (entities: Array<Entity>): void => {
+    if (this.modifiers.homingProjectiles && this.isAlive) {
+      let target: TPosition | undefined
+      let closest: number
+      entities.forEach((entity) => {
+        if (!entity.isAlive) return
+        const distance = getDistance(this.position, entity.position)
+        if (!closest || closest > distance) {
+          closest = distance
+          target = entity.position
+        }
+      })
+      if (target) {
+        this.velocity.deflectTo(
+          target,
+          this.position,
+          this.modifiers.homingIntensity
+        )
+      }
+    }
   }
 
   protected render = (

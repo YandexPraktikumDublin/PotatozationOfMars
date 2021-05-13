@@ -6,7 +6,8 @@ type TLevel = {
   simultaneously: number
   bossType: typeof Entity
   bossEntranceMusic?: string
-  bossMusic?: string
+  bossMusic?: Array<string>
+  levelMusic?: Array<string>
 }
 
 export default TLevel

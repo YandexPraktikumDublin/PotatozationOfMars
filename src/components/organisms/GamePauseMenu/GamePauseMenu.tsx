@@ -28,31 +28,42 @@ const GamePauseMenu: FC<TGamePauseMenuProps> = memo(
 
     const controls = useSelector(getControlsSelector)
     const volume = useSelector(getSoundVolumeSelector)
-    const musicVolume = useSelector(getMusicVolumeSelector)
+    const mVolume = useSelector(getMusicVolumeSelector)
 
     const toggleControlInput = useCallback(() => {
       const newControls =
         controls === controlTypes.keyboard
           ? controlTypes.mouse
           : controlTypes.keyboard
+
+      window.localStorage.controlType = newControls
+
       dispatch(toggleControls({ controls: newControls }))
     }, [controls])
 
     const increaseVolume = useCallback(() => {
-      dispatch(updateSoundVolume({ soundVolume: volume + 0.1 }))
+      const soundVolume = volume + 0.1
+      dispatch(updateSoundVolume({ soundVolume }))
+      window.localStorage.soundVolume = soundVolume
     }, [volume])
 
     const decreaseVolume = useCallback(() => {
-      dispatch(updateSoundVolume({ soundVolume: volume - 0.1 }))
+      const soundVolume = volume - 0.1
+      dispatch(updateSoundVolume({ soundVolume }))
+      window.localStorage.soundVolume = soundVolume
     }, [volume])
 
     const increaseMusicVolume = useCallback(() => {
-      dispatch(updateMusicVolume({ musicVolume: musicVolume + 0.1 }))
-    }, [musicVolume])
+      const musicVolume = mVolume + 0.1
+      dispatch(updateMusicVolume({ musicVolume }))
+      window.localStorage.musicVolume = musicVolume
+    }, [mVolume])
 
     const decreaseMusicVolume = useCallback(() => {
-      dispatch(updateMusicVolume({ musicVolume: musicVolume - 0.1 }))
-    }, [musicVolume])
+      const musicVolume = mVolume - 0.1
+      dispatch(updateMusicVolume({ musicVolume }))
+      window.localStorage.musicVolume = musicVolume
+    }, [mVolume])
 
     const startNewGame = () => {
       dispatch(requestNewGame({ newGame: true }))
@@ -101,7 +112,7 @@ const GamePauseMenu: FC<TGamePauseMenuProps> = memo(
               decrease={decreaseMusicVolume}
               increase={increaseMusicVolume}
               text="Music volume"
-              value={musicVolume}
+              value={mVolume}
             />
             <Button onClick={toggleControlInput}>{controls} control</Button>
             <Button onClick={toMainMenu}>Back</Button>

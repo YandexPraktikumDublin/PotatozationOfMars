@@ -1,12 +1,19 @@
 import { Sound } from '@game/entities'
-import { soundtrack1 } from '@game/sound'
+import { soundtrack1, soundtrack2, soundtrack3, soundtrack4 } from '@game/sound'
 
 class ContextController {
+  readonly baseSoundTrack: Array<Sound> = [
+    new Sound(soundtrack1),
+    new Sound(soundtrack2),
+    new Sound(soundtrack3),
+    new Sound(soundtrack4)
+  ]
+
   instance: CanvasRenderingContext2D
   canvas: HTMLCanvasElement
   soundVolume: number
   musicVolume: number
-  soundTrack: Array<Sound>
+  soundTrackQueue: Array<Sound>
   currentSoundtrack?: Sound
   coefficient: { cx: number; cy: number }
   center: { ox: number; oy: number }
@@ -17,19 +24,25 @@ class ContextController {
     this.canvas.height = height
     this.soundVolume = 0.1
     this.musicVolume = 0.5
-    this.soundTrack = [new Sound(soundtrack1)]
+    this.soundTrackQueue = this.baseSoundTrack
     this.center = { ox: width / 2, oy: height / 2 }
     this.coefficient = { cx: 1, cy: 1 }
   }
 
-  startSoundTrack = (sound?: Sound) => {
-    const randomSoundIndex = Math.floor(Math.random() * this.soundTrack.length)
+  changeSoundtrack = (soundQueue?: Array<Sound>) => {
+    this.soundTrackQueue = soundQueue ?? this.baseSoundTrack
+  }
+
+  startSoundtrack = () => {
+    const randomSoundIndex = Math.floor(
+      Math.random() * this.soundTrackQueue.length
+    )
     this.currentSoundtrack?.stop()
-    const nextSoundTrack = sound ?? this.soundTrack[randomSoundIndex]
+    const nextSoundTrack = this.soundTrackQueue[randomSoundIndex]
     this.currentSoundtrack = nextSoundTrack
       .play(this.soundVolume * this.musicVolume)
       .rewind()
-      .next(this.startSoundTrack)
+      .next(this.startSoundtrack)
   }
 
   pauseSoundtrack = () => {
