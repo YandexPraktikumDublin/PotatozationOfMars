@@ -4,7 +4,7 @@ type TCallback = (context: ContextController) => void
 
 class GameClock {
   static fps = 60
-  static fpsInterval: number = 1000 / GameClock.fps
+  static fpsInterval: number = (1000 / GameClock.fps) % 1000
   events: Array<TCallback>
   count: number
   animationFrameId: number = 0

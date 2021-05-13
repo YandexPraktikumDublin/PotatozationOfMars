@@ -143,7 +143,9 @@ const useRenderCanvas = () => {
     game.start()
     dispatch(toggleControls({ controls: window.localStorage.controlType }))
     dispatch(updateSoundVolume({ soundVolume: window.localStorage.soundVolume }))
+    game.setSoundVolume(soundVolume)
     dispatch(updateMusicVolume({ musicVolume: window.localStorage.musicVolume }))
+    game.setMusicVolume(musicVolume)
     dispatch(resetScore())
 
     if (controls === controlTypes.mouse) {
