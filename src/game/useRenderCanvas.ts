@@ -6,10 +6,12 @@ import {
   requestNewGame,
   resetScore,
   toggleControls,
-  togglePause, updateMusicVolume,
+  togglePause,
+  updateMusicVolume,
   updatePlayerHealth,
-  updateScore, updateSoundVolume
-} from "@store/game/actions";
+  updateScore,
+  updateSoundVolume
+} from '@store/game/actions'
 import { updateLeaderboardRequest } from '@store/leaderboard/updateLeaderboard/actions'
 import { getUserSelector } from '@store/user/fetchUser/selectors'
 
@@ -62,11 +64,11 @@ const useRenderCanvas = () => {
       window.localStorage.controlType = controls
     }
 
-    if(!window.localStorage.soundVolume){
+    if (!window.localStorage.soundVolume) {
       window.localStorage.soundVolume = soundVolume
     }
 
-    if(!window.localStorage.musicVolume){
+    if (!window.localStorage.musicVolume) {
       window.localStorage.musicVolume = musicVolume
     }
 
@@ -142,9 +144,13 @@ const useRenderCanvas = () => {
     game.init()
     game.start()
     dispatch(toggleControls({ controls: window.localStorage.controlType }))
-    dispatch(updateSoundVolume({ soundVolume: window.localStorage.soundVolume }))
+    dispatch(
+      updateSoundVolume({ soundVolume: window.localStorage.soundVolume })
+    )
     game.setSoundVolume(soundVolume)
-    dispatch(updateMusicVolume({ musicVolume: window.localStorage.musicVolume }))
+    dispatch(
+      updateMusicVolume({ musicVolume: window.localStorage.musicVolume })
+    )
     game.setMusicVolume(musicVolume)
     dispatch(resetScore())
 
